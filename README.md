@@ -1,4 +1,4 @@
-# portfolio
+# Portfolio
 
 My personal developer portfolio
 
