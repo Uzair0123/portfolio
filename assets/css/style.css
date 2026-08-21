@@ -1,6 +1,6 @@
 /* ==========================================================================
    UZAIR SULTAN — 3D CYBER PORTFOLIO DESIGN SYSTEM
-   High-Impact 3D Depth • Mobile Gyroscope • Terminal Console
+   High-Impact 3D Depth • Staggered Scroll Reveals • Mobile Gyroscope
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
@@ -105,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: 6.5rem 0;
   position: relative;
 }
 
@@ -144,17 +144,56 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.05rem;
 }
 
-/* Scroll Reveal Animation */
-.reveal-on-scroll {
+/* ==================== HIGH-END SCROLL REVEAL ENGINE ==================== */
+.scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(40px) scale(0.98);
+  filter: blur(6px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
 
-.reveal-on-scroll.revealed {
+.scroll-reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
 }
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-45px);
+  filter: blur(6px);
+  transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(45px);
+  filter: blur(6px);
+  transition: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+/* Stagger Delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
 
 /* Glassmorphism Card */
 .glass-card {
@@ -354,7 +393,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-/* Stage 2: Centered 3D Avatar (Overlapping bottom of heading) */
+/* Stage 2: Centered 3D Avatar */
 .hero-avatar-centerpiece {
   position: relative;
   z-index: 6;
@@ -391,7 +430,7 @@ h1, h2, h3, h4, h5, h6 {
   transform-style: preserve-3d;
 }
 
-/* Stage 3: Lower Row (Left: Tagline / Right: CTA) */
+/* Stage 3: Lower Row */
 .hero-bottom-grid {
   display: flex;
   justify-content: space-between;
@@ -496,7 +535,7 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translateX(-50%); }
 }
 
-/* ==================== 2. TERMINAL CONSOLE (IMMEDIATELY AFTER INTRO) ==================== */
+/* ==================== 2. TERMINAL CONSOLE ==================== */
 .terminal-window {
   background: #0B1021;
   border: 1px solid rgba(16, 185, 129, 0.35);

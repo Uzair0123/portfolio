@@ -2,7 +2,7 @@
  * Uzair Sultan — 3D Cyber Portfolio Controller
  * -------------------------------------------------------------
  * 3D Mouse Parallax & Gyroscope Head Tracking, Numbered Accordions,
- * Scroll Reveals, Code Inspector Tabs, Architecture Modal & Toast.
+ * Staggered Scroll Reveals, Code Inspector Tabs, Architecture Modal.
  */
 document.addEventListener("DOMContentLoaded", () => {
   init3DHeroTracking();
@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function init3DHeroTracking() {
   const avatarCard = document.getElementById("avatar3DCard");
-  const avatarImg = document.getElementById("avatar3DImg");
   const floatingAssets = document.querySelectorAll(".floating-asset");
 
   if (!avatarCard) return;
@@ -38,15 +37,12 @@ function init3DHeroTracking() {
     const avatarCenterX = rect.left + rect.width / 2;
     const avatarCenterY = rect.top + rect.height / 2;
 
-    // Vector from avatar center to cursor
     const deltaX = e.clientX - avatarCenterX;
     const deltaY = e.clientY - avatarCenterY;
 
-    // Max 28 degrees head rotation
     targetRotY = Math.max(-28, Math.min(28, (deltaX / (window.innerWidth / 2)) * 28));
     targetRotX = Math.max(-24, Math.min(24, (-deltaY / (window.innerHeight / 2)) * 24));
 
-    // Parallax on floating micro-assets
     floatingAssets.forEach((asset, idx) => {
       const speed = (idx + 1) * 8;
       asset.style.transform = `translate(${targetRotY * speed * 0.05}px, ${-targetRotX * speed * 0.05}px)`;
@@ -75,8 +71,6 @@ function init3DHeroTracking() {
     window.addEventListener("deviceorientation", (e) => {
       if (e.gamma !== null && e.beta !== null) {
         isInteracting = true;
-        // Gamma: Left-to-Right (-90 to 90)
-        // Beta: Front-to-Back (-180 to 180)
         const tiltX = Math.max(-25, Math.min(25, (e.gamma / 45) * 25));
         const tiltY = Math.max(-20, Math.min(20, ((e.beta - 45) / 45) * -20));
 
@@ -89,11 +83,9 @@ function init3DHeroTracking() {
   // --- D. SMOOTH PHYSICS ANIMATION LOOP (Linear Interpolation / Lerp) ---
   let idleTime = 0;
   function animateHead() {
-    // Lerp smoothing formula: current += (target - current) * factor
     currentRotX += (targetRotX - currentRotX) * 0.09;
     currentRotY += (targetRotY - currentRotY) * 0.09;
 
-    // Gentle natural idle breathing when not active
     idleTime += 0.03;
     const idleBob = isInteracting ? 0 : Math.sin(idleTime) * 4;
 
@@ -130,24 +122,24 @@ function initProjectAccordion() {
 }
 
 /**
- * 3. Intersection Observer Scroll Reveal Animations
+ * 3. High-End Staggered Intersection Observer Scroll Reveal
  */
 function initScrollReveals() {
-  const reveals = document.querySelectorAll(".reveal-on-scroll");
+  const revealElements = document.querySelectorAll(".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right");
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
+        entry.target.classList.add("is-visible");
         obs.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.15,
+    threshold: 0.08,
     rootMargin: "0px 0px -40px 0px"
   });
 
-  reveals.forEach(el => observer.observe(el));
+  revealElements.forEach(el => observer.observe(el));
 }
 
 /**
