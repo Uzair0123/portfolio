@@ -32,10 +32,10 @@
 
       <ul class="nav-links">
         <li><a href="#about" class="nav-link active">About</a></li>
+        <li><a href="#terminal" class="nav-link">Terminal</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#services" class="nav-link">Services</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#terminal" class="nav-link">Terminal</a></li>
         <li><a href="#code" class="nav-link">Code Labs</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -51,7 +51,7 @@
     </div>
   </nav>
 
-  <!-- ==================== 2. 3D HERO SECTION (LAYERED DEPTH) ==================== -->
+  <!-- ==================== 2. 3D HERO SECTION (PHYSICS & GYRO) ==================== -->
   <section class="hero-3d-section" id="about">
     <!-- Floating 3D Micro-Elements -->
     <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1">
@@ -64,10 +64,10 @@
         <h1 class="hero-giant-heading">HI, I'M UZAIR</h1>
       </div>
 
-      <!-- Stage 2: Centered 3D Avatar (Overlapping bottom of heading) -->
+      <!-- Stage 2: Centered 3D Avatar (Interactive Mouse & Gyro Head Tracker) -->
       <div class="hero-avatar-centerpiece">
-        <div class="hero-avatar-card" id="avatar3DCard">
-          <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img">
+        <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope">
+          <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img" id="avatar3DImg">
         </div>
       </div>
 
@@ -117,7 +117,56 @@
     </div>
   </section>
 
-  <!-- ==================== 3. INTERACTIVE NUMBERED PROJECT ACCORDION ==================== -->
+  <!-- ==================== 3. INTERACTIVE TERMINAL SHELL (RIGHT AFTER INTRO) ==================== -->
+  <section class="section reveal-on-scroll" id="terminal">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-terminal"></i> Embedded Linux Shell</span>
+        <h2 class="section-title">Interactive Terminal Console</h2>
+        <p class="section-desc">
+          Test live commands or tap quick pills to explore skills, project trees, and contact information in real-time.
+        </p>
+      </div>
+
+      <div class="terminal-window" style="max-width:950px; margin:0 auto;">
+        <div class="terminal-header">
+          <div class="terminal-controls">
+            <span class="term-dot term-dot-red"></span>
+            <span class="term-dot term-dot-yellow"></span>
+            <span class="term-dot term-dot-green"></span>
+          </div>
+          <div class="terminal-title">bash — uzair@linux-workstation:~</div>
+          <div style="font-size:0.7rem; color:var(--accent-emerald); font-weight:700;">LIVE BASH 5.2</div>
+        </div>
+
+        <div class="terminal-body" id="terminalBody">
+          <!-- Output populated by TerminalModule -->
+        </div>
+
+        <div style="padding:0.75rem 1.25rem; background:#0B1021; border-top:1px solid rgba(255,255,255,0.06);">
+          <div class="term-input-row">
+            <span class="term-prompt">uzair@linux-workstation:~$</span>
+            <input type="text" id="terminalInput" class="term-input" placeholder="Type a command (e.g. help, whoami, skills, tree, projects)..." autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+
+        <div class="term-chips">
+          <span style="font-size:0.725rem; color:var(--text-dim); margin-right:0.25rem;">Quick Commands:</span>
+          <button class="term-chip" data-cmd="whoami">whoami</button>
+          <button class="term-chip" data-cmd="skills">skills</button>
+          <button class="term-chip" data-cmd="projects">projects</button>
+          <button class="term-chip" data-cmd="tree">tree</button>
+          <button class="term-chip" data-cmd="neofetch">neofetch</button>
+          <button class="term-chip" data-cmd="uptime">uptime</button>
+          <button class="term-chip" data-cmd="contact">contact</button>
+          <button class="term-chip" data-cmd="sudo hire">sudo hire</button>
+          <button class="term-chip" data-cmd="clear">clear</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. INTERACTIVE NUMBERED PROJECT ACCORDION ==================== -->
   <section class="section reveal-on-scroll" id="projects" style="background:rgba(8, 13, 26, 0.6);">
     <div class="container">
       <div class="section-header">
@@ -315,7 +364,7 @@
     </div>
   </section>
 
-  <!-- ==================== 4. NUMBERED SERVICES & DISCIPLINES ==================== -->
+  <!-- ==================== 5. NUMBERED SERVICES & DISCIPLINES ==================== -->
   <section class="section reveal-on-scroll" id="services">
     <div class="container">
       <div class="section-header">
@@ -376,7 +425,7 @@
     </div>
   </section>
 
-  <!-- ==================== 5. SKILLS MATRIX ==================== -->
+  <!-- ==================== 6. SKILLS MATRIX ==================== -->
   <section class="section reveal-on-scroll" id="skills" style="background:rgba(8, 13, 26, 0.6);">
     <div class="container">
       <div class="section-header">
@@ -437,55 +486,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 6. INTERACTIVE TERMINAL SHELL ==================== -->
-  <section class="section reveal-on-scroll" id="terminal">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag"><i class="fa-solid fa-terminal"></i> Embedded Linux Shell</span>
-        <h2 class="section-title">Interactive Terminal Console</h2>
-        <p class="section-desc">
-          Test live commands or tap quick pills to explore skills, project trees, and contact information in real-time.
-        </p>
-      </div>
-
-      <div class="terminal-window" style="max-width:950px; margin:0 auto;">
-        <div class="terminal-header">
-          <div class="terminal-controls">
-            <span class="term-dot term-dot-red"></span>
-            <span class="term-dot term-dot-yellow"></span>
-            <span class="term-dot term-dot-green"></span>
-          </div>
-          <div class="terminal-title">bash — uzair@linux-workstation:~</div>
-          <div style="font-size:0.7rem; color:var(--accent-emerald); font-weight:700;">LIVE BASH 5.2</div>
-        </div>
-
-        <div class="terminal-body" id="terminalBody">
-          <!-- Output populated by TerminalModule -->
-        </div>
-
-        <div style="padding:0.75rem 1.25rem; background:#0B1021; border-top:1px solid rgba(255,255,255,0.06);">
-          <div class="term-input-row">
-            <span class="term-prompt">uzair@linux-workstation:~$</span>
-            <input type="text" id="terminalInput" class="term-input" placeholder="Type a command (e.g. help, whoami, skills, tree, projects)..." autocomplete="off" spellcheck="false">
-          </div>
-        </div>
-
-        <div class="term-chips">
-          <span style="font-size:0.725rem; color:var(--text-dim); margin-right:0.25rem;">Quick Commands:</span>
-          <button class="term-chip" data-cmd="whoami">whoami</button>
-          <button class="term-chip" data-cmd="skills">skills</button>
-          <button class="term-chip" data-cmd="projects">projects</button>
-          <button class="term-chip" data-cmd="tree">tree</button>
-          <button class="term-chip" data-cmd="neofetch">neofetch</button>
-          <button class="term-chip" data-cmd="uptime">uptime</button>
-          <button class="term-chip" data-cmd="contact">contact</button>
-          <button class="term-chip" data-cmd="sudo hire">sudo hire</button>
-          <button class="term-chip" data-cmd="clear">clear</button>
-        </div>
       </div>
     </div>
   </section>

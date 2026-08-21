@@ -1,11 +1,11 @@
 /**
  * Uzair Sultan — 3D Cyber Portfolio Controller
  * -------------------------------------------------------------
- * 3D Mouse Parallax Tilt, Numbered Accordions, Scroll Reveals,
- * Code Inspector Tabs, Architecture Modal & Toast Notifications.
+ * 3D Mouse Parallax & Gyroscope Head Tracking, Numbered Accordions,
+ * Scroll Reveals, Code Inspector Tabs, Architecture Modal & Toast.
  */
 document.addEventListener("DOMContentLoaded", () => {
-  init3DHeroParallax();
+  init3DHeroTracking();
   initProjectAccordion();
   initScrollReveals();
   initNavigation();
@@ -16,49 +16,93 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * 1. 3D Parallax Mouse-Follow Tilt Effect (Smooth Physics)
+ * 1. 3D Head Tracking (Desktop Mouse-Follow + Mobile Gyroscope & Touch Drag)
  */
-function init3DHeroParallax() {
-  const heroSection = document.querySelector(".hero-3d-section");
+function init3DHeroTracking() {
   const avatarCard = document.getElementById("avatar3DCard");
+  const avatarImg = document.getElementById("avatar3DImg");
+  const floatingAssets = document.querySelectorAll(".floating-asset");
 
-  if (!heroSection || !avatarCard) return;
+  if (!avatarCard) return;
 
-  let mouseX = 0, mouseY = 0;
-  let currentX = 0, currentY = 0;
-  let isHovered = false;
+  let targetRotX = 0;
+  let targetRotY = 0;
+  let currentRotX = 0;
+  let currentRotY = 0;
+  let isInteracting = false;
 
-  heroSection.addEventListener("mouseenter", () => {
-    isHovered = true;
+  // --- A. DESKTOP MOUSE TRACKING (Window-wide) ---
+  window.addEventListener("mousemove", (e) => {
+    isInteracting = true;
+    const rect = avatarCard.getBoundingClientRect();
+    const avatarCenterX = rect.left + rect.width / 2;
+    const avatarCenterY = rect.top + rect.height / 2;
+
+    // Vector from avatar center to cursor
+    const deltaX = e.clientX - avatarCenterX;
+    const deltaY = e.clientY - avatarCenterY;
+
+    // Max 28 degrees head rotation
+    targetRotY = Math.max(-28, Math.min(28, (deltaX / (window.innerWidth / 2)) * 28));
+    targetRotX = Math.max(-24, Math.min(24, (-deltaY / (window.innerHeight / 2)) * 24));
+
+    // Parallax on floating micro-assets
+    floatingAssets.forEach((asset, idx) => {
+      const speed = (idx + 1) * 8;
+      asset.style.transform = `translate(${targetRotY * speed * 0.05}px, ${-targetRotX * speed * 0.05}px)`;
+    });
   });
 
-  heroSection.addEventListener("mousemove", (e) => {
-    const rect = heroSection.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+  // --- B. MOBILE TOUCH TRACKING (Drag / Touch on screen) ---
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches.length > 0) {
+      isInteracting = true;
+      const touch = e.touches[0];
+      const rect = avatarCard.getBoundingClientRect();
+      const avatarCenterX = rect.left + rect.width / 2;
+      const avatarCenterY = rect.top + rect.height / 2;
 
-    // Normalize coordinates (-1 to 1)
-    mouseX = (x / (rect.width / 2)) * 18; // Max 18 deg tilt
-    mouseY = (y / (rect.height / 2)) * -18;
-  });
+      const deltaX = touch.clientX - avatarCenterX;
+      const deltaY = touch.clientY - avatarCenterY;
 
-  heroSection.addEventListener("mouseleave", () => {
-    isHovered = false;
-    mouseX = 0;
-    mouseY = 0;
-  });
+      targetRotY = Math.max(-26, Math.min(26, (deltaX / (window.innerWidth / 2)) * 26));
+      targetRotX = Math.max(-22, Math.min(22, (-deltaY / (window.innerHeight / 2)) * 22));
+    }
+  }, { passive: true });
 
-  // Smooth Animation Frame Loop
-  function animateTilt() {
-    // Linear Interpolation (lerp)
-    currentX += (mouseX - currentX) * 0.08;
-    currentY += (mouseY - currentY) * 0.08;
+  // --- C. MOBILE GYROSCOPE ORIENTATION (Phone Tilt) ---
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener("deviceorientation", (e) => {
+      if (e.gamma !== null && e.beta !== null) {
+        isInteracting = true;
+        // Gamma: Left-to-Right (-90 to 90)
+        // Beta: Front-to-Back (-180 to 180)
+        const tiltX = Math.max(-25, Math.min(25, (e.gamma / 45) * 25));
+        const tiltY = Math.max(-20, Math.min(20, ((e.beta - 45) / 45) * -20));
 
-    avatarCard.style.transform = `perspective(1000px) rotateX(${currentY}deg) rotateY(${currentX}deg) translateZ(25px)`;
-    requestAnimationFrame(animateTilt);
+        targetRotY = tiltX;
+        targetRotX = tiltY;
+      }
+    }, { passive: true });
   }
 
-  animateTilt();
+  // --- D. SMOOTH PHYSICS ANIMATION LOOP (Linear Interpolation / Lerp) ---
+  let idleTime = 0;
+  function animateHead() {
+    // Lerp smoothing formula: current += (target - current) * factor
+    currentRotX += (targetRotX - currentRotX) * 0.09;
+    currentRotY += (targetRotY - currentRotY) * 0.09;
+
+    // Gentle natural idle breathing when not active
+    idleTime += 0.03;
+    const idleBob = isInteracting ? 0 : Math.sin(idleTime) * 4;
+
+    avatarCard.style.transform = `perspective(1000px) rotateX(${currentRotX + idleBob}deg) rotateY(${currentRotY}deg) translateZ(25px)`;
+
+    requestAnimationFrame(animateHead);
+  }
+
+  animateHead();
 }
 
 /**
@@ -100,7 +144,7 @@ function initScrollReveals() {
     });
   }, {
     threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+    rootMargin: "0px 0px -40px 0px"
   });
 
   reveals.forEach(el => observer.observe(el));
