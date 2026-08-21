@@ -2,7 +2,7 @@
  * Uzair Sultan — Cinematic 3D Cyber Portfolio Motion Controller
  * -----------------------------------------------------------------
  * Multi-Plane Parallax, Magnetic Micro-Interactions, 3D Card Depth Tilt,
- * Mobile Hamburger Drawer, Gyroscope & Continuous 3D Ambient Life.
+ * Mobile Hamburger Drawer, Gyroscope & Smooth Code Tab Animator.
  */
 document.addEventListener("DOMContentLoaded", () => {
   initHeroParallaxAndHeadTracking();
@@ -41,16 +41,16 @@ function initHeroParallaxAndHeadTracking() {
     const normalizedX = (e.clientX - windowCenterX) / windowCenterX; // -1 to 1
     const normalizedY = (e.clientY - windowCenterY) / windowCenterY; // -1 to 1
 
-    targetHeadY = normalizedX * 28;
-    targetHeadX = -normalizedY * 24;
+    targetHeadY = normalizedX * 26;
+    targetHeadX = -normalizedY * 22;
 
     parallaxLayers.forEach((layer) => {
       const depth = parseFloat(layer.dataset.parallax) || 0.05;
-      const transX = normalizedX * depth * 80;
-      const transY = normalizedY * depth * 80;
+      const transX = normalizedX * depth * 70;
+      const transY = normalizedY * depth * 70;
       layer.style.transform = `translate3d(${transX}px, ${transY}px, 0)`;
     });
-  });
+  }, { passive: true });
 
   // --- B. MOBILE TOUCH TRACKING (Swiping turns head) ---
   window.addEventListener("touchstart", (e) => {
@@ -78,8 +78,8 @@ function initHeroParallaxAndHeadTracking() {
     const normalizedX = (touch.clientX - windowCenterX) / windowCenterX;
     const normalizedY = (touch.clientY - windowCenterY) / windowCenterY;
 
-    targetHeadY = normalizedX * 26;
-    targetHeadX = -normalizedY * 22;
+    targetHeadY = normalizedX * 24;
+    targetHeadX = -normalizedY * 20;
   }
 
   // --- C. MOBILE GYROSCOPE ORIENTATION ---
@@ -87,9 +87,7 @@ function initHeroParallaxAndHeadTracking() {
     window.addEventListener("deviceorientation", (e) => {
       if (e.gamma !== null && e.beta !== null && !isTouching) {
         hasGyro = true;
-        // Gamma: Left-to-Right (-90 to 90)
-        // Beta: Front-to-Back (-180 to 180)
-        targetHeadY = Math.max(-25, Math.min(25, (e.gamma / 40) * 25));
+        targetHeadY = Math.max(-24, Math.min(24, (e.gamma / 40) * 24));
         targetHeadX = Math.max(-20, Math.min(20, ((e.beta - 45) / 40) * -20));
       }
     }, { passive: true });
@@ -100,13 +98,12 @@ function initHeroParallaxAndHeadTracking() {
   function animateFrame() {
     animTime += 0.035;
 
-    // Organic continuous ambient movement on mobile when not being dragged
     let organicTiltY = 0;
     let organicTiltX = 0;
 
     if (!isTouching && !hasGyro) {
-      organicTiltY = Math.sin(animTime * 0.8) * 12;
-      organicTiltX = Math.cos(animTime * 0.6) * 8;
+      organicTiltY = Math.sin(animTime * 0.8) * 10;
+      organicTiltX = Math.cos(animTime * 0.6) * 7;
     }
 
     const finalTargetX = targetHeadX + organicTiltX;
@@ -115,9 +112,9 @@ function initHeroParallaxAndHeadTracking() {
     currentHeadX += (finalTargetX - currentHeadX) * 0.085;
     currentHeadY += (finalTargetY - currentHeadY) * 0.085;
 
-    const idleBob = Math.sin(animTime) * 4;
+    const idleBob = Math.sin(animTime) * 3.5;
 
-    avatarCard.style.transform = `perspective(1000px) rotateX(${currentHeadX + idleBob}deg) rotateY(${currentHeadY}deg) translateZ(25px)`;
+    avatarCard.style.transform = `perspective(1000px) rotateX(${currentHeadX + idleBob}deg) rotateY(${currentHeadY}deg) translate3d(0, 0, 20px)`;
 
     requestAnimationFrame(animateFrame);
   }
@@ -180,7 +177,7 @@ function initMagneticButtons() {
       const deltaY = (e.clientY - btnCenterY) * 0.35;
 
       btn.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(1.04)`;
-    });
+    }, { passive: true });
 
     btn.addEventListener("mouseleave", () => {
       btn.style.transform = "translate3d(0px, 0px, 0) scale(1)";
@@ -202,14 +199,14 @@ function initCard3DTilt() {
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
-      const rotX = (y / (rect.height / 2)) * -6;
-      const rotY = (x / (rect.width / 2)) * 6;
+      const rotX = (y / (rect.height / 2)) * -5;
+      const rotY = (x / (rect.width / 2)) * 5;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
-    });
+      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translate3d(0, -4px, 0)`;
+    }, { passive: true });
 
     card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)";
     });
   });
 }
@@ -227,10 +224,8 @@ function initProjectAccordion() {
     header.addEventListener("click", () => {
       const isActive = item.classList.contains("active");
 
-      // Close all accordion items
       accordionItems.forEach(i => i.classList.remove("active"));
 
-      // If it wasn't active, open it
       if (!isActive) {
         item.classList.add("active");
       }
@@ -239,7 +234,7 @@ function initProjectAccordion() {
 }
 
 /**
- * 6. Connected Intersection Observer Scroll Reveal
+ * 6. 100% Smooth Intersection Observer Scroll Reveal (Hardware Accelerated)
  */
 function initScrollReveals() {
   const revealElements = document.querySelectorAll(".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right");
@@ -284,27 +279,30 @@ function initNavigation() {
         link.classList.add("active");
       }
     });
-  });
+  }, { passive: true });
 }
 
 /**
- * 8. Code Inspector Tabs
+ * 8. Animated Code Inspector Tabs
  */
 function initCodeInspector() {
   const tabs = document.querySelectorAll(".code-tab-btn");
-  const codeBlocks = document.querySelectorAll(".code-tab-pane");
+  const codePanes = document.querySelectorAll(".code-tab-pane");
 
   tabs.forEach(tab => {
     tab.addEventListener("click", (e) => {
-      tabs.forEach(t => t.classList.remove("active"));
-      codeBlocks.forEach(b => b.style.display = "none");
-
       const targetId = e.currentTarget.dataset.code;
+
+      tabs.forEach(t => t.classList.remove("active"));
       e.currentTarget.classList.add("active");
-      const targetBlock = document.getElementById(targetId);
-      if (targetBlock) {
-        targetBlock.style.display = "block";
-      }
+
+      codePanes.forEach(pane => {
+        if (pane.id === targetId) {
+          pane.classList.add("active-pane");
+        } else {
+          pane.classList.remove("active-pane");
+        }
+      });
     });
   });
 }
