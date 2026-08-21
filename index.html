@@ -35,12 +35,13 @@
         <li><a href="#terminal" class="nav-link">Terminal</a></li>
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#code" class="nav-link">Code Labs</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
       <div class="nav-cta">
-        <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm">
-          <i class="fa-brands fa-github"></i> GitHub
+        <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline btn-sm" style="border-color:#22C55E; color:#22C55E;">
+          <i class="fa-brands fa-whatsapp"></i> +91-7889446114
         </a>
         <a href="mailto:uzairteeli123456789@gmail.com" class="btn btn-emerald btn-sm">
           <i class="fa-solid fa-paper-plane"></i> Get In Touch
@@ -58,7 +59,7 @@
       <!-- Left Hero Column -->
       <div>
         <div class="hero-status-pill">
-          <span class="pulse-dot"></span> Available for Engineering Roles & Projects
+          <span class="pulse-dot"></span> Available for Engineering Roles & Commercial Projects
         </div>
 
         <h1 class="hero-title">
@@ -81,8 +82,8 @@
           <a href="#terminal" class="btn btn-outline">
             <i class="fa-solid fa-terminal"></i> Interactive Shell
           </a>
-          <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline">
-            <i class="fa-brands fa-github"></i> GitHub Profile
+          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline" style="border-color:#22C55E; color:#22C55E;">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
           </a>
         </div>
 
@@ -122,7 +123,7 @@
           <div style="padding:0.75rem 1.25rem; background:#0B1021; border-top:1px solid rgba(255,255,255,0.06);">
             <div class="term-input-row">
               <span class="term-prompt">uzair@linux-workstation:~$</span>
-              <input type="text" id="terminalInput" class="term-input" placeholder="Type a command (e.g. help, whoami, skills, projects)..." autocomplete="off" spellcheck="false">
+              <input type="text" id="terminalInput" class="term-input" placeholder="Type a command (e.g. help, whoami, skills, tree, projects)..." autocomplete="off" spellcheck="false">
             </div>
           </div>
 
@@ -131,6 +132,7 @@
             <button class="term-chip" data-cmd="whoami">whoami</button>
             <button class="term-chip" data-cmd="skills">skills</button>
             <button class="term-chip" data-cmd="projects">projects</button>
+            <button class="term-chip" data-cmd="tree">tree</button>
             <button class="term-chip" data-cmd="neofetch">neofetch</button>
             <button class="term-chip" data-cmd="contact">contact</button>
             <button class="term-chip" data-cmd="sudo hire">sudo hire</button>
@@ -295,12 +297,15 @@
             <span class="tech-badge">Schema.org SEO</span>
           </div>
 
-          <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
             <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Production Demo
             </a>
+            <button class="btn btn-outline" id="openArchModalBtn">
+              <i class="fa-solid fa-sitemap"></i> View Architecture
+            </button>
             <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" class="btn btn-outline">
-              <i class="fa-brands fa-github"></i> View GitHub Source
+              <i class="fa-brands fa-github"></i> GitHub Source
             </a>
           </div>
         </div>
@@ -369,7 +374,124 @@
     </div>
   </section>
 
-  <!-- ==================== 5. CONTACT & FOOTER ==================== -->
+  <!-- ==================== 5. INTERACTIVE CODE LABS ==================== -->
+  <section class="section" id="code">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-code-compare"></i> Source Code Labs</span>
+        <h2 class="section-title">Hands-On Code & Script Samples</h2>
+        <p class="section-desc">
+          Inspect actual production-quality Bash automation scripts, networking utilities, and Python algorithms.
+        </p>
+      </div>
+
+      <div class="code-inspector-card">
+        <div class="code-tabs-header">
+          <div class="code-tab-btns">
+            <button class="code-tab-btn active" data-code="codeBash">
+              <i class="fa-brands fa-linux" style="color:#F59E0B;"></i> backup_audit.sh
+            </button>
+            <button class="code-tab-btn" data-code="codePython">
+              <i class="fa-brands fa-python" style="color:#8B5CF6;"></i> binary_tree_dsa.py
+            </button>
+            <button class="code-tab-btn" data-code="codeNet">
+              <i class="fa-solid fa-network-wired" style="color:#06B6D4;"></i> subnet_calc.py
+            </button>
+          </div>
+          <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-emerald);">// Syntax Highlighting</span>
+        </div>
+
+        <!-- Code Pane 1: Bash -->
+        <div class="code-tab-pane" id="codeBash">
+          <pre class="code-pre-block"><code><span style="color:#64748B;">#!/usr/bin/env bash</span>
+<span style="color:#64748B;"># ==============================================================================</span>
+<span style="color:#64748B;"># Script: backup_audit.sh — Automated Server Health, Permissions & Log Rotator</span>
+<span style="color:#64748B;"># Author: Uzair Sultan (Linux Administrator)</span>
+<span style="color:#64748B;"># ==============================================================================</span>
+<span style="color:#8B5CF6;">set</span> -euo pipefail
+
+BACKUP_SRC=<span style="color:#10B981;">"/var/www/production_app"</span>
+BACKUP_DEST=<span style="color:#10B981;">"/var/backups/daily"</span>
+TIMESTAMP=$(date +<span style="color:#10B981;">"%Y%m%d_%H%M%S"</span>)
+ARCHIVE_NAME=<span style="color:#10B981;">"app_backup_${TIMESTAMP}.tar.gz"</span>
+
+<span style="color:#F59E0B;">log_info</span>() {
+  echo -e <span style="color:#10B981;">"[INFO $(date +'%T')] $1"</span>
+}
+
+<span style="color:#F59E0B;">perform_backup</span>() {
+  log_info <span style="color:#10B981;">"Starting automated archive of ${BACKUP_SRC}..."</span>
+  mkdir -p <span style="color:#10B981;">"${BACKUP_DEST}"</span>
+  tar -czf <span style="color:#10B981;">"${BACKUP_DEST}/${ARCHIVE_NAME}"</span> -C <span style="color:#10B981;">"${BACKUP_SRC}"</span> .
+  log_info <span style="color:#10B981;">"Backup created successfully: ${BACKUP_DEST}/${ARCHIVE_NAME}"</span>
+  
+  <span style="color:#64748B;"># Rotate archives older than 7 days</span>
+  find <span style="color:#10B981;">"${BACKUP_DEST}"</span> -type f -name <span style="color:#10B981;">"*.tar.gz"</span> -mtime +7 -exec rm -f {} \;
+  log_info <span style="color:#10B981;">"Old log & backup rotation complete."</span>
+}
+
+perform_backup</code></pre>
+        </div>
+
+        <!-- Code Pane 2: Python DSA -->
+        <div class="code-tab-pane" id="codePython" style="display:none;">
+          <pre class="code-pre-block"><code><span style="color:#64748B;"># ==============================================================================</span>
+<span style="color:#64748B;"># binary_tree_dsa.py — Self-Balancing BST & Breadth-First-Search Traversal</span>
+<span style="color:#64748B;"># Author: Uzair Sultan (Python Problem Solver)</span>
+<span style="color:#64748B;"># ==============================================================================</span>
+<span style="color:#8B5CF6;">from</span> collections <span style="color:#8B5CF6;">import</span> deque
+
+<span style="color:#8B5CF6;">class</span> <span style="color:#10B981; font-weight:700;">TreeNode</span>:
+    <span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">__init__</span>(self, val=<span style="color:#F59E0B;">0</span>, left=<span style="color:#F59E0B;">None</span>, right=<span style="color:#F59E0B;">None</span>):
+        self.val = val
+        self.left = left
+        self.right = right
+
+<span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">level_order_traversal</span>(root: TreeNode) -> list[list[int]]:
+    <span style="color:#64748B;">"""Time Complexity: O(N), Space Complexity: O(N)"""</span>
+    <span style="color:#8B5CF6;">if</span> <span style="color:#8B5CF6;">not</span> root:
+        <span style="color:#8B5CF6;">return</span> []
+    
+    result = []
+    queue = deque([root])
+    
+    <span style="color:#8B5CF6;">while</span> queue:
+        level_nodes = []
+        <span style="color:#8B5CF6;">for</span> _ <span style="color:#8B5CF6;">in</span> range(len(queue)):
+            curr = queue.popleft()
+            level_nodes.append(curr.val)
+            <span style="color:#8B5CF6;">if</span> curr.left:  queue.append(curr.left)
+            <span style="color:#8B5CF6;">if</span> curr.right: queue.append(curr.right)
+        result.append(level_nodes)
+        
+    <span style="color:#8B5CF6;">return</span> result</code></pre>
+        </div>
+
+        <!-- Code Pane 3: Subnet Calculator -->
+        <div class="code-tab-pane" id="codeNet" style="display:none;">
+          <pre class="code-pre-block"><code><span style="color:#64748B;"># ==============================================================================</span>
+<span style="color:#64748B;"># subnet_calc.py — IPv4 CIDR Block & Host Range Calculator</span>
+<span style="color:#64748B;"># Author: Uzair Sultan (Networking Specialist)</span>
+<span style="color:#64748B;"># ==============================================================================</span>
+<span style="color:#8B5CF6;">import</span> ipaddress
+
+<span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">inspect_network</span>(cidr_string: str):
+    net = ipaddress.ip_network(cidr_string, strict=<span style="color:#F59E0B;">False</span>)
+    
+    print(<span style="color:#10B981;">f"Network Address:    {net.network_address}"</span>)
+    print(<span style="color:#10B981;">f"Broadcast Address:  {net.broadcast_address}"</span>)
+    print(<span style="color:#10B981;">f"Netmask:            {net.netmask}"</span>)
+    print(<span style="color:#10B981;">f"Total Usable Hosts: {net.num_addresses - 2}"</span>)
+    print(<span style="color:#10B981;">f"Host IP Range:      {net[1]} - {net[-2]}"</span>)
+
+<span style="color:#64748B;"># Example Execution for a /24 Enterprise Subnet</span>
+inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. CONTACT & FOOTER ==================== -->
   <section class="section" id="contact">
     <div class="container">
       <div class="glass-card contact-card">
@@ -380,28 +502,85 @@
         </p>
 
         <div class="contact-channels">
+          <!-- WhatsApp -->
+          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline" style="border-color:#22C55E; color:#22C55E;">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp (+91-7889446114)
+          </a>
+
+          <!-- Phone Call -->
+          <a href="tel:+917889446114" class="btn btn-outline">
+            <i class="fa-solid fa-phone"></i> Call +91-7889446114
+          </a>
+
+          <!-- Email -->
           <a href="mailto:uzairteeli123456789@gmail.com" class="btn btn-emerald">
             <i class="fa-solid fa-envelope"></i> uzairteeli123456789@gmail.com
           </a>
-          <a href="https://wa.me/919149543089" target="_blank" class="btn btn-outline" style="border-color:#22C55E; color:#22C55E;">
-            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp (+91 91495 43089)
-          </a>
+
+          <!-- GitHub -->
           <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline">
             <i class="fa-brands fa-github"></i> GitHub (@Uzair0123)
           </a>
+        </div>
+
+        <div style="margin-top:2rem; display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+          <button class="term-chip" data-copy="+917889446114">
+            <i class="fa-solid fa-copy"></i> Copy Phone Number
+          </button>
+          <button class="term-chip" data-copy="uzairteeli123456789@gmail.com">
+            <i class="fa-solid fa-copy"></i> Copy Email Address
+          </button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ==================== ARCHITECTURE INSPECTOR MODAL ==================== -->
+  <div class="arch-modal-overlay" id="archModal">
+    <div class="arch-modal-card">
+      <button class="arch-modal-close" id="closeArchModalBtn">&times;</button>
+      
+      <span class="section-tag"><i class="fa-solid fa-sitemap"></i> System Architecture Inspector</span>
+      <h3 style="font-size:1.8rem; margin:0.5rem 0 1rem 0;">Kashmir Kesar Kingdom — Engineering Breakdown</h3>
+      <p style="color:var(--text-muted); font-size:0.95rem;">
+        An overview of the architectural design decisions that achieved sub-second global load times and enterprise B2B capabilities.
+      </p>
+
+      <div class="arch-grid-cards">
+        <div class="arch-mini-card">
+          <h4><i class="fa-solid fa-bolt"></i> 95% Compression</h4>
+          <p>Automated progressive JPEG pipeline reducing catalog weight from 48.3MB to 2.43MB.</p>
+        </div>
+        <div class="arch-mini-card">
+          <h4><i class="fa-solid fa-coins"></i> Dynamic Currencies</h4>
+          <p>Real-time FX conversion engine supporting USD ($), EUR (€), AED (د.إ), GBP (£), INR (₹).</p>
+        </div>
+        <div class="arch-mini-card">
+          <h4><i class="fa-solid fa-mobile-screen"></i> Offline PWA Engine</h4>
+          <p>Service Worker cache with network-first strategy enabling offline catalog browsing at trade expos.</p>
+        </div>
+        <div class="arch-mini-card">
+          <h4><i class="fa-solid fa-shield-halved"></i> Lab Authenticator</h4>
+          <p>Digital QC batch verification system matching physical batch numbers with lab metrics.</p>
+        </div>
+      </div>
+
+      <div style="text-align:right; margin-top:1.5rem;">
+        <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Platform
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Global Footer -->
   <footer class="footer">
     <div class="container">
       <p style="margin-bottom:0.5rem;">
-        &copy; <span id="currentYear">2026</span> <strong>Uzair Sultan</strong> • Linux Administrator, DevOps & Web Developer.
+        &copy; <span id="currentYear">2026</span> <strong>Uzair Sultan</strong> • Linux Systems Administrator, DevOps & Web Developer.
       </p>
       <p style="font-size:0.8rem; color:var(--text-dim);">
-        Engineered with Semantic HTML5, Modern CSS Glassmorphism & Cyber Terminal Engine. Hosted on GitHub Pages.
+        Direct: +91-7889446114 • uzairteeli123456789@gmail.com • Hosted on GitHub Pages.
       </p>
     </div>
   </footer>

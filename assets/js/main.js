@@ -2,12 +2,15 @@
  * Uzair Sultan — Portfolio Global Controller
  * -------------------------------------------------------------
  * Dynamic typing animation, active navigation link tracker,
- * mobile drawer toggle, and contact copy triggers.
+ * architecture modal inspector, code viewer tabs, and toast notifications.
  */
 document.addEventListener("DOMContentLoaded", () => {
   initTypingAnimation();
   initNavigation();
   initYear();
+  initCodeInspector();
+  initArchitectureModal();
+  initCopyTriggers();
 });
 
 function initTypingAnimation() {
@@ -19,7 +22,7 @@ function initTypingAnimation() {
     "DevOps & Cloud Engineer",
     "Modern Web Architecture Developer",
     "Python Problem Solver (DSA)",
-    "Network Infrastructure Enthusiast"
+    "Network Infrastructure Specialist"
   ];
 
   let roleIdx = 0;
@@ -33,11 +36,11 @@ function initTypingAnimation() {
     if (isDeleting) {
       target.innerText = currentRole.substring(0, charIdx - 1);
       charIdx--;
-      typeSpeed = 40;
+      typeSpeed = 35;
     } else {
       target.innerText = currentRole.substring(0, charIdx + 1);
       charIdx++;
-      typeSpeed = 80;
+      typeSpeed = 75;
     }
 
     if (!isDeleting && charIdx === currentRole.length) {
@@ -78,6 +81,84 @@ function initNavigation() {
       }
     });
   });
+}
+
+function initCodeInspector() {
+  const tabs = document.querySelectorAll(".code-tab-btn");
+  const codeBlocks = document.querySelectorAll(".code-tab-pane");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", (e) => {
+      tabs.forEach(t => t.classList.remove("active"));
+      codeBlocks.forEach(b => b.style.display = "none");
+
+      const targetId = e.currentTarget.dataset.code;
+      e.currentTarget.classList.add("active");
+      const targetBlock = document.getElementById(targetId);
+      if (targetBlock) {
+        targetBlock.style.display = "block";
+      }
+    });
+  });
+}
+
+function initArchitectureModal() {
+  const modal = document.getElementById("archModal");
+  const openBtn = document.getElementById("openArchModalBtn");
+  const closeBtn = document.getElementById("closeArchModalBtn");
+
+  if (!modal) return;
+
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    });
+  }
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  });
+}
+
+function initCopyTriggers() {
+  document.querySelectorAll("[data-copy]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      const textToCopy = e.currentTarget.dataset.copy;
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          showToast(`Copied "${textToCopy}" to clipboard!`);
+        });
+      }
+    });
+  });
+}
+
+function showToast(message) {
+  let toast = document.getElementById("portfolioToast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "portfolioToast";
+    toast.className = "portfolio-toast";
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--accent-emerald);"></i> ${message}`;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
 }
 
 function initYear() {

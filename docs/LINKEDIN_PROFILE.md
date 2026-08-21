@@ -41,7 +41,7 @@ Featured Production Work:
 I am always eager to connect with fellow systems engineers, developers, and hiring teams. Let’s connect!
 
 📫 Email: uzairteeli123456789@gmail.com
-📱 WhatsApp: +91 91495 43089
+📱 WhatsApp: +91-7889446114
 🌐 GitHub: https://github.com/Uzair0123
 ```
 
