@@ -1,13 +1,13 @@
 /**
  * Uzair Sultan — 3D Cyber Portfolio Controller
  * -------------------------------------------------------------
- * 3D Mouse-follow Parallax Tilt, Numbered Project Accordions,
+ * 3D Mouse Parallax Tilt, Numbered Accordions, Scroll Reveals,
  * Code Inspector Tabs, Architecture Modal & Toast Notifications.
  */
 document.addEventListener("DOMContentLoaded", () => {
   init3DHeroParallax();
   initProjectAccordion();
-  initTypingAnimation();
+  initScrollReveals();
   initNavigation();
   initYear();
   initCodeInspector();
@@ -16,36 +16,49 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * 1. 3D Parallax Mouse-Follow Tilt Effect
+ * 1. 3D Parallax Mouse-Follow Tilt Effect (Smooth Physics)
  */
 function init3DHeroParallax() {
   const heroSection = document.querySelector(".hero-3d-section");
-  const avatarWrap = document.querySelector(".hero-avatar-wrap");
-  const bgText = document.querySelector(".hero-giant-bg-text");
+  const avatarCard = document.getElementById("avatar3DCard");
 
-  if (!heroSection || !avatarWrap) return;
+  if (!heroSection || !avatarCard) return;
+
+  let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+  let isHovered = false;
+
+  heroSection.addEventListener("mouseenter", () => {
+    isHovered = true;
+  });
 
   heroSection.addEventListener("mousemove", (e) => {
     const rect = heroSection.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    const tiltX = (y / (rect.height / 2)) * -14; // Max 14deg tilt
-    const tiltY = (x / (rect.width / 2)) * 14;
-
-    avatarWrap.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(30px)`;
-
-    if (bgText) {
-      bgText.style.transform = `translate(calc(-50% + ${tiltY * 1.2}px), calc(-50% + ${tiltX * 1.2}px))`;
-    }
+    // Normalize coordinates (-1 to 1)
+    mouseX = (x / (rect.width / 2)) * 18; // Max 18 deg tilt
+    mouseY = (y / (rect.height / 2)) * -18;
   });
 
   heroSection.addEventListener("mouseleave", () => {
-    avatarWrap.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
-    if (bgText) {
-      bgText.style.transform = "translate(-50%, -50%)";
-    }
+    isHovered = false;
+    mouseX = 0;
+    mouseY = 0;
   });
+
+  // Smooth Animation Frame Loop
+  function animateTilt() {
+    // Linear Interpolation (lerp)
+    currentX += (mouseX - currentX) * 0.08;
+    currentY += (mouseY - currentY) * 0.08;
+
+    avatarCard.style.transform = `perspective(1000px) rotateX(${currentY}deg) rotateY(${currentX}deg) translateZ(25px)`;
+    requestAnimationFrame(animateTilt);
+  }
+
+  animateTilt();
 }
 
 /**
@@ -73,51 +86,24 @@ function initProjectAccordion() {
 }
 
 /**
- * 3. Dynamic Typing Subtitle
+ * 3. Intersection Observer Scroll Reveal Animations
  */
-function initTypingAnimation() {
-  const target = document.getElementById("typingSubtitle");
-  if (!target) return;
+function initScrollReveals() {
+  const reveals = document.querySelectorAll(".reveal-on-scroll");
 
-  const roles = [
-    "Linux Systems Administrator",
-    "DevOps & Cloud Engineer",
-    "Modern Web Architecture Developer",
-    "Python Problem Solver (DSA)",
-    "Network Infrastructure Specialist"
-  ];
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  });
 
-  let roleIdx = 0;
-  let charIdx = 0;
-  let isDeleting = false;
-  let typeSpeed = 80;
-
-  function type() {
-    const currentRole = roles[roleIdx];
-
-    if (isDeleting) {
-      target.innerText = currentRole.substring(0, charIdx - 1);
-      charIdx--;
-      typeSpeed = 35;
-    } else {
-      target.innerText = currentRole.substring(0, charIdx + 1);
-      charIdx++;
-      typeSpeed = 75;
-    }
-
-    if (!isDeleting && charIdx === currentRole.length) {
-      isDeleting = true;
-      typeSpeed = 1800;
-    } else if (isDeleting && charIdx === 0) {
-      isDeleting = false;
-      roleIdx = (roleIdx + 1) % roles.length;
-      typeSpeed = 400;
-    }
-
-    setTimeout(type, typeSpeed);
-  }
-
-  type();
+  reveals.forEach(el => observer.observe(el));
 }
 
 /**

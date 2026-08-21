@@ -51,42 +51,44 @@
     </div>
   </nav>
 
-  <!-- ==================== 2. 3D HERO SECTION WITH DEPTH LAYERING ==================== -->
+  <!-- ==================== 2. 3D HERO SECTION (LAYERED DEPTH) ==================== -->
   <section class="hero-3d-section" id="about">
-    <!-- Giant Bold Typography Behind Avatar (Z-Index: 2) -->
-    <div class="hero-giant-bg-text">HI, I'M UZAIR</div>
-
-    <!-- Floating 3D Micro-Elements (Z-Index: 4) -->
+    <!-- Floating 3D Micro-Elements -->
     <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1">
     <img src="assets/images/chrome-donut.png" alt="3D Chrome Donut" class="floating-asset floating-donut-1">
     <img src="assets/images/chrome-sphere.png" alt="3D Cyber Sphere" class="floating-asset floating-sphere-1">
 
-    <div class="container hero-3d-grid">
-      <!-- Left Side Tagline -->
-      <div class="hero-side-left">
-        <div style="font-family:var(--font-code); font-size:0.85rem; color:var(--accent-emerald); font-weight:700; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.08em;">
-          // Systems Engineer & Developer
+    <div class="container hero-container-box">
+      <!-- Stage 1: Big Centered Typography -->
+      <div class="hero-header-title-wrap">
+        <h1 class="hero-giant-heading">HI, I'M UZAIR</h1>
+      </div>
+
+      <!-- Stage 2: Centered 3D Avatar (Overlapping bottom of heading) -->
+      <div class="hero-avatar-centerpiece">
+        <div class="hero-avatar-card" id="avatar3DCard">
+          <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img">
         </div>
-        <h2 style="font-size:1.55rem; font-weight:800; line-height:1.3; margin-bottom:1rem;">
-          Bridging Low-Level <span class="gradient-text">Linux & Networks</span> with High-Performance Web Platforms.
-        </h2>
-        <p style="color:var(--text-muted); font-size:0.925rem; line-height:1.6;">
-          Passionate about kernel-space fundamentals, bash automation, packet flow, algorithmic problem solving with Python, and sub-second commercial web delivery.
-        </p>
       </div>
 
-      <!-- Center Avatar Wrapper (Z-Index: 5 - Overlaps Background Text) -->
-      <div class="hero-avatar-wrap">
-        <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-img">
-      </div>
+      <!-- Stage 3: Lower Row (Left: Tagline / Right: CTA) -->
+      <div class="hero-bottom-grid">
+        <div class="hero-bottom-left">
+          <div class="hero-role-badge">
+            <span class="pulse-dot"></span> LINUX SYSTEMS & DEVOPS ENGINEER
+          </div>
+          <p class="hero-tagline-text">
+            A systems builder passionate about low-level Linux administration, computer networking protocols, and crafting bold, memorable commercial web platforms.
+          </p>
+        </div>
 
-      <!-- Right Side CTA -->
-      <div class="hero-side-right">
-        <a href="https://wa.me/917889446114" target="_blank" class="btn btn-neon-pill">
-          <i class="fa-solid fa-bolt"></i> Contact Me
-        </a>
-        <div style="font-family:var(--font-code); font-size:0.8rem; color:var(--text-dim); text-align:right; margin-top:0.5rem;">
-          <i class="fa-solid fa-circle" style="color:var(--accent-emerald); font-size:0.55rem;"></i> Available for Contracts & Roles
+        <div class="hero-bottom-right">
+          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-neon-pill-glow">
+            <i class="fa-brands fa-whatsapp"></i> CONTACT ME
+          </a>
+          <span class="hero-availability-note">
+            <i class="fa-solid fa-circle" style="color:#10B981; font-size:0.55rem;"></i> Available for Contracts & Roles
+          </span>
         </div>
       </div>
     </div>
@@ -102,7 +104,7 @@
         <div class="marquee-item"><i class="fa-brands fa-python"></i> Python 3 & DSA</div>
         <div class="marquee-item"><i class="fa-brands fa-git-alt"></i> Git & GitHub Actions CI/CD</div>
         <div class="marquee-item"><i class="fa-solid fa-gauge-high"></i> 95% Payload Optimization</div>
-        <!-- Duplicate for continuous infinite scroll -->
+        <!-- Infinite loop repetition -->
         <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu Linux 24.04</div>
         <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
         <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> TCP/IP Protocols</div>
@@ -116,7 +118,7 @@
   </section>
 
   <!-- ==================== 3. INTERACTIVE NUMBERED PROJECT ACCORDION ==================== -->
-  <section class="section" id="projects" style="background:rgba(8, 13, 26, 0.6);">
+  <section class="section reveal-on-scroll" id="projects" style="background:rgba(8, 13, 26, 0.6);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag"><i class="fa-solid fa-laptop-code"></i> Engineering Portfolio</span>
@@ -314,7 +316,7 @@
   </section>
 
   <!-- ==================== 4. NUMBERED SERVICES & DISCIPLINES ==================== -->
-  <section class="section" id="services">
+  <section class="section reveal-on-scroll" id="services">
     <div class="container">
       <div class="section-header">
         <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Core Disciplines</span>
@@ -375,7 +377,7 @@
   </section>
 
   <!-- ==================== 5. SKILLS MATRIX ==================== -->
-  <section class="section" id="skills" style="background:rgba(8, 13, 26, 0.6);">
+  <section class="section reveal-on-scroll" id="skills" style="background:rgba(8, 13, 26, 0.6);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag"><i class="fa-solid fa-microchip"></i> Technical Competencies</span>
@@ -440,7 +442,7 @@
   </section>
 
   <!-- ==================== 6. INTERACTIVE TERMINAL SHELL ==================== -->
-  <section class="section" id="terminal">
+  <section class="section reveal-on-scroll" id="terminal">
     <div class="container">
       <div class="section-header">
         <span class="section-tag"><i class="fa-solid fa-terminal"></i> Embedded Linux Shell</span>
@@ -489,7 +491,7 @@
   </section>
 
   <!-- ==================== 7. SOURCE CODE LABS ==================== -->
-  <section class="section" id="code" style="background:rgba(8, 13, 26, 0.6);">
+  <section class="section reveal-on-scroll" id="code" style="background:rgba(8, 13, 26, 0.6);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag"><i class="fa-solid fa-code-compare"></i> Source Code Labs</span>
@@ -606,7 +608,7 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
   </section>
 
   <!-- ==================== 8. CONTACT & FOOTER ==================== -->
-  <section class="section" id="contact">
+  <section class="section reveal-on-scroll" id="contact">
     <div class="container">
       <div class="glass-card contact-card">
         <span class="section-tag"><i class="fa-solid fa-handshake"></i> Let's Connect</span>
