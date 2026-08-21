@@ -27,9 +27,10 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="nav-brand">
-        <span class="nav-prompt-symbol">&gt;_</span> uzair<span style="color:var(--text-dim);">@workstation:~$</span>
+        <span class="nav-prompt-symbol">&gt;_</span> uzair<span class="nav-brand-suffix" style="color:var(--text-dim);">@workstation:~$</span>
       </a>
 
+      <!-- Desktop Links -->
       <ul class="nav-links">
         <li><a href="#about" class="nav-link active">About</a></li>
         <li><a href="#terminal" class="nav-link">Terminal</a></li>
@@ -40,6 +41,7 @@
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
+      <!-- Desktop CTA -->
       <div class="nav-cta">
         <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline btn-sm" style="border-color:#22C55E; color:#22C55E;" data-magnetic="true">
           <i class="fa-brands fa-whatsapp"></i> +91-7889446114
@@ -48,8 +50,39 @@
           <i class="fa-solid fa-paper-plane"></i> Hire Me
         </a>
       </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open Navigation Menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
     </div>
   </nav>
+
+  <!-- ==================== MOBILE NAVIGATION DRAWER ==================== -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay">
+    <div class="mobile-nav-drawer">
+      <div class="mobile-nav-header">
+        <span class="nav-brand"><span class="nav-prompt-symbol">&gt;_</span> uzair.sh</span>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close Navigation Menu">&times;</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="#about" class="mobile-nav-link"><i class="fa-solid fa-user"></i> About</a></li>
+        <li><a href="#terminal" class="mobile-nav-link"><i class="fa-solid fa-terminal"></i> Terminal Console</a></li>
+        <li><a href="#projects" class="mobile-nav-link"><i class="fa-solid fa-laptop-code"></i> Projects Showcase</a></li>
+        <li><a href="#services" class="mobile-nav-link"><i class="fa-solid fa-briefcase"></i> Services</a></li>
+        <li><a href="#skills" class="mobile-nav-link"><i class="fa-solid fa-microchip"></i> Skills Matrix</a></li>
+        <li><a href="#code" class="mobile-nav-link"><i class="fa-solid fa-code"></i> Code Labs</a></li>
+        <li><a href="#contact" class="mobile-nav-link"><i class="fa-solid fa-envelope"></i> Contact Me</a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="https://wa.me/917889446114" target="_blank" class="btn btn-emerald" style="width:100%;">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================== 2. 3D HERO SECTION (CHOREOGRAPHED 5 STAGES) ==================== -->
   <section class="hero-3d-section" id="about">
@@ -253,7 +286,7 @@
                   <span class="term-chip">Cron Jobs</span>
                   <span class="term-chip">Grep/Sed/Awk</span>
                 </div>
-                <div style="display:flex; flex-wrap:gap:0.75rem;">
+                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
                   <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-solid fa-code"></i> Inspect Code
                   </a>

@@ -2,10 +2,11 @@
  * Uzair Sultan — Cinematic 3D Cyber Portfolio Motion Controller
  * -----------------------------------------------------------------
  * Multi-Plane Parallax, Magnetic Micro-Interactions, 3D Card Depth Tilt,
- * Mobile Gyroscope, Connected Scroll Reveals & Interactive Terminal.
+ * Mobile Hamburger Drawer, Gyroscope & Continuous 3D Ambient Life.
  */
 document.addEventListener("DOMContentLoaded", () => {
   initHeroParallaxAndHeadTracking();
+  initMobileMenuDrawer();
   initMagneticButtons();
   initCard3DTilt();
   initProjectAccordion();
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * 1. Multi-Plane 3D Parallax & Avatar Head Tracking (Desktop + Mobile)
+ * 1. Multi-Plane 3D Parallax & Avatar Head Tracking (Desktop + Continuous Mobile 3D Motion)
  */
 function initHeroParallaxAndHeadTracking() {
   const avatarCard = document.getElementById("avatar3DCard");
@@ -27,25 +28,22 @@ function initHeroParallaxAndHeadTracking() {
 
   if (!avatarCard || !heroSection) return;
 
-  let mouseX = 0, mouseY = 0;
   let currentHeadX = 0, currentHeadY = 0;
   let targetHeadX = 0, targetHeadY = 0;
-  let isInteracting = false;
+  let isTouching = false;
+  let hasGyro = false;
 
   // --- A. DESKTOP MOUSE PARALLAX & HEAD TRACKING ---
   window.addEventListener("mousemove", (e) => {
-    isInteracting = true;
     const windowCenterX = window.innerWidth / 2;
     const windowCenterY = window.innerHeight / 2;
 
     const normalizedX = (e.clientX - windowCenterX) / windowCenterX; // -1 to 1
     const normalizedY = (e.clientY - windowCenterY) / windowCenterY; // -1 to 1
 
-    // 1. Head rotation angles (max 28 deg)
     targetHeadY = normalizedX * 28;
     targetHeadX = -normalizedY * 24;
 
-    // 2. Multi-Plane Parallax translation
     parallaxLayers.forEach((layer) => {
       const depth = parseFloat(layer.dataset.parallax) || 0.05;
       const transX = normalizedX * depth * 80;
@@ -54,43 +52,70 @@ function initHeroParallaxAndHeadTracking() {
     });
   });
 
-  // --- B. MOBILE TOUCH TRACKING ---
-  window.addEventListener("touchmove", (e) => {
+  // --- B. MOBILE TOUCH TRACKING (Swiping turns head) ---
+  window.addEventListener("touchstart", (e) => {
     if (e.touches.length > 0) {
-      isInteracting = true;
-      const touch = e.touches[0];
-      const windowCenterX = window.innerWidth / 2;
-      const windowCenterY = window.innerHeight / 2;
-
-      const normalizedX = (touch.clientX - windowCenterX) / windowCenterX;
-      const normalizedY = (touch.clientY - windowCenterY) / windowCenterY;
-
-      targetHeadY = normalizedX * 24;
-      targetHeadX = -normalizedY * 20;
+      isTouching = true;
+      handleTouchPos(e.touches[0]);
     }
   }, { passive: true });
 
-  // --- C. MOBILE GYROSCOPE TILT ---
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches.length > 0) {
+      isTouching = true;
+      handleTouchPos(e.touches[0]);
+    }
+  }, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    setTimeout(() => { isTouching = false; }, 800);
+  });
+
+  function handleTouchPos(touch) {
+    const windowCenterX = window.innerWidth / 2;
+    const windowCenterY = window.innerHeight / 2;
+
+    const normalizedX = (touch.clientX - windowCenterX) / windowCenterX;
+    const normalizedY = (touch.clientY - windowCenterY) / windowCenterY;
+
+    targetHeadY = normalizedX * 26;
+    targetHeadX = -normalizedY * 22;
+  }
+
+  // --- C. MOBILE GYROSCOPE ORIENTATION ---
   if (window.DeviceOrientationEvent) {
     window.addEventListener("deviceorientation", (e) => {
-      if (e.gamma !== null && e.beta !== null) {
-        isInteracting = true;
+      if (e.gamma !== null && e.beta !== null && !isTouching) {
+        hasGyro = true;
         // Gamma: Left-to-Right (-90 to 90)
         // Beta: Front-to-Back (-180 to 180)
-        targetHeadY = Math.max(-25, Math.min(25, (e.gamma / 45) * 25));
-        targetHeadX = Math.max(-20, Math.min(20, ((e.beta - 45) / 45) * -20));
+        targetHeadY = Math.max(-25, Math.min(25, (e.gamma / 40) * 25));
+        targetHeadX = Math.max(-20, Math.min(20, ((e.beta - 45) / 40) * -20));
       }
     }, { passive: true });
   }
 
-  // --- D. SMOOTH PHYSICS ANIMATION LOOP (Lerp) ---
-  let idleTime = 0;
+  // --- D. SMOOTH PHYSICS ANIMATION LOOP (Lerp + Organic 3D Breathing) ---
+  let animTime = 0;
   function animateFrame() {
-    currentHeadX += (targetHeadX - currentHeadX) * 0.085;
-    currentHeadY += (targetHeadY - currentHeadY) * 0.085;
+    animTime += 0.035;
 
-    idleTime += 0.03;
-    const idleBob = isInteracting ? 0 : Math.sin(idleTime) * 3.5;
+    // Organic continuous ambient movement on mobile when not being dragged
+    let organicTiltY = 0;
+    let organicTiltX = 0;
+
+    if (!isTouching && !hasGyro) {
+      organicTiltY = Math.sin(animTime * 0.8) * 12;
+      organicTiltX = Math.cos(animTime * 0.6) * 8;
+    }
+
+    const finalTargetX = targetHeadX + organicTiltX;
+    const finalTargetY = targetHeadY + organicTiltY;
+
+    currentHeadX += (finalTargetX - currentHeadX) * 0.085;
+    currentHeadY += (finalTargetY - currentHeadY) * 0.085;
+
+    const idleBob = Math.sin(animTime) * 4;
 
     avatarCard.style.transform = `perspective(1000px) rotateX(${currentHeadX + idleBob}deg) rotateY(${currentHeadY}deg) translateZ(25px)`;
 
@@ -101,10 +126,46 @@ function initHeroParallaxAndHeadTracking() {
 }
 
 /**
- * 2. Magnetic Buttons Engine (Micro-Interactions)
+ * 2. Mobile Navigation Drawer Controller
+ */
+function initMobileMenuDrawer() {
+  const toggleBtn = document.getElementById("mobileMenuToggle");
+  const closeBtn = document.getElementById("mobileNavClose");
+  const overlay = document.getElementById("mobileNavOverlay");
+  const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+
+  if (!toggleBtn || !overlay) return;
+
+  function openDrawer() {
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDrawer() {
+    overlay.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+
+  toggleBtn.addEventListener("click", openDrawer);
+  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      closeDrawer();
+    }
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      closeDrawer();
+    });
+  });
+}
+
+/**
+ * 3. Magnetic Buttons Engine (Micro-Interactions)
  */
 function initMagneticButtons() {
-  // Only activate on desktop devices with hover support
   if (window.matchMedia("(pointer: coarse)").matches) return;
 
   const magneticBtns = document.querySelectorAll("[data-magnetic='true']");
@@ -128,7 +189,7 @@ function initMagneticButtons() {
 }
 
 /**
- * 3. Interactive 3D Card Depth Tilt
+ * 4. Interactive 3D Card Depth Tilt
  */
 function initCard3DTilt() {
   if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -141,7 +202,7 @@ function initCard3DTilt() {
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
-      const rotX = (y / (rect.height / 2)) * -6; // Max 6 deg tilt
+      const rotX = (y / (rect.height / 2)) * -6;
       const rotY = (x / (rect.width / 2)) * 6;
 
       card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
@@ -154,7 +215,7 @@ function initCard3DTilt() {
 }
 
 /**
- * 4. Interactive Numbered Project Accordion
+ * 5. Interactive Numbered Project Accordion
  */
 function initProjectAccordion() {
   const accordionItems = document.querySelectorAll(".accordion-item");
@@ -178,7 +239,7 @@ function initProjectAccordion() {
 }
 
 /**
- * 5. Connected Intersection Observer Scroll Reveal
+ * 6. Connected Intersection Observer Scroll Reveal
  */
 function initScrollReveals() {
   const revealElements = document.querySelectorAll(".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right");
@@ -191,15 +252,15 @@ function initScrollReveals() {
       }
     });
   }, {
-    threshold: 0.08,
-    rootMargin: "0px 0px -40px 0px"
+    threshold: 0.05,
+    rootMargin: "0px 0px -20px 0px"
   });
 
   revealElements.forEach(el => observer.observe(el));
 }
 
 /**
- * 6. Active Navigation Link Tracker
+ * 7. Active Navigation Link Tracker
  */
 function initNavigation() {
   const navLinks = document.querySelectorAll(".nav-link");
@@ -227,7 +288,7 @@ function initNavigation() {
 }
 
 /**
- * 7. Code Inspector Tabs
+ * 8. Code Inspector Tabs
  */
 function initCodeInspector() {
   const tabs = document.querySelectorAll(".code-tab-btn");
@@ -249,7 +310,7 @@ function initCodeInspector() {
 }
 
 /**
- * 8. System Architecture Modal
+ * 9. System Architecture Modal
  */
 function initArchitectureModal() {
   const modal = document.getElementById("archModal");
@@ -282,7 +343,7 @@ function initArchitectureModal() {
 }
 
 /**
- * 9. Copy-to-Clipboard Triggers
+ * 10. Copy-to-Clipboard Triggers
  */
 function initCopyTriggers() {
   document.querySelectorAll("[data-copy]").forEach(el => {

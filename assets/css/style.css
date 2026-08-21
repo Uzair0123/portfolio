@@ -1,6 +1,6 @@
 /* ==========================================================================
    UZAIR SULTAN — CINEMATIC 3D CYBER PORTFOLIO DESIGN SYSTEM
-   Award-Winning Motion Experience • Physics Easing • Multi-Plane Parallax
+   Award-Winning Motion Experience • Mobile Drawer • Gyroscope & Touch
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
@@ -164,9 +164,9 @@ h1, h2, h3, h4, h5, h6 {
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.08) 40%, rgba(5, 8, 19, 0) 70%);
+  width: clamp(320px, 60vw, 650px);
+  height: clamp(320px, 60vw, 650px);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(6, 182, 212, 0.1) 40%, rgba(5, 8, 19, 0) 70%);
   border-radius: 50%;
   filter: blur(60px);
   pointer-events: none;
@@ -186,15 +186,14 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
   z-index: 3;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
-  animation: floatBob 5s ease-in-out infinite;
   opacity: 0;
   transform: scale(0.6) translateY(20px);
   animation: assetIntro 1.2s var(--ease-spring) forwards, floatBob 5s ease-in-out 1.2s infinite;
 }
 
-.floating-star-1 { top: 16%; left: 8%; width: 52px; animation-delay: 0.3s, 1.5s; }
-.floating-donut-1 { top: 22%; right: 9%; width: 64px; animation-delay: 0.45s, 1.65s; }
-.floating-sphere-1 { bottom: 18%; left: 12%; width: 44px; animation-delay: 0.6s, 1.8s; }
+.floating-star-1 { top: 16%; left: 8%; width: clamp(38px, 6vw, 55px); animation-delay: 0.3s, 1.5s; }
+.floating-donut-1 { top: 22%; right: 9%; width: clamp(45px, 7vw, 68px); animation-delay: 0.45s, 1.65s; }
+.floating-sphere-1 { bottom: 18%; left: 12%; width: clamp(32px, 5vw, 46px); animation-delay: 0.6s, 1.8s; }
 
 @keyframes assetIntro {
   to { opacity: 1; transform: scale(1) translateY(0); }
@@ -222,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-giant-heading {
-  font-size: clamp(3.8rem, 11.5vw, 9rem);
+  font-size: clamp(3.2rem, 11vw, 9rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   color: #FFFFFF;
@@ -269,8 +268,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-avatar-card {
-  width: clamp(240px, 28vw, 360px);
-  height: clamp(240px, 28vw, 360px);
+  width: clamp(230px, 28vw, 360px);
+  height: clamp(230px, 28vw, 360px);
   border-radius: 50%;
   background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(5, 8, 19, 0) 70%);
   display: flex;
@@ -561,7 +560,6 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--shadow-emerald);
 }
 
-/* Interactive Border Glow Beam */
 .glass-card::before {
   content: '';
   position: absolute;
@@ -699,7 +697,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
-/* ==================== 5. NUMBERED SERVICES (BORDER SWEEP) ==================== */
+/* ==================== 5. NUMBERED SERVICES ==================== */
 .services-numbered-list {
   display: flex;
   flex-direction: column;
@@ -929,15 +927,16 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 380px;
 }
 
-/* ==================== NAVBAR ==================== */
+/* ==================== NAVBAR & MOBILE DRAWER ==================== */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(5, 8, 19, 0.85);
+  background: rgba(5, 8, 19, 0.88);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   height: 74px;
   display: flex;
@@ -960,6 +959,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-main);
+  white-space: nowrap;
 }
 
 .nav-prompt-symbol {
@@ -969,14 +969,14 @@ h1, h2, h3, h4, h5, h6 {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.85rem;
   list-style: none;
 }
 
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 0.925rem;
   font-weight: 600;
   transition: color 0.2s ease;
   position: relative;
@@ -1006,7 +1006,137 @@ h1, h2, h3, h4, h5, h6 {
 .nav-cta {
   display: flex;
   align-items: center;
+  gap: 0.85rem;
+}
+
+/* Mobile Hamburger Toggle Button */
+.mobile-menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1001;
+}
+
+.mobile-menu-toggle:hover {
+  border-color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Navigation Drawer Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 8, 19, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-cinematic);
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-drawer {
+  width: min(320px, 85vw);
+  height: 100%;
+  background: #0B1024;
+  border-left: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease-spring);
+  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.mobile-nav-overlay.active .mobile-nav-drawer {
+  transform: translateX(0);
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-nav-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: var(--text-main);
+  font-size: 1.4rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.mobile-nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
   gap: 1rem;
+  transition: all 0.2s ease;
+  padding: 0.4rem 0;
+}
+
+.mobile-nav-link i {
+  color: var(--accent-emerald);
+  width: 24px;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--text-main);
+  transform: translateX(6px);
 }
 
 /* ==================== CONTACT & FOOTER ==================== */
@@ -1164,7 +1294,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==================== RESPONSIVE RULES ==================== */
-@media (max-width: 900px) {
+@media (max-width: 990px) {
+  .nav-links, .nav-cta {
+    display: none !important;
+  }
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
   .hero-bottom-grid {
     flex-direction: column !important;
     align-items: center !important;
@@ -1187,8 +1323,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 600px) {
+  .nav-brand-suffix {
+    display: none !important;
+  }
   .hero-giant-heading {
-    font-size: 3.2rem !important;
+    font-size: clamp(2.5rem, 11vw, 4rem) !important;
+  }
+  .hero-avatar-centerpiece {
+    margin-top: -2rem !important;
   }
   .hero-avatar-card {
     width: 220px !important;
@@ -1198,9 +1340,13 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1.25rem 1.5rem !important;
   }
   .accordion-title {
-    font-size: 1.1rem !important;
+    font-size: 1.15rem !important;
   }
   .section-title {
     font-size: 2.1rem !important;
+  }
+  .terminal-body {
+    height: 280px !important;
+    padding: 1rem !important;
   }
 }
