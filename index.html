@@ -20,8 +20,11 @@
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
-</head>
 <body>
+
+  <!-- ==================== DUAL-RING CYBER CURSOR ==================== -->
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+  <div class="custom-cursor-ring" id="cursorRing"></div>
 
   <!-- ==================== 1. TOP NAVIGATION ==================== -->
   <nav class="navbar">
@@ -102,7 +105,7 @@
 
       <!-- Stage 3: Centered 3D Avatar (Spring Rise & Gyro/Mouse Tracker) (Z-Index: 6) -->
       <div class="hero-avatar-centerpiece" data-parallax="0.16">
-        <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope">
+        <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope" data-cursor="grab">
           <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img" id="avatar3DImg">
         </div>
       </div>
@@ -164,7 +167,7 @@
         </p>
       </div>
 
-      <div class="terminal-window scroll-reveal delay-1" style="max-width:950px; margin:0 auto;" data-tilt="true">
+      <div class="terminal-window scroll-reveal delay-1" style="max-width:950px; margin:0 auto;" data-tilt="true" data-cursor="terminal">
         <div class="terminal-header">
           <div class="terminal-controls">
             <span class="term-dot term-dot-red"></span>
@@ -216,7 +219,7 @@
       <div class="projects-accordion">
         
         <!-- Accordion 01: Kashmir Kesar Kingdom (Active by Default) -->
-        <div class="accordion-item active scroll-reveal delay-1" data-tilt="true">
+        <div class="accordion-item active scroll-reveal delay-1" data-tilt="true" data-cursor="project">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">01</span>
@@ -262,7 +265,7 @@
         </div>
 
         <!-- Accordion 02: Linux Administration & Automation -->
-        <div class="accordion-item scroll-reveal delay-2" data-tilt="true">
+        <div class="accordion-item scroll-reveal delay-2" data-tilt="true" data-cursor="project">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">02</span>
@@ -307,7 +310,7 @@
         </div>
 
         <!-- Accordion 03: Computer Networking Labs -->
-        <div class="accordion-item scroll-reveal delay-3" data-tilt="true">
+        <div class="accordion-item scroll-reveal delay-3" data-tilt="true" data-cursor="project">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">03</span>
@@ -352,7 +355,7 @@
         </div>
 
         <!-- Accordion 04: Python DSA Suite -->
-        <div class="accordion-item scroll-reveal delay-4" data-tilt="true">
+        <div class="accordion-item scroll-reveal delay-4" data-tilt="true" data-cursor="project">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">04</span>

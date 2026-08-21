@@ -1,10 +1,12 @@
 /**
- * Uzair Sultan — Cinematic 3D Cyber Portfolio Motion Controller
+ * Uzair Sultan — Aesthetic 3D Digital Experience Controller
  * -----------------------------------------------------------------
- * Multi-Plane Parallax, Magnetic Micro-Interactions, 3D Card Depth Tilt,
- * Mobile Hamburger Drawer, Gyroscope & Smooth Code Tab Animator.
+ * Dual-Ring Custom Cursor, Kinetic Parallax, Dynamic Card Spotlights,
+ * 3D Avatar Physics, Mobile Drawer & Gyroscope 3D Ambient Engine.
  */
 document.addEventListener("DOMContentLoaded", () => {
+  initCustomCursor();
+  initDynamicCardSpotlights();
   initHeroParallaxAndHeadTracking();
   initMobileMenuDrawer();
   initMagneticButtons();
@@ -19,7 +21,69 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * 1. Multi-Plane 3D Parallax & Avatar Head Tracking (Desktop + Continuous Mobile 3D Motion)
+ * 1. Intelligent Dual-Ring Custom Cursor System (Desktop)
+ */
+function initCustomCursor() {
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+
+  const dot = document.getElementById("cursorDot");
+  const ring = document.getElementById("cursorRing");
+  if (!dot || !ring) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+  }, { passive: true });
+
+  // Cursor morph triggers
+  document.querySelectorAll("a, button, [data-cursor], input, textarea, .accordion-header").forEach(el => {
+    el.addEventListener("mouseenter", (e) => {
+      const cursorType = el.dataset.cursor || "pointer";
+      document.body.classList.remove("cursor-hover-pointer", "cursor-hover-project", "cursor-hover-grab", "cursor-hover-terminal");
+      document.body.classList.add(`cursor-hover-${cursorType}`);
+    });
+
+    el.addEventListener("mouseleave", () => {
+      document.body.classList.remove("cursor-hover-pointer", "cursor-hover-project", "cursor-hover-grab", "cursor-hover-terminal");
+    });
+  });
+
+  // Smooth Ring Lerp Animation Loop
+  function renderCursor() {
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+    requestAnimationFrame(renderCursor);
+  }
+
+  renderCursor();
+}
+
+/**
+ * 2. Dynamic Card Spotlight Flare (Ray-Traced Radial Glow)
+ */
+function initDynamicCardSpotlights() {
+  const spotlightCards = document.querySelectorAll(".glass-card, .accordion-item, .terminal-window");
+
+  spotlightCards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }, { passive: true });
+  });
+}
+
+/**
+ * 3. Multi-Plane 3D Parallax & Avatar Head Tracking (Desktop + Mobile)
  */
 function initHeroParallaxAndHeadTracking() {
   const avatarCard = document.getElementById("avatar3DCard");
@@ -123,7 +187,7 @@ function initHeroParallaxAndHeadTracking() {
 }
 
 /**
- * 2. Mobile Navigation Drawer Controller
+ * 4. Mobile Navigation Drawer Controller
  */
 function initMobileMenuDrawer() {
   const toggleBtn = document.getElementById("mobileMenuToggle");
@@ -160,7 +224,7 @@ function initMobileMenuDrawer() {
 }
 
 /**
- * 3. Magnetic Buttons Engine (Micro-Interactions)
+ * 5. Magnetic Buttons Engine (Micro-Interactions)
  */
 function initMagneticButtons() {
   if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -186,7 +250,7 @@ function initMagneticButtons() {
 }
 
 /**
- * 4. Interactive 3D Card Depth Tilt
+ * 6. Interactive 3D Card Depth Tilt
  */
 function initCard3DTilt() {
   if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -212,7 +276,7 @@ function initCard3DTilt() {
 }
 
 /**
- * 5. Interactive Numbered Project Accordion
+ * 7. Interactive Numbered Project Accordion
  */
 function initProjectAccordion() {
   const accordionItems = document.querySelectorAll(".accordion-item");
@@ -234,7 +298,7 @@ function initProjectAccordion() {
 }
 
 /**
- * 6. 100% Smooth Intersection Observer Scroll Reveal (Hardware Accelerated)
+ * 8. 100% Smooth Intersection Observer Scroll Reveal (Hardware Accelerated)
  */
 function initScrollReveals() {
   const revealElements = document.querySelectorAll(".scroll-reveal, .scroll-reveal-left, .scroll-reveal-right");
@@ -255,7 +319,7 @@ function initScrollReveals() {
 }
 
 /**
- * 7. Active Navigation Link Tracker
+ * 9. Active Navigation Link Tracker
  */
 function initNavigation() {
   const navLinks = document.querySelectorAll(".nav-link");
@@ -283,7 +347,7 @@ function initNavigation() {
 }
 
 /**
- * 8. Animated Code Inspector Tabs
+ * 10. Animated Code Inspector Tabs
  */
 function initCodeInspector() {
   const tabs = document.querySelectorAll(".code-tab-btn");
@@ -308,7 +372,7 @@ function initCodeInspector() {
 }
 
 /**
- * 9. System Architecture Modal
+ * 11. System Architecture Modal
  */
 function initArchitectureModal() {
   const modal = document.getElementById("archModal");
@@ -341,7 +405,7 @@ function initArchitectureModal() {
 }
 
 /**
- * 10. Copy-to-Clipboard Triggers
+ * 12. Copy-to-Clipboard Triggers
  */
 function initCopyTriggers() {
   document.querySelectorAll("[data-copy]").forEach(el => {

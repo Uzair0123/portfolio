@@ -1,17 +1,17 @@
 /* ==========================================================================
-   UZAIR SULTAN — CINEMATIC 3D CYBER PORTFOLIO DESIGN SYSTEM
-   Award-Winning Motion Experience • 60 FPS Hardware-Accelerated • Mobile Optimized
+   UZAIR SULTAN — AESTHETIC 3D DIGITAL EXPERIENCE DESIGN SYSTEM
+   Award-Winning Motion • Dual-Ring Cursor • Dynamic Spotlight Flares • 60 FPS
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
 
 :root {
-  /* Color Palette */
+  /* Color Tokens */
   --bg-deep: #050813;
-  --bg-card: rgba(13, 19, 36, 0.8);
+  --bg-card: rgba(13, 19, 36, 0.75);
   --bg-card-hover: rgba(20, 29, 54, 0.95);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(16, 185, 129, 0.35);
+  --border-glow: rgba(16, 185, 129, 0.4);
 
   --accent-emerald: #10B981;
   --accent-emerald-glow: rgba(16, 185, 129, 0.25);
@@ -36,8 +36,8 @@
   --radius-lg: 22px;
   --radius-full: 9999px;
 
-  --shadow-card: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
-  --shadow-emerald: 0 0 30px rgba(16, 185, 129, 0.3);
+  --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  --shadow-emerald: 0 0 35px rgba(16, 185, 129, 0.35);
 
   /* Physics-Based Motion Easings */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -147,7 +147,79 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.05rem;
 }
 
-/* ==================== 1. CHOREOGRAPHED HERO ENTRANCE ==================== */
+/* ==================== 1. INTELLIGENT DUAL-RING CURSOR ==================== */
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 9999;
+  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 0.3s ease, width 0.3s var(--ease-spring), height 0.3s var(--ease-spring), background 0.3s ease, border-color 0.3s ease;
+  display: none;
+}
+
+@media (pointer: fine) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 10px var(--accent-emerald);
+}
+
+.custom-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(16, 185, 129, 0.45);
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+}
+
+/* Cursor Morph States */
+.cursor-hover-pointer .custom-cursor-ring {
+  width: 50px;
+  height: 50px;
+  border-color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.cursor-hover-project .custom-cursor-ring {
+  width: 80px;
+  height: 80px;
+  background: rgba(5, 8, 19, 0.9);
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+}
+
+.cursor-hover-project .custom-cursor-ring::after {
+  content: 'VIEW ↗';
+}
+
+.cursor-hover-grab .custom-cursor-ring {
+  width: 70px;
+  height: 70px;
+  background: rgba(5, 8, 19, 0.85);
+  border-color: var(--accent-cyan);
+}
+
+.cursor-hover-grab .custom-cursor-ring::after {
+  content: '3D TILT';
+}
+
+/* ==================== 2. CHOREOGRAPHED HERO EXPERIENCE ==================== */
 .hero-3d-section {
   position: relative;
   min-height: 94vh;
@@ -165,9 +237,9 @@ h1, h2, h3, h4, h5, h6 {
   top: 30%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
-  width: clamp(320px, 60vw, 650px);
-  height: clamp(320px, 60vw, 650px);
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(6, 182, 212, 0.1) 40%, rgba(5, 8, 19, 0) 70%);
+  width: clamp(320px, 60vw, 680px);
+  height: clamp(320px, 60vw, 680px);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(6, 182, 212, 0.12) 40%, rgba(5, 8, 19, 0) 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
@@ -474,7 +546,7 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translate3d(-50%, 0, 0); }
 }
 
-/* ==================== 2. 100% SMOOTH SCROLL REVEAL ENGINE (NO JANK) ==================== */
+/* ==================== 3. 100% SMOOTH SCROLL REVEAL ENGINE ==================== */
 .scroll-reveal {
   opacity: 0;
   transform: translate3d(0, 28px, 0);
@@ -496,9 +568,16 @@ h1, h2, h3, h4, h5, h6 {
 .delay-5 { transition-delay: 0.40s; }
 .delay-6 { transition-delay: 0.48s; }
 
-/* ==================== 3. 3D DEPTH CARD TILT & GLASSMORPHISM ==================== */
+/* ==================== 4. DYNAMIC SPOTLIGHT CARDS ==================== */
+.glass-card,
+.accordion-item,
+.terminal-window {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  background: radial-gradient(circle 350px at var(--mouse-x) var(--mouse-y), rgba(16, 185, 129, 0.08) 0%, rgba(13, 19, 36, 0.85) 80%);
+}
+
 .glass-card {
-  background: var(--bg-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
@@ -512,7 +591,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass-card:hover {
-  background: var(--bg-card-hover);
   border-color: var(--border-glow);
   transform: translate3d(0, -5px, 0);
   box-shadow: var(--shadow-emerald);
@@ -533,7 +611,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 100%;
 }
 
-/* ==================== 4. INTERACTIVE NUMBERED PROJECT ACCORDION ==================== */
+/* ==================== 5. INTERACTIVE NUMBERED PROJECT ACCORDION ==================== */
 .projects-accordion {
   display: flex;
   flex-direction: column;
@@ -543,7 +621,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .accordion-item {
-  background: rgba(13, 19, 36, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -557,7 +634,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .accordion-item.active {
-  background: rgba(18, 27, 51, 0.95);
   border-color: var(--accent-emerald);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.75), var(--shadow-emerald);
 }
@@ -652,7 +728,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.04);
 }
 
-/* ==================== 5. NUMBERED SERVICES ==================== */
+/* ==================== 6. NUMBERED SERVICES ==================== */
 .services-numbered-list {
   display: flex;
   flex-direction: column;
@@ -702,9 +778,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.65;
 }
 
-/* ==================== 6. TERMINAL CONSOLE ==================== */
+/* ==================== 7. TERMINAL CONSOLE ==================== */
 .terminal-window {
-  background: #0B1021;
   border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: var(--radius-md);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), var(--shadow-emerald);
@@ -818,7 +893,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate3d(0, -2px, 0);
 }
 
-/* ==================== 7. ANIMATED CODE INSPECTOR ==================== */
+/* ==================== 8. ANIMATED CODE INSPECTOR ==================== */
 .code-inspector-card {
   background: #080D1D;
   border: 1px solid rgba(16, 185, 129, 0.3);
@@ -877,7 +952,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* Smooth Animated Code Panes */
 .code-tab-pane {
   opacity: 0;
   display: none;
@@ -902,7 +976,7 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 380px;
 }
 
-/* ==================== NAVBAR & MOBILE DRAWER ==================== */
+/* ==================== 9. NAVBAR & MOBILE DRAWER ==================== */
 .navbar {
   position: fixed;
   top: 0;
