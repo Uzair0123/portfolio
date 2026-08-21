@@ -41,39 +41,42 @@
       </ul>
 
       <div class="nav-cta">
-        <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline btn-sm" style="border-color:#22C55E; color:#22C55E;">
+        <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline btn-sm" style="border-color:#22C55E; color:#22C55E;" data-magnetic="true">
           <i class="fa-brands fa-whatsapp"></i> +91-7889446114
         </a>
-        <a href="#contact" class="btn btn-emerald btn-sm">
+        <a href="#contact" class="btn btn-emerald btn-sm" data-magnetic="true">
           <i class="fa-solid fa-paper-plane"></i> Hire Me
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- ==================== 2. 3D HERO SECTION (PHYSICS & GYRO) ==================== -->
+  <!-- ==================== 2. 3D HERO SECTION (CHOREOGRAPHED 5 STAGES) ==================== -->
   <section class="hero-3d-section" id="about">
-    <!-- Floating 3D Micro-Elements -->
-    <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1">
-    <img src="assets/images/chrome-donut.png" alt="3D Chrome Donut" class="floating-asset floating-donut-1">
-    <img src="assets/images/chrome-sphere.png" alt="3D Cyber Sphere" class="floating-asset floating-sphere-1">
+    <!-- Stage 1: Atmosphere & Ambient Backdrop Glow (Z-Index: 1) -->
+    <div class="hero-ambient-glow"></div>
+
+    <!-- Floating 3D Micro-Elements (Z-Index: 3) -->
+    <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1" data-parallax="0.08">
+    <img src="assets/images/chrome-donut.png" alt="3D Chrome Donut" class="floating-asset floating-donut-1" data-parallax="0.12">
+    <img src="assets/images/chrome-sphere.png" alt="3D Cyber Sphere" class="floating-asset floating-sphere-1" data-parallax="0.06">
 
     <div class="container hero-container-box">
-      <!-- Stage 1: Big Centered Typography -->
-      <div class="hero-header-title-wrap scroll-reveal">
+      <!-- Stage 2: Big Centered Typography with Clip Mask (Z-Index: 2) -->
+      <div class="hero-header-title-wrap" data-parallax="0.03">
         <h1 class="hero-giant-heading">HI, I'M UZAIR</h1>
       </div>
 
-      <!-- Stage 2: Centered 3D Avatar (Interactive Mouse & Gyro Head Tracker) -->
-      <div class="hero-avatar-centerpiece scroll-reveal delay-1">
+      <!-- Stage 3: Centered 3D Avatar (Spring Rise & Gyro/Mouse Tracker) (Z-Index: 6) -->
+      <div class="hero-avatar-centerpiece" data-parallax="0.16">
         <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope">
           <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img" id="avatar3DImg">
         </div>
       </div>
 
-      <!-- Stage 3: Lower Row (Left: Tagline / Right: CTA) -->
+      <!-- Stage 4 & 5: Lower Row (Left: Tagline / Right: Magnetic CTA) (Z-Index: 7) -->
       <div class="hero-bottom-grid">
-        <div class="hero-bottom-left scroll-reveal-left delay-2">
+        <div class="hero-bottom-left" data-parallax="0.04">
           <div class="hero-role-badge">
             <span class="pulse-dot"></span> LINUX SYSTEMS & DEVOPS ENGINEER
           </div>
@@ -82,8 +85,8 @@
           </p>
         </div>
 
-        <div class="hero-bottom-right scroll-reveal-right delay-2">
-          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-neon-pill-glow">
+        <div class="hero-bottom-right" data-parallax="0.05">
+          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-neon-pill-glow" data-magnetic="true">
             <i class="fa-brands fa-whatsapp"></i> CONTACT ME
           </a>
           <span class="hero-availability-note">
@@ -94,7 +97,7 @@
     </div>
 
     <!-- Infinite Marquee Ticker -->
-    <div class="marquee-wrapper scroll-reveal delay-3">
+    <div class="marquee-wrapper">
       <div class="marquee-track">
         <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu Linux 24.04</div>
         <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
@@ -128,7 +131,7 @@
         </p>
       </div>
 
-      <div class="terminal-window scroll-reveal delay-1" style="max-width:950px; margin:0 auto;">
+      <div class="terminal-window scroll-reveal delay-1" style="max-width:950px; margin:0 auto;" data-tilt="true">
         <div class="terminal-header">
           <div class="terminal-controls">
             <span class="term-dot term-dot-red"></span>
@@ -180,7 +183,7 @@
       <div class="projects-accordion">
         
         <!-- Accordion 01: Kashmir Kesar Kingdom (Active by Default) -->
-        <div class="accordion-item active scroll-reveal delay-1">
+        <div class="accordion-item active scroll-reveal delay-1" data-tilt="true">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">01</span>
@@ -206,13 +209,13 @@
                   <span class="term-chip">CI/CD Deploy</span>
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm">
+                  <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Project
                   </a>
-                  <button class="btn btn-outline btn-sm" id="openArchModalBtn">
+                  <button class="btn btn-outline btn-sm" id="openArchModalBtn" data-magnetic="true">
                     <i class="fa-solid fa-sitemap"></i> View Architecture
                   </button>
-                  <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" class="btn btn-outline btn-sm">
+                  <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
                     <i class="fa-brands fa-github"></i> GitHub Source
                   </a>
                 </div>
@@ -226,7 +229,7 @@
         </div>
 
         <!-- Accordion 02: Linux Administration & Automation -->
-        <div class="accordion-item scroll-reveal delay-2">
+        <div class="accordion-item scroll-reveal delay-2" data-tilt="true">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">02</span>
@@ -250,11 +253,11 @@
                   <span class="term-chip">Cron Jobs</span>
                   <span class="term-chip">Grep/Sed/Awk</span>
                 </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="#code" class="btn btn-emerald btn-sm">
+                <div style="display:flex; flex-wrap:gap:0.75rem;">
+                  <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-solid fa-code"></i> Inspect Code
                   </a>
-                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm">
+                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
                     <i class="fa-brands fa-github"></i> View GitHub
                   </a>
                 </div>
@@ -271,7 +274,7 @@
         </div>
 
         <!-- Accordion 03: Computer Networking Labs -->
-        <div class="accordion-item scroll-reveal delay-3">
+        <div class="accordion-item scroll-reveal delay-3" data-tilt="true">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">03</span>
@@ -296,10 +299,10 @@
                   <span class="term-chip">DNS & Firewalls</span>
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="#code" class="btn btn-emerald btn-sm">
+                  <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-solid fa-code"></i> Inspect Subnet Code
                   </a>
-                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm">
+                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
                     <i class="fa-brands fa-github"></i> View GitHub
                   </a>
                 </div>
@@ -316,7 +319,7 @@
         </div>
 
         <!-- Accordion 04: Python DSA Suite -->
-        <div class="accordion-item scroll-reveal delay-4">
+        <div class="accordion-item scroll-reveal delay-4" data-tilt="true">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">04</span>
@@ -341,10 +344,10 @@
                   <span class="term-chip">Big-O Opt</span>
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="#code" class="btn btn-emerald btn-sm">
+                  <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-solid fa-code"></i> Inspect Tree Code
                   </a>
-                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm">
+                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
                     <i class="fa-brands fa-github"></i> View GitHub
                   </a>
                 </div>
@@ -438,7 +441,7 @@
 
       <div class="skills-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem;">
         
-        <div class="glass-card scroll-reveal delay-1">
+        <div class="glass-card scroll-reveal delay-1" data-tilt="true">
           <div style="font-size:2rem; color:#F59E0B; margin-bottom:1rem;"><i class="fa-brands fa-linux"></i></div>
           <h3>Linux & Systems Administration</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
@@ -454,7 +457,7 @@
           </div>
         </div>
 
-        <div class="glass-card scroll-reveal delay-2">
+        <div class="glass-card scroll-reveal delay-2" data-tilt="true">
           <div style="font-size:2rem; color:#06B6D4; margin-bottom:1rem;"><i class="fa-solid fa-network-wired"></i></div>
           <h3>Computer Networking & Protocols</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
@@ -470,7 +473,7 @@
           </div>
         </div>
 
-        <div class="glass-card scroll-reveal delay-3">
+        <div class="glass-card scroll-reveal delay-3" data-tilt="true">
           <div style="font-size:2rem; color:#10B981; margin-bottom:1rem;"><i class="fa-solid fa-code"></i></div>
           <h3>Modern Web Architecture</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
@@ -501,7 +504,7 @@
         </p>
       </div>
 
-      <div class="code-inspector-card scroll-reveal delay-1" style="max-width:1000px; margin:0 auto;">
+      <div class="code-inspector-card scroll-reveal delay-1" style="max-width:1000px; margin:0 auto;" data-tilt="true">
         <div class="code-tabs-header">
           <div class="code-tab-btns">
             <button class="code-tab-btn active" data-code="codeBash">
@@ -557,7 +560,7 @@ perform_backup</code></pre>
 <span style="color:#64748B;"># ==============================================================================</span>
 <span style="color:#8B5CF6;">from</span> collections <span style="color:#8B5CF6;">import</span> deque
 
-<span style="class="color:#8B5CF6;">class</span> <span style="color:#10B981; font-weight:700;">TreeNode</span>:
+<span style="color:#8B5CF6;">class</span> <span style="color:#10B981; font-weight:700;">TreeNode</span>:
     <span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">__init__</span>(self, val=<span style="color:#F59E0B;">0</span>, left=<span style="color:#F59E0B;">None</span>, right=<span style="color:#F59E0B;">None</span>):
         self.val = val
         self.left = left
@@ -610,7 +613,7 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
   <!-- ==================== 8. CONTACT & FOOTER ==================== -->
   <section class="section" id="contact">
     <div class="container">
-      <div class="glass-card contact-card scroll-reveal">
+      <div class="glass-card contact-card scroll-reveal" data-tilt="true">
         <span class="section-tag"><i class="fa-solid fa-handshake"></i> Let's Connect</span>
         <h2 class="section-title">Ready to Collaborate or Hire?</h2>
         <p class="section-desc">
@@ -619,22 +622,22 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
 
         <div class="contact-channels scroll-reveal delay-1">
           <!-- WhatsApp -->
-          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline" style="border-color:#22C55E; color:#22C55E;">
+          <a href="https://wa.me/917889446114" target="_blank" class="btn btn-outline" style="border-color:#22C55E; color:#22C55E;" data-magnetic="true">
             <i class="fa-brands fa-whatsapp"></i> WhatsApp (+91-7889446114)
           </a>
 
           <!-- Phone Call -->
-          <a href="tel:+917889446114" class="btn btn-outline">
+          <a href="tel:+917889446114" class="btn btn-outline" data-magnetic="true">
             <i class="fa-solid fa-phone"></i> Call +91-7889446114
           </a>
 
           <!-- Email -->
-          <a href="mailto:uzairteeli123456789@gmail.com" class="btn btn-emerald">
+          <a href="mailto:uzairteeli123456789@gmail.com" class="btn btn-emerald" data-magnetic="true">
             <i class="fa-solid fa-envelope"></i> uzairteeli123456789@gmail.com
           </a>
 
           <!-- GitHub -->
-          <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline">
+          <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline" data-magnetic="true">
             <i class="fa-brands fa-github"></i> GitHub (@Uzair0123)
           </a>
         </div>
@@ -682,7 +685,7 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
       </div>
 
       <div style="text-align:right; margin-top:1.5rem;">
-        <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm">
+        <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Platform
         </a>
       </div>
