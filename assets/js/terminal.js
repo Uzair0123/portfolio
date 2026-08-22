@@ -26,7 +26,7 @@ const TerminalModule = {
 <span style="color:#94A3B8;">Linux Systems Administrator • DevOps Engineer • Modern Web Architect</span>
 Passionate systems builder specializing in Linux internals, network protocol inspection, modular vanilla web development, and algorithmic problem solving with Python. Focused on high-performance, fault-tolerant infrastructure and commercial web delivery.`,
 
-    skills: `<span style="color:#10B981; font-weight:700;">[LINUX & SYSTEMS]</span>   Ubuntu 24.04, Bash Shell, Systemd, Process Lifecycle, Permissions, Grep/Sed/Awk
+    skills: `<span style="color:#10B981; font-weight:700;">[LINUX & SYSTEMS]</span>   Ubuntu 24.04, Arch Linux, Kali Linux, Bash Shell, Systemd, Process Lifecycle, Permissions, Grep/Sed/Awk
 <span style="color:#06B6D4; font-weight:700;">[NETWORKING]</span>        TCP/IP Suite, OSI 7-Layer, Subnetting/CIDR, DNS Resolution, Firewalls, Wireshark
 <span style="color:#F59E0B; font-weight:700;">[WEB ARCHITECTURE]</span>  Semantic HTML5, Modern CSS3 Grid/Flex, Modular ES6+ JS, PWA (95% Bandwidth Opt)
 <span style="color:#8B5CF6; font-weight:700;">[PYTHON & DSA]</span>      Python 3, Data Structures & Algorithms (Trees, Graphs, Sorting, Hash Maps)
@@ -71,7 +71,7 @@ Passionate systems builder specializing in Linux internals, network protocol ins
 
     neofetch: `<span style="color:#10B981;">        .---.        </span> <span style="color:#10B981; font-weight:700;">uzair@linux-workstation</span>
 <span style="color:#10B981;">       /     \\       </span> -----------------------
-<span style="color:#10B981;">      | () () |      </span> <strong style="color:#F8FAFC;">OS:</strong> Ubuntu 24.04 LTS (x86_64)
+<span style="color:#10B981;">      | () () |      </span> <strong style="color:#F8FAFC;">OS:</strong> Ubuntu 24.04 LTS • Arch Linux • Kali Linux
 <span style="color:#10B981;">       \\  _  /       </span> <strong style="color:#F8FAFC;">Kernel:</strong> Linux 6.8.0-generic
 <span style="color:#10B981;">        /   \\        </span> <strong style="color:#F8FAFC;">Shell:</strong> GNU bash 5.2.21
 <span style="color:#10B981;">       /|   |\\       </span> <strong style="color:#F8FAFC;">Languages:</strong> Bash, Python 3, JavaScript (ES6+), C
