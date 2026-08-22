@@ -17,17 +17,40 @@
 
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+
+  <!-- ═══════════════ ADVANCED ANIMATION STACK ═══════════════ -->
+  <!-- Smooth Scroll Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- ScrollTrigger for Scroll-Linked Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Text Splitting for Typography Animation -->
+  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+</head>
 <body>
+
+  <!-- ═══════════════ INTERACTIVE PARTICLE CANVAS (Background Layer Z:0) ═══════════════ -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- ═══════════════ CINEMATIC PRELOADER ═══════════════ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+      <span class="preloader-text">INITIALIZING SYSTEMS<span class="preloader-dots"></span></span>
+    </div>
+  </div>
 
   <!-- ==================== DUAL-RING CYBER CURSOR ==================== -->
   <div class="custom-cursor-dot" id="cursorDot"></div>
   <div class="custom-cursor-ring" id="cursorRing"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
 
   <!-- ==================== 1. TOP NAVIGATION ==================== -->
-  <nav class="navbar">
+  <nav class="navbar" id="mainNavbar">
     <div class="container nav-container">
       <a href="index.html" class="nav-brand">
         <span class="nav-prompt-symbol">&gt;_</span> uzair<span class="nav-brand-suffix" style="color:var(--text-dim);">@workstation:~$</span>
@@ -35,13 +58,13 @@
 
       <!-- Desktop Links -->
       <ul class="nav-links">
-        <li><a href="#about" class="nav-link active">About</a></li>
-        <li><a href="#terminal" class="nav-link">Terminal</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#code" class="nav-link">Code Labs</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#about" class="nav-link active" data-magnetic="true">About</a></li>
+        <li><a href="#terminal" class="nav-link" data-magnetic="true">Terminal</a></li>
+        <li><a href="#projects" class="nav-link" data-magnetic="true">Projects</a></li>
+        <li><a href="#services" class="nav-link" data-magnetic="true">Services</a></li>
+        <li><a href="#skills" class="nav-link" data-magnetic="true">Skills</a></li>
+        <li><a href="#code" class="nav-link" data-magnetic="true">Code Labs</a></li>
+        <li><a href="#contact" class="nav-link" data-magnetic="true">Contact</a></li>
       </ul>
 
       <!-- Desktop CTA -->
@@ -87,32 +110,51 @@
     </div>
   </div>
 
-  <!-- ==================== 2. 3D HERO SECTION (CHOREOGRAPHED 5 STAGES) ==================== -->
-  <section class="hero-3d-section" id="about">
-    <!-- Stage 1: Atmosphere & Ambient Backdrop Glow (Z-Index: 1) -->
-    <div class="hero-ambient-glow"></div>
+  <!-- ═══════════════ MAIN SCROLL CONTAINER (Lenis Smooth Scroll) ═══════════════ -->
+  <main id="smooth-wrapper">
 
-    <!-- Floating 3D Micro-Elements (Z-Index: 3) -->
-    <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1" data-parallax="0.08">
-    <img src="assets/images/chrome-donut.png" alt="3D Chrome Donut" class="floating-asset floating-donut-1" data-parallax="0.12">
-    <img src="assets/images/chrome-sphere.png" alt="3D Cyber Sphere" class="floating-asset floating-sphere-1" data-parallax="0.06">
+  <!-- ==================== 2. 3D HERO SECTION (CHOREOGRAPHED CINEMATIC SEQUENCE) ==================== -->
+  <section class="hero-3d-section" id="about">
+    <!-- Cinematic Backdrop Layers -->
+    <div class="hero-ambient-glow"></div>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-vignette"></div>
+
+    <!-- Floating 3D Micro-Elements -->
+    <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1" data-depth="0.08">
+    <img src="assets/images/chrome-donut.png" alt="3D Chrome Donut" class="floating-asset floating-donut-1" data-depth="0.12">
+    <img src="assets/images/chrome-sphere.png" alt="3D Cyber Sphere" class="floating-asset floating-sphere-1" data-depth="0.06">
 
     <div class="container hero-container-box">
-      <!-- Stage 2: Big Centered Typography with Clip Mask (Z-Index: 2) -->
-      <div class="hero-header-title-wrap" data-parallax="0.03">
-        <h1 class="hero-giant-heading">HI, I'M UZAIR</h1>
+      <!-- Giant Background Name (Scroll-Linked Interactive) -->
+      <div class="hero-bg-name-layer" id="heroBgName">
+        <span class="hero-bg-text" data-speed="0.3">UZAIR</span>
       </div>
 
-      <!-- Stage 3: Centered 3D Avatar (Spring Rise & Gyro/Mouse Tracker) (Z-Index: 6) -->
-      <div class="hero-avatar-centerpiece" data-parallax="0.16">
-        <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope" data-cursor="grab">
-          <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img" id="avatar3DImg">
+      <!-- Hero Header with Split Letters -->
+      <div class="hero-header-title-wrap" data-depth="0.03">
+        <h1 class="hero-giant-heading" id="heroMainTitle">HI, I'M UZAIR</h1>
+        <div class="hero-subtitle-line">
+          <span class="hero-subtitle-prefix">$</span>
+          <span class="hero-subtitle-text" id="heroSubtitle">whoami --role</span>
         </div>
       </div>
 
-      <!-- Stage 4 & 5: Lower Row (Left: Tagline / Right: Magnetic CTA) (Z-Index: 7) -->
+      <!-- 3D Avatar with Spring Physics -->
+      <div class="hero-avatar-centerpiece" data-depth="0.16" id="avatarWrapper">
+        <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope" data-cursor="grab">
+          <div class="avatar-ring-glow"></div>
+          <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img" id="avatar3DImg">
+          <div class="avatar-status-indicator">
+            <span class="status-dot-pulse"></span>
+            <span class="status-label">ONLINE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lower Row: Tagline + CTA -->
       <div class="hero-bottom-grid">
-        <div class="hero-bottom-left" data-parallax="0.04">
+        <div class="hero-bottom-left" data-depth="0.04">
           <div class="hero-role-badge">
             <span class="pulse-dot"></span> LINUX SYSTEMS & DEVOPS ENGINEER
           </div>
@@ -121,7 +163,7 @@
           </p>
         </div>
 
-        <div class="hero-bottom-right" data-parallax="0.05">
+        <div class="hero-bottom-right" data-depth="0.05">
           <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-neon-pill-glow" data-magnetic="true">
             <i class="fa-brands fa-whatsapp"></i> CONTACT ME
           </a>
@@ -129,6 +171,14 @@
             <i class="fa-solid fa-circle" style="color:#10B981; font-size:0.55rem;"></i> Available for Contracts & Roles
           </span>
         </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="hero-scroll-indicator" id="scrollIndicator">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span class="scroll-label">SCROLL TO EXPLORE</span>
       </div>
     </div>
 
@@ -143,7 +193,6 @@
         <div class="marquee-item"><i class="fa-brands fa-python"></i> Python 3 & DSA</div>
         <div class="marquee-item"><i class="fa-brands fa-git-alt"></i> Git & GitHub Actions CI/CD</div>
         <div class="marquee-item"><i class="fa-solid fa-gauge-high"></i> 95% Payload Optimization</div>
-        <!-- Infinite loop repetition -->
         <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu Linux 24.04</div>
         <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
         <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> TCP/IP Protocols</div>
@@ -156,8 +205,15 @@
     </div>
   </section>
 
-  <!-- ==================== 3. INTERACTIVE TERMINAL SHELL (RIGHT AFTER INTRO) ==================== -->
-  <section class="section" id="terminal">
+  <!-- ═══════════════ WOW TRANSITION: HORIZONTAL REVEAL LINE ═══════════════ -->
+  <div class="section-divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- ==================== 3. INTERACTIVE TERMINAL SHELL ==================== -->
+  <section class="section terminal-section" id="terminal">
     <div class="container">
       <div class="section-header scroll-reveal">
         <span class="section-tag"><i class="fa-solid fa-terminal"></i> Embedded Linux Shell</span>
@@ -689,6 +745,8 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
       </div>
     </div>
   </section>
+
+  </main><!-- /smooth-wrapper -->
 
   <!-- ==================== ARCHITECTURE INSPECTOR MODAL ==================== -->
   <div class="arch-modal-overlay" id="archModal">
