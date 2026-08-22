@@ -37,10 +37,16 @@ Passionate systems builder specializing in Linux internals, network protocol ins
    • Live: <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/kashmir-kesar-kingdom/</a>
    • GitHub: <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/kashmir-kesar-kingdom</a>
 
-<strong style="color:#F8FAFC;">2. Linux System Administration & Bash Automation Toolkit</strong>
+<strong style="color:#F8FAFC;">2. Craver Fast Food Co. (Production-Grade Online Ordering Web App)</strong>
+   • Modular ES6+ online ordering platform with real-time catalog search & dietary filters
+   • Interactive quick-view modal, persistent LocalStorage cart with coupon engine & checkout receipts
+   • Live: <a href="https://uzair0123.github.io/craver-fast-food/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/craver-fast-food/</a>
+   • GitHub: <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/craver-fast-food</a>
+
+<strong style="color:#F8FAFC;">3. Linux System Administration & Bash Automation Toolkit</strong>
    • Automated scripts for server log rotation, user auditing & automated backup routines
 
-<strong style="color:#F8FAFC;">3. Network Protocol Labs & Wireshark Packet Inspection</strong>
+<strong style="color:#F8FAFC;">4. Network Protocol Labs & Wireshark Packet Inspection</strong>
    • Hands-on packet flow analysis & CIDR subnet allocation schemes`,
 
     tree: `<span style="color:#10B981; font-weight:700;">uzair-sultan/workspace</span>
@@ -51,10 +57,13 @@ Passionate systems builder specializing in Linux internals, network protocol ins
 ├── <span style="color:#06B6D4;">Computer_Networking/</span>
 │   ├── tcp_handshake_analysis.pcapng
 │   └── subnet_calculator.py
-├── <span style="color:#06B6D4;">Client_Projects/</span>
-│   └── <span style="color:#F59E0B; font-weight:700;">kashmir-kesar-kingdom/</span> (Live Production)
-│       ├── assets/ (95% Compressed Payload)
-│       └── sw.js (Offline PWA Engine)
+├── <span style="color:#06B6D4;">Production_Web_Apps/</span>
+│   ├── <span style="color:#F59E0B; font-weight:700;">kashmir-kesar-kingdom/</span> (Live Production)
+│   │   ├── assets/ (95% Compressed Payload)
+│   │   └── sw.js (Offline PWA Engine)
+│   └── <span style="color:#EF4444; font-weight:700;">craver-fast-food/</span> (Live Production)
+│       ├── data/products.js (Structured Catalog)
+│       └── js/cart.js (LocalStorage Cart Engine)
 └── <span style="color:#06B6D4;">Python_DSA/</span>
     ├── binary_search_tree.py
     └── graph_traversal.py`,
