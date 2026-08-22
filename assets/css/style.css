@@ -1882,17 +1882,25 @@ h1, h2, h3, h4, h5, h6 {
   .mobile-menu-toggle {
     display: flex !important;
   }
+  .hero-avatar-centerpiece {
+    margin-top: 0.75rem !important;
+    margin-bottom: 1.25rem !important;
+  }
   .hero-bottom-grid {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
     gap: 1.5rem !important;
+    margin-top: 0 !important;
   }
   .hero-bottom-right {
     align-items: center !important;
   }
   .hero-bottom-left {
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .accordion-content-grid {
     grid-template-columns: 1fr !important;
@@ -1917,16 +1925,57 @@ h1, h2, h3, h4, h5, h6 {
   
   .hero-3d-section {
     min-height: 100svh;
-    padding: 6rem 0 2rem 0;
+    padding: 5.5rem 1rem 2.5rem 1rem !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .hero-giant-heading {
-    font-size: clamp(2.5rem, 12vw, 4.5rem) !important;
+    font-size: clamp(2.3rem, 11vw, 4.2rem) !important;
+  }
+  
+  .hero-subtitle-line {
+    margin-top: 0.75rem !important;
+  }
+  
+  .hero-avatar-centerpiece {
+    margin-top: 0.75rem !important;
+    margin-bottom: 1.25rem !important;
   }
   
   .hero-avatar-card {
-    width: 200px !important;
-    height: 200px !important;
+    width: clamp(180px, 46vw, 210px) !important;
+    height: clamp(180px, 46vw, 210px) !important;
+  }
+  
+  .avatar-status-indicator {
+    bottom: 8px !important;
+    right: 8px !important;
+    padding: 0.2rem 0.55rem !important;
+    font-size: 0.58rem !important;
+  }
+  
+  .hero-bottom-grid {
+    margin-top: 0 !important;
+    gap: 1.25rem !important;
+  }
+  
+  .hero-role-badge {
+    font-size: 0.68rem !important;
+    padding: 0.35rem 0.85rem !important;
+    margin-bottom: 0.75rem !important;
+    max-width: 92vw;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  .hero-tagline-text {
+    font-size: 0.9rem !important;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
   
   .hero-bg-text {
@@ -1948,8 +1997,42 @@ h1, h2, h3, h4, h5, h6 {
     display: none !important;
   }
   
+  .hero-3d-section {
+    padding: 5rem 0.75rem 2rem 0.75rem !important;
+  }
+  
   .hero-avatar-centerpiece {
-    margin-top: -1.5rem !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .hero-avatar-card {
+    width: 175px !important;
+    height: 175px !important;
+  }
+  
+  .avatar-status-indicator {
+    bottom: 6px !important;
+    right: 6px !important;
+    padding: 0.18rem 0.5rem !important;
+    font-size: 0.55rem !important;
+  }
+  
+  .hero-bottom-grid {
+    margin-top: 0 !important;
+    gap: 1.25rem !important;
+  }
+  
+  .hero-role-badge {
+    font-size: 0.65rem !important;
+    padding: 0.3rem 0.75rem !important;
+    margin-bottom: 0.65rem !important;
+    letter-spacing: 0.02em;
+  }
+  
+  .hero-tagline-text {
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
   }
   
   .accordion-header {
@@ -1989,5 +2072,33 @@ h1, h2, h3, h4, h5, h6 {
   
   body, a, button {
     cursor: auto !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-avatar-card {
+    width: 155px !important;
+    height: 155px !important;
+  }
+  
+  .hero-avatar-centerpiece {
+    margin-top: 0.35rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+  
+  .avatar-status-indicator {
+    bottom: 4px !important;
+    right: 4px !important;
+    padding: 0.15rem 0.45rem !important;
+    font-size: 0.5rem !important;
+  }
+  
+  .hero-role-badge {
+    font-size: 0.58rem !important;
+    padding: 0.25rem 0.65rem !important;
+  }
+  
+  .hero-tagline-text {
+    font-size: 0.82rem !important;
   }
 }
