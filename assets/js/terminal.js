@@ -22,6 +22,7 @@ const TerminalModule = {
   • <span style="color:#10B981;">clear</span>        - Flush the terminal console buffer`,
 
     whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong>
+<span style="color:#10B981; font-weight:600;">MCA (IGNOU, Currently Pursuing) • BCA (University of Kashmir)</span>
 <span style="color:#94A3B8;">Linux Systems Administrator • DevOps Engineer • Modern Web Architect</span>
 Passionate systems builder specializing in Linux internals, network protocol inspection, modular vanilla web development, and algorithmic problem solving with Python. Focused on high-performance, fault-tolerant infrastructure and commercial web delivery.`,
 
