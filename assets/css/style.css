@@ -577,6 +577,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   cursor: grab;
   will-change: transform;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
 }
 
 .hero-avatar-centerpiece:active {
@@ -592,6 +594,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
   will-change: transform;
   position: relative;
 }
@@ -627,6 +631,8 @@ h1, h2, h3, h4, h5, h6 {
   user-select: none;
   pointer-events: none;
   transform-style: preserve-3d;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
   will-change: transform;
 }
 

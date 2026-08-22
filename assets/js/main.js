@@ -162,10 +162,10 @@
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: Math.random() * 1.5 + 0.8,
-          alpha: Math.random() * 0.5 + 0.2,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          radius: Math.random() * 1.4 + 0.8,
+          alpha: Math.random() * 0.4 + 0.2,
         });
       }
     }
@@ -192,8 +192,8 @@
 
         if (dist < MOUSE_RADIUS) {
           const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-          p.x -= (dx / dist) * force * 1.2;
-          p.y -= (dy / dist) * force * 1.2;
+          p.x -= (dx / dist) * force * 0.35;
+          p.y -= (dy / dist) * force * 0.35;
         }
 
         // Draw particle
@@ -458,10 +458,9 @@
       });
     });
 
-    // Avatar idle breathing loop
-    gsap.to(".hero-avatar-card", {
+    // Avatar idle breathing loop (applied to inner img to prevent transform conflict)
+    gsap.to(".hero-avatar-3d-img", {
       y: "random(-4, 4)",
-      rotationZ: "random(-0.8, 0.8)",
       duration: 4,
       repeat: -1,
       yoyo: true,
@@ -513,9 +512,8 @@
         end: "bottom top",
         scrub: 1,
       },
-      y: -70,
-      scale: 0.88,
-      opacity: 0.35,
+      y: -45,
+      scale: 0.94,
     });
 
     gsap.to(".hero-giant-heading", {
@@ -640,36 +638,49 @@
     let bgTargetX = 0, bgTargetY = 0;
     let bgCurX = 0, bgCurY = 0;
 
-    hero.addEventListener("mousemove", (e) => {
+    window.addEventListener("mousemove", (e) => {
       const rect = hero.getBoundingClientRect();
+      // Only process when hero is visible in viewport
+      if (rect.bottom < 0 || rect.top > window.innerHeight) {
+        targetRotX = 0;
+        targetRotY = 0;
+        bgTargetX = 0;
+        bgTargetY = 0;
+        return;
+      }
+
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
 
-      const normX = (e.clientX - cx) / (rect.width / 2);
-      const normY = (e.clientY - cy) / (rect.height / 2);
+      const normX = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2)));
+      const normY = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
 
-      targetRotY = normX * 14;
-      targetRotX = -normY * 14;
+      // Safe, controlled rotation angles (max +/- 7 degrees)
+      targetRotY = normX * 7;
+      targetRotX = -normY * 7;
 
-      bgTargetX = normX * 25;
-      bgTargetY = normY * 15;
+      bgTargetX = normX * 18;
+      bgTargetY = normY * 10;
     }, { passive: true });
 
-    hero.addEventListener("mouseleave", () => {
-      targetRotX = 0;
-      targetRotY = 0;
-      bgTargetX = 0;
-      bgTargetY = 0;
-    });
+    window.addEventListener("scroll", () => {
+      const rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) {
+        targetRotX = 0;
+        targetRotY = 0;
+        bgTargetX = 0;
+        bgTargetY = 0;
+      }
+    }, { passive: true });
 
     function animateTracking() {
-      curRotX += (targetRotX - curRotX) * 0.1;
-      curRotY += (targetRotY - curRotY) * 0.1;
+      curRotX += (targetRotX - curRotX) * 0.08;
+      curRotY += (targetRotY - curRotY) * 0.08;
       avatarCard.style.transform = `perspective(1000px) rotateX(${curRotX.toFixed(2)}deg) rotateY(${curRotY.toFixed(2)}deg)`;
 
       if (bgName) {
-        bgCurX += (bgTargetX - bgCurX) * 0.08;
-        bgCurY += (bgTargetY - bgCurY) * 0.08;
+        bgCurX += (bgTargetX - bgCurX) * 0.06;
+        bgCurY += (bgTargetY - bgCurY) * 0.06;
         bgName.style.transform = `translate3d(${bgCurX.toFixed(1)}px, ${bgCurY.toFixed(1)}px, 0)`;
       }
 
@@ -979,18 +990,27 @@
     const marqueeTrack = document.querySelector(".marquee-track");
     if (!marqueeTrack || PREFERS_REDUCED_MOTION) return;
 
-    let baseSpeed = 1;
-    let currentSpeed = 1;
+    let baseSpeed = 0.035;
+    let currentSpeed = 0.035;
     let position = 0;
+    let isHovered = false;
+
+    const wrapper = marqueeTrack.parentElement;
+    if (wrapper) {
+      wrapper.addEventListener("mouseenter", () => { isHovered = true; });
+      wrapper.addEventListener("mouseleave", () => { isHovered = false; });
+    }
 
     function animateMarquee() {
-      const targetSpeed = baseSpeed + Math.abs(scrollVelocity) * 0.8;
-      currentSpeed += (targetSpeed - currentSpeed) * 0.1;
+      if (!isHovered) {
+        const targetSpeed = baseSpeed + Math.min(0.12, Math.abs(scrollVelocity) * 0.003);
+        currentSpeed += (targetSpeed - currentSpeed) * 0.08;
 
-      position -= currentSpeed;
-      if (position <= -50) position = 0;
+        position -= currentSpeed;
+        if (position <= -50) position = 0;
 
-      marqueeTrack.style.transform = `translate3d(${position}%, 0, 0)`;
+        marqueeTrack.style.transform = `translate3d(${position}%, 0, 0)`;
+      }
       requestAnimationFrame(animateMarquee);
     }
     animateMarquee();
