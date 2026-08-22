@@ -700,24 +700,29 @@
     if (!toggle || !overlay) return;
 
     function openDrawer() {
-      overlay.classList.add("is-active");
-      toggle.classList.add("is-active");
+      overlay.classList.add("active", "is-active");
+      toggle.classList.add("active", "is-active");
       document.body.style.overflow = "hidden";
       if (lenis) lenis.stop();
     }
 
     function closeDrawer() {
-      overlay.classList.remove("is-active");
-      toggle.classList.remove("is-active");
+      overlay.classList.remove("active", "is-active");
+      toggle.classList.remove("active", "is-active");
       document.body.style.overflow = "";
       if (lenis) lenis.start();
     }
 
-    toggle.addEventListener("click", () => {
-      overlay.classList.contains("is-active") ? closeDrawer() : openDrawer();
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = overlay.classList.contains("is-active") || overlay.classList.contains("active");
+      isOpen ? closeDrawer() : openDrawer();
     });
 
-    closeBtn?.addEventListener("click", closeDrawer);
+    closeBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeDrawer();
+    });
 
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeDrawer();
