@@ -187,6 +187,7 @@
       <div class="marquee-track">
         <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu • Arch • Kali Linux</div>
         <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
+        <div class="marquee-item"><i class="fa-brands fa-react"></i> React Native & Expo SDK 54</div>
         <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> TCP/IP Protocols</div>
         <div class="marquee-item"><i class="fa-brands fa-js"></i> Vanilla JS (ES6+)</div>
         <div class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Progressive Web Apps (PWA)</div>
@@ -195,6 +196,7 @@
         <div class="marquee-item"><i class="fa-solid fa-gauge-high"></i> 95% Payload Optimization</div>
         <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu • Arch • Kali Linux</div>
         <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
+        <div class="marquee-item"><i class="fa-brands fa-react"></i> React Native & Expo SDK 54</div>
         <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> TCP/IP Protocols</div>
         <div class="marquee-item"><i class="fa-brands fa-js"></i> Vanilla JS (ES6+)</div>
         <div class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Progressive Web Apps (PWA)</div>
@@ -383,25 +385,24 @@
                   A full-featured, cross-platform mobile application engineered for hyper-local rapid grocery & essentials commerce. Features a custom Botanical Emerald design system, 3-step animated onboarding, 6-digit OTP verification, real-time multi-attribute search, reactive cart & pricing engine ($20 free delivery milestone), multi-step express checkout, and a live delivery progress radar.
                 </p>
                 <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">React Native 0.74</span>
-                  <span class="term-chip">Expo SDK 51</span>
+                  <span class="term-chip">React Native 0.81</span>
+                  <span class="term-chip">Expo SDK 54</span>
                   <span class="term-chip">TypeScript Strict</span>
-                  <span class="term-chip">Expo Router v3</span>
-                  <span class="term-chip">Reactive Context</span>
+                  <span class="term-chip">Expo Router v6</span>
+                  <span class="term-chip">EAS APK Ready</span>
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
                   <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-brands fa-github"></i> GitHub Source
                   </a>
+                  <button class="btn btn-outline btn-sm" id="openNexoraArchModalBtn" data-magnetic="true">
+                    <i class="fa-solid fa-sitemap"></i> View Architecture
+                  </button>
                 </div>
               </div>
 
-              <div class="glass-card" style="padding:1.5rem; font-family:var(--font-code); font-size:0.8rem; color:#A7F3D0; background:#073525; border:1px solid #00D084;">
-                <p style="color:#00D084; font-weight:bold;">⚡ NEXORA EXPRESS ARCHITECTURE</p>
-                <p style="color:#FFF; margin-top:0.4rem;">$ npx expo start</p>
-                <p style="color:#00D084;">✓ Expo Router: (auth) | (onboarding) | (tabs)</p>
-                <p style="color:#00D084;">✓ Dispatch Engine: 10-15 Min Micro-Fulfillment</p>
-                <p style="color:#FFF;">✓ Status: Production Mobile Ready</p>
+              <div class="accordion-img-preview">
+                <img src="assets/images/project-nexora.jpg" alt="Nexora Quick-Commerce Mobile Application">
               </div>
             </div>
           </div>
@@ -497,11 +498,11 @@
           </div>
         </div>
 
-        <!-- Accordion 04: Python DSA Suite -->
+        <!-- Accordion 06: Python DSA Suite -->
         <div class="accordion-item scroll-reveal delay-4" data-tilt="true" data-cursor="project">
           <div class="accordion-header">
             <div class="accordion-header-left">
-              <span class="accordion-num">04</span>
+              <span class="accordion-num">06</span>
               <div>
                 <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-purple); font-weight:700; text-transform:uppercase;">Algorithms & Problem Solving</span>
                 <h3 class="accordion-title">Python Data Structures & Algorithm Suite</h3>
@@ -670,6 +671,24 @@
           </div>
         </div>
 
+        <div class="glass-card scroll-reveal delay-4" data-tilt="true">
+          <div style="font-size:2rem; color:#00D084; margin-bottom:1rem;"><i class="fa-brands fa-react"></i></div>
+          <h3>Cross-Platform Mobile Engineering</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
+            Architecting production-ready cross-platform mobile apps with reactive state stores, typed routes, and native hardware integration.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1.25rem;">
+            <span class="term-chip">React Native 0.81</span>
+            <span class="term-chip">Expo SDK 54</span>
+            <span class="term-chip">Expo Router v6</span>
+            <span class="term-chip">TypeScript Strict</span>
+            <span class="term-chip">Reactive Context</span>
+            <span class="term-chip">AsyncStorage</span>
+            <span class="term-chip">EAS APK Build</span>
+            <span class="term-chip">Botanical Emerald UI</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -690,6 +709,9 @@
           <div class="code-tab-btns">
             <button class="code-tab-btn active" data-code="codeBash">
               <i class="fa-brands fa-linux" style="color:#F59E0B;"></i> backup_audit.sh
+            </button>
+            <button class="code-tab-btn" data-code="codeMobile">
+              <i class="fa-brands fa-react" style="color:#00D084;"></i> useCartStore.tsx
             </button>
             <button class="code-tab-btn" data-code="codePython">
               <i class="fa-brands fa-python" style="color:#8B5CF6;"></i> binary_tree_dsa.py
@@ -731,6 +753,51 @@ ARCHIVE_NAME=<span style="color:#10B981;">"app_backup_${TIMESTAMP}.tar.gz"</span
 }
 
 perform_backup</code></pre>
+        </div>
+
+        <!-- Code Pane 2: React Native / TypeScript Pricing Engine -->
+        <div class="code-tab-pane" id="codeMobile">
+          <pre class="code-pre-block"><code><span style="color:#64748B;">// ==============================================================================</span>
+<span style="color:#64748B;">// useCartStore.tsx — Reactive Pricing Engine & Milestone Tracker</span>
+<span style="color:#64748B;">// Project: Nexora Quick-Commerce Mobile App (React Native + Expo SDK 54)</span>
+<span style="color:#64748B;">// Author: Uzair Sultan (Lead Mobile Architect)</span>
+<span style="color:#64748B;">// ==============================================================================</span>
+<span style="color:#8B5CF6;">import</span> React, { createContext, useContext, useState, useMemo } <span style="color:#8B5CF6;">from</span> <span style="color:#10B981;">'react'</span>;
+<span style="color:#8B5CF6;">import</span> { Product } <span style="color:#8B5CF6;">from</span> <span style="color:#10B981;">'../types/product.types'</span>;
+<span style="color:#8B5CF6;">import</span> { CartItem, AppliedCoupon, CartSummary } <span style="color:#8B5CF6;">from</span> <span style="color:#10B981;">'../types/cart.types'</span>;
+
+<span style="color:#8B5CF6;">const</span> FREE_DELIVERY_THRESHOLD = <span style="color:#F59E0B;">20.00</span>;
+<span style="color:#8B5CF6;">const</span> STANDARD_DELIVERY_FEE = <span style="color:#F59E0B;">1.99</span>;
+<span style="color:#8B5CF6;">const</span> PACKAGING_FEE = <span style="color:#F59E0B;">0.49</span>;
+
+<span style="color:#8B5CF6;">export const</span> <span style="color:#10B981; font-weight:700;">CartProvider</span>: React.FC&lt;{ children: React.ReactNode }&gt; = ({ children }) =&gt; {
+  <span style="color:#8B5CF6;">const</span> [items, setItems] = useState&lt;CartItem[]&gt;([]);
+  <span style="color:#8B5CF6;">const</span> [coupon, setCoupon] = useState&lt;AppliedCoupon | null&gt;(<span style="color:#06B6D4;">null</span>);
+
+  <span style="color:#64748B;">// Pure Memoized Calculation Engine for Quick-Commerce Cart</span>
+  <span style="color:#8B5CF6;">const</span> summary = useMemo&lt;CartSummary&gt;(() =&gt; {
+    <span style="color:#8B5CF6;">let</span> subtotal = <span style="color:#F59E0B;">0</span>;
+    items.forEach(({ product, quantity }) =&gt; {
+      subtotal += product.price * quantity;
+    });
+
+    <span style="color:#8B5CF6;">const</span> isFreeDelivery = subtotal &gt;= FREE_DELIVERY_THRESHOLD || (coupon?.freeDelivery ?? <span style="color:#F59E0B;">false</span>);
+    <span style="color:#8B5CF6;">const</span> deliveryFee = items.length === <span style="color:#F59E0B;">0</span> ? <span style="color:#F59E0B;">0</span> : isFreeDelivery ? <span style="color:#F59E0B;">0</span> : STANDARD_DELIVERY_FEE;
+    <span style="color:#8B5CF6;">const</span> packagingFee = items.length === <span style="color:#F59E0B;">0</span> ? <span style="color:#F59E0B;">0</span> : PACKAGING_FEE;
+
+    <span style="color:#8B5CF6;">let</span> couponDiscount = <span style="color:#F59E0B;">0</span>;
+    <span style="color:#8B5CF6;">if</span> (coupon?.discountPercent) {
+      couponDiscount = Math.min(<span style="color:#F59E0B;">10.00</span>, subtotal * (coupon.discountPercent / <span style="color:#F59E0B;">100</span>));
+    }
+
+    <span style="color:#8B5CF6;">const</span> grandTotal = Math.max(<span style="color:#F59E0B;">0</span>, subtotal - couponDiscount + deliveryFee + packagingFee);
+    <span style="color:#8B5CF6;">const</span> freeDeliveryRemaining = Math.max(<span style="color:#F59E0B;">0</span>, FREE_DELIVERY_THRESHOLD - subtotal);
+
+    <span style="color:#8B5CF6;">return</span> { subtotal, couponDiscount, deliveryFee, packagingFee, grandTotal, isFreeDelivery, freeDeliveryRemaining };
+  }, [items, coupon]);
+
+  <span style="color:#8B5CF6;">return</span> &lt;CartContext.Provider value={{ items, coupon, summary }}&gt;{children}&lt;/CartContext.Provider&gt;;
+};</code></pre>
         </div>
 
         <!-- Code Pane 2: Python DSA -->
@@ -837,7 +904,7 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
 
   </main><!-- /smooth-wrapper -->
 
-  <!-- ==================== ARCHITECTURE INSPECTOR MODAL ==================== -->
+  <!-- ==================== ARCHITECTURE INSPECTOR MODAL: KASHMIR KESAR KINGDOM ==================== -->
   <div class="arch-modal-overlay" id="archModal">
     <div class="arch-modal-card">
       <button class="arch-modal-close" id="closeArchModalBtn">&times;</button>
@@ -870,6 +937,44 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
       <div style="text-align:right; margin-top:1.5rem;">
         <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
           <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Platform
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ARCHITECTURE INSPECTOR MODAL: NEXORA MOBILE APP ==================== -->
+  <div class="arch-modal-overlay" id="nexoraArchModal">
+    <div class="arch-modal-card">
+      <button class="arch-modal-close" id="closeNexoraArchModalBtn">&times;</button>
+      
+      <span class="section-tag" style="color:var(--accent-mint);"><i class="fa-solid fa-sitemap"></i> System Architecture Inspector</span>
+      <h3 style="font-size:1.8rem; margin:0.5rem 0 1rem 0;">Nexora Mobile App — Clean Architecture Breakdown</h3>
+      <p style="color:var(--text-muted); font-size:0.95rem;">
+        An overview of the bespoke design system, reactive state architecture, and native build pipeline powering the Nexora quick-commerce application.
+      </p>
+
+      <div class="arch-grid-cards">
+        <div class="arch-mini-card">
+          <h4 style="color:#00D084;"><i class="fa-solid fa-palette"></i> Botanical Emerald UI</h4>
+          <p>Bespoke chromatic tokens (#0B4F37, #00D084) with 6-digit OTP keypad, speed selector pill, and zero UI bloat.</p>
+        </div>
+        <div class="arch-mini-card">
+          <h4 style="color:#06B6D4;"><i class="fa-solid fa-layer-group"></i> Decentralized Stores</h4>
+          <p>Atomic React Context state providers (useCartStore, useOrderStore, useUserStore, useFavoritesStore) eliminating re-renders.</p>
+        </div>
+        <div class="arch-mini-card">
+          <h4 style="color:#F59E0B;"><i class="fa-solid fa-route"></i> Typed Expo Router v6</h4>
+          <p>File-based typed route hierarchy with deep linking across (onboarding), (auth), (tabs), checkout, and product stack.</p>
+        </div>
+        <div class="arch-mini-card">
+          <h4 style="color:#8B5CF6;"><i class="fa-brands fa-android"></i> EAS APK Pipeline</h4>
+          <p>Production-ready eas.json build profile compiling standalone Android APK binaries with native asset preloading.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem; flex-wrap:wrap;">
+        <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
+          <i class="fa-brands fa-github"></i> View GitHub Repository
         </a>
       </div>
     </div>

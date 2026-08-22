@@ -11,8 +11,8 @@ const TerminalModule = {
   commands: {
     help: `Available Linux & Systems Commands:
   • <span style="color:#10B981;">whoami</span>       - Developer overview & technical philosophy
-  • <span style="color:#10B981;">skills</span>       - Systems, Networking, Web, Python & DevOps competencies
-  • <span style="color:#10B981;">projects</span>     - Production web builds & engineering repositories
+  • <span style="color:#10B981;">skills</span>       - Systems, Mobile, Networking, Web & DevOps competencies
+  • <span style="color:#10B981;">projects</span>     - Production web & cross-platform mobile repositories
   • <span style="color:#10B981;">tree</span>         - Visual workspace directory tree hierarchy
   • <span style="color:#10B981;">neofetch</span>     - System telemetry, kernel & environment specs
   • <span style="color:#10B981;">uptime</span>       - Workstation uptime & load average metrics
@@ -23,41 +23,45 @@ const TerminalModule = {
 
     whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong>
 <span style="color:#10B981; font-weight:600;">MCA (IGNOU, Currently Pursuing) • BCA (University of Kashmir)</span>
-<span style="color:#94A3B8;">Linux Systems Administrator • DevOps Engineer • Modern Web Architect</span>
-Passionate systems builder specializing in Linux internals, network protocol inspection, modular vanilla web development, and algorithmic problem solving with Python. Focused on high-performance, fault-tolerant infrastructure and commercial web delivery.`,
+<span style="color:#94A3B8;">Linux Systems Administrator • DevOps Engineer • Mobile & Web Architect</span>
+Passionate systems builder specializing in Linux internals, network protocol inspection, cross-platform mobile engineering with React Native & Expo, modular vanilla web development, and algorithmic problem solving with Python. Focused on high-performance, fault-tolerant infrastructure and commercial-grade applications.`,
 
     skills: `<span style="color:#10B981; font-weight:700;">[LINUX & SYSTEMS]</span>   Ubuntu 24.04, Arch Linux, Kali Linux, Bash Shell, Systemd, Process Lifecycle, Permissions, Grep/Sed/Awk
+<span style="color:#00D084; font-weight:700;">[MOBILE APP ENG]</span>    React Native (0.81), Expo SDK 54, Expo Router v6, TypeScript, EAS Build (APK), Mobile State
 <span style="color:#06B6D4; font-weight:700;">[NETWORKING]</span>        TCP/IP Suite, OSI 7-Layer, Subnetting/CIDR, DNS Resolution, Firewalls, Wireshark
 <span style="color:#F59E0B; font-weight:700;">[WEB ARCHITECTURE]</span>  Semantic HTML5, Modern CSS3 Grid/Flex, Modular ES6+ JS, PWA (95% Bandwidth Opt)
 <span style="color:#8B5CF6; font-weight:700;">[PYTHON & DSA]</span>      Python 3, Data Structures & Algorithms (Trees, Graphs, Sorting, Hash Maps)
 <span style="color:#EF4444; font-weight:700;">[DEVOPS & CI/CD]</span>    Git, GitHub, GitHub Actions CI/CD Workflows, Cloud Pages Deployment`,
 
-    projects: `<strong style="color:#F8FAFC;">1. Kashmir Kesar Kingdom Pvt. Ltd. (Production Commercial Web Platform)</strong>
+    projects: `<strong style="color:#F8FAFC;">1. Nexora (Ultra-Fast Quick-Commerce Mobile Application)</strong>
+   • Production cross-platform mobile app built with React Native 0.81, Expo SDK 54 & Expo Router v6
+   • Botanical Emerald design system, 6-digit OTP auth, reactive cart engine, live delivery radar & APK ready
+   • GitHub: <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" style="color:#00D084;">https://github.com/Uzair0123/nexora-mobile-app</a>
+
+<strong style="color:#F8FAFC;">2. Kashmir Kesar Kingdom Pvt. Ltd. (Production Commercial Web Platform)</strong>
    • Full-scale commercial export portal with multi-currency engine & B2B RFQ estimator
    • 95% asset payload compression (48.3MB down to 2.43MB) with PWA offline caching
    • Live: <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/kashmir-kesar-kingdom/</a>
    • GitHub: <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/kashmir-kesar-kingdom</a>
 
-<strong style="color:#F8FAFC;">2. Craver Fast Food Co. (Production-Grade Online Ordering Web App)</strong>
+<strong style="color:#F8FAFC;">3. Craver Fast Food Co. (Production-Grade Online Ordering Web App)</strong>
    • Modular ES6+ online ordering platform with real-time catalog search & dietary filters
    • Interactive quick-view modal, persistent LocalStorage cart with coupon engine & checkout receipts
    • Live: <a href="https://uzair0123.github.io/craver-fast-food/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/craver-fast-food/</a>
    • GitHub: <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/craver-fast-food</a>
 
-<strong style="color:#F8FAFC;">3. Linux System Administration & Bash Automation Toolkit</strong>
+<strong style="color:#F8FAFC;">4. Linux System Administration & Bash Automation Toolkit</strong>
    • Automated scripts for server log rotation, user auditing & automated backup routines
 
-<strong style="color:#F8FAFC;">4. Network Protocol Labs & Wireshark Packet Inspection</strong>
+<strong style="color:#F8FAFC;">5. Network Protocol Labs & Wireshark Packet Inspection</strong>
    • Hands-on packet flow analysis & CIDR subnet allocation schemes`,
 
     tree: `<span style="color:#10B981; font-weight:700;">uzair-sultan/workspace</span>
-├── <span style="color:#06B6D4;">Linux_Administration/</span>
-│   ├── bash_automation.sh
-│   ├── system_audit.sh
-│   └── log_rotator.sh
-├── <span style="color:#06B6D4;">Computer_Networking/</span>
-│   ├── tcp_handshake_analysis.pcapng
-│   └── subnet_calculator.py
+├── <span style="color:#00D084; font-weight:700;">Mobile_Applications/</span>
+│   └── <span style="color:#00D084; font-weight:700;">nexora-mobile-app/</span> (Expo SDK 54 / React Native)
+│       ├── app/ (Expo Router v6 File-Based Routing)
+│       ├── src/ (Botanical Emerald Design System & Stores)
+│       └── eas.json (Android APK Build Profile)
 ├── <span style="color:#06B6D4;">Production_Web_Apps/</span>
 │   ├── <span style="color:#F59E0B; font-weight:700;">kashmir-kesar-kingdom/</span> (Live Production)
 │   │   ├── assets/ (95% Compressed Payload)
@@ -65,6 +69,13 @@ Passionate systems builder specializing in Linux internals, network protocol ins
 │   └── <span style="color:#EF4444; font-weight:700;">craver-fast-food/</span> (Live Production)
 │       ├── data/products.js (Structured Catalog)
 │       └── js/cart.js (LocalStorage Cart Engine)
+├── <span style="color:#06B6D4;">Linux_Administration/</span>
+│   ├── bash_automation.sh
+│   ├── system_audit.sh
+│   └── log_rotator.sh
+├── <span style="color:#06B6D4;">Computer_Networking/</span>
+│   ├── tcp_handshake_analysis.pcapng
+│   └── subnet_calculator.py
 └── <span style="color:#06B6D4;">Python_DSA/</span>
     ├── binary_search_tree.py
     └── graph_traversal.py`,
@@ -74,7 +85,7 @@ Passionate systems builder specializing in Linux internals, network protocol ins
 <span style="color:#10B981;">      | () () |      </span> <strong style="color:#F8FAFC;">OS:</strong> Ubuntu 24.04 LTS • Arch Linux • Kali Linux
 <span style="color:#10B981;">       \\  _  /       </span> <strong style="color:#F8FAFC;">Kernel:</strong> Linux 6.8.0-generic
 <span style="color:#10B981;">        /   \\        </span> <strong style="color:#F8FAFC;">Shell:</strong> GNU bash 5.2.21
-<span style="color:#10B981;">       /|   |\\       </span> <strong style="color:#F8FAFC;">Languages:</strong> Bash, Python 3, JavaScript (ES6+), C
+<span style="color:#10B981;">       /|   |\\       </span> <strong style="color:#F8FAFC;">Languages:</strong> Bash, Python 3, TypeScript, JavaScript (ES6+), C
 <span style="color:#10B981;">      (_|   |_)      </span> <strong style="color:#F8FAFC;">Uptime:</strong> 99.99%
 <span style="color:#10B981;">        '---'        </span> <strong style="color:#F8FAFC;">Status:</strong> Ready for Hire / Engineering Collaboration`,
 
@@ -156,7 +167,7 @@ Type '<span style="color:#10B981; font-weight:700;">help</span>' or tap quick pi
     });
 
     // Quick Command Pills
-    document.querySelectorAll(".term-chip").forEach(chip => {
+    document.querySelectorAll(".term-chip[data-cmd]").forEach(chip => {
       chip.addEventListener("click", (e) => {
         const cmd = e.currentTarget.dataset.cmd;
         if (cmd) {

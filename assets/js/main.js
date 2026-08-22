@@ -897,57 +897,62 @@
   // 16. CODE INSPECTOR TABS
   // ═══════════════════════════════════════════════════════════════
   function initCodeInspector() {
-    const tabs = document.querySelectorAll(".code-tab");
-    const snippets = document.querySelectorAll(".code-snippet");
+    const tabs = document.querySelectorAll(".code-tab-btn");
+    const snippets = document.querySelectorAll(".code-tab-pane");
     if (!tabs.length || !snippets.length) return;
 
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
-        const targetTab = tab.getAttribute("data-tab");
+        const targetCode = tab.getAttribute("data-code");
 
         tabs.forEach(t => t.classList.remove("active"));
-        snippets.forEach(s => s.classList.remove("active"));
+        snippets.forEach(s => s.classList.remove("active-pane"));
 
         tab.classList.add("active");
-        const activeSnippet = document.querySelector(`.code-snippet[data-snippet="${targetTab}"]`);
-        if (activeSnippet) activeSnippet.classList.add("active");
+        const activeSnippet = document.getElementById(targetCode);
+        if (activeSnippet) activeSnippet.classList.add("active-pane");
       });
     });
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 17. ARCHITECTURE MODAL
+  // 17. ARCHITECTURE MODAL (Kashmir Kesar Kingdom & Nexora Mobile)
   // ═══════════════════════════════════════════════════════════════
   function initArchitectureModal() {
-    const trigger = document.getElementById("viewArchitectureBtn");
-    const modal = document.getElementById("architectureModal");
-    const closeBtn = document.getElementById("closeModalBtn");
-    if (!trigger || !modal) return;
+    function setupModal(triggerId, modalId, closeBtnId) {
+      const trigger = document.getElementById(triggerId);
+      const modal = document.getElementById(modalId);
+      const closeBtn = document.getElementById(closeBtnId);
+      if (!trigger || !modal) return;
 
-    function openModal() {
-      modal.classList.add("is-active");
-      document.body.style.overflow = "hidden";
-      if (lenis) lenis.stop();
-    }
-
-    function closeModal() {
-      modal.classList.remove("is-active");
-      document.body.style.overflow = "";
-      if (lenis) lenis.start();
-    }
-
-    trigger.addEventListener("click", openModal);
-    closeBtn?.addEventListener("click", closeModal);
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("is-active")) {
-        closeModal();
+      function openModal() {
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+        if (lenis) lenis.stop();
       }
-    });
+
+      function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+        if (lenis) lenis.start();
+      }
+
+      trigger.addEventListener("click", openModal);
+      closeBtn?.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("active")) {
+          closeModal();
+        }
+      });
+    }
+
+    setupModal("openArchModalBtn", "archModal", "closeArchModalBtn");
+    setupModal("openNexoraArchModalBtn", "nexoraArchModal", "closeNexoraArchModalBtn");
   }
 
   // ═══════════════════════════════════════════════════════════════
