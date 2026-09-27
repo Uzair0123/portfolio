@@ -10,24 +10,24 @@ const TerminalModule = {
 
   commands: {
     help: `Available Linux & Systems Commands:
-  • <span style="color:#10B981;">whoami</span>       - Developer overview & technical philosophy
-  • <span style="color:#10B981;">skills</span>       - Systems, Mobile, Networking, Web & DevOps competencies
-  • <span style="color:#10B981;">projects</span>     - Production web & cross-platform mobile repositories
-  • <span style="color:#10B981;">tree</span>         - Visual workspace directory tree hierarchy
-  • <span style="color:#10B981;">neofetch</span>     - System telemetry, kernel & environment specs
-  • <span style="color:#10B981;">uptime</span>       - Workstation uptime & load average metrics
-  • <span style="color:#10B981;">contact</span>      - Direct phone, WhatsApp (+91-7889446114) & email
-  • <span style="color:#10B981;">sudo hire</span>    - Launch priority recruitment inquiry
-  • <span style="color:#10B981;">matrix</span>       - Digital rain cyber matrix simulation
-  • <span style="color:#10B981;">clear</span>        - Flush the terminal console buffer`,
+  • <span style="color:#8B5CF6;">whoami</span>       - Developer overview & technical philosophy
+  • <span style="color:#8B5CF6;">skills</span>       - Systems, Mobile, Networking, Web & DevOps competencies
+  • <span style="color:#8B5CF6;">projects</span>     - Production web & cross-platform mobile repositories
+  • <span style="color:#8B5CF6;">tree</span>         - Visual workspace directory tree hierarchy
+  • <span style="color:#8B5CF6;">neofetch</span>     - System telemetry, kernel & environment specs
+  • <span style="color:#8B5CF6;">uptime</span>       - Workstation uptime & load average metrics
+  • <span style="color:#8B5CF6;">contact</span>      - Direct phone, WhatsApp (+91-7889446114) & email
+  • <span style="color:#8B5CF6;">sudo hire</span>    - Launch priority recruitment inquiry
+  • <span style="color:#8B5CF6;">matrix</span>       - Digital rain cyber matrix simulation
+  • <span style="color:#8B5CF6;">clear</span>        - Flush the terminal console buffer`,
 
     whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong>
-<span style="color:#10B981; font-weight:600;">MCA (IGNOU, Currently Pursuing) • BCA (University of Kashmir)</span>
+<span style="color:#8B5CF6; font-weight:600;">MCA (IGNOU, Currently Pursuing) • BCA (University of Kashmir)</span>
 <span style="color:#94A3B8;">Linux Systems Administrator • DevOps Engineer • Mobile & Web Architect</span>
 Passionate systems builder specializing in Linux internals, network protocol inspection, cross-platform mobile engineering with React Native & Expo, modular vanilla web development, and algorithmic problem solving with Python. Focused on high-performance, fault-tolerant infrastructure and commercial-grade applications.`,
 
-    skills: `<span style="color:#10B981; font-weight:700;">[LINUX & SYSTEMS]</span>   Ubuntu 24.04, Arch Linux, Kali Linux, Bash Shell, Systemd, Process Lifecycle, Permissions, Grep/Sed/Awk
-<span style="color:#00D084; font-weight:700;">[MOBILE APP ENG]</span>    React Native (0.81), Expo SDK 54, Expo Router v6, TypeScript, EAS Build (APK), Mobile State
+    skills: `<span style="color:#8B5CF6; font-weight:700;">[LINUX & SYSTEMS]</span>   Ubuntu 24.04, Arch Linux, Kali Linux, Bash Shell, Systemd, Process Lifecycle, Permissions, Grep/Sed/Awk
+<span style="color:#F472B6; font-weight:700;">[MOBILE APP ENG]</span>    React Native (0.81), Expo SDK 54, Expo Router v6, TypeScript, EAS Build (APK), Mobile State
 <span style="color:#06B6D4; font-weight:700;">[NETWORKING]</span>        TCP/IP Suite, OSI 7-Layer, Subnetting/CIDR, DNS Resolution, Firewalls, Wireshark
 <span style="color:#F59E0B; font-weight:700;">[WEB ARCHITECTURE]</span>  Semantic HTML5, Modern CSS3 Grid/Flex, Modular ES6+ JS, PWA (95% Bandwidth Opt)
 <span style="color:#8B5CF6; font-weight:700;">[PYTHON & DSA]</span>      Python 3, Data Structures & Algorithms (Trees, Graphs, Sorting, Hash Maps)
@@ -36,19 +36,19 @@ Passionate systems builder specializing in Linux internals, network protocol ins
     projects: `<strong style="color:#F8FAFC;">1. Nexora (Ultra-Fast Quick-Commerce Mobile Application)</strong>
    • Production cross-platform mobile app built with React Native 0.81, Expo SDK 54 & Expo Router v6
    • Botanical Emerald design system, 6-digit OTP auth, reactive cart engine, live delivery radar & APK ready
-   • GitHub: <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" style="color:#00D084;">https://github.com/Uzair0123/nexora-mobile-app</a>
+   • GitHub: <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" style="color:#F472B6;">https://github.com/Uzair0123/nexora-mobile-app</a>
 
 <strong style="color:#F8FAFC;">2. Kashmir Kesar Kingdom Pvt. Ltd. (Production Commercial Web Platform)</strong>
    • Full-scale commercial export portal with multi-currency engine & B2B RFQ estimator
    • 95% asset payload compression (48.3MB down to 2.43MB) with PWA offline caching
    • Live: <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/kashmir-kesar-kingdom/</a>
-   • GitHub: <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/kashmir-kesar-kingdom</a>
+   • GitHub: <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" style="color:#8B5CF6;">https://github.com/Uzair0123/kashmir-kesar-kingdom</a>
 
 <strong style="color:#F8FAFC;">3. Craver Fast Food Co. (Production-Grade Online Ordering Web App)</strong>
    • Modular ES6+ online ordering platform with real-time catalog search & dietary filters
    • Interactive quick-view modal, persistent LocalStorage cart with coupon engine & checkout receipts
    • Live: <a href="https://uzair0123.github.io/craver-fast-food/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/craver-fast-food/</a>
-   • GitHub: <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/craver-fast-food</a>
+   • GitHub: <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" style="color:#8B5CF6;">https://github.com/Uzair0123/craver-fast-food</a>
 
 <strong style="color:#F8FAFC;">4. Linux System Administration & Bash Automation Toolkit</strong>
    • Automated scripts for server log rotation, user auditing & automated backup routines
@@ -56,9 +56,9 @@ Passionate systems builder specializing in Linux internals, network protocol ins
 <strong style="color:#F8FAFC;">5. Network Protocol Labs & Wireshark Packet Inspection</strong>
    • Hands-on packet flow analysis & CIDR subnet allocation schemes`,
 
-    tree: `<span style="color:#10B981; font-weight:700;">uzair-sultan/workspace</span>
-├── <span style="color:#00D084; font-weight:700;">Mobile_Applications/</span>
-│   └── <span style="color:#00D084; font-weight:700;">nexora-mobile-app/</span> (Expo SDK 54 / React Native)
+    tree: `<span style="color:#8B5CF6; font-weight:700;">uzair-sultan/workspace</span>
+├── <span style="color:#F472B6; font-weight:700;">Mobile_Applications/</span>
+│   └── <span style="color:#F472B6; font-weight:700;">nexora-mobile-app/</span> (Expo SDK 54 / React Native)
 │       ├── app/ (Expo Router v6 File-Based Routing)
 │       ├── src/ (Botanical Emerald Design System & Stores)
 │       └── eas.json (Android APK Build Profile)
@@ -80,29 +80,29 @@ Passionate systems builder specializing in Linux internals, network protocol ins
     ├── binary_search_tree.py
     └── graph_traversal.py`,
 
-    neofetch: `<span style="color:#10B981;">        .---.        </span> <span style="color:#10B981; font-weight:700;">uzair@linux-workstation</span>
-<span style="color:#10B981;">       /     \\       </span> -----------------------
-<span style="color:#10B981;">      | () () |      </span> <strong style="color:#F8FAFC;">OS:</strong> Ubuntu 24.04 LTS • Arch Linux • Kali Linux
-<span style="color:#10B981;">       \\  _  /       </span> <strong style="color:#F8FAFC;">Kernel:</strong> Linux 6.8.0-generic
-<span style="color:#10B981;">        /   \\        </span> <strong style="color:#F8FAFC;">Shell:</strong> GNU bash 5.2.21
-<span style="color:#10B981;">       /|   |\\       </span> <strong style="color:#F8FAFC;">Languages:</strong> Bash, Python 3, TypeScript, JavaScript (ES6+), C
-<span style="color:#10B981;">      (_|   |_)      </span> <strong style="color:#F8FAFC;">Uptime:</strong> 99.99%
-<span style="color:#10B981;">        '---'        </span> <strong style="color:#F8FAFC;">Status:</strong> Ready for Hire / Engineering Collaboration`,
+    neofetch: `<span style="color:#8B5CF6;">        .---.        </span> <span style="color:#8B5CF6; font-weight:700;">uzair@linux-workstation</span>
+<span style="color:#8B5CF6;">       /     \\       </span> -----------------------
+<span style="color:#8B5CF6;">      | () () |      </span> <strong style="color:#F8FAFC;">OS:</strong> Ubuntu 24.04 LTS • Arch Linux • Kali Linux
+<span style="color:#8B5CF6;">       \\  _  /       </span> <strong style="color:#F8FAFC;">Kernel:</strong> Linux 6.8.0-generic
+<span style="color:#8B5CF6;">        /   \\        </span> <strong style="color:#F8FAFC;">Shell:</strong> GNU bash 5.2.21
+<span style="color:#8B5CF6;">       /|   |\\       </span> <strong style="color:#F8FAFC;">Languages:</strong> Bash, Python 3, TypeScript, JavaScript (ES6+), C
+<span style="color:#8B5CF6;">      (_|   |_)      </span> <strong style="color:#F8FAFC;">Uptime:</strong> 99.99%
+<span style="color:#8B5CF6;">        '---'        </span> <strong style="color:#F8FAFC;">Status:</strong> Ready for Hire / Engineering Collaboration`,
 
     uptime: `<span style="color:#94A3B8;">up 42 days, 14:28, 1 user, load average: 0.08, 0.05, 0.01</span>`,
 
     contact: `<strong style="color:#F8FAFC;">Direct Communication Channels:</strong>
-  • <span style="color:#10B981;">Phone / Call:</span>  <a href="tel:+917889446114" style="color:#06B6D4;">+91-7889446114</a>
-  • <span style="color:#10B981;">WhatsApp:</span>      <a href="https://wa.me/917889446114" target="_blank" style="color:#06B6D4;">+91-7889446114</a>
-  • <span style="color:#10B981;">Email:</span>         <a href="mailto:uzairteeli123456789@gmail.com" style="color:#06B6D4;">uzairteeli123456789@gmail.com</a>
-  • <span style="color:#10B981;">GitHub:</span>        <a href="https://github.com/Uzair0123" target="_blank" style="color:#06B6D4;">https://github.com/Uzair0123</a>
-  • <span style="color:#10B981;">Location:</span>      Jammu & Kashmir, India`,
+  • <span style="color:#8B5CF6;">Phone / Call:</span>  <a href="tel:+917889446114" style="color:#06B6D4;">+91-7889446114</a>
+  • <span style="color:#8B5CF6;">WhatsApp:</span>      <a href="https://wa.me/917889446114" target="_blank" style="color:#06B6D4;">+91-7889446114</a>
+  • <span style="color:#8B5CF6;">Email:</span>         <a href="mailto:uzairteeli123456789@gmail.com" style="color:#06B6D4;">uzairteeli123456789@gmail.com</a>
+  • <span style="color:#8B5CF6;">GitHub:</span>        <a href="https://github.com/Uzair0123" target="_blank" style="color:#06B6D4;">https://github.com/Uzair0123</a>
+  • <span style="color:#8B5CF6;">Location:</span>      Jammu & Kashmir, India`,
 
-    "sudo hire": `<span style="color:#10B981; font-weight:700;">[AUTHENTICATION SUCCESSFUL — ROOT PRIVILEGES]</span>
+    "sudo hire": `<span style="color:#8B5CF6; font-weight:700;">[AUTHENTICATION SUCCESSFUL — ROOT PRIVILEGES]</span>
 Access Granted: Direct channel initialized with Uzair Sultan!
 Redirecting to WhatsApp (+91-7889446114) / Email...`,
 
-    matrix: `<span style="color:#10B981;">01010101 01111010 01100001 01101001 01110010<br>
+    matrix: `<span style="color:#8B5CF6;">01010101 01111010 01100001 01101001 01110010<br>
 01010011 01110101 01101100 01110100 01100001 01101110<br>
 Wake up, Neo... The matrix has you.<br>
 Follow the white rabbit. 🐇</span>`
@@ -119,7 +119,7 @@ Follow the white rabbit. 🐇</span>`
 
   printInitialGreeting: function() {
     this.appendOutput(`<span style="color:#94A3B8;">Welcome to Uzair Sultan's Interactive Terminal v2.6 (Ubuntu x86_64)
-Type '<span style="color:#10B981; font-weight:700;">help</span>' or tap quick pills below. Press Tab for autocomplete, &uarr;/&darr; for history.</span>`);
+Type '<span style="color:#8B5CF6; font-weight:700;">help</span>' or tap quick pills below. Press Tab for autocomplete, &uarr;/&darr; for history.</span>`);
   },
 
   bindEvents: function() {
@@ -200,7 +200,7 @@ Type '<span style="color:#10B981; font-weight:700;">help</span>' or tap quick pi
     if (output) {
       this.appendOutput(`<div class="term-output">${output}</div>`);
     } else {
-      this.appendOutput(`<span style="color:#EF4444;">bash: command not found: ${cmd}. Type '<span style="color:#10B981;">help</span>' for available commands.</span>`);
+      this.appendOutput(`<span style="color:#EF4444;">bash: command not found: ${cmd}. Type '<span style="color:#8B5CF6;">help</span>' for available commands.</span>`);
     }
 
     // Auto scroll to bottom

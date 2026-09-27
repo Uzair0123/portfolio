@@ -69,7 +69,7 @@
 
       <!-- Desktop CTA -->
       <div class="nav-cta">
-        <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-outline btn-sm nav-whatsapp-btn" style="border-color:#22C55E; color:#22C55E;" data-magnetic="true">
+        <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-outline btn-sm nav-whatsapp-btn" style="border-color:#38BDF8; color:#38BDF8;" data-magnetic="true">
           <i class="fa-brands fa-whatsapp"></i> WhatsApp
         </a>
         <a href="#contact" class="btn btn-emerald btn-sm" data-magnetic="true">
@@ -168,7 +168,7 @@
             <i class="fa-brands fa-whatsapp"></i> CONTACT ME
           </a>
           <span class="hero-availability-note">
-            <i class="fa-solid fa-circle" style="color:#10B981; font-size:0.55rem;"></i> Available for Contracts & Roles
+            <i class="fa-solid fa-circle" style="color:#8B5CF6; font-size:0.55rem;"></i> Available for Contracts & Roles
           </span>
         </div>
       </div>
@@ -446,8 +446,8 @@
               <div class="glass-card" style="padding:1.5rem; font-family:var(--font-code); font-size:0.8rem; color:#A7F3D0; background:#0B1021;">
                 <p># Automated Log Rotation & Backup</p>
                 <p style="color:#FFF;">$ ./backup_audit.sh --target /var/www</p>
-                <p style="color:#10B981;">[SUCCESS] Archive created: /var/backups/daily.tar.gz</p>
-                <p style="color:#10B981;">[SUCCESS] Rotated archives older than 7 days.</p>
+                <p style="color:#8B5CF6;">[SUCCESS] Archive created: /var/backups/daily.tar.gz</p>
+                <p style="color:#8B5CF6;">[SUCCESS] Rotated archives older than 7 days.</p>
               </div>
             </div>
           </div>
@@ -537,7 +537,7 @@
                 <p># Binary Search Tree Traversal</p>
                 <p style="color:#FFF;">$ python3 -m unittest test_bst.py</p>
                 <p style="color:#8B5CF6;">Ran 12 tests in 0.003s</p>
-                <p style="color:#10B981;">OK (All test cases passed with O(N) complexity)</p>
+                <p style="color:#8B5CF6;">OK (All test cases passed with O(N) complexity)</p>
               </div>
             </div>
           </div>
@@ -656,7 +656,7 @@
         </div>
 
         <div class="glass-card scroll-reveal delay-3" data-tilt="true">
-          <div style="font-size:2rem; color:#10B981; margin-bottom:1rem;"><i class="fa-solid fa-code"></i></div>
+          <div style="font-size:2rem; color:#8B5CF6; margin-bottom:1rem;"><i class="fa-solid fa-code"></i></div>
           <h3>Modern Web Architecture</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
             Building ultra-fast, change-proof, responsive commercial web platforms with zero bloated dependencies.
@@ -672,7 +672,7 @@
         </div>
 
         <div class="glass-card scroll-reveal delay-4" data-tilt="true">
-          <div style="font-size:2rem; color:#00D084; margin-bottom:1rem;"><i class="fa-brands fa-react"></i></div>
+          <div style="font-size:2rem; color:#F472B6; margin-bottom:1rem;"><i class="fa-brands fa-react"></i></div>
           <h3>Cross-Platform Mobile Engineering</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
             Architecting production-ready cross-platform mobile apps with reactive state stores, typed routes, and native hardware integration.
@@ -711,7 +711,7 @@
               <i class="fa-brands fa-linux" style="color:#F59E0B;"></i> backup_audit.sh
             </button>
             <button class="code-tab-btn" data-code="codeMobile">
-              <i class="fa-brands fa-react" style="color:#00D084;"></i> useCartStore.tsx
+              <i class="fa-brands fa-react" style="color:#F472B6;"></i> useCartStore.tsx
             </button>
             <button class="code-tab-btn" data-code="codePython">
               <i class="fa-brands fa-python" style="color:#8B5CF6;"></i> binary_tree_dsa.py
@@ -732,24 +732,24 @@
 <span style="color:#64748B;"># ==============================================================================</span>
 <span style="color:#8B5CF6;">set</span> -euo pipefail
 
-BACKUP_SRC=<span style="color:#10B981;">"/var/www/production_app"</span>
-BACKUP_DEST=<span style="color:#10B981;">"/var/backups/daily"</span>
-TIMESTAMP=$(date +<span style="color:#10B981;">"%Y%m%d_%H%M%S"</span>)
-ARCHIVE_NAME=<span style="color:#10B981;">"app_backup_${TIMESTAMP}.tar.gz"</span>
+BACKUP_SRC=<span style="color:#8B5CF6;">"/var/www/production_app"</span>
+BACKUP_DEST=<span style="color:#8B5CF6;">"/var/backups/daily"</span>
+TIMESTAMP=$(date +<span style="color:#8B5CF6;">"%Y%m%d_%H%M%S"</span>)
+ARCHIVE_NAME=<span style="color:#8B5CF6;">"app_backup_${TIMESTAMP}.tar.gz"</span>
 
 <span style="color:#F59E0B;">log_info</span>() {
-  echo -e <span style="color:#10B981;">"[INFO $(date +'%T')] $1"</span>
+  echo -e <span style="color:#8B5CF6;">"[INFO $(date +'%T')] $1"</span>
 }
 
 <span style="color:#F59E0B;">perform_backup</span>() {
-  log_info <span style="color:#10B981;">"Starting automated archive of ${BACKUP_SRC}..."</span>
-  mkdir -p <span style="color:#10B981;">"${BACKUP_DEST}"</span>
-  tar -czf <span style="color:#10B981;">"${BACKUP_DEST}/${ARCHIVE_NAME}"</span> -C <span style="color:#10B981;">"${BACKUP_SRC}"</span> .
-  log_info <span style="color:#10B981;">"Backup created successfully: ${BACKUP_DEST}/${ARCHIVE_NAME}"</span>
+  log_info <span style="color:#8B5CF6;">"Starting automated archive of ${BACKUP_SRC}..."</span>
+  mkdir -p <span style="color:#8B5CF6;">"${BACKUP_DEST}"</span>
+  tar -czf <span style="color:#8B5CF6;">"${BACKUP_DEST}/${ARCHIVE_NAME}"</span> -C <span style="color:#8B5CF6;">"${BACKUP_SRC}"</span> .
+  log_info <span style="color:#8B5CF6;">"Backup created successfully: ${BACKUP_DEST}/${ARCHIVE_NAME}"</span>
   
   <span style="color:#64748B;"># Rotate archives older than 7 days</span>
-  find <span style="color:#10B981;">"${BACKUP_DEST}"</span> -type f -name <span style="color:#10B981;">"*.tar.gz"</span> -mtime +7 -exec rm -f {} \;
-  log_info <span style="color:#10B981;">"Old log & backup rotation complete."</span>
+  find <span style="color:#8B5CF6;">"${BACKUP_DEST}"</span> -type f -name <span style="color:#8B5CF6;">"*.tar.gz"</span> -mtime +7 -exec rm -f {} \;
+  log_info <span style="color:#8B5CF6;">"Old log & backup rotation complete."</span>
 }
 
 perform_backup</code></pre>
@@ -762,15 +762,15 @@ perform_backup</code></pre>
 <span style="color:#64748B;">// Project: Nexora Quick-Commerce Mobile App (React Native + Expo SDK 54)</span>
 <span style="color:#64748B;">// Author: Uzair Sultan (Lead Mobile Architect)</span>
 <span style="color:#64748B;">// ==============================================================================</span>
-<span style="color:#8B5CF6;">import</span> React, { createContext, useContext, useState, useMemo } <span style="color:#8B5CF6;">from</span> <span style="color:#10B981;">'react'</span>;
-<span style="color:#8B5CF6;">import</span> { Product } <span style="color:#8B5CF6;">from</span> <span style="color:#10B981;">'../types/product.types'</span>;
-<span style="color:#8B5CF6;">import</span> { CartItem, AppliedCoupon, CartSummary } <span style="color:#8B5CF6;">from</span> <span style="color:#10B981;">'../types/cart.types'</span>;
+<span style="color:#8B5CF6;">import</span> React, { createContext, useContext, useState, useMemo } <span style="color:#8B5CF6;">from</span> <span style="color:#8B5CF6;">'react'</span>;
+<span style="color:#8B5CF6;">import</span> { Product } <span style="color:#8B5CF6;">from</span> <span style="color:#8B5CF6;">'../types/product.types'</span>;
+<span style="color:#8B5CF6;">import</span> { CartItem, AppliedCoupon, CartSummary } <span style="color:#8B5CF6;">from</span> <span style="color:#8B5CF6;">'../types/cart.types'</span>;
 
 <span style="color:#8B5CF6;">const</span> FREE_DELIVERY_THRESHOLD = <span style="color:#F59E0B;">20.00</span>;
 <span style="color:#8B5CF6;">const</span> STANDARD_DELIVERY_FEE = <span style="color:#F59E0B;">1.99</span>;
 <span style="color:#8B5CF6;">const</span> PACKAGING_FEE = <span style="color:#F59E0B;">0.49</span>;
 
-<span style="color:#8B5CF6;">export const</span> <span style="color:#10B981; font-weight:700;">CartProvider</span>: React.FC&lt;{ children: React.ReactNode }&gt; = ({ children }) =&gt; {
+<span style="color:#8B5CF6;">export const</span> <span style="color:#8B5CF6; font-weight:700;">CartProvider</span>: React.FC&lt;{ children: React.ReactNode }&gt; = ({ children }) =&gt; {
   <span style="color:#8B5CF6;">const</span> [items, setItems] = useState&lt;CartItem[]&gt;([]);
   <span style="color:#8B5CF6;">const</span> [coupon, setCoupon] = useState&lt;AppliedCoupon | null&gt;(<span style="color:#06B6D4;">null</span>);
 
@@ -808,7 +808,7 @@ perform_backup</code></pre>
 <span style="color:#64748B;"># ==============================================================================</span>
 <span style="color:#8B5CF6;">from</span> collections <span style="color:#8B5CF6;">import</span> deque
 
-<span style="color:#8B5CF6;">class</span> <span style="color:#10B981; font-weight:700;">TreeNode</span>:
+<span style="color:#8B5CF6;">class</span> <span style="color:#8B5CF6; font-weight:700;">TreeNode</span>:
     <span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">__init__</span>(self, val=<span style="color:#F59E0B;">0</span>, left=<span style="color:#F59E0B;">None</span>, right=<span style="color:#F59E0B;">None</span>):
         self.val = val
         self.left = left
@@ -845,14 +845,14 @@ perform_backup</code></pre>
 <span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">inspect_network</span>(cidr_string: str):
     net = ipaddress.ip_network(cidr_string, strict=<span style="color:#F59E0B;">False</span>)
     
-    print(<span style="color:#10B981;">f"Network Address:    {net.network_address}"</span>)
-    print(<span style="color:#10B981;">f"Broadcast Address:  {net.broadcast_address}"</span>)
-    print(<span style="color:#10B981;">f"Netmask:            {net.netmask}"</span>)
-    print(<span style="color:#10B981;">f"Total Usable Hosts: {net.num_addresses - 2}"</span>)
-    print(<span style="color:#10B981;">f"Host IP Range:      {net[1]} - {net[-2]}"</span>)
+    print(<span style="color:#8B5CF6;">f"Network Address:    {net.network_address}"</span>)
+    print(<span style="color:#8B5CF6;">f"Broadcast Address:  {net.broadcast_address}"</span>)
+    print(<span style="color:#8B5CF6;">f"Netmask:            {net.netmask}"</span>)
+    print(<span style="color:#8B5CF6;">f"Total Usable Hosts: {net.num_addresses - 2}"</span>)
+    print(<span style="color:#8B5CF6;">f"Host IP Range:      {net[1]} - {net[-2]}"</span>)
 
 <span style="color:#64748B;"># Example Execution for a /24 Enterprise Subnet</span>
-inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></pre>
+inspect_network(<span style="color:#8B5CF6;">"192.168.10.0/24"</span>)</code></pre>
         </div>
       </div>
     </div>
@@ -870,7 +870,7 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
 
         <div class="contact-channels scroll-reveal delay-1">
           <!-- WhatsApp -->
-          <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-outline" style="border-color:#22C55E; color:#22C55E;" data-magnetic="true">
+          <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-outline" style="border-color:#38BDF8; color:#38BDF8;" data-magnetic="true">
             <i class="fa-brands fa-whatsapp"></i> WhatsApp (+91-7889446114)
           </a>
 
@@ -955,8 +955,8 @@ inspect_network(<span style="color:#10B981;">"192.168.10.0/24"</span>)</code></p
 
       <div class="arch-grid-cards">
         <div class="arch-mini-card">
-          <h4 style="color:#00D084;"><i class="fa-solid fa-palette"></i> Botanical Emerald UI</h4>
-          <p>Bespoke chromatic tokens (#0B4F37, #00D084) with 6-digit OTP keypad, speed selector pill, and zero UI bloat.</p>
+          <h4 style="color:#F472B6;"><i class="fa-solid fa-palette"></i> Botanical Emerald UI</h4>
+          <p>Bespoke chromatic tokens (#0B4F37, #F472B6) with 6-digit OTP keypad, speed selector pill, and zero UI bloat.</p>
         </div>
         <div class="arch-mini-card">
           <h4 style="color:#06B6D4;"><i class="fa-solid fa-layer-group"></i> Decentralized Stores</h4>

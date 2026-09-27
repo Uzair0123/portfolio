@@ -144,10 +144,9 @@
 
     const ctx = canvas.getContext("2d");
     let width, height;
-    let particles = [];
-    const PARTICLE_COUNT = IS_MOBILE ? 25 : 65;
-    const CONNECTION_DISTANCE = IS_MOBILE ? 90 : 130;
-    const MOUSE_RADIUS = 160;
+    let orbs = [];
+    const ORB_COUNT = IS_MOBILE ? 4 : 8;
+    const MOUSE_RADIUS = 300;
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -156,69 +155,74 @@
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    function createParticles() {
-      particles = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push({
+    const colors = [
+      "139, 92, 246", // Purple
+      "56, 189, 248", // Cyan/Blue
+      "217, 70, 239", // Magenta/Pink
+    ];
+
+    function createOrbs() {
+      orbs = [];
+      for (let i = 0; i < ORB_COUNT; i++) {
+        orbs.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
-          radius: Math.random() * 1.4 + 0.8,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 200 + 150,
+          colorBase: colors[Math.floor(Math.random() * colors.length)],
           alpha: Math.random() * 0.4 + 0.2,
+          pulse: Math.random() * Math.PI * 2
         });
       }
     }
-    createParticles();
+    createOrbs();
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
+      // We use lighter global composite operation for glowing liquid effect
+      ctx.globalCompositeOperation = 'screen';
 
-        p.x += p.vx;
-        p.y += p.vy;
+      for (let i = 0; i < orbs.length; i++) {
+        const o = orbs[i];
 
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
+        o.x += o.vx;
+        o.y += o.vy;
+        o.pulse += 0.01;
+        
+        // Gentle size pulsating
+        const currentRadius = o.radius + Math.sin(o.pulse) * 30;
 
-        // Mouse interaction
-        const dx = mouseX - p.x;
-        const dy = mouseY - p.y;
+        if (o.x < -currentRadius) o.x = width + currentRadius;
+        if (o.x > width + currentRadius) o.x = -currentRadius;
+        if (o.y < -currentRadius) o.y = height + currentRadius;
+        if (o.y > height + currentRadius) o.y = -currentRadius;
+
+        // Mouse interaction (soft repel)
+        const dx = mouseX - o.x;
+        const dy = mouseY - o.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < MOUSE_RADIUS) {
           const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
-          p.x -= (dx / dist) * force * 0.35;
-          p.y -= (dy / dist) * force * 0.35;
+          o.x -= (dx / dist) * force * 1.5;
+          o.y -= (dy / dist) * force * 1.5;
         }
 
-        // Draw particle
+        // Draw soft glowing orb
+        const gradient = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, currentRadius);
+        gradient.addColorStop(0, `rgba(${o.colorBase}, ${o.alpha})`);
+        gradient.addColorStop(0.5, `rgba(${o.colorBase}, ${o.alpha * 0.5})`);
+        gradient.addColorStop(1, `rgba(${o.colorBase}, 0)`);
+
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${p.alpha * 0.6})`;
+        ctx.arc(o.x, o.y, currentRadius, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
         ctx.fill();
-
-        // Connect nearby particles
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dist2 = Math.hypot(p.x - p2.x, p.y - p2.y);
-
-          if (dist2 < CONNECTION_DISTANCE) {
-            const alpha = (1 - dist2 / CONNECTION_DISTANCE) * 0.15;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
-            ctx.lineWidth = 0.75;
-            ctx.stroke();
-          }
-        }
       }
 
+      ctx.globalCompositeOperation = 'source-over';
       requestAnimationFrame(animate);
     }
     animate();
@@ -447,10 +451,10 @@
     // Ambient floating loops for assets
     document.querySelectorAll(".floating-asset").forEach((asset, i) => {
       gsap.to(asset, {
-        y: "random(-12, 12)",
-        x: "random(-8, 8)",
-        rotation: "random(-6, 6)",
-        duration: "random(4, 6)",
+        y: "random(-16, 16)",
+        x: "random(-12, 12)",
+        rotation: "random(-10, 10)",
+        duration: "random(8, 12)",
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
