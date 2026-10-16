@@ -50,8 +50,10 @@ Passionate systems builder specializing in Linux internals, network protocol ins
    • Live: <a href="https://uzair0123.github.io/craver-fast-food/" target="_blank" style="color:#06B6D4;">https://uzair0123.github.io/craver-fast-food/</a>
    • GitHub: <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" style="color:#8B5CF6;">https://github.com/Uzair0123/craver-fast-food</a>
 
-<strong style="color:#F8FAFC;">4. Linux System Administration & Bash Automation Toolkit</strong>
-   • Automated scripts for server log rotation, user auditing & automated backup routines
+<strong style="color:#F8FAFC;">4. sys-inspect (Linux Systems & Network Telemetry CLI)</strong>
+   • Production systems telemetry CLI reading /proc kernel primitives, inode capacity, and socket states
+   • Features dynamic ANSI triage, defunct/zombie process detection, and defensive pipefail error handling
+   • GitHub: <a href="https://github.com/Uzair0123/sys-inspect" target="_blank" style="color:#10B981;">https://github.com/Uzair0123/sys-inspect</a>
 
 <strong style="color:#F8FAFC;">5. Network Protocol Labs & Wireshark Packet Inspection</strong>
    • Hands-on packet flow analysis & CIDR subnet allocation schemes`,
@@ -70,8 +72,10 @@ Passionate systems builder specializing in Linux internals, network protocol ins
 │       ├── data/products.js (Structured Catalog)
 │       └── js/cart.js (LocalStorage Cart Engine)
 ├── <span style="color:#06B6D4;">Linux_Administration/</span>
+│   ├── <span style="color:#10B981; font-weight:700;">sys-inspect/</span> (Production Telemetry Engine)
+│   │   ├── sys-inspect.sh
+│   │   └── README.md
 │   ├── bash_automation.sh
-│   ├── system_audit.sh
 │   └── log_rotator.sh
 ├── <span style="color:#06B6D4;">Computer_Networking/</span>
 │   ├── tcp_handshake_analysis.pcapng

@@ -408,14 +408,14 @@
           </div>
         </div>
 
-        <!-- Accordion 04: Linux Administration & Automation -->
+        <!-- Accordion 04: Linux Administration & sys-inspect -->
         <div class="accordion-item scroll-reveal delay-3" data-tilt="true" data-cursor="project">
           <div class="accordion-header">
             <div class="accordion-header-left">
               <span class="accordion-num">04</span>
               <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-amber); font-weight:700; text-transform:uppercase;">Systems Engineering & Shell Scripts</span>
-                <h3 class="accordion-title">Linux Administration & Automation Suite</h3>
+                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-amber); font-weight:700; text-transform:uppercase;">Systems Engineering & Kernel Telemetry</span>
+                <h3 class="accordion-title">sys-inspect: Linux Telemetry & Health Auditor</h3>
               </div>
             </div>
             <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
@@ -425,29 +425,32 @@
             <div class="accordion-content-grid">
               <div>
                 <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  Collection of robust Bash automation scripts for server log rotation, user account permission auditing, automated backup archiving, and system health telemetry monitoring on Ubuntu Linux.
+                  Production-grade Linux systems telemetry CLI querying kernel virtual filesystems (/proc) and socket states (ss -tuln). Features dynamic ANSI color triage, inode exhaustion detection (df -i), zombie process auditing, and defensive pipefail error handling.
                 </p>
                 <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
                   <span class="term-chip">Bash Shell</span>
-                  <span class="term-chip">Systemd</span>
-                  <span class="term-chip">Cron Jobs</span>
-                  <span class="term-chip">Grep/Sed/Awk</span>
+                  <span class="term-chip">Kernel /proc</span>
+                  <span class="term-chip">TCP/IP (ss)</span>
+                  <span class="term-chip">Awk & Coreutils</span>
+                  <span class="term-chip">ANSI Colors</span>
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
                   <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
                     <i class="fa-solid fa-code"></i> Inspect Code
                   </a>
-                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> View GitHub
+                  <a href="https://github.com/Uzair0123/sys-inspect" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
+                    <i class="fa-brands fa-github"></i> View Repo
                   </a>
                 </div>
               </div>
 
               <div class="glass-card" style="padding:1.5rem; font-family:var(--font-code); font-size:0.8rem; color:#A7F3D0; background:#0B1021;">
-                <p># Automated Log Rotation & Backup</p>
-                <p style="color:#FFF;">$ ./backup_audit.sh --target /var/www</p>
-                <p style="color:#8B5CF6;">[SUCCESS] Archive created: /var/backups/daily.tar.gz</p>
-                <p style="color:#8B5CF6;">[SUCCESS] Rotated archives older than 7 days.</p>
+                <p style="color:#64748B;"># Run live system telemetry</p>
+                <p style="color:#FFF;">$ ./sys-inspect.sh</p>
+                <p style="color:#34D399;">[OK] Load Avg: 0.85, 1.02, 1.04</p>
+                <p style="color:#34D399;">[OK] Memory: 46.2% | Inodes: 14%</p>
+                <p style="color:#38BDF8;">[OK] Sockets: 38 | DNS: Resolved</p>
+                <p style="color:#34D399;">[OK] Zombies: 0 defunct</p>
               </div>
             </div>
           </div>
