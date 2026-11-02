@@ -1,6 +1,6 @@
 /* ==========================================================================
-   UZAIR PORTFOLIO — PHASE 3: HIGH-END UI POLISH
-   Glassmorphism, Specular Borders, Authentic Terminal UI & Hover Glows.
+   UZAIR PORTFOLIO — PHASE 4: MOBILE & TABLET OPTIMIZATION
+   Fluid Typography, 1-Column Hero Stack, Touch Pills, Responsive Grids.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -50,7 +50,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. CSS Reset & Document Baseline
+   3. CSS Reset & Document Baseline (Zero Horizontal Overflow)
    -------------------------------------------------------------------------- */
 *,
 *::before,
@@ -64,6 +64,8 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   background-color: var(--bg-void);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -72,12 +74,14 @@ body {
   font-family: var(--font-ui);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* --------------------------------------------------------------------------
-   4. Typographic Hierarchy
+   4. Fluid Typographic Hierarchy
    -------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
@@ -88,18 +92,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3.25rem;
+  font-size: clamp(2.5rem, 5vw, 5rem);
   letter-spacing: -0.035em;
   font-weight: 800;
 }
 
 h2 {
-  font-size: 1.85rem;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
   letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: 1.25rem;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
   letter-spacing: -0.02em;
 }
 
@@ -109,6 +113,7 @@ h4 {
 
 p {
   color: var(--text-muted);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
 }
 
 a {
@@ -137,12 +142,12 @@ code, kbd, pre, samp {
 }
 
 .section-header h2 {
-  font-size: 1.85rem;
+  font-size: clamp(1.45rem, 3vw, 2rem);
   color: var(--text-primary);
 }
 
 .section-subtitle {
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--text-muted);
   margin-top: 0.4rem;
 }
@@ -165,6 +170,7 @@ code, kbd, pre, samp {
   text-decoration: none;
   line-height: 1;
   transition: var(--transition-smooth);
+  touch-action: manipulation;
 }
 
 /* Primary CTA: Cyber Emerald Solid Accent */
@@ -204,6 +210,7 @@ code, kbd, pre, samp {
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   transition: var(--transition-smooth);
+  touch-action: manipulation;
 }
 
 .btn-sm:hover {
@@ -229,7 +236,7 @@ code, kbd, pre, samp {
 .nav-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0.8rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -241,6 +248,18 @@ code, kbd, pre, samp {
   font-size: 0.92rem;
   font-weight: 600;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-bash);
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .prompt-user {
@@ -273,6 +292,7 @@ code, kbd, pre, samp {
   background-color: var(--accent-bash);
   box-shadow: 0 0 8px var(--accent-bash);
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .nav-links {
@@ -293,7 +313,7 @@ code, kbd, pre, samp {
 }
 
 /* --------------------------------------------------------------------------
-   7. Hero Section (2-Column 50/50 Grid)
+   7. Hero Section (2-Column 50/50 Grid & Fluid Stack)
    -------------------------------------------------------------------------- */
 .hero-section {
   padding: 5rem 0 4rem;
@@ -339,20 +359,20 @@ code, kbd, pre, samp {
 }
 
 .hero-identity h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 5rem);
   color: var(--text-primary);
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .hero-identity h2 {
-  font-size: 1.45rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
   font-weight: 600;
   color: var(--accent-k8s);
   letter-spacing: -0.015em;
 }
 
 .hero-bio {
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   color: var(--text-muted);
   line-height: 1.65;
 }
@@ -366,10 +386,12 @@ code, kbd, pre, samp {
 /* Right Column: Authentic macOS/Linux Terminal Window */
 .hero-terminal {
   width: 100%;
+  max-width: 100%;
 }
 
 .terminal-container {
   width: 100%;
+  max-width: 100%;
   background-color: var(--terminal-bg);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
@@ -455,21 +477,26 @@ code, kbd, pre, samp {
   font-weight: 500;
 }
 
-/* Terminal Dark Body with Padding */
+/* Terminal Dark Body with Padding & Horizontal Scroll Safety */
 .terminal-body {
   padding: 1.5rem;
-  min-height: 250px;
+  min-height: 240px;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: clamp(0.82rem, 1.1vw, 0.9rem);
   line-height: 1.75;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
   background-color: var(--terminal-bg);
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .terminal-line {
   margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .terminal-line .prompt {
@@ -501,8 +528,51 @@ code, kbd, pre, samp {
   margin-left: 2px;
 }
 
+/* Touch-Friendly 1-Click Command Pills */
+.terminal-1click-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.85rem;
+}
+
+.pills-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-bash);
+  letter-spacing: 0.05em;
+  margin-right: 0.2rem;
+}
+
+.pill-cmd-btn {
+  background: var(--card-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+  touch-action: manipulation;
+}
+
+.pill-cmd-btn:hover,
+.pill-cmd-btn:active {
+  border-color: var(--accent-bash);
+  color: var(--accent-bash);
+  box-shadow: 0 0 12px rgba(0, 245, 160, 0.3);
+  transform: translateY(-1px);
+}
+
 /* --------------------------------------------------------------------------
-   8. Skills & Infrastructure Matrix (Bento Grid with Glassmorphism)
+   8. Skills & Infrastructure Matrix (Bento Grid)
    -------------------------------------------------------------------------- */
 .skills-section {
   padding: 4.5rem 0;
@@ -511,7 +581,7 @@ code, kbd, pre, samp {
 
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 
@@ -556,7 +626,7 @@ code, kbd, pre, samp {
   color: var(--text-muted);
 }
 
-/* Domain-Specific Bento Highlights & Specular Hover Glows */
+/* Domain Highlights & Specular Hover Glows */
 #skill-kubernetes {
   border-top: 2px solid var(--accent-k8s);
 }
@@ -646,7 +716,7 @@ code, kbd, pre, samp {
 }
 
 /* --------------------------------------------------------------------------
-   9. Projects Section (Card Layout CSS Grid with Hover Glows)
+   9. Projects Section (Card Layout CSS Grid)
    -------------------------------------------------------------------------- */
 .projects-section {
   padding: 4.5rem 0;
@@ -655,7 +725,7 @@ code, kbd, pre, samp {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
@@ -829,7 +899,7 @@ code, kbd, pre, samp {
 
 .experience-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
@@ -1022,42 +1092,189 @@ code, kbd, pre, samp {
 }
 
 /* --------------------------------------------------------------------------
-   13. Responsive Viewports (Mobile & Tablet)
+   13. Responsive Architecture & Viewports (Mobile & Tablet)
    -------------------------------------------------------------------------- */
-@media (max-width: 900px) {
+/* Tablet Viewport (768px - 992px) */
+@media (max-width: 992px) {
+  /* Hero Reflow to 1-Column Stack */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  /* Centered Identity Module */
+  .hero-identity {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-avatar-wrap {
+    margin: 0 auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 180px;
+    max-width: 240px;
+  }
+
+  /* 2-Column Grid Layout on Tablets */
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
   .nav-status {
     display: none;
   }
 }
 
+/* Mobile Screens (< 768px) */
 @media (max-width: 768px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+  /* Reduced Global Spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  .hero-identity h1 {
-    font-size: 2.85rem;
+  .hero-section {
+    padding: 3.5rem 0 2.5rem;
+  }
+
+  .skills-section,
+  .projects-section,
+  .experience-section,
+  .contact-section {
+    padding: 3rem 0;
+  }
+
+  .bento-card,
+  .project-card,
+  .experience-card,
+  .contact-form,
+  .contact-channels {
+    padding: 1.35rem;
+  }
+
+  /* Top Floating HUD on Mobile: Avatar, Status Dot & Resume Stay Visible */
+  .status-nav {
+    padding: 0.2rem 0;
+  }
+
+  .nav-container {
+    padding: 0.6rem 1rem;
+    justify-content: space-between;
+  }
+
+  .nav-status {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nav-status .status-item:not(:first-child) {
+    display: none; /* Hide PODS and REGION to prevent clutter */
+  }
+
+  .nav-links .nav-link {
+    display: none; /* Hide non-essential text links on mobile */
+  }
+
+  .nav-links {
+    gap: 0;
+  }
+
+  .btn-sm {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  /* Grids Stack to 1 Column */
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
 
-  .nav-container {
-    flex-wrap: wrap;
+  .terminal-body {
+    padding: 1.15rem;
+    min-height: 210px;
+    font-size: 0.8rem;
   }
 
-  .nav-links {
-    width: 100%;
-    justify-content: space-between;
-    padding-top: 0.65rem;
-    border-top: 1px solid var(--border-subtle);
+  .terminal-1click-pills {
+    gap: 6px;
+  }
+
+  .pill-cmd-btn {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.74rem;
   }
 
   .footer-content {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* Small Handset Screens (< 480px) */
+@media (max-width: 480px) {
+  .hero-identity h1 {
+    font-size: clamp(2.3rem, 11vw, 3.2rem);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .terminal-header {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .terminal-tabs {
+    display: none; /* Hide tab strip on narrow screens */
+  }
+
+  .nav-brand .prompt-host {
+    display: none; /* Keep avatar and user prompt */
   }
 }
