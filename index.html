@@ -3,1008 +3,1055 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Uzair Sultan — Linux Systems Administrator, DevOps Engineer, Computer Networking Specialist & Modern Web Developer Portfolio.">
-  <meta name="keywords" content="Uzair Sultan, Linux Administrator, DevOps, Computer Networking, Web Developer, Bash Scripting, Python, DSA, Portfolio">
-  <title>Uzair Sultan | 3D Systems, DevOps & Web Engineering Portfolio</title>
+  <title>Uzair Sultan — Cloud Control Plane & Interactive Linux Terminal</title>
+  
+  <meta name="description" content="Uzair Sultan — System Architect, DevOps & Cloud Engineer specializing in Kubernetes, AWS, Terraform IaC, Linux Systems Administration, and Network Protocols.">
+  <meta name="keywords" content="Uzair Sultan, DevOps Engineer, Cloud Architect, Kubernetes, Docker, AWS, Terraform, Linux Systems, Computer Networking, Python, Bash">
+  <meta name="author" content="Uzair Sultan">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Uzair Sultan — 3D Systems Engineer & Web Developer Portfolio">
-  <meta property="og:description" content="Explore my projects in Linux administration, computer networking, modern web architecture, and Python DSA.">
+  <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://uzair0123.github.io/portfolio/">
+  <meta property="og:title" content="Uzair Sultan — Cloud Control Plane & DevOps Portfolio">
+  <meta property="og:description" content="High-Performance Cloud Control Plane & Interactive Linux CLI Portfolio.">
+  <meta property="og:image" content="assets/images/avatar-3d.png">
+
+  <!-- Twitter Meta -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Uzair Sultan — Cloud Control Plane & DevOps Portfolio">
+  <meta name="twitter:description" content="High-Performance Cloud Control Plane & Interactive Linux CLI Portfolio.">
+  <meta name="twitter:image" content="assets/images/avatar-3d.png">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
-  <!-- FontAwesome Icons -->
+  <!-- Font Awesome 6.5.1 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- ═══════════════ ADVANCED ANIMATION STACK ═══════════════ -->
-  <!-- Smooth Scroll Engine -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <!-- GSAP Animation Engine -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <!-- ScrollTrigger for Scroll-Linked Animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <!-- Text Splitting for Typography Animation -->
-  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
-
-  <!-- CSS Stylesheet -->
+  <!-- Core Dark Ops Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  <!-- ═══════════════ INTERACTIVE PARTICLE CANVAS (Background Layer Z:0) ═══════════════ -->
-  <canvas id="particleCanvas"></canvas>
+  <!-- Background Grid & Interactive Spotlight Glow -->
+  <div class="bg-grid-overlay"></div>
+  <div class="bg-spotlight-glow"></div>
 
-  <!-- ═══════════════ CINEMATIC PRELOADER ═══════════════ -->
-  <div class="preloader" id="preloader">
-    <div class="preloader-content">
-      <div class="preloader-bar"><div class="preloader-fill"></div></div>
-      <span class="preloader-text">INITIALIZING SYSTEMS<span class="preloader-dots"></span></span>
-    </div>
-  </div>
-
-  <!-- ==================== DUAL-RING CYBER CURSOR ==================== -->
-  <div class="custom-cursor-dot" id="cursorDot"></div>
-  <div class="custom-cursor-ring" id="cursorRing"></div>
-  <div class="cursor-trail" id="cursorTrail"></div>
-
-  <!-- ==================== 1. TOP NAVIGATION ==================== -->
-  <nav class="navbar" id="mainNavbar">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-brand">
-        <span class="nav-prompt-symbol">&gt;_</span> uzair<span class="nav-brand-suffix" style="color:var(--text-dim);">@workstation:~$</span>
+  <!-- ═══════════════ TOP HUD / SYSTEM STATUS BAR ═══════════════ -->
+  <header class="top-hud-bar">
+    <div class="container top-hud-container">
+      
+      <!-- Left: Node CLI ID -->
+      <a href="#terminal" class="hud-node-indicator" title="Local Cloud Node">
+        <span class="hud-prompt-user">uzair</span>@<span class="text-cyan">cloud-node-01</span>:<span class="hud-prompt-symbol">~$</span>
+        <span class="hud-blinking-cursor"></span>
       </a>
 
-      <!-- Desktop Links -->
-      <ul class="nav-links">
-        <li><a href="#about" class="nav-link active" data-magnetic="true">About</a></li>
-        <li><a href="#terminal" class="nav-link" data-magnetic="true">Terminal</a></li>
-        <li><a href="#projects" class="nav-link" data-magnetic="true">Projects</a></li>
-        <li><a href="#services" class="nav-link" data-magnetic="true">Services</a></li>
-        <li><a href="#skills" class="nav-link" data-magnetic="true">Skills</a></li>
-        <li><a href="#code" class="nav-link" data-magnetic="true">Code Labs</a></li>
-        <li><a href="#contact" class="nav-link" data-magnetic="true">Contact</a></li>
-      </ul>
-
-      <!-- Desktop CTA -->
-      <div class="nav-cta">
-        <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-outline btn-sm nav-whatsapp-btn" style="border-color:#38BDF8; color:#38BDF8;" data-magnetic="true">
-          <i class="fa-brands fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="#contact" class="btn btn-emerald btn-sm" data-magnetic="true">
-          <i class="fa-solid fa-paper-plane"></i> Hire Me
-        </a>
-      </div>
-
-      <!-- Mobile Hamburger Button -->
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open Navigation Menu">
-        <span class="hamburger-bar"></span>
-        <span class="hamburger-bar"></span>
-        <span class="hamburger-bar"></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ==================== MOBILE NAVIGATION DRAWER ==================== -->
-  <div class="mobile-nav-overlay" id="mobileNavOverlay">
-    <div class="mobile-nav-drawer">
-      <div class="mobile-nav-header">
-        <span class="nav-brand"><span class="nav-prompt-symbol">&gt;_</span> uzair.sh</span>
-        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close Navigation Menu">&times;</button>
-      </div>
-      <ul class="mobile-nav-links">
-        <li><a href="#about" class="mobile-nav-link"><i class="fa-solid fa-user"></i> About</a></li>
-        <li><a href="#terminal" class="mobile-nav-link"><i class="fa-solid fa-terminal"></i> Terminal Console</a></li>
-        <li><a href="#projects" class="mobile-nav-link"><i class="fa-solid fa-laptop-code"></i> Projects Showcase</a></li>
-        <li><a href="#services" class="mobile-nav-link"><i class="fa-solid fa-briefcase"></i> Services</a></li>
-        <li><a href="#skills" class="mobile-nav-link"><i class="fa-solid fa-microchip"></i> Skills Matrix</a></li>
-        <li><a href="#code" class="mobile-nav-link"><i class="fa-solid fa-code"></i> Code Labs</a></li>
-        <li><a href="#contact" class="mobile-nav-link"><i class="fa-solid fa-envelope"></i> Contact Me</a></li>
-      </ul>
-      <div class="mobile-nav-footer">
-        <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-emerald" style="width:100%;">
-          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════ MAIN SCROLL CONTAINER (Lenis Smooth Scroll) ═══════════════ -->
-  <main id="smooth-wrapper">
-
-  <!-- ==================== 2. 3D HERO SECTION (CHOREOGRAPHED CINEMATIC SEQUENCE) ==================== -->
-  <section class="hero-3d-section" id="about">
-    <!-- Cinematic Backdrop Layers -->
-    <div class="hero-ambient-glow"></div>
-    <div class="hero-grid-overlay"></div>
-    <div class="hero-vignette"></div>
-
-    <!-- Floating 3D Micro-Elements -->
-    <img src="assets/images/chrome-star.png" alt="3D Chrome Star" class="floating-asset floating-star-1" data-depth="0.08">
-    <img src="assets/images/chrome-donut.png" alt="3D Chrome Donut" class="floating-asset floating-donut-1" data-depth="0.12">
-    <img src="assets/images/chrome-sphere.png" alt="3D Cyber Sphere" class="floating-asset floating-sphere-1" data-depth="0.06">
-
-    <div class="container hero-container-box">
-      <!-- Giant Background Name (Scroll-Linked Interactive) -->
-      <div class="hero-bg-name-layer" id="heroBgName">
-        <span class="hero-bg-text" data-speed="0.3">UZAIR</span>
-      </div>
-
-      <!-- Hero Header with Split Letters -->
-      <div class="hero-header-title-wrap" data-depth="0.03">
-        <h1 class="hero-giant-heading" id="heroMainTitle">HI, I'M UZAIR</h1>
-        <div class="hero-subtitle-line">
-          <span class="hero-subtitle-prefix">$</span>
-          <span class="hero-subtitle-text" id="heroSubtitle">whoami --role</span>
+      <!-- Center: Live Telemetry Cluster Status -->
+      <div class="hud-telemetry-cluster">
+        <div class="telemetry-pill">
+          <span class="pulse-dot-green"></span>
+          <span>CLUSTER: <strong class="text-emerald">ONLINE</strong></span>
+        </div>
+        <div class="telemetry-pill">
+          <i class="fa-solid fa-dharmachakra text-cyan"></i>
+          <span>PODS: <strong class="text-cyan">12/12 READY</strong></span>
+        </div>
+        <div class="telemetry-pill">
+          <i class="fa-solid fa-cloud text-amber"></i>
+          <span>REGION: <strong class="text-amber">ap-south-1</strong></span>
+        </div>
+        <div class="telemetry-pill">
+          <i class="fa-solid fa-stopwatch text-emerald"></i>
+          <span>UPTIME: <strong class="text-emerald" id="hudUptimeCounter">182d 14:32:10</strong></span>
+        </div>
+        <div class="telemetry-pill">
+          <i class="fa-solid fa-bolt text-cyan"></i>
+          <span>RTT: <strong class="text-cyan" id="hudLatencyValue">12ms</strong></span>
         </div>
       </div>
 
-      <!-- 3D Avatar with Spring Physics -->
-      <div class="hero-avatar-centerpiece" data-depth="0.16" id="avatarWrapper">
-        <div class="hero-avatar-card" id="avatar3DCard" title="Tilt head with cursor / touch / phone gyroscope" data-cursor="grab">
-          <div class="avatar-backdrop-glow"></div>
-          <div class="avatar-orbit-ring"></div>
-          <div class="avatar-ring-glow"></div>
-          <img src="assets/images/avatar-3d.png" alt="Uzair Sultan 3D Avatar" class="hero-avatar-3d-img" id="avatar3DImg">
-          <div class="avatar-status-indicator">
-            <span class="status-dot-pulse"></span>
-            <span class="status-label">ONLINE</span>
+      <!-- Right: Navigation & Command Palette Trigger -->
+      <div class="hud-nav-group">
+        <ul class="hud-nav-links">
+          <li><a href="#about" class="hud-nav-link">~/about</a></li>
+          <li><a href="#topology" class="hud-nav-link">~/topology</a></li>
+          <li><a href="#containers" class="hud-nav-link">~/containers</a></li>
+          <li><a href="#pipelines" class="hud-nav-link">~/pipelines</a></li>
+          <li><a href="#git-log" class="hud-nav-link">~/git-log</a></li>
+          <li><a href="#contact" class="hud-nav-link">~/init-contact</a></li>
+        </ul>
+
+        <button class="hud-cmd-btn" id="cmdPaletteBtn" title="Open Command Palette (Cmd + K)">
+          <i class="fa-solid fa-terminal"></i>
+          <span>Menu</span>
+          <span class="hud-cmd-key">⌘K</span>
+        </button>
+
+        <button class="hud-mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════ HERO SECTION (SPLIT-SCREEN) ═══════════════ -->
+  <main>
+    <section class="hero-control-plane" id="about">
+      <div class="container">
+        <div class="hero-split-grid">
+
+          <!-- Left Column: Mission Control & Identity -->
+          <div class="mission-control-card">
+            
+            <div class="hero-status-pill">
+              <span class="pulse-dot-green"></span>
+              <span>SYSTEM ARCHITECT // DEVOPS & CLOUD ENGINEER</span>
+            </div>
+
+            <h1 class="hero-headline">
+              HI, I'M <span class="hero-gradient-text">UZAIR SULTAN</span>
+            </h1>
+
+            <div class="hero-cmd-subhead">
+              <span class="subhead-prefix">$</span>
+              <span>terraform apply --target=cloud_infrastructure --auto-approve</span>
+            </div>
+
+            <p class="hero-bio-paragraph">
+              A systems engineer passionate about low-level Linux kernel primitives, Kubernetes container orchestration, Infrastructure-as-Code automation, AWS cloud architecture, and high-throughput computer networking protocols. Building fault-tolerant, commercial-grade platforms with high availability and automated GitOps pipelines.
+            </p>
+
+            <!-- Integrated 3D Avatar Centerpiece -->
+            <div class="hero-avatar-mini-wrap">
+              <div class="hero-avatar-card" id="avatar3DCard" title="Tactile 3D Tilt with Cursor">
+                <div class="avatar-backdrop-glow"></div>
+                <div class="avatar-orbit-ring"></div>
+                <div class="avatar-ring-glow"></div>
+                <img src="assets/images/avatar-3d.png" alt="Uzair Sultan Avatar" class="hero-avatar-3d-img">
+              </div>
+              <div class="avatar-spec-list">
+                <div class="avatar-spec-item"><strong>ROLE:</strong> Cloud & DevOps Architect</div>
+                <div class="avatar-spec-item"><strong>HOST:</strong> AWS EKS (Kubernetes v1.30.2)</div>
+                <div class="avatar-spec-item"><strong>KERNEL:</strong> Linux 6.8.0-sysadmin x86_64</div>
+                <div class="avatar-spec-item"><strong>STATUS:</strong> <span class="text-emerald">Active & Ready to Deploy</span></div>
+              </div>
+            </div>
+
+            <!-- Primary CTAs -->
+            <div class="hero-cta-actions">
+              <button class="btn-control-plane btn-primary-k8s" id="ctaKubectlProjects">
+                <i class="fa-solid fa-dharmachakra"></i>
+                <span>kubectl get projects -o wide</span>
+              </button>
+              <button class="btn-control-plane btn-secondary-curl" id="ctaCurlResume">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+                <span>curl -O resume.pdf</span>
+              </button>
+            </div>
+
           </div>
-        </div>
-      </div>
 
-      <!-- Lower Row: Tagline + CTA -->
-      <div class="hero-bottom-grid">
-        <div class="hero-bottom-left" data-depth="0.04">
-          <div class="hero-role-badge">
-            <span class="pulse-dot"></span> LINUX SYSTEMS & DEVOPS ENGINEER
+          <!-- Right Column: Interactive Linux CLI (zsh / tmux emulator) -->
+          <div class="terminal-window-card" id="terminal">
+            
+            <!-- Window Title Bar -->
+            <div class="terminal-titlebar">
+              <div class="term-window-controls">
+                <span class="term-dot dot-red"></span>
+                <span class="term-dot dot-yellow"></span>
+                <span class="term-dot dot-green"></span>
+              </div>
+              <div class="term-tab-bar">
+                <button class="term-tab active" id="tabZsh"><i class="fa-solid fa-terminal"></i> zsh</button>
+                <button class="term-tab" id="tabHtop"><i class="fa-solid fa-chart-simple"></i> htop</button>
+                <button class="term-tab" id="tabLogs"><i class="fa-solid fa-network-wired"></i> network-logs</button>
+              </div>
+              <div style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-dark);">
+                tmux: session-0
+              </div>
+            </div>
+
+            <!-- Terminal Content Area -->
+            <div class="term-view-wrap">
+              
+              <!-- Tab 1: ZSH Shell -->
+              <div id="terminalZshView" style="display:flex; flex-direction:column; min-height:100%;">
+                <div id="terminalBody" style="flex:1;">
+                  <!-- Boot sequence and command output will populate here -->
+                </div>
+
+                <div class="term-input-row">
+                  <span class="term-prompt">uzair@cloud-node-01:~$</span>
+                  <input type="text" id="terminalInput" class="term-input-field" autocomplete="off" spellcheck="false" placeholder="type 'help' or tap chips below...">
+                </div>
+              </div>
+
+              <!-- Tab 2: HTOP View -->
+              <div id="terminalHtopView" style="display:none;"></div>
+
+              <!-- Tab 3: Network Logs Stream -->
+              <div id="terminalLogsView" style="display:none;"></div>
+
+            </div>
+
+            <!-- Quick Command Chips for Mobile & Fast Exploration -->
+            <div class="terminal-chips-footer">
+              <span class="term-chips-label"><i class="fa-solid fa-bolt"></i> QUICK:</span>
+              <button class="term-chip" data-cmd="help">help</button>
+              <button class="term-chip" data-cmd="whoami">whoami</button>
+              <button class="term-chip" data-cmd="docker ps">docker ps</button>
+              <button class="term-chip" data-cmd="skills --list">skills --list</button>
+              <button class="term-chip" data-cmd="kubectl get nodes">kubectl get nodes</button>
+              <button class="term-chip" data-cmd="ping uzair">ping uzair</button>
+              <button class="term-chip" data-cmd="clear">clear</button>
+            </div>
+
           </div>
-          <p class="hero-tagline-text">
-            A systems builder passionate about low-level Linux administration, computer networking protocols, and crafting bold, memorable commercial web platforms.
-          </p>
-        </div>
 
-        <div class="hero-bottom-right" data-depth="0.05">
-          <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-neon-pill-glow" data-magnetic="true">
-            <i class="fa-brands fa-whatsapp"></i> CONTACT ME
-          </a>
-          <span class="hero-availability-note">
-            <i class="fa-solid fa-circle" style="color:#8B5CF6; font-size:0.55rem;"></i> Available for Contracts & Roles
-          </span>
         </div>
       </div>
+    </section>
 
-      <!-- Scroll Indicator -->
-      <div class="hero-scroll-indicator" id="scrollIndicator">
-        <div class="scroll-mouse">
-          <div class="scroll-wheel"></div>
-        </div>
-        <span class="scroll-label">SCROLL TO EXPLORE</span>
-      </div>
-    </div>
-
-    <!-- Infinite Marquee Ticker -->
-    <div class="marquee-wrapper">
-      <div class="marquee-track">
-        <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu • Arch • Kali Linux</div>
-        <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
-        <div class="marquee-item"><i class="fa-brands fa-react"></i> React Native & Expo SDK 54</div>
-        <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> TCP/IP Protocols</div>
-        <div class="marquee-item"><i class="fa-brands fa-js"></i> Vanilla JS (ES6+)</div>
-        <div class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Progressive Web Apps (PWA)</div>
-        <div class="marquee-item"><i class="fa-brands fa-python"></i> Python 3 & DSA</div>
-        <div class="marquee-item"><i class="fa-brands fa-git-alt"></i> Git & GitHub Actions CI/CD</div>
-        <div class="marquee-item"><i class="fa-solid fa-gauge-high"></i> 95% Payload Optimization</div>
-        <div class="marquee-item"><i class="fa-brands fa-linux"></i> Ubuntu • Arch • Kali Linux</div>
-        <div class="marquee-item"><i class="fa-solid fa-terminal"></i> Bash Automation</div>
-        <div class="marquee-item"><i class="fa-brands fa-react"></i> React Native & Expo SDK 54</div>
-        <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> TCP/IP Protocols</div>
-        <div class="marquee-item"><i class="fa-brands fa-js"></i> Vanilla JS (ES6+)</div>
-        <div class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Progressive Web Apps (PWA)</div>
-        <div class="marquee-item"><i class="fa-brands fa-python"></i> Python 3 & DSA</div>
-        <div class="marquee-item"><i class="fa-brands fa-git-alt"></i> Git & GitHub Actions CI/CD</div>
-        <div class="marquee-item"><i class="fa-solid fa-gauge-high"></i> 95% Payload Optimization</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════ WOW TRANSITION: HORIZONTAL REVEAL LINE ═══════════════ -->
-  <div class="section-divider">
-    <div class="divider-line"></div>
-    <div class="divider-dot"></div>
-    <div class="divider-line"></div>
-  </div>
-
-  <!-- ==================== 3. INTERACTIVE TERMINAL SHELL ==================== -->
-  <section class="section terminal-section" id="terminal">
-    <div class="container">
-      <div class="section-header scroll-reveal">
-        <span class="section-tag"><i class="fa-solid fa-terminal"></i> Embedded Linux Shell</span>
-        <h2 class="section-title">Interactive Terminal Console</h2>
-        <p class="section-desc">
-          Test live commands or tap quick pills to explore skills, project trees, and contact information in real-time.
-        </p>
-      </div>
-
-      <div class="terminal-window scroll-reveal delay-1" style="max-width:950px; margin:0 auto;" data-tilt="true" data-cursor="terminal">
-        <div class="terminal-header">
-          <div class="terminal-controls">
-            <span class="term-dot term-dot-red"></span>
-            <span class="term-dot term-dot-yellow"></span>
-            <span class="term-dot term-dot-green"></span>
-          </div>
-          <div class="terminal-title">bash — uzair@linux-workstation:~</div>
-          <div style="font-size:0.7rem; color:var(--accent-emerald); font-weight:700;">LIVE BASH 5.2</div>
-        </div>
-
-        <div class="terminal-body" id="terminalBody">
-          <!-- Output populated by TerminalModule -->
-        </div>
-
-        <div style="padding:0.75rem 1.25rem; background:#0B1021; border-top:1px solid rgba(255,255,255,0.06);">
-          <div class="term-input-row">
-            <span class="term-prompt">uzair@linux-workstation:~$</span>
-            <input type="text" id="terminalInput" class="term-input" placeholder="Type a command (e.g. help, whoami, skills, tree, projects)..." autocomplete="off" spellcheck="false">
-          </div>
-        </div>
-
-        <div class="term-chips">
-          <span style="font-size:0.725rem; color:var(--text-dim); margin-right:0.25rem;">Quick Commands:</span>
-          <button class="term-chip" data-cmd="whoami">whoami</button>
-          <button class="term-chip" data-cmd="skills">skills</button>
-          <button class="term-chip" data-cmd="projects">projects</button>
-          <button class="term-chip" data-cmd="tree">tree</button>
-          <button class="term-chip" data-cmd="neofetch">neofetch</button>
-          <button class="term-chip" data-cmd="uptime">uptime</button>
-          <button class="term-chip" data-cmd="contact">contact</button>
-          <button class="term-chip" data-cmd="sudo hire">sudo hire</button>
-          <button class="term-chip" data-cmd="clear">clear</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 4. INTERACTIVE NUMBERED PROJECT ACCORDION ==================== -->
-  <section class="section" id="projects" style="background:rgba(8, 13, 26, 0.6);">
-    <div class="container">
-      <div class="section-header scroll-reveal">
-        <span class="section-tag"><i class="fa-solid fa-laptop-code"></i> Engineering Portfolio</span>
-        <h2 class="section-title">Interactive Project Showcase</h2>
-        <p class="section-desc">
-          Click on any numbered row to expand and inspect live project builds, technical architecture, and metrics.
-        </p>
-      </div>
-
-      <div class="projects-accordion">
+    <!-- ═══════════════ CORE TECH STACK: 11-DOMAIN BENTO GRID ═══════════════ -->
+    <section class="bento-section" id="topology">
+      <div class="container">
         
-        <!-- Accordion 01: Kashmir Kesar Kingdom (Active by Default) -->
-        <div class="accordion-item active scroll-reveal delay-1" data-tilt="true" data-cursor="project">
-          <div class="accordion-header">
-            <div class="accordion-header-left">
-              <span class="accordion-num">01</span>
-              <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-emerald); font-weight:700; text-transform:uppercase;">Flagship Production Web Platform</span>
-                <h3 class="accordion-title">Kashmir Kesar Kingdom Pvt. Ltd.</h3>
-              </div>
-            </div>
-            <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+        <div class="section-meta-header">
+          <div class="section-tag-pill tag-cyan">
+            <i class="fa-solid fa-network-wired"></i> CLOUD INFRASTRUCTURE MATRIX
           </div>
-
-          <div class="accordion-body">
-            <div class="accordion-content-grid">
-              <div>
-                <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  A full-scale commercial B2B wholesale export & B2C retail web platform built for a premier Himalayan agricultural producer. Features real-time multi-currency conversion, a wholesale RFQ cost estimator, digital batch lab cert validator, and offline PWA mode.
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">Vanilla JS</span>
-                  <span class="term-chip">95% Opt (2.4MB)</span>
-                  <span class="term-chip">PWA Offline</span>
-                  <span class="term-chip">Multi-Currency</span>
-                  <span class="term-chip">CI/CD Deploy</span>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Project
-                  </a>
-                  <button class="btn btn-outline btn-sm" id="openArchModalBtn" data-magnetic="true">
-                    <i class="fa-solid fa-sitemap"></i> View Architecture
-                  </button>
-                  <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> GitHub Source
-                  </a>
-                </div>
-              </div>
-
-              <div class="accordion-img-preview">
-                <img src="assets/images/screenshot_kkk_website.png" alt="Kashmir Kesar Kingdom Platform">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Accordion 02: Craver Fast Food Co. -->
-        <div class="accordion-item scroll-reveal delay-2" data-tilt="true" data-cursor="project">
-          <div class="accordion-header">
-            <div class="accordion-header-left">
-              <span class="accordion-num">02</span>
-              <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-amber); font-weight:700; text-transform:uppercase;">Commercial Web Platform & Enterprise CI/CD Engine</span>
-                <h3 class="accordion-title">Craver Fast Food Co. — DevOps & Delivery Pipeline</h3>
-              </div>
-            </div>
-            <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-
-          <div class="accordion-body">
-            <div class="accordion-content-grid">
-              <div>
-                <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  A commercial-grade multi-page web platform and automated delivery pipeline. Features 3 automated Quality Gates (File Integrity, Aqua Security Trivy CVE vulnerability scans, and HTTP smoke tests), automated Docker Hub image publishing, and Zero-Downtime Blue/Green deployment orchestrating NGINX reverse proxies and custom bridge networks with atomic hot-reloads (<code style="color:var(--accent-cyan);">nginx -s reload</code>).
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">Docker Hub</span>
-                  <span class="term-chip">GitHub Actions CI/CD</span>
-                  <span class="term-chip">Aqua Trivy DevSecOps</span>
-                  <span class="term-chip">Blue/Green Deploy</span>
-                  <span class="term-chip">NGINX Reverse Proxy</span>
-                  <span class="term-chip">Modular ES6+</span>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="https://uzair0123.github.io/craver-fast-food/" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Live App
-                  </a>
-                  <a href="https://github.com/Uzair0123/craver-fast-food/actions" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-solid fa-gears"></i> CI/CD Pipelines
-                  </a>
-                  <a href="https://hub.docker.com/r/uzairsultan/craver-fastfood" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-docker"></i> Docker Hub
-                  </a>
-                  <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> GitHub Source
-                  </a>
-                </div>
-              </div>
-
-              <div class="accordion-img-preview">
-                <img src="assets/images/screenshot_craver_website.png" alt="Craver Fast Food Co. Web Application">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Accordion 03: Nexora Mobile Application -->
-        <div class="accordion-item scroll-reveal delay-2" data-tilt="true" data-cursor="project">
-          <div class="accordion-header">
-            <div class="accordion-header-left">
-              <span class="accordion-num">03</span>
-              <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-mint); font-weight:700; text-transform:uppercase;">Cross-Platform Mobile App (React Native & Expo)</span>
-                <h3 class="accordion-title">Nexora — Quick-Commerce Mobile App</h3>
-              </div>
-            </div>
-            <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-
-          <div class="accordion-body">
-            <div class="accordion-content-grid">
-              <div>
-                <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  A full-featured, cross-platform mobile application engineered for hyper-local rapid grocery & essentials commerce. Features a custom Botanical Emerald design system, 3-step animated onboarding, 6-digit OTP verification, real-time multi-attribute search, reactive cart & pricing engine ($20 free delivery milestone), multi-step express checkout, and a live delivery progress radar.
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">React Native 0.81</span>
-                  <span class="term-chip">Expo SDK 54</span>
-                  <span class="term-chip">TypeScript Strict</span>
-                  <span class="term-chip">Expo Router v6</span>
-                  <span class="term-chip">EAS APK Ready</span>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> GitHub Source
-                  </a>
-                  <button class="btn btn-outline btn-sm" id="openNexoraArchModalBtn" data-magnetic="true">
-                    <i class="fa-solid fa-sitemap"></i> View Architecture
-                  </button>
-                </div>
-              </div>
-
-              <div class="accordion-img-preview">
-                <img src="assets/images/project-nexora.jpg" alt="Nexora Quick-Commerce Mobile Application">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Accordion 04: Linux Administration & sys-inspect -->
-        <div class="accordion-item scroll-reveal delay-3" data-tilt="true" data-cursor="project">
-          <div class="accordion-header">
-            <div class="accordion-header-left">
-              <span class="accordion-num">04</span>
-              <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-amber); font-weight:700; text-transform:uppercase;">Systems Engineering & Kernel Telemetry</span>
-                <h3 class="accordion-title">sys-inspect: Linux Telemetry & Health Auditor</h3>
-              </div>
-            </div>
-            <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-
-          <div class="accordion-body">
-            <div class="accordion-content-grid">
-              <div>
-                <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  Production-grade Linux systems telemetry CLI querying kernel virtual filesystems (/proc) and socket states (ss -tuln). Features dynamic ANSI color triage, inode exhaustion detection (df -i), zombie process auditing, and defensive pipefail error handling.
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">Bash Shell</span>
-                  <span class="term-chip">Kernel /proc</span>
-                  <span class="term-chip">TCP/IP (ss)</span>
-                  <span class="term-chip">Awk & Coreutils</span>
-                  <span class="term-chip">ANSI Colors</span>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
-                    <i class="fa-solid fa-code"></i> Inspect Code
-                  </a>
-                  <a href="https://github.com/Uzair0123/sys-inspect" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> View Repo
-                  </a>
-                </div>
-              </div>
-
-              <div class="glass-card" style="padding:1.5rem; font-family:var(--font-code); font-size:0.8rem; color:#A7F3D0; background:#0B1021;">
-                <p style="color:#64748B;"># Run live system telemetry</p>
-                <p style="color:#FFF;">$ ./sys-inspect.sh</p>
-                <p style="color:#34D399;">[OK] Load Avg: 0.85, 1.02, 1.04</p>
-                <p style="color:#34D399;">[OK] Memory: 46.2% | Inodes: 14%</p>
-                <p style="color:#38BDF8;">[OK] Sockets: 38 | DNS: Resolved</p>
-                <p style="color:#34D399;">[OK] Zombies: 0 defunct</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Accordion 05: Computer Networking Labs -->
-        <div class="accordion-item scroll-reveal delay-3" data-tilt="true" data-cursor="project">
-          <div class="accordion-header">
-            <div class="accordion-header-left">
-              <span class="accordion-num">05</span>
-              <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-cyan); font-weight:700; text-transform:uppercase;">Protocol Inspection & Subnetting</span>
-                <h3 class="accordion-title">Network Protocol Labs & Packet Inspector</h3>
-              </div>
-            </div>
-            <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-
-          <div class="accordion-body">
-            <div class="accordion-content-grid">
-              <div>
-                <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  Hands-on packet inspection analysis examining TCP 3-way handshakes, DNS queries, HTTP/HTTPS payload headers, and CIDR subnet allocation schemes using Wireshark and Python CLI networking utilities.
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">Wireshark</span>
-                  <span class="term-chip">TCP/IP Suite</span>
-                  <span class="term-chip">Subnetting</span>
-                  <span class="term-chip">DNS & Firewalls</span>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
-                    <i class="fa-solid fa-code"></i> Inspect Subnet Code
-                  </a>
-                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> View GitHub
-                  </a>
-                </div>
-              </div>
-
-              <div class="glass-card" style="padding:1.5rem; font-family:var(--font-code); font-size:0.8rem; color:#67E8F9; background:#0B1021;">
-                <p># IPv4 CIDR Calculation</p>
-                <p style="color:#FFF;">$ python3 subnet_calc.py 192.168.10.0/24</p>
-                <p style="color:#06B6D4;">Network: 192.168.10.0 | Netmask: 255.255.255.0</p>
-                <p style="color:#06B6D4;">Usable Hosts: 254 (192.168.10.1 - 192.168.10.254)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Accordion 06: Python DSA Suite -->
-        <div class="accordion-item scroll-reveal delay-4" data-tilt="true" data-cursor="project">
-          <div class="accordion-header">
-            <div class="accordion-header-left">
-              <span class="accordion-num">06</span>
-              <div>
-                <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-purple); font-weight:700; text-transform:uppercase;">Algorithms & Problem Solving</span>
-                <h3 class="accordion-title">Python Data Structures & Algorithm Suite</h3>
-              </div>
-            </div>
-            <div class="accordion-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-          </div>
-
-          <div class="accordion-body">
-            <div class="accordion-content-grid">
-              <div>
-                <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.7; margin-bottom:1.25rem;">
-                  Time and space complexity optimized implementations of classic computer science algorithms (Binary Trees, Graphs, Sorting, Hash Maps, Recursion) with clean, documented Python implementations.
-                </p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;">
-                  <span class="term-chip">Python 3</span>
-                  <span class="term-chip">Binary Trees</span>
-                  <span class="term-chip">Graph BFS/DFS</span>
-                  <span class="term-chip">Big-O Opt</span>
-                </div>
-                <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
-                  <a href="#code" class="btn btn-emerald btn-sm" data-magnetic="true">
-                    <i class="fa-solid fa-code"></i> Inspect Tree Code
-                  </a>
-                  <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline btn-sm" data-magnetic="true">
-                    <i class="fa-brands fa-github"></i> View GitHub
-                  </a>
-                </div>
-              </div>
-
-              <div class="glass-card" style="padding:1.5rem; font-family:var(--font-code); font-size:0.8rem; color:#C4B5FD; background:#0B1021;">
-                <p># Binary Search Tree Traversal</p>
-                <p style="color:#FFF;">$ python3 -m unittest test_bst.py</p>
-                <p style="color:#8B5CF6;">Ran 12 tests in 0.003s</p>
-                <p style="color:#8B5CF6;">OK (All test cases passed with O(N) complexity)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 5. NUMBERED SERVICES & DISCIPLINES ==================== -->
-  <section class="section" id="services">
-    <div class="container">
-      <div class="section-header scroll-reveal">
-        <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Core Disciplines</span>
-        <h2 class="section-title">What I Build & Deliver</h2>
-        <p class="section-desc">
-          Professional engineering services combining systems reliability with high-impact web delivery.
-        </p>
-      </div>
-
-      <div class="services-numbered-list">
-        
-        <div class="service-row scroll-reveal delay-1">
-          <span class="service-num">01</span>
-          <div>
-            <h3 class="service-title">Linux Systems Administration</h3>
-            <span style="font-family:var(--font-code); font-size:0.8rem; color:var(--accent-emerald);">Ubuntu • Arch Linux • Kali Linux • Shell Automation</span>
-          </div>
-          <p class="service-desc">
-            Configuring, securing, and maintaining Linux server environments. Implementing automated backup routines, cron jobs, user privilege boundaries, process lifecycle monitoring, and log rotation.
+          <h2 class="section-giant-title">11-Domain Systems & DevOps Architecture</h2>
+          <p class="section-desc-subtext">
+            Production-grade cloud topology designed for high availability, zero-trust security, immutable infrastructure, and sub-millisecond network throughput.
           </p>
         </div>
 
-        <div class="service-row scroll-reveal delay-2">
-          <span class="service-num">02</span>
-          <div>
-            <h3 class="service-title">DevOps & CI/CD Pipelines</h3>
-            <span style="font-family:var(--font-code); font-size:0.8rem; color:var(--accent-cyan);">GitHub Actions • Automated Testing • Deployment</span>
+        <div class="bento-grid-container">
+
+          <!-- 1. Docker & Kubernetes -->
+          <div class="bento-card col-6" style="border-top: 2px solid var(--domain-k8s);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-brands fa-docker" style="color:var(--domain-docker);"></i>
+                <span>Docker & Kubernetes Orchestration</span>
+              </div>
+              <span class="bento-badge badge-k8s">CONTAINER RUNTIME</span>
+            </div>
+            <p class="bento-desc">
+              Multi-stage Alpine Docker containerization, Helm charts deployment, Ingress-NGINX reverse proxy, auto-healing pod replica sets, and horizontal pod autoscalers (HPA).
+            </p>
+            <div class="k8s-pod-list">
+              <div class="k8s-pod-item">
+                <span class="pod-name"><i class="fa-solid fa-cube text-cyan"></i> pod/uzair-api-7b8f9c-v1</span>
+                <span class="pod-status">● Running (1/1) • 14MB RAM</span>
+              </div>
+              <div class="k8s-pod-item">
+                <span class="pod-name"><i class="fa-solid fa-cube text-cyan"></i> pod/nexora-delivery-worker-2</span>
+                <span class="pod-status">● Running (1/1) • 28MB RAM</span>
+              </div>
+              <div class="k8s-pod-item">
+                <span class="pod-name"><i class="fa-solid fa-cube text-cyan"></i> pod/ingress-nginx-controller</span>
+                <span class="pod-status">● Running (2/2) • 42MB RAM</span>
+              </div>
+            </div>
           </div>
-          <p class="service-desc">
-            Automating the deployment pipeline with GitHub Actions workflows, code validation triggers, zero-downtime static cloud hosting, and Git branch management.
-          </p>
-        </div>
 
-        <div class="service-row scroll-reveal delay-3">
-          <span class="service-num">03</span>
-          <div>
-            <h3 class="service-title">Modern Web Architecture</h3>
-            <span style="font-family:var(--font-code); font-size:0.8rem; color:var(--accent-amber);">Semantic HTML5 • CSS3 • Modular JS • PWA</span>
+          <!-- 2. AWS Cloud Architecture -->
+          <div class="bento-card col-6" style="border-top: 2px solid var(--domain-aws);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-brands fa-aws" style="color:var(--domain-aws);"></i>
+                <span>AWS Cloud Infrastructure</span>
+              </div>
+              <span class="bento-badge badge-aws">AWS VPC ap-south-1</span>
+            </div>
+            <p class="bento-desc">
+              Custom VPC network topology with public/private subnets across AZs, Internet & NAT Gateways, Application Load Balancers, IAM least-privilege security boundaries, and S3 static storage.
+            </p>
+            <div class="aws-vpc-matrix">
+              <div class="aws-node-box">
+                <div class="aws-node-icon"><i class="fa-solid fa-server"></i></div>
+                <div class="aws-node-label">Amazon EC2</div>
+              </div>
+              <div class="aws-node-box">
+                <div class="aws-node-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                <div class="aws-node-label">Amazon EKS</div>
+              </div>
+              <div class="aws-node-box">
+                <div class="aws-node-icon"><i class="fa-solid fa-database"></i></div>
+                <div class="aws-node-label">Amazon S3</div>
+              </div>
+              <div class="aws-node-box">
+                <div class="aws-node-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="aws-node-label">AWS IAM</div>
+              </div>
+              <div class="aws-node-box">
+                <div class="aws-node-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="aws-node-label">AWS Lambda</div>
+              </div>
+              <div class="aws-node-box">
+                <div class="aws-node-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="aws-node-label">CloudWatch</div>
+              </div>
+            </div>
           </div>
-          <p class="service-desc">
-            Engineering ultra-fast, dependency-free commercial web platforms. Applying 95% asset payload compression, responsive layouts across phone/desktop, and offline Service Worker caching.
-          </p>
-        </div>
 
-        <div class="service-row scroll-reveal delay-4">
-          <span class="service-num">04</span>
-          <div>
-            <h3 class="service-title">Network Infrastructure & Analysis</h3>
-            <span style="font-family:var(--font-code); font-size:0.8rem; color:var(--accent-purple);">TCP/IP • OSI Model • Wireshark • DNS</span>
-          </div>
-          <p class="service-desc">
-            Designing IPv4/IPv6 CIDR subnet schemes, analyzing network packet flows, diagnosing latency/packet loss, configuring DNS resolution, and establishing firewall security boundaries.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 6. SKILLS MATRIX ==================== -->
-  <section class="section" id="skills" style="background:rgba(8, 13, 26, 0.6);">
-    <div class="container">
-      <div class="section-header scroll-reveal">
-        <span class="section-tag"><i class="fa-solid fa-microchip"></i> Technical Competencies</span>
-        <h2 class="section-title">Core Engineering & Skills Matrix</h2>
-        <p class="section-desc">
-          Practical competencies across systems engineering, networking infrastructure, web platforms, and programming.
-        </p>
-      </div>
-
-      <div class="skills-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem;">
-        
-        <div class="glass-card scroll-reveal delay-1" data-tilt="true">
-          <div style="font-size:2rem; color:#F59E0B; margin-bottom:1rem;"><i class="fa-brands fa-linux"></i></div>
-          <h3>Linux & Systems Administration</h3>
-          <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
-            Deep operational knowledge of the Linux operating system, kernel-space concepts, process life-cycles, and shell scripting.
-          </p>
-          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1.25rem;">
-            <span class="term-chip">Docker Containers</span>
-            <span class="term-chip">GitHub Actions CI/CD</span>
-            <span class="term-chip">Trivy DevSecOps</span>
-            <span class="term-chip">NGINX Reverse Proxy</span>
-            <span class="term-chip">Arch Linux</span>
-            <span class="term-chip">Ubuntu 24.04</span>
-            <span class="term-chip">Bash Shell Scripting</span>
-            <span class="term-chip">Systemd & Cron</span>
-          </div>
-        </div>
-
-        <div class="glass-card scroll-reveal delay-2" data-tilt="true">
-          <div style="font-size:2rem; color:#06B6D4; margin-bottom:1rem;"><i class="fa-solid fa-network-wired"></i></div>
-          <h3>Computer Networking & Protocols</h3>
-          <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
-            Solid grasp of packet flow, transport/network layers, subnet planning, and protocol analysis.
-          </p>
-          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1.25rem;">
-            <span class="term-chip">TCP/IP Suite</span>
-            <span class="term-chip">OSI 7-Layer</span>
-            <span class="term-chip">Subnetting</span>
-            <span class="term-chip">DNS</span>
-            <span class="term-chip">Wireshark</span>
-            <span class="term-chip">Firewalls</span>
-          </div>
-        </div>
-
-        <div class="glass-card scroll-reveal delay-3" data-tilt="true">
-          <div style="font-size:2rem; color:#8B5CF6; margin-bottom:1rem;"><i class="fa-solid fa-code"></i></div>
-          <h3>Modern Web Architecture</h3>
-          <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
-            Building ultra-fast, change-proof, responsive commercial web platforms with zero bloated dependencies.
-          </p>
-          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1.25rem;">
-            <span class="term-chip">Semantic HTML5</span>
-            <span class="term-chip">CSS3 Grid/Flex</span>
-            <span class="term-chip">Modular ES6+ JS</span>
-            <span class="term-chip">PWA</span>
-            <span class="term-chip">95% Opt</span>
-            <span class="term-chip">SEO</span>
-          </div>
-        </div>
-
-        <div class="glass-card scroll-reveal delay-4" data-tilt="true">
-          <div style="font-size:2rem; color:#F472B6; margin-bottom:1rem;"><i class="fa-brands fa-react"></i></div>
-          <h3>Cross-Platform Mobile Engineering</h3>
-          <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.35rem;">
-            Architecting production-ready cross-platform mobile apps with reactive state stores, typed routes, and native hardware integration.
-          </p>
-          <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1.25rem;">
-            <span class="term-chip">React Native 0.81</span>
-            <span class="term-chip">Expo SDK 54</span>
-            <span class="term-chip">Expo Router v6</span>
-            <span class="term-chip">TypeScript Strict</span>
-            <span class="term-chip">Reactive Context</span>
-            <span class="term-chip">AsyncStorage</span>
-            <span class="term-chip">EAS APK Build</span>
-            <span class="term-chip">Botanical Emerald UI</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 7. SOURCE CODE LABS ==================== -->
-  <section class="section" id="code" style="background:rgba(8, 13, 26, 0.6);">
-    <div class="container">
-      <div class="section-header scroll-reveal">
-        <span class="section-tag"><i class="fa-solid fa-code-compare"></i> Source Code Labs</span>
-        <h2 class="section-title">Hands-On Code & Script Samples</h2>
-        <p class="section-desc">
-          Inspect actual production-quality Bash automation scripts, networking utilities, and Python algorithms.
-        </p>
-      </div>
-
-      <div class="code-inspector-card scroll-reveal delay-1" style="max-width:1000px; margin:0 auto;" data-tilt="true">
-        <div class="code-tabs-header">
-          <div class="code-tab-btns">
-            <button class="code-tab-btn active" data-code="codeBash">
-              <i class="fa-brands fa-linux" style="color:#F59E0B;"></i> backup_audit.sh
-            </button>
-            <button class="code-tab-btn" data-code="codeMobile">
-              <i class="fa-brands fa-react" style="color:#F472B6;"></i> useCartStore.tsx
-            </button>
-            <button class="code-tab-btn" data-code="codePython">
-              <i class="fa-brands fa-python" style="color:#8B5CF6;"></i> binary_tree_dsa.py
-            </button>
-            <button class="code-tab-btn" data-code="codeNet">
-              <i class="fa-solid fa-network-wired" style="color:#06B6D4;"></i> subnet_calc.py
-            </button>
-          </div>
-          <span style="font-family:var(--font-code); font-size:0.75rem; color:var(--accent-emerald);">// Syntax Highlighting</span>
-        </div>
-
-        <!-- Code Pane 1: Bash -->
-        <div class="code-tab-pane active-pane" id="codeBash">
-          <pre class="code-pre-block"><code><span style="color:#64748B;">#!/usr/bin/env bash</span>
-<span style="color:#64748B;"># ==============================================================================</span>
-<span style="color:#64748B;"># Script: backup_audit.sh — Automated Server Health, Permissions & Log Rotator</span>
-<span style="color:#64748B;"># Author: Uzair Sultan (Linux Administrator)</span>
-<span style="color:#64748B;"># ==============================================================================</span>
-<span style="color:#8B5CF6;">set</span> -euo pipefail
-
-BACKUP_SRC=<span style="color:#8B5CF6;">"/var/www/production_app"</span>
-BACKUP_DEST=<span style="color:#8B5CF6;">"/var/backups/daily"</span>
-TIMESTAMP=$(date +<span style="color:#8B5CF6;">"%Y%m%d_%H%M%S"</span>)
-ARCHIVE_NAME=<span style="color:#8B5CF6;">"app_backup_${TIMESTAMP}.tar.gz"</span>
-
-<span style="color:#F59E0B;">log_info</span>() {
-  echo -e <span style="color:#8B5CF6;">"[INFO $(date +'%T')] $1"</span>
+          <!-- 3. Terraform (Infrastructure as Code) -->
+          <div class="bento-card col-4" style="border-top: 2px solid var(--domain-iac);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-cubes-stacked" style="color:var(--domain-iac);"></i>
+                <span>Terraform IaC</span>
+              </div>
+              <span class="bento-badge badge-tf">HCL v1.8</span>
+            </div>
+            <p class="bento-desc">
+              Declarative cloud provisioning with remote S3 state locks and automated drift detection.
+            </p>
+            <div class="code-card-wrap">
+              <button class="btn-copy-snippet" title="Copy snippet"><i class="fa-regular fa-copy"></i> Copy</button>
+              <pre><code>resource "aws_eks_cluster" "prod" {
+  name     = "portfolio-cluster"
+  role_arn = aws_iam_role.cluster.arn
+  version  = "1.30"
+  vpc_config {
+    subnet_ids = aws_subnet.private[*].id
+  }
 }
+# Plan: 11 to add, 0 to change</code></pre>
+            </div>
+          </div>
 
-<span style="color:#F59E0B;">perform_backup</span>() {
-  log_info <span style="color:#8B5CF6;">"Starting automated archive of ${BACKUP_SRC}..."</span>
-  mkdir -p <span style="color:#8B5CF6;">"${BACKUP_DEST}"</span>
-  tar -czf <span style="color:#8B5CF6;">"${BACKUP_DEST}/${ARCHIVE_NAME}"</span> -C <span style="color:#8B5CF6;">"${BACKUP_SRC}"</span> .
-  log_info <span style="color:#8B5CF6;">"Backup created successfully: ${BACKUP_DEST}/${ARCHIVE_NAME}"</span>
-  
-  <span style="color:#64748B;"># Rotate archives older than 7 days</span>
-  find <span style="color:#8B5CF6;">"${BACKUP_DEST}"</span> -type f -name <span style="color:#8B5CF6;">"*.tar.gz"</span> -mtime +7 -exec rm -f {} \;
-  log_info <span style="color:#8B5CF6;">"Old log & backup rotation complete."</span>
-}
+          <!-- 4. Linux CLI & SysAdmin -->
+          <div class="bento-card col-4" style="border-top: 2px solid var(--domain-linux);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-brands fa-linux" style="color:var(--domain-linux);"></i>
+                <span>Linux SysAdmin</span>
+              </div>
+              <span class="bento-badge badge-linux">KERNEL 6.8</span>
+            </div>
+            <p class="bento-desc">
+              Systemd unit files, process namespaces, cgroups v2 resource capping, UFW firewall rules, and /proc audits.
+            </p>
+            <div class="systemd-list">
+              <div class="systemd-item">
+                <span>● sshd.service</span>
+                <span class="text-emerald">active (running)</span>
+              </div>
+              <div class="systemd-item">
+                <span>● nginx.service</span>
+                <span class="text-emerald">active (ports: 80, 443)</span>
+              </div>
+              <div class="systemd-item">
+                <span>● ufw.service</span>
+                <span class="text-emerald">active (default: drop)</span>
+              </div>
+              <div class="systemd-item">
+                <span>● systemd-journald</span>
+                <span class="text-emerald">active (14.2 MB)</span>
+              </div>
+            </div>
+          </div>
 
-perform_backup</code></pre>
+          <!-- 5. CI/CD & ArgoCD GitOps -->
+          <div class="bento-card col-4" id="pipelines" style="border-top: 2px solid var(--domain-linux);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-code-branch" style="color:var(--domain-linux);"></i>
+                <span>CI/CD & GitOps</span>
+              </div>
+              <span class="bento-badge badge-linux">AUTOMATED</span>
+            </div>
+            <p class="bento-desc">
+              GitHub Actions pipeline testing syntax, building Docker images, and triggering ArgoCD declarative cluster synchronization.
+            </p>
+            <div class="pipeline-track">
+              <div class="pipeline-node">
+                <div class="pipe-icon-bubble"><i class="fa-solid fa-code-commit"></i></div>
+                <span>Git Push</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipeline-node">
+                <div class="pipe-icon-bubble"><i class="fa-solid fa-vial-circle-check"></i></div>
+                <span>PyTest/Lint</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipeline-node">
+                <div class="pipe-icon-bubble"><i class="fa-brands fa-docker"></i></div>
+                <span>Build Image</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipeline-node">
+                <div class="pipe-icon-bubble"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <span>ArgoCD Sync</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Computer Networking & OSI Flow -->
+          <div class="bento-card col-6" style="border-top: 2px solid var(--domain-k8s);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-route" style="color:var(--domain-k8s);"></i>
+                <span>Computer Networking & OSI 7-Layer Flow</span>
+              </div>
+              <span class="bento-badge badge-k8s">TCP/IP SUITE</span>
+            </div>
+            <p class="bento-desc">
+              Low-level protocol inspection with Wireshark: TCP 3-way handshakes, CIDR subnetting, BGP dynamic routing, MTU 1500 byte packet fragmentation, and TLS 1.3 cryptographic key exchange.
+            </p>
+            <div class="code-card-wrap">
+              <div style="color:var(--domain-k8s); font-weight:700; margin-bottom:0.2rem;">INGRESS PACKET LIFECYCLE:</div>
+              <div style="color:#CBD5E1;">[DNS A-Record] ➔ [Cloudflare Anycast Proxy] ➔ [AWS ALB:443] ➔ [VPC CIDR 10.0.1.0/24] ➔ [Kube-Proxy Pod] ➔ [Container Socket:8080]</div>
+            </div>
+          </div>
+
+          <!-- 7. Bash & Python Automation (Split Tabs) -->
+          <div class="bento-card col-6 code-split-card" style="border-top: 2px solid var(--domain-python);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-brands fa-python" style="color:var(--domain-python);"></i>
+                <span>Bash & Python Automation</span>
+              </div>
+              <div class="code-tab-nav">
+                <button class="code-tab-btn active" data-tab="bash">backup_s3.sh</button>
+                <button class="code-tab-btn" data-tab="python">cloud_audit.py</button>
+              </div>
+            </div>
+            <p class="bento-desc">
+              Idempotent defensive scripts enforcing <code>set -euo pipefail</code> in Bash and automated AWS resource audits using Python's <code>boto3</code> SDK.
+            </p>
+            <div class="code-card-wrap">
+              <div class="code-snippet-panel active" data-panel="bash">
+                <pre><code>#!/usr/bin/env bash
+set -euo pipefail
+BACKUP_DIR="/var/log/sys-telemetry"
+ARCHIVE="telemetry-$(date +%F).tar.gz"
+tar -czf "$ARCHIVE" "$BACKUP_DIR"
+aws s3 cp "$ARCHIVE" "s3://uzair-vault-backups/"
+logger -t DEVOPS "Backup synced with S3."</code></pre>
+              </div>
+              <div class="code-snippet-panel" data-panel="python">
+                <pre><code>import boto3
+ec2 = boto3.client('ec2', region_name='ap-south-1')
+volumes = ec2.describe_volumes(
+    Filters=[{'Name': 'status', 'Values': ['available']}]
+)
+for vol in volumes['Volumes']:
+    print(f"Orphan EBS Volume: {vol['VolumeId']} ({vol['Size']}GB)")</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Observability & Telemetry -->
+          <div class="bento-card col-4" style="border-top: 2px solid var(--domain-red);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-chart-line" style="color:var(--domain-red);"></i>
+                <span>Prometheus & Grafana</span>
+              </div>
+              <span class="bento-badge" style="background:rgba(239,68,68,0.1); color:var(--domain-red); border:1px solid rgba(239,68,68,0.3);">METRICS</span>
+            </div>
+            <p class="bento-desc">
+              P99 latency dashboards, Node-Exporter host metrics, blackbox HTTP probes, and Slack incident webhooks.
+            </p>
+            <div class="systemd-list">
+              <div class="systemd-item">
+                <span>P99 HTTP Latency</span>
+                <span class="text-emerald">18 ms</span>
+              </div>
+              <div class="systemd-item">
+                <span>Error Rate (5xx)</span>
+                <span class="text-emerald">0.00%</span>
+              </div>
+              <div class="systemd-item">
+                <span>Prometheus Scrape</span>
+                <span class="text-cyan">15s Interval</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Zero-Trust Security & Vault -->
+          <div class="bento-card col-4" style="border-top: 2px solid var(--domain-iac);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-lock" style="color:var(--domain-iac);"></i>
+                <span>Zero-Trust Security</span>
+              </div>
+              <span class="bento-badge badge-tf">ENCRYPTED</span>
+            </div>
+            <p class="bento-desc">
+              HashiCorp Vault secret rotation, least-privilege IAM policies, TLS 1.3 certificates, and container vulnerability scanning.
+            </p>
+            <div class="systemd-list">
+              <div class="systemd-item">
+                <span>Vault Engine</span>
+                <span class="text-emerald">Active (AES-256)</span>
+              </div>
+              <div class="systemd-item">
+                <span>mTLS Handshake</span>
+                <span class="text-emerald">Enforced</span>
+              </div>
+              <div class="systemd-item">
+                <span>Trivy CVE Audit</span>
+                <span class="text-emerald">0 Critical Vulnerabilities</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. Database & Distributed Cache -->
+          <div class="bento-card col-4" style="border-top: 2px solid var(--domain-docker);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-database" style="color:var(--domain-docker);"></i>
+                <span>Postgres & Redis Cache</span>
+              </div>
+              <span class="bento-badge" style="background:rgba(59,130,246,0.1); color:var(--domain-docker); border:1px solid rgba(59,130,246,0.3);">STORAGE</span>
+            </div>
+            <p class="bento-desc">
+              High-availability PostgreSQL active-standby replica streaming WAL logs paired with an ultra-fast in-memory Redis layer.
+            </p>
+            <div class="systemd-list">
+              <div class="systemd-item">
+                <span>PostgreSQL 16 Replica</span>
+                <span class="text-emerald">In-Sync (0ms lag)</span>
+              </div>
+              <div class="systemd-item">
+                <span>Redis In-Memory Hit</span>
+                <span class="text-cyan">99.4% Hit Ratio</span>
+              </div>
+              <div class="systemd-item">
+                <span>WAL Backup S3</span>
+                <span class="text-emerald">Every 15 min</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. Mobile & Client Edge Runtime -->
+          <div class="bento-card col-12" style="border-top: 2px solid var(--domain-linux);">
+            <div class="bento-card-header">
+              <div class="bento-card-title">
+                <i class="fa-solid fa-mobile-screen-button" style="color:var(--domain-linux);"></i>
+                <span>Mobile & Client Edge Runtime (React Native 0.81 • Expo SDK 54)</span>
+              </div>
+              <span class="bento-badge badge-linux">CLIENT EDGE POD</span>
+            </div>
+            <p class="bento-desc">
+              Cross-platform mobile applications engineered with React Native 0.81, Expo SDK 54, and Expo Router v6. Built for offline-first resilience with SQLite caching, biometric auth, and instantaneous cold-boot performance.
+            </p>
+          </div>
+
         </div>
+      </div>
+    </section>
 
-        <!-- Code Pane 2: React Native / TypeScript Pricing Engine -->
-        <div class="code-tab-pane" id="codeMobile">
-          <pre class="code-pre-block"><code><span style="color:#64748B;">// ==============================================================================</span>
-<span style="color:#64748B;">// useCartStore.tsx — Reactive Pricing Engine & Milestone Tracker</span>
-<span style="color:#64748B;">// Project: Nexora Quick-Commerce Mobile App (React Native + Expo SDK 54)</span>
-<span style="color:#64748B;">// Author: Uzair Sultan (Lead Mobile Architect)</span>
-<span style="color:#64748B;">// ==============================================================================</span>
-<span style="color:#8B5CF6;">import</span> React, { createContext, useContext, useState, useMemo } <span style="color:#8B5CF6;">from</span> <span style="color:#8B5CF6;">'react'</span>;
-<span style="color:#8B5CF6;">import</span> { Product } <span style="color:#8B5CF6;">from</span> <span style="color:#8B5CF6;">'../types/product.types'</span>;
-<span style="color:#8B5CF6;">import</span> { CartItem, AppliedCoupon, CartSummary } <span style="color:#8B5CF6;">from</span> <span style="color:#8B5CF6;">'../types/cart.types'</span>;
-
-<span style="color:#8B5CF6;">const</span> FREE_DELIVERY_THRESHOLD = <span style="color:#F59E0B;">20.00</span>;
-<span style="color:#8B5CF6;">const</span> STANDARD_DELIVERY_FEE = <span style="color:#F59E0B;">1.99</span>;
-<span style="color:#8B5CF6;">const</span> PACKAGING_FEE = <span style="color:#F59E0B;">0.49</span>;
-
-<span style="color:#8B5CF6;">export const</span> <span style="color:#8B5CF6; font-weight:700;">CartProvider</span>: React.FC&lt;{ children: React.ReactNode }&gt; = ({ children }) =&gt; {
-  <span style="color:#8B5CF6;">const</span> [items, setItems] = useState&lt;CartItem[]&gt;([]);
-  <span style="color:#8B5CF6;">const</span> [coupon, setCoupon] = useState&lt;AppliedCoupon | null&gt;(<span style="color:#06B6D4;">null</span>);
-
-  <span style="color:#64748B;">// Pure Memoized Calculation Engine for Quick-Commerce Cart</span>
-  <span style="color:#8B5CF6;">const</span> summary = useMemo&lt;CartSummary&gt;(() =&gt; {
-    <span style="color:#8B5CF6;">let</span> subtotal = <span style="color:#F59E0B;">0</span>;
-    items.forEach(({ product, quantity }) =&gt; {
-      subtotal += product.price * quantity;
-    });
-
-    <span style="color:#8B5CF6;">const</span> isFreeDelivery = subtotal &gt;= FREE_DELIVERY_THRESHOLD || (coupon?.freeDelivery ?? <span style="color:#F59E0B;">false</span>);
-    <span style="color:#8B5CF6;">const</span> deliveryFee = items.length === <span style="color:#F59E0B;">0</span> ? <span style="color:#F59E0B;">0</span> : isFreeDelivery ? <span style="color:#F59E0B;">0</span> : STANDARD_DELIVERY_FEE;
-    <span style="color:#8B5CF6;">const</span> packagingFee = items.length === <span style="color:#F59E0B;">0</span> ? <span style="color:#F59E0B;">0</span> : PACKAGING_FEE;
-
-    <span style="color:#8B5CF6;">let</span> couponDiscount = <span style="color:#F59E0B;">0</span>;
-    <span style="color:#8B5CF6;">if</span> (coupon?.discountPercent) {
-      couponDiscount = Math.min(<span style="color:#F59E0B;">10.00</span>, subtotal * (coupon.discountPercent / <span style="color:#F59E0B;">100</span>));
-    }
-
-    <span style="color:#8B5CF6;">const</span> grandTotal = Math.max(<span style="color:#F59E0B;">0</span>, subtotal - couponDiscount + deliveryFee + packagingFee);
-    <span style="color:#8B5CF6;">const</span> freeDeliveryRemaining = Math.max(<span style="color:#F59E0B;">0</span>, FREE_DELIVERY_THRESHOLD - subtotal);
-
-    <span style="color:#8B5CF6;">return</span> { subtotal, couponDiscount, deliveryFee, packagingFee, grandTotal, isFreeDelivery, freeDeliveryRemaining };
-  }, [items, coupon]);
-
-  <span style="color:#8B5CF6;">return</span> &lt;CartContext.Provider value={{ items, coupon, summary }}&gt;{children}&lt;/CartContext.Provider&gt;;
-};</code></pre>
-        </div>
-
-        <!-- Code Pane 2: Python DSA -->
-        <div class="code-tab-pane" id="codePython">
-          <pre class="code-pre-block"><code><span style="color:#64748B;"># ==============================================================================</span>
-<span style="color:#64748B;"># binary_tree_dsa.py — Self-Balancing BST & Breadth-First-Search Traversal</span>
-<span style="color:#64748B;"># Author: Uzair Sultan (Python Problem Solver)</span>
-<span style="color:#64748B;"># ==============================================================================</span>
-<span style="color:#8B5CF6;">from</span> collections <span style="color:#8B5CF6;">import</span> deque
-
-<span style="color:#8B5CF6;">class</span> <span style="color:#8B5CF6; font-weight:700;">TreeNode</span>:
-    <span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">__init__</span>(self, val=<span style="color:#F59E0B;">0</span>, left=<span style="color:#F59E0B;">None</span>, right=<span style="color:#F59E0B;">None</span>):
-        self.val = val
-        self.left = left
-        self.right = right
-
-<span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">level_order_traversal</span>(root: TreeNode) -> list[list[int]]:
-    <span style="color:#64748B;">"""Time Complexity: O(N), Space Complexity: O(N)"""</span>
-    <span style="color:#8B5CF6;">if</span> <span style="color:#8B5CF6;">not</span> root:
-        <span style="color:#8B5CF6;">return</span> []
-    
-    result = []
-    queue = deque([root])
-    
-    <span style="color:#8B5CF6;">while</span> queue:
-        level_nodes = []
-        <span style="color:#8B5CF6;">for</span> _ <span style="color:#8B5CF6;">in</span> range(len(queue)):
-            curr = queue.popleft()
-            level_nodes.append(curr.val)
-            <span style="color:#8B5CF6;">if</span> curr.left:  queue.append(curr.left)
-            <span style="color:#8B5CF6;">if</span> curr.right: queue.append(curr.right)
-        result.append(level_nodes)
+    <!-- ═══════════════ PROJECTS: ACTIVE DOCKER CONTAINERS REGISTRY ═══════════════ -->
+    <section class="projects-section" id="containers">
+      <div class="container">
         
-    <span style="color:#8B5CF6;">return</span> result</code></pre>
+        <div class="section-meta-header">
+          <div class="section-tag-pill tag-emerald">
+            <i class="fa-brands fa-docker"></i> ACTIVE DOCKER CONTAINERS REGISTRY
+          </div>
+          <h2 class="section-giant-title">Production Repositories & Workloads</h2>
+          <p class="section-desc-subtext">
+            Each project is deployed as an isolated, containerized service with custom routing, health probes, and live repository endpoints.
+          </p>
         </div>
 
-        <!-- Code Pane 3: Subnet Calculator -->
-        <div class="code-tab-pane" id="codeNet">
-          <pre class="code-pre-block"><code><span style="color:#64748B;"># ==============================================================================</span>
-<span style="color:#64748B;"># subnet_calc.py — IPv4 CIDR Block & Host Range Calculator</span>
-<span style="color:#64748B;"># Author: Uzair Sultan (Networking Specialist)</span>
-<span style="color:#64748B;"># ==============================================================================</span>
-<span style="color:#8B5CF6;">import</span> ipaddress
+        <div class="containers-registry-grid">
 
-<span style="color:#8B5CF6;">def</span> <span style="color:#06B6D4;">inspect_network</span>(cidr_string: str):
-    net = ipaddress.ip_network(cidr_string, strict=<span style="color:#F59E0B;">False</span>)
-    
-    print(<span style="color:#8B5CF6;">f"Network Address:    {net.network_address}"</span>)
-    print(<span style="color:#8B5CF6;">f"Broadcast Address:  {net.broadcast_address}"</span>)
-    print(<span style="color:#8B5CF6;">f"Netmask:            {net.netmask}"</span>)
-    print(<span style="color:#8B5CF6;">f"Total Usable Hosts: {net.num_addresses - 2}"</span>)
-    print(<span style="color:#8B5CF6;">f"Host IP Range:      {net[1]} - {net[-2]}"</span>)
+          <!-- 1. Nexora -->
+          <div class="docker-container-card">
+            <div class="container-card-header">
+              <div class="container-id-box">
+                <span class="cid-sha">sha256:a8f4c2190e31</span>
+                <span class="cid-ports">PORTS: 0.0.0.0:8081->8081/tcp</span>
+              </div>
+              <span class="container-status-badge">
+                <span class="pulse-dot-green"></span> STATUS: Up 21 days (healthy)
+              </span>
+            </div>
 
-<span style="color:#64748B;"># Example Execution for a /24 Enterprise Subnet</span>
-inspect_network(<span style="color:#8B5CF6;">"192.168.10.0/24"</span>)</code></pre>
+            <div class="project-title-row">
+              <h3>Nexora — Quick-Commerce Mobile App</h3>
+            </div>
+
+            <p class="project-arch-summary">
+              Cross-platform mobile application engineered with React Native 0.81, Expo SDK 54, and Expo Router v6. Features Botanical Emerald design system, 6-digit OTP verification, reactive cart calculation engine, live delivery radar, and production APK builds.
+            </p>
+
+            <div class="project-topology-view">
+              <div class="topology-flow-diagram">
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Mobile Client (Expo SDK 54 / Android APK)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Async OTP Dispatcher via Cloudflare Edge API</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> In-Memory SQLite Offline Order Queue</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Live Geolocation Radar & Real-Time Fulfillment</div>
+              </div>
+            </div>
+
+            <div class="docker-labels-row">
+              <span class="docker-label-chip">env=production</span>
+              <span class="docker-label-chip">runtime=react-native:0.81</span>
+              <span class="docker-label-chip">sdk=expo-54</span>
+              <span class="docker-label-chip">arch=mobile-edge</span>
+            </div>
+
+            <div class="container-action-footer">
+              <button class="btn-toggle-topology"><i class="fa-solid fa-diagram-project"></i> View Topology</button>
+              <div class="container-link-btns">
+                <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" class="btn-card-link btn-git-inspect">
+                  <i class="fa-brands fa-github"></i> Inspect Source
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Kashmir Kesar Kingdom -->
+          <div class="docker-container-card">
+            <div class="container-card-header">
+              <div class="container-id-box">
+                <span class="cid-sha">sha256:b7190d4e5f22</span>
+                <span class="cid-ports">PORTS: 0.0.0.0:443->80/tcp</span>
+              </div>
+              <span class="container-status-badge">
+                <span class="pulse-dot-green"></span> STATUS: Up 60 days (healthy)
+              </span>
+            </div>
+
+            <div class="project-title-row">
+              <h3>Kashmir Kesar Kingdom Pvt. Ltd.</h3>
+            </div>
+
+            <p class="project-arch-summary">
+              High-performance international commercial agricultural export platform. Achieved a massive 95% asset payload compression (48.3MB down to 2.4MB) with real-time multi-currency conversions (USD, EUR, GBP, AED, INR), dynamic B2B export RFQ pricing calculator, and PWA offline service workers.
+            </p>
+
+            <div class="project-topology-view">
+              <div class="topology-flow-diagram">
+                <div class="topo-step"><span class="topo-step-icon">▹</span> User Browser ➔ Cloudflare Edge CDN</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> NGINX Gzip/Brotli Compression Layer (95% reduction)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Dynamic Currency Conversion Worker (Exchange Rates)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Service Worker Cache (Offline PWA Capabilities)</div>
+              </div>
+            </div>
+
+            <div class="docker-labels-row">
+              <span class="docker-label-chip">env=production</span>
+              <span class="docker-label-chip">web=pwa-offline</span>
+              <span class="docker-label-chip">compression=95%</span>
+              <span class="docker-label-chip">currency=multi-rate</span>
+            </div>
+
+            <div class="container-action-footer">
+              <button class="btn-toggle-topology"><i class="fa-solid fa-diagram-project"></i> View Topology</button>
+              <div class="container-link-btns">
+                <a href="https://github.com/Uzair0123/kashmir-kesar-kingdom" target="_blank" class="btn-card-link btn-git-inspect">
+                  <i class="fa-brands fa-github"></i> Source
+                </a>
+                <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn-card-link btn-live-endpoint">
+                  Live ↗
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Craver Fast Food Co. -->
+          <div class="docker-container-card">
+            <div class="container-card-header">
+              <div class="container-id-box">
+                <span class="cid-sha">sha256:c3392b1a8d05</span>
+                <span class="cid-ports">PORTS: 0.0.0.0:3000->3000/tcp</span>
+              </div>
+              <span class="container-status-badge">
+                <span class="pulse-dot-green"></span> STATUS: Up 38 days (healthy)
+              </span>
+            </div>
+
+            <div class="project-title-row">
+              <h3>Craver Fast Food Co. — Ordering Engine</h3>
+            </div>
+
+            <p class="project-arch-summary">
+              Modular ES6+ commercial online ordering web application. Includes instant fuzzy search, dietary filter matrix, interactive quick-view modal, stateful persistent LocalStorage cart with dynamic coupon validation, and automated GitHub Actions delivery.
+            </p>
+
+            <div class="project-topology-view">
+              <div class="topology-flow-diagram">
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Web Client ➔ Modular ES6+ Reactive State</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> LocalStorage Serializer (Cart & Checkout Engine)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> GitHub Actions CI/CD Automated Test & Deploy</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Zero-Config Cloud Delivery on GitHub Pages</div>
+              </div>
+            </div>
+
+            <div class="docker-labels-row">
+              <span class="docker-label-chip">env=production</span>
+              <span class="docker-label-chip">runtime=node:20-alpine</span>
+              <span class="docker-label-chip">cicd=github-actions</span>
+              <span class="docker-label-chip">cart=persistent</span>
+            </div>
+
+            <div class="container-action-footer">
+              <button class="btn-toggle-topology"><i class="fa-solid fa-diagram-project"></i> View Topology</button>
+              <div class="container-link-btns">
+                <a href="https://github.com/Uzair0123/craver-fast-food" target="_blank" class="btn-card-link btn-git-inspect">
+                  <i class="fa-brands fa-github"></i> Source
+                </a>
+                <a href="https://uzair0123.github.io/craver-fast-food/" target="_blank" class="btn-card-link btn-live-endpoint">
+                  Live ↗
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. sys-inspect -->
+          <div class="docker-container-card">
+            <div class="container-card-header">
+              <div class="container-id-box">
+                <span class="cid-sha">sha256:d9910f8a3c44</span>
+                <span class="cid-ports">PORTS: 127.0.0.1:9100->9100/tcp</span>
+              </div>
+              <span class="container-status-badge">
+                <span class="pulse-dot-green"></span> STATUS: Up 12 days (healthy)
+              </span>
+            </div>
+
+            <div class="project-title-row">
+              <h3>sys-inspect — Linux Telemetry CLI</h3>
+            </div>
+
+            <p class="project-arch-summary">
+              Production systems telemetry CLI auditing Linux kernel /proc primitives, socket states, inode allocations, zombie processes, and memory fragmentation. Built with defensive pipefail handling and dynamic ANSI health triage.
+            </p>
+
+            <div class="project-topology-view">
+              <div class="topology-flow-diagram">
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Direct /proc and /sys Kernel Memory Readers</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Zombie & Defunct Process PID Tree Scanner</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Inode & File Descriptor Allocation Thresholds</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> ANSI Colored Terminal Health Report Generator</div>
+              </div>
+            </div>
+
+            <div class="docker-labels-row">
+              <span class="docker-label-chip">env=cli-binary</span>
+              <span class="docker-label-chip">runtime=bash/c</span>
+              <span class="docker-label-chip">target=linux-kernel</span>
+              <span class="docker-label-chip">telemetry=proc</span>
+            </div>
+
+            <div class="container-action-footer">
+              <button class="btn-toggle-topology"><i class="fa-solid fa-diagram-project"></i> View Topology</button>
+              <div class="container-link-btns">
+                <a href="https://github.com/Uzair0123/sys-inspect" target="_blank" class="btn-card-link btn-git-inspect">
+                  <i class="fa-brands fa-github"></i> Inspect Source
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Network Protocol Labs -->
+          <div class="docker-container-card">
+            <div class="container-card-header">
+              <div class="container-id-box">
+                <span class="cid-sha">sha256:e4481c7e9b10</span>
+                <span class="cid-ports">PORTS: 0.0.0.0:53->53/udp</span>
+              </div>
+              <span class="container-status-badge">
+                <span class="pulse-dot-green"></span> STATUS: Up 5 days (healthy)
+              </span>
+            </div>
+
+            <div class="project-title-row">
+              <h3>Network Protocol Labs & Packet Inspector</h3>
+            </div>
+
+            <p class="project-arch-summary">
+              Comprehensive network engineering lab analyzing TCP/IP communication layers. Hands-on Wireshark packet capture, CIDR subnet design, BGP route flapping mitigation, and DNS authoritative resolution auditing.
+            </p>
+
+            <div class="project-topology-view">
+              <div class="topology-flow-diagram">
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Wireshark Raw Packet Capture Interface (eth0)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> TCP SYN -> SYN-ACK -> ACK Sequence Validator</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> CIDR Subnet Calculator (VLSM IPv4 / IPv6)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> BGP Autonomous System (ASN) Routing Simulator</div>
+              </div>
+            </div>
+
+            <div class="docker-labels-row">
+              <span class="docker-label-chip">env=lab</span>
+              <span class="docker-label-chip">protocols=tcp-udp-bgp</span>
+              <span class="docker-label-chip">tool=wireshark</span>
+              <span class="docker-label-chip">layer=osi-7</span>
+            </div>
+
+            <div class="container-action-footer">
+              <button class="btn-toggle-topology"><i class="fa-solid fa-diagram-project"></i> View Topology</button>
+              <div class="container-link-btns">
+                <a href="https://github.com/Uzair0123" target="_blank" class="btn-card-link btn-git-inspect">
+                  <i class="fa-brands fa-github"></i> GitHub Profile
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Python Algorithms & Distributed Engine -->
+          <div class="docker-container-card">
+            <div class="container-card-header">
+              <div class="container-id-box">
+                <span class="cid-sha">sha256:f12089ba44cd</span>
+                <span class="cid-ports">PORTS: 127.0.0.1:8000->8000/tcp</span>
+              </div>
+              <span class="container-status-badge">
+                <span class="pulse-dot-green"></span> STATUS: Up 18 days (healthy)
+              </span>
+            </div>
+
+            <div class="project-title-row">
+              <h3>Algo-Engine & Python DSA Suite</h3>
+            </div>
+
+            <p class="project-arch-summary">
+              High-performance algorithmic implementations in Python 3. Focuses on tree traversal, graph shortest-path (Dijkstra, BFS/DFS), hash collision resolution, LRU cache memory eviction, and distributed system consensus patterns.
+            </p>
+
+            <div class="project-topology-view">
+              <div class="topology-flow-diagram">
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Asymptotic Time Complexity Profiler (Big-O)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> In-Memory LRU Cache with O(1) Access</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Graph Network Router (Dijkstra Shortest Path)</div>
+                <div class="topo-step"><span class="topo-step-icon">▹</span> Automated Benchmark Suite (PyTest)</div>
+              </div>
+            </div>
+
+            <div class="docker-labels-row">
+              <span class="docker-label-chip">env=algorithms</span>
+              <span class="docker-label-chip">lang=python:3.12</span>
+              <span class="docker-label-chip">dsa=trees-graphs</span>
+              <span class="docker-label-chip">benchmark=pytest</span>
+            </div>
+
+            <div class="container-action-footer">
+              <button class="btn-toggle-topology"><i class="fa-solid fa-diagram-project"></i> View Topology</button>
+              <div class="container-link-btns">
+                <a href="https://github.com/Uzair0123" target="_blank" class="btn-card-link btn-git-inspect">
+                  <i class="fa-brands fa-github"></i> Inspect Code
+                </a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ==================== 8. CONTACT & FOOTER ==================== -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="glass-card contact-card scroll-reveal" data-tilt="true">
-        <span class="section-tag"><i class="fa-solid fa-handshake"></i> Let's Connect</span>
-        <h2 class="section-title">Ready to Collaborate or Hire?</h2>
-        <p class="section-desc">
-          I am actively open to engineering roles, Linux systems administration, DevOps opportunities, and commercial web development projects.
-        </p>
-
-        <div class="contact-channels scroll-reveal delay-1">
-          <!-- WhatsApp -->
-          <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect%20with%20you%20regarding%20an%20engineering%20opportunity%20/%20project%20collaboration." target="_blank" class="btn btn-outline" style="border-color:#38BDF8; color:#38BDF8;" data-magnetic="true">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp (+91-7889446114)
-          </a>
-
-          <!-- Phone Call -->
-          <a href="tel:+917889446114" class="btn btn-outline" data-magnetic="true">
-            <i class="fa-solid fa-phone"></i> Call +91-7889446114
-          </a>
-
-          <!-- Email -->
-          <a href="mailto:uzairteeli123456789@gmail.com" class="btn btn-emerald" data-magnetic="true">
-            <i class="fa-solid fa-envelope"></i> uzairteeli123456789@gmail.com
-          </a>
-
-          <!-- GitHub -->
-          <a href="https://github.com/Uzair0123" target="_blank" class="btn btn-outline" data-magnetic="true">
-            <i class="fa-brands fa-github"></i> GitHub (@Uzair0123)
-          </a>
+    <!-- ═══════════════ EXPERIENCE & CERTIFICATIONS: GIT LOG TIMELINE ═══════════════ -->
+    <section class="git-timeline-section" id="git-log">
+      <div class="container">
+        
+        <div class="section-meta-header">
+          <div class="section-tag-pill tag-purple">
+            <i class="fa-solid fa-code-commit"></i> COMMIT HISTORY
+          </div>
+          <h2 class="section-giant-title">Career Milestones & Education (git log --graph)</h2>
+          <p class="section-desc-subtext">
+            Track-record of systems mastery, formal degrees, and open-source infrastructure commits.
+          </p>
         </div>
 
-        <div class="scroll-reveal delay-2" style="margin-top:2rem; display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
-          <button class="term-chip" data-copy="+917889446114">
-            <i class="fa-solid fa-copy"></i> Copy Phone Number
-          </button>
-          <button class="term-chip" data-copy="uzairteeli123456789@gmail.com">
-            <i class="fa-solid fa-copy"></i> Copy Email Address
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="git-graph-spine">
 
-  </main><!-- /smooth-wrapper -->
+          <!-- Commit 1: Master of Computer Applications -->
+          <div class="git-commit-node node-cyan">
+            <div class="timeline-commit-card">
+              <div class="commit-meta-row">
+                <span class="commit-hash">commit a7c91f2</span>
+                <span class="commit-tag">HEAD -> main, tag: v2.4.0</span>
+                <span class="commit-date">2024 — Present</span>
+              </div>
+              <h3 class="commit-title">Master of Computer Applications (MCA)</h3>
+              <div class="commit-subtitle">Indira Gandhi National Open University (IGNOU)</div>
+              <ul class="commit-bullets">
+                <li>Deep study of Distributed Operating Systems, Advanced Computer Networks, Cloud Computing, and Algorithmic Design.</li>
+                <li>Conducting research and implementation on container orchestration, microservice telemetry, and secure cloud topologies.</li>
+              </ul>
+            </div>
+          </div>
 
-  <!-- ==================== ARCHITECTURE INSPECTOR MODAL: KASHMIR KESAR KINGDOM ==================== -->
-  <div class="arch-modal-overlay" id="archModal">
-    <div class="arch-modal-card">
-      <button class="arch-modal-close" id="closeArchModalBtn">&times;</button>
-      
-      <span class="section-tag"><i class="fa-solid fa-sitemap"></i> System Architecture Inspector</span>
-      <h3 style="font-size:1.8rem; margin:0.5rem 0 1rem 0;">Kashmir Kesar Kingdom — Engineering Breakdown</h3>
-      <p style="color:var(--text-muted); font-size:0.95rem;">
-        An overview of the architectural design decisions that achieved sub-second global load times and enterprise B2B capabilities.
-      </p>
+          <!-- Commit 2: Bachelor of Computer Applications -->
+          <div class="git-commit-node">
+            <div class="timeline-commit-card">
+              <div class="commit-meta-row">
+                <span class="commit-hash">commit 8f31b0e</span>
+                <span class="commit-tag">tag: v1.8.0</span>
+                <span class="commit-date">2021 — 2024</span>
+              </div>
+              <h3 class="commit-title">Bachelor of Computer Applications (BCA)</h3>
+              <div class="commit-subtitle">University of Kashmir • First Class Distinction</div>
+              <ul class="commit-bullets">
+                <li>Graduated with top academic standing, mastering Operating Systems, Relational Database Systems, Network Architecture, and Software Engineering.</li>
+                <li>Built early prototypes of systems administration scripts, local HTTP servers, and modular web interfaces.</li>
+              </ul>
+            </div>
+          </div>
 
-      <div class="arch-grid-cards">
-        <div class="arch-mini-card">
-          <h4><i class="fa-solid fa-bolt"></i> 95% Compression</h4>
-          <p>Automated progressive JPEG pipeline reducing catalog weight from 48.3MB to 2.43MB.</p>
-        </div>
-        <div class="arch-mini-card">
-          <h4><i class="fa-solid fa-coins"></i> Dynamic Currencies</h4>
-          <p>Real-time FX conversion engine supporting USD ($), EUR (€), AED (د.إ), GBP (£), INR (₹).</p>
-        </div>
-        <div class="arch-mini-card">
-          <h4><i class="fa-solid fa-mobile-screen"></i> Offline PWA Engine</h4>
-          <p>Service Worker cache with network-first strategy enabling offline catalog browsing at trade expos.</p>
-        </div>
-        <div class="arch-mini-card">
-          <h4><i class="fa-solid fa-shield-halved"></i> Lab Authenticator</h4>
-          <p>Digital QC batch verification system matching physical batch numbers with lab metrics.</p>
+          <!-- Commit 3: Production Engineering & Client Deliveries -->
+          <div class="git-commit-node node-purple">
+            <div class="timeline-commit-card">
+              <div class="commit-meta-row">
+                <span class="commit-hash">commit 4e96c15</span>
+                <span class="commit-tag">feature/production-systems</span>
+                <span class="commit-date">2024 — 2026</span>
+              </div>
+              <h3 class="commit-title">Production Systems Architect & Mobile Engineer</h3>
+              <div class="commit-subtitle">Commercial Client Deliveries & Open-Source Infrastructure</div>
+              <ul class="commit-bullets">
+                <li>Architected Kashmir Kesar Kingdom with 95% payload compression and multi-currency export RFQ engine.</li>
+                <li>Developed Nexora quick-commerce application using React Native 0.81 and Expo Router v6.</li>
+                <li>Created sys-inspect CLI tool for real-time Linux kernel telemetry and systemd service monitoring.</li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
+    </section>
 
-      <div style="text-align:right; margin-top:1.5rem;">
-        <a href="https://uzair0123.github.io/kashmir-kesar-kingdom/" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Platform
-        </a>
+    <!-- ═══════════════ CONTACT: SSH HANDSHAKE & WEBHOOK DISPATCH ═══════════════ -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        
+        <div class="section-meta-header" style="text-align:center;">
+          <div class="section-tag-pill tag-emerald" style="margin: 0 auto 0.75rem;">
+            <i class="fa-solid fa-satellite-dish"></i> INITIATE CONNECTION
+          </div>
+          <h2 class="section-giant-title">SSH Handshake & Webhook Dispatch</h2>
+          <p class="section-desc-subtext" style="margin: 0 auto;">
+            Send an encrypted message or job opportunity directly to my terminal inbox.
+          </p>
+        </div>
+
+        <div class="ssh-contact-card">
+          <div class="ssh-terminal-header">
+            <span><i class="fa-solid fa-terminal"></i> ssh connect@uzair.cloud -p 22</span>
+            <span style="color:var(--text-dark); font-size:0.75rem;">AUTH: ED25519-KEY</span>
+          </div>
+
+          <form id="sshContactForm" class="ssh-form-grid">
+            <div class="env-input-wrap">
+              <label class="env-label" for="senderName">export SENDER_NAME=</label>
+              <input type="text" id="senderName" class="env-input" placeholder='"Your Name or Organization"' required>
+            </div>
+
+            <div class="env-input-wrap">
+              <label class="env-label" for="senderEmail">export RETURN_EMAIL=</label>
+              <input type="email" id="senderEmail" class="env-input" placeholder='"engineer@company.com"' required>
+            </div>
+
+            <div class="env-input-wrap">
+              <label class="env-label" for="senderMessage">export PAYLOAD_MESSAGE=</label>
+              <textarea id="senderMessage" class="env-input" rows="4" placeholder='"Describe engineering opportunity, cloud collaboration, or project scope..."' required></textarea>
+            </div>
+
+            <button type="submit" class="btn-execute-webhook">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>[ EXECUTE POST /api/v1/contact ]</span>
+            </button>
+          </form>
+
+          <div class="contact-feedback-terminal" id="contactTerminalFeedback">
+            <span style="color:var(--text-dark);">// Terminal feedback will stream upon webhook execution...</span>
+          </div>
+
+          <div class="direct-channels-row">
+            <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20saw%20your%20Cloud%20Control%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" class="channel-chip">
+              <i class="fa-brands fa-whatsapp text-emerald"></i>
+              <span>+91 7889446114 (WhatsApp)</span>
+            </a>
+            <a href="mailto:uzairteeli123456789@gmail.com" class="channel-chip">
+              <i class="fa-solid fa-envelope text-cyan"></i>
+              <span>uzairteeli123456789@gmail.com</span>
+            </a>
+            <a href="https://github.com/Uzair0123" target="_blank" class="channel-chip">
+              <i class="fa-brands fa-github text-purple"></i>
+              <span>github.com/Uzair0123</span>
+            </a>
+          </div>
+        </div>
+
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- ==================== ARCHITECTURE INSPECTOR MODAL: NEXORA MOBILE APP ==================== -->
-  <div class="arch-modal-overlay" id="nexoraArchModal">
-    <div class="arch-modal-card">
-      <button class="arch-modal-close" id="closeNexoraArchModalBtn">&times;</button>
-      
-      <span class="section-tag" style="color:var(--accent-mint);"><i class="fa-solid fa-sitemap"></i> System Architecture Inspector</span>
-      <h3 style="font-size:1.8rem; margin:0.5rem 0 1rem 0;">Nexora Mobile App — Clean Architecture Breakdown</h3>
-      <p style="color:var(--text-muted); font-size:0.95rem;">
-        An overview of the bespoke design system, reactive state architecture, and native build pipeline powering the Nexora quick-commerce application.
-      </p>
-
-      <div class="arch-grid-cards">
-        <div class="arch-mini-card">
-          <h4 style="color:#F472B6;"><i class="fa-solid fa-palette"></i> Botanical Emerald UI</h4>
-          <p>Bespoke chromatic tokens (#0B4F37, #F472B6) with 6-digit OTP keypad, speed selector pill, and zero UI bloat.</p>
-        </div>
-        <div class="arch-mini-card">
-          <h4 style="color:#06B6D4;"><i class="fa-solid fa-layer-group"></i> Decentralized Stores</h4>
-          <p>Atomic React Context state providers (useCartStore, useOrderStore, useUserStore, useFavoritesStore) eliminating re-renders.</p>
-        </div>
-        <div class="arch-mini-card">
-          <h4 style="color:#F59E0B;"><i class="fa-solid fa-route"></i> Typed Expo Router v6</h4>
-          <p>File-based typed route hierarchy with deep linking across (onboarding), (auth), (tabs), checkout, and product stack.</p>
-        </div>
-        <div class="arch-mini-card">
-          <h4 style="color:#8B5CF6;"><i class="fa-brands fa-android"></i> EAS APK Pipeline</h4>
-          <p>Production-ready eas.json build profile compiling standalone Android APK binaries with native asset preloading.</p>
-        </div>
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="control-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <strong>UZAIR SULTAN</strong> // CLOUD CONTROL PLANE v2.5.0 • <span class="text-emerald">CLUSTER ONLINE</span>
       </div>
-
-      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem; flex-wrap:wrap;">
-        <a href="https://github.com/Uzair0123/nexora-mobile-app" target="_blank" class="btn btn-emerald btn-sm" data-magnetic="true">
-          <i class="fa-brands fa-github"></i> View GitHub Repository
-        </a>
+      <div class="footer-right">
+        <span>© 2026 Uzair Sultan • Built with Zero-Dependency Modular Web Architecture</span>
       </div>
-    </div>
-  </div>
-
-  <!-- Global Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p style="margin-bottom:0.5rem;">
-        &copy; <span id="currentYear">2026</span> <strong>Uzair Sultan</strong> • Linux Systems Administrator, DevOps & Web Developer.
-      </p>
-      <p style="font-size:0.8rem; color:var(--text-dim);">
-        Direct: +91-7889446114 • uzairteeli123456789@gmail.com • Hosted on GitHub Pages.
-      </p>
     </div>
   </footer>
 
-  <!-- JavaScript Modules -->
+  <!-- ═══════════════ COMMAND PALETTE MODAL ═══════════════ -->
+  <div class="cmd-palette-backdrop" id="commandPaletteModal">
+    <div class="cmd-palette-dialog">
+      <div class="cmd-palette-searchbox">
+        <i class="fa-solid fa-terminal"></i>
+        <input type="text" id="cmdPaletteInput" class="cmd-palette-input" placeholder="Type a command or jump to section... (e.g. 'docker ps', 'whoami', 'containers')">
+        <button class="cmd-palette-close" id="cmdPaletteClose"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="cmd-palette-results" id="cmdPaletteResults">
+        <!-- Filterable commands populating dynamically -->
+      </div>
+
+      <div class="cmd-palette-footer">
+        <span>Navigation: <kbd>↑</kbd> <kbd>↓</kbd> Select</span>
+        <span>Execute: <kbd>↵</kbd> Enter</span>
+        <span>Exit: <kbd>ESC</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ MOBILE NAV DRAWER ═══════════════ -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-drawer-header">
+      <span class="hud-node-indicator">
+        <span class="hud-prompt-user">uzair</span>@<span class="text-cyan">cloud-node-01</span>
+      </span>
+      <button id="mobileDrawerClose" style="background:transparent; border:none; color:#FFF; font-size:1.2rem; cursor:pointer;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <ul class="mobile-nav-list">
+      <li><a href="#about" class="mobile-nav-link">~/about</a></li>
+      <li><a href="#topology" class="mobile-nav-link">~/topology</a></li>
+      <li><a href="#containers" class="mobile-nav-link">~/containers</a></li>
+      <li><a href="#pipelines" class="mobile-nav-link">~/pipelines</a></li>
+      <li><a href="#git-log" class="mobile-nav-link">~/git-log</a></li>
+      <li><a href="#contact" class="mobile-nav-link">~/init-contact</a></li>
+    </ul>
+
+    <div style="margin-top:auto; padding-top:1.5rem; border-top:1px solid var(--border-subtle); display:flex; flex-direction:column; gap:0.6rem;">
+      <button class="btn-control-plane btn-primary-k8s" onclick="window.triggerResumeModal(); document.getElementById('mobileNavDrawer').classList.remove('open');">
+        <i class="fa-solid fa-cloud-arrow-down"></i> curl -O resume.pdf
+      </button>
+      <a href="https://wa.me/917889446114" target="_blank" class="btn-control-plane btn-secondary-curl" style="justify-content:center;">
+        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Terminal and Main Application Scripts -->
   <script src="assets/js/terminal.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
