@@ -17,6 +17,7 @@ const TerminalModule = {
   • <span style="color:#00F5A0;">docker ps</span>       - Active containerized production workloads & ports
   • <span style="color:#38BDF8;">k8s cluster</span>     - EKS node topology, pods & cluster status
   • <span style="color:#FF8A00;">aws stack</span>       - AWS VPC, subnets, EC2, ALB & S3 telemetry
+  • <span style="color:#00F5A0;">certs</span>           - Verified credentials & industry certifications
   • <span style="color:#38BDF8;">ping uzair</span>       - Dispatch ICMP probe & open contact gateway
   • <span style="color:#00F5A0;">resume</span>           - Retrieve official engineer curriculum vitae (PDF)
   • <span style="color:#A855F7;">skills</span>           - 11-Domain infrastructure matrix summary
@@ -24,9 +25,32 @@ const TerminalModule = {
 
     whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">System Architect // DevOps & Cloud Engineer</span>
 <span style="color:#94A3B8;">Education:</span> MCA (IGNOU, Started 2026 — Present) • BCA (University of Kashmir, 1st Class)
+<span style="color:#94A3B8;">Certifications:</span> Docker Essentials (IBM Cognitive Class) • DevOps & CI/CD Automation (Mltio University)
 <span style="color:#94A3B8;">Host Cluster:</span> AWS EKS (Kubernetes v1.30.2) • <span style="color:#38BDF8;">Kernel:</span> Linux 6.8.0-sysadmin x86_64
 
 <span style="color:#CBD5E1;">Systems builder focused on Linux kernel internals, Kubernetes orchestration, declarative Terraform infrastructure, and computer networking. Delivering fault-tolerant, self-healing platforms with zero tolerance for downtime.</span>`,
+
+    certs: `<strong style="color:#F8FAFC;">Verified Industry Certifications:</strong>
+  • <span style="color:#38BDF8; font-weight:700;">Docker Essentials: A Developer Introduction</span>
+    Issuer: <span style="color:#F8FAFC;">Cognitive Class (IBM Developer Skills Network)</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
+    Credential ID: <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span>
+    Focus: Docker container execution, image layers, and modern DevOps microservices.
+
+  • <span style="color:#A855F7; font-weight:700;">DevOps & CI/CD Automation</span>
+    Issuer: <span style="color:#F8FAFC;">Mltio University</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
+    Credential ID: <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span>
+    Focus: Automated GitHub Actions pipelines, security gates, and continuous delivery.`,
+
+    certifications: `<strong style="color:#F8FAFC;">Verified Industry Certifications:</strong>
+  • <span style="color:#38BDF8; font-weight:700;">Docker Essentials: A Developer Introduction</span>
+    Issuer: <span style="color:#F8FAFC;">Cognitive Class (IBM Developer Skills Network)</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
+    Credential ID: <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span>
+    Focus: Docker container execution, image layers, and modern DevOps microservices.
+
+  • <span style="color:#A855F7; font-weight:700;">DevOps & CI/CD Automation</span>
+    Issuer: <span style="color:#F8FAFC;">Mltio University</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
+    Credential ID: <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span>
+    Focus: Automated GitHub Actions pipelines, security gates, and continuous delivery.`,
 
     "docker ps": `<span style="color:#94A3B8;">CONTAINER ID   IMAGE                               COMMAND               STATUS                    PORTS                     NAMES</span>
 <span style="color:#38BDF8;">a8f4c2190e31</span>   uzair/nexora:v1.0.0                 "expo-start"          <span style="color:#00F5A0;">Up 21 days (healthy)</span>      0.0.0.0:8081->8081/tcp    nexora-app
