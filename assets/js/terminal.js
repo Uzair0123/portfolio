@@ -101,7 +101,8 @@ const TerminalModule = {
   init: function() {
     this.container = document.getElementById("heroTerminal");
     this.body = document.getElementById("termBody");
-    this.input = document.getElementById("termInput");
+    this.input = document.getElementById("terminal-input") || document.getElementById("termInput");
+    this.output = document.getElementById("terminal-output");
     this.tabZsh = document.getElementById("tabZsh");
     this.tabHtop = document.getElementById("tabHtop");
     this.tabLogs = document.getElementById("tabLogs");

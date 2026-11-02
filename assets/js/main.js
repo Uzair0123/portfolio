@@ -1,85 +1,34 @@
 /**
- * OLED Cyber-Cinema Orchestrator — Kinetic Motion Architecture v3.5
- * -------------------------------------------------------------
- * 1. Blast Door Preloader Curtain
- * 2. 60FPS Interactive HTML5 Network Topology Canvas (Multi-color & Data Packets)
- * 3. Robust GSAP ScrollTrigger Choreography (No opacity freeze)
- * 4. 3D Magnetic Avatar & Card Tilt with Specular Spotlight
- * 5. Slide-Over Architecture Blueprint Drawer
- * 6. Mobile Navigation Drawer & Touch Optimization
- * 7. Command Palette (Cmd+K) & SSH Webhook Dispatch
+ * Uzair Sultan — DevOps & Cloud Infrastructure Portfolio
+ * Phase 4.5: Interactive Terminal Engine & Cloud Network Topology Canvas
+ * ----------------------------------------------------------------------
+ * 1. 60FPS Interactive HTML5 Network Topology Canvas (#network-bg)
+ * 2. Interactive macOS/Linux Terminal Emulator (#terminal-input & #terminal-output)
+ * 3. 1-Click Command Pills Dispatcher (.pill-cmd-btn)
+ * 4. Smooth Anchor Navigation
  */
 
 (function () {
   'use strict';
 
   // ═══════════════════════════════════════════════════════════════
-  // 1. SYSTEM BOOT PRELOADER BLAST DOOR
+  // 1. CLOUD NETWORK TOPOLOGY BACKGROUND CANVAS
   // ═══════════════════════════════════════════════════════════════
-  function initPreloaderBlastDoor() {
-    const curtain = document.getElementById("preloaderCurtain");
-    const bar = document.getElementById("preloaderBar");
-    const pct = document.getElementById("preloaderPct");
-    const logsContainer = document.getElementById("preloaderLogs");
-    if (!curtain || !bar || !pct) return;
-
-    const bootSteps = [
-      { text: "[OK] Mounting Avatar Orbital HUD Frame...", at: 15 },
-      { text: "[OK] Spawning Interactive Constellation Canvas...", at: 45 },
-      { text: "[OK] Initializing Multi-AZ Cloud Topologies...", at: 75 },
-      { text: "⚡ [READY] Portfolio Control Plane Online.", at: 100 }
-    ];
-
-    let currentProgress = 0;
-    let stepIndex = 0;
-
-    const interval = setInterval(() => {
-      currentProgress += Math.floor(6 + Math.random() * 10);
-      if (currentProgress > 100) currentProgress = 100;
-
-      bar.style.width = `${currentProgress}%`;
-      pct.textContent = `${currentProgress}%`;
-
-      if (stepIndex < bootSteps.length && currentProgress >= bootSteps[stepIndex].at) {
-        if (logsContainer) {
-          const line = document.createElement("div");
-          line.textContent = bootSteps[stepIndex].text;
-          logsContainer.appendChild(line);
-        }
-        stepIndex++;
-      }
-
-      if (currentProgress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          curtain.classList.add("blast-open");
-          setTimeout(() => {
-            curtain.style.display = "none";
-            if (window.ScrollTrigger) {
-              window.ScrollTrigger.refresh();
-            }
-          }, 850);
-        }, 250);
-      }
-    }, 30);
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 2. 60FPS INTERACTIVE NETWORK TOPOLOGY CANVAS (UPGRADED)
-  // ═══════════════════════════════════════════════════════════════
-  function initNetworkConstellationCanvas() {
-    const canvas = document.getElementById("networkCanvas");
+  function initNetworkTopologyCanvas() {
+    const canvas = document.getElementById("network-bg");
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-    let width, height;
-    let nodes = [];
-    let packets = [];
+    if (!ctx) return;
+
+    let width = 0;
+    let height = 0;
+    let particles = [];
     const isMobile = window.innerWidth < 768;
-    const nodeCount = isMobile ? 35 : 65;
+    const particleCount = isMobile ? 35 : 70;
     const maxDistance = isMobile ? 110 : 145;
 
-    let mouse = { x: -9999, y: -9999, radius: 160 };
+    let mouse = { x: -9999, y: -9999 };
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -88,6 +37,7 @@
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
+    // Track mouse on desktop for interactive node linking
     window.addEventListener("pointermove", (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
@@ -98,526 +48,317 @@
       mouse.y = -9999;
     });
 
-    const colors = [
-      { r: 0, g: 245, b: 160 },   // Cyber Emerald
-      { r: 56, g: 189, b: 248 },  // Electric Cyan
-      { r: 168, g: 85, b: 247 },  // Plasma Violet
-      { r: 255, g: 138, b: 0 }    // Solar Amber
+    // Color palette: Cyber Emerald (#00F5A0) & Electric Cyan (#38BDF8)
+    const palette = [
+      { r: 0, g: 245, b: 160 },   // Cyber Emerald (--accent-bash)
+      { r: 56, g: 189, b: 248 }   // Electric Cyan (--accent-k8s)
     ];
 
-    for (let i = 0; i < nodeCount; i++) {
-      const col = colors[i % colors.length];
-      nodes.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.7,
-        vy: (Math.random() - 0.5) * 0.7,
-        radius: Math.random() * 2.2 + 1.2,
-        color: col,
-        pulse: Math.random() * Math.PI
+    for (let i = 0; i < particleCount; i++) {
+      const col = palette[i % palette.length];
+      particles.push({
+        x: Math.random() * (width || window.innerWidth),
+        y: Math.random() * (height || window.innerHeight),
+        vx: (Math.random() - 0.5) * 0.55,
+        vy: (Math.random() - 0.5) * 0.55,
+        radius: Math.random() * 1.8 + 1,
+        color: col
       });
     }
-
-    // Spawn animated data packets between nodes
-    setInterval(() => {
-      if (nodes.length < 2) return;
-      const i1 = Math.floor(Math.random() * nodes.length);
-      let closest = -1;
-      let minD = maxDistance;
-      for (let j = 0; j < nodes.length; j++) {
-        if (i1 === j) continue;
-        const d = Math.hypot(nodes[i1].x - nodes[j].x, nodes[i1].y - nodes[j].y);
-        if (d < minD) {
-          minD = d;
-          closest = j;
-        }
-      }
-      if (closest !== -1 && packets.length < 15) {
-        packets.push({
-          from: nodes[i1],
-          to: nodes[closest],
-          progress: 0,
-          speed: 0.02 + Math.random() * 0.02,
-          color: nodes[i1].color
-        });
-      }
-    }, 450);
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw and update nodes
-      for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-        n.x += n.vx;
-        n.y += n.vy;
-        n.pulse += 0.03;
+      // Update & render particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
 
-        if (n.x < 0 || n.x > width) n.vx *= -1;
-        if (n.y < 0 || n.y > height) n.vy *= -1;
+        p.x += p.vx;
+        p.y += p.vy;
 
-        // Mouse repulsion
-        const dx = mouse.x - n.x;
-        const dy = mouse.y - n.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          n.x -= (dx / dist) * force * 3.5;
-          n.y -= (dy / dist) * force * 3.5;
+        // Wrap around boundaries smoothly
+        if (p.x < -10) p.x = width + 10;
+        else if (p.x > width + 10) p.x = -10;
+        if (p.y < -10) p.y = height + 10;
+        else if (p.y > height + 10) p.y = -10;
+
+        // Draw particle node
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.7)`;
+        ctx.fill();
+
+        // Connect nearby particles with thin cloud network lines
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            const alpha = (1 - dist / maxDistance) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
+            ctx.lineWidth = 0.75;
+            ctx.stroke();
+          }
         }
 
-        // Pulse size
-        const currentR = n.radius + Math.sin(n.pulse) * 0.6;
+        // Interactive mouse connection on desktop
+        if (mouse.x > 0 && mouse.y > 0) {
+          const mdx = p.x - mouse.x;
+          const mdy = p.y - mouse.y;
+          const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
 
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, Math.max(0.5, currentR), 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, 0.85)`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, 0.6)`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        // Draw connections
-        for (let j = i + 1; j < nodes.length; j++) {
-          const n2 = nodes[j];
-          const distNodes = Math.hypot(n.x - n2.x, n.y - n2.y);
-          if (distNodes < maxDistance) {
-            const alpha = (1 - distNodes / maxDistance) * 0.28;
+          if (mDist < 160) {
+            const mAlpha = (1 - mDist / 160) * 0.45;
             ctx.beginPath();
-            ctx.moveTo(n.x, n.y);
-            ctx.lineTo(n2.x, n2.y);
-            ctx.strokeStyle = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, ${alpha})`;
-            ctx.lineWidth = 0.85;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${mAlpha})`;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
           }
         }
       }
 
-      // Draw moving data packets
-      for (let p = packets.length - 1; p >= 0; p--) {
-        const pkt = packets[p];
-        pkt.progress += pkt.speed;
-        if (pkt.progress >= 1) {
-          packets.splice(p, 1);
-          continue;
-        }
-        const px = pkt.from.x + (pkt.to.x - pkt.from.x) * pkt.progress;
-        const py = pkt.from.y + (pkt.to.y - pkt.from.y) * pkt.progress;
-
-        ctx.beginPath();
-        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgb(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b})`;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = `rgb(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b})`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
       requestAnimationFrame(animate);
     }
+
     animate();
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 3. SAFE ANIMATION & SCROLL CHOREOGRAPHY (ALWAYS VISIBLE)
+  // 2. INTERACTIVE TERMINAL ENGINE
   // ═══════════════════════════════════════════════════════════════
-  function initSmoothScrollAndGSAP() {
-    const isDesktop = window.innerWidth >= 1024;
+  function initInteractiveTerminal() {
+    const termBody = document.getElementById("termBody");
+    const termOutput = document.getElementById("terminal-output");
+    const termInput = document.getElementById("terminal-input");
+    const pills = document.querySelectorAll(".pill-cmd-btn");
 
-    // Initialize Lenis ONLY on Desktop to keep mobile touch scroll 100% native & fluid
-    if (isDesktop && typeof window.Lenis !== "undefined") {
-      const lenis = new window.Lenis({
-        duration: 1.1,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true
-      });
+    if (!termBody || !termInput || !termOutput) return;
 
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+    // Command History
+    const history = [];
+    let historyIndex = -1;
+
+    // Helper: Escape HTML to prevent XSS
+    function escapeHTML(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Scroll terminal to latest output line
+    function scrollToBottom() {
+      termBody.scrollTop = termBody.scrollHeight;
+    }
+
+    // Command dictionary responses
+    const commands = {
+      help: `
+<div class="terminal-line response">
+  <span style="color:#00F5A0; font-weight:700;">AVAILABLE CLOUD CONTROL &amp; LINUX COMMANDS:</span><br>
+  • <span style="color:#38BDF8; font-weight:600;">whoami</span>          <span style="color:#94A3B8;">— Identity, engineering background &amp; philosophy</span><br>
+  • <span style="color:#00F5A0; font-weight:600;">skills</span>          <span style="color:#94A3B8;">— Core technology stack &amp; engineering pillars</span><br>
+  • <span style="color:#FF8A00; font-weight:600;">docker ps</span>       <span style="color:#94A3B8;">— List active containerized microservices &amp; ports</span><br>
+  • <span style="color:#38BDF8; font-weight:600;">kubectl get nodes</span> <span style="color:#94A3B8;">— Inspect Kubernetes cluster nodes &amp; topology</span><br>
+  • <span style="color:#A855F7; font-weight:600;">aws stack</span>       <span style="color:#94A3B8;">— AWS VPC, EKS, ALB &amp; CloudFront infrastructure</span><br>
+  • <span style="color:#00F5A0; font-weight:600;">certs</span>           <span style="color:#94A3B8;">— Verified industry certifications &amp; credentials</span><br>
+  • <span style="color:#38BDF8; font-weight:600;">ping uzair</span>       <span style="color:#94A3B8;">— Test low-latency connection to contact gateway</span><br>
+  • <span style="color:#A855F7; font-weight:600;">projects</span>        <span style="color:#94A3B8;">— Production architecture systems &amp; deployments</span><br>
+  • <span style="color:#64748B; font-weight:600;">clear</span>           <span style="color:#94A3B8;">— Clear the active terminal buffer</span>
+</div>`,
+
+      whoami: `
+<div class="terminal-line response">
+  <strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">DevOps &amp; Cloud Infrastructure Architect</span><br>
+  <span style="color:#94A3B8;">From Linux kernel systems to cloud infrastructure, I turn code into automated, production-ready deployments.</span><br>
+  <span style="color:#38BDF8;">Education:</span> Master of Computer Applications (IGNOU, Started 2026 — Present) • BCA (1st Class)<br>
+  <span style="color:#A855F7;">Mission:</span> Building self-healing, zero-downtime platforms with declarative IaC and hardened security.
+</div>`,
+
+      skills: `
+<div class="terminal-line response">
+  <span style="color:#00F5A0; font-weight:700;">• [CONTAINERS &amp; K8S]</span>  <span style="color:#F8FAFC;">Docker, Multi-stage Builds, Kubernetes, Helm, Ingress-NGINX</span><br>
+  <span style="color:#FF8A00; font-weight:700;">• [AWS CLOUD INFRA]</span>   <span style="color:#F8FAFC;">VPC, EC2, S3, IAM, EKS, ALB, Route 53, CloudWatch</span><br>
+  <span style="color:#A855F7; font-weight:700;">• [INFRASTRUCTURE]</span>    <span style="color:#F8FAFC;">Terraform HCL, GitOps (ArgoCD), GitHub Actions, Ansible</span><br>
+  <span style="color:#00F5A0; font-weight:700;">• [LINUX &amp; NETWORKS]</span>  <span style="color:#F8FAFC;">Ubuntu, Arch, Bash Scripting, Systemd, TCP/IP, Wireshark, BGP</span><br>
+  <span style="color:#38BDF8; font-weight:700;">• [CI/CD &amp; DEVOPS]</span>    <span style="color:#F8FAFC;">Automated Linting, Security Scanning, Zero-Downtime Rollouts</span>
+</div>`,
+
+      certs: `
+<div class="terminal-line response">
+  <strong style="color:#F8FAFC;">VERIFIED INDUSTRY CERTIFICATIONS:</strong><br>
+  • <span style="color:#38BDF8; font-weight:700;">Docker Essentials: A Developer Introduction</span><br>
+    <span style="color:#94A3B8;">Issuer:</span> Cognitive Class (IBM Developer Skills Network) • <span style="color:#00F5A0;">Issued Oct 2026</span><br>
+    <span style="color:#94A3B8;">Credential ID:</span> <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span><br>
+    <span style="color:#94A3B8;">Focus:</span> Containerization, Docker images, and modern microservices workflows.<br><br>
+  • <span style="color:#00F5A0; font-weight:700;">DevOps &amp; CI/CD Automation</span><br>
+    <span style="color:#94A3B8;">Issuer:</span> Mltio University • <span style="color:#00F5A0;">Issued Oct 2026</span><br>
+    <span style="color:#94A3B8;">Credential ID:</span> <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span><br>
+    <span style="color:#94A3B8;">Focus:</span> Automated delivery pipelines, testing gates, and infrastructure orchestration.
+</div>`,
+
+      "docker ps": `
+<div class="terminal-line response" style="font-size:0.8rem; overflow-x:auto;">
+  <span style="color:#94A3B8;">CONTAINER ID   IMAGE                               COMMAND               STATUS                    PORTS                     NAMES</span><br>
+  <span style="color:#38BDF8;">a8f4c2190e31</span>   uzair/nexora:v1.0.0                 "expo-start"          <span style="color:#00F5A0;">Up 21 days (healthy)</span>      0.0.0.0:8081-&gt;8081/tcp    nexora-app<br>
+  <span style="color:#38BDF8;">b7190d4e5f22</span>   uzair/kashmir-kesar-kingdom:v2.4    "nginx -g 'daemon'"   <span style="color:#00F5A0;">Up 60 days (healthy)</span>      0.0.0.0:443-&gt;80/tcp       kkk-export-web<br>
+  <span style="color:#38BDF8;">c3392b1a8d05</span>   uzair/craver-fastfood:v1.4.2        "node server.js"      <span style="color:#00F5A0;">Up 38 days (healthy)</span>      0.0.0.0:3000-&gt;3000/tcp    craver-order-engine<br>
+  <span style="color:#38BDF8;">d9910f8a3c44</span>   uzair/sys-inspect:latest            "sys-inspect"         <span style="color:#00F5A0;">Up 12 days (healthy)</span>      127.0.0.1:9100-&gt;9100/tcp  sys-inspect-telemetry
+</div>`,
+
+      "kubectl get nodes": `
+<div class="terminal-line response" style="font-size:0.8rem; overflow-x:auto;">
+  <span style="color:#94A3B8;">NAME                                         STATUS   ROLES           AGE    VERSION</span><br>
+  <span style="color:#00F5A0;">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)<br>
+  <span style="color:#00F5A0;">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)<br>
+  <span style="color:#00F5A0;">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)<br>
+  <span style="color:#38BDF8;">CLUSTER STATUS:</span> 3/3 Nodes Ready • 12/12 Pods InSync • Ingress-NGINX: Active • Flannel CNI: 0 errors
+</div>`,
+
+      "aws stack": `
+<div class="terminal-line response">
+  <span style="color:#FF8A00; font-weight:700;">AWS TOPOLOGY // REGION: ap-south-1 (Mumbai)</span><br>
+  ├── <span style="color:#38BDF8;">VPC:</span> vpc-0a4b9c1d (CIDR: 10.0.0.0/16)<br>
+  │   ├── Public Subnets (ap-south-1a &amp; 1b) -&gt; Internet Gateway + Application Load Balancer<br>
+  │   └── Private Subnets (ap-south-1a &amp; 1b) -&gt; NAT Gateway + EKS Managed Nodes<br>
+  ├── <span style="color:#00F5A0;">EKS Cluster:</span> portfolio-eks (v1.30.2, Multi-AZ)<br>
+  ├── <span style="color:#A855F7;">Storage &amp; CDN:</span> S3 bucket 'uzair-vault-artifacts' with CloudFront Edge Caching<br>
+  └── <span style="color:#00F5A0;">Security:</span> IAM Least-Privilege Role Policies + AWS Secrets Manager
+</div>`,
+
+      "ping uzair": `
+<div class="terminal-line response">
+  <span style="color:#38BDF8;">PING uzair.cloud (13.232.0.1): 56 data bytes</span><br>
+  64 bytes from 13.232.0.1: icmp_seq=0 ttl=64 time=0.038 ms<br>
+  64 bytes from 13.232.0.1: icmp_seq=1 ttl=64 time=0.035 ms<br>
+  64 bytes from 13.232.0.1: icmp_seq=2 ttl=64 time=0.037 ms<br>
+  <span style="color:#00F5A0;">--- 0% packet loss, handshake verified. Route open to uzairteeli123456789@gmail.com ---</span>
+</div>`,
+
+      projects: `
+<div class="terminal-line response">
+  <strong style="color:#F8FAFC;">PRODUCTION ARCHITECTURE PROJECTS:</strong><br>
+  • <span style="color:#38BDF8; font-weight:600;">Nexora Mobile App</span> — React Native 0.81 &amp; Expo SDK 54 cross-platform client<br>
+  • <span style="color:#00F5A0; font-weight:600;">Kashmir Kesar Kingdom</span> — Global export e-commerce architecture (NGINX, AWS)<br>
+  • <span style="color:#FF8A00; font-weight:600;">Craver Fastfood</span> — High-throughput food ordering engine (Node.js, React)<br>
+  • <span style="color:#A855F7; font-weight:600;">Sys-Inspect Telemetry</span> — Linux node exporter and system inspection utility<br>
+  <span style="color:#94A3B8;">(Tip: Scroll down to #projects or type 'docker ps' to see active containers)</span>
+</div>`
+    };
+
+    // Aliases
+    commands["k8s nodes"] = commands["kubectl get nodes"];
+    commands["kubectl"] = commands["kubectl get nodes"];
+    commands["certifications"] = commands["certs"];
+    commands["resume"] = `
+<div class="terminal-line response">
+  <span style="color:#38BDF8;">Fetching official Curriculum Vitae artifact...</span><br>
+  <span style="color:#00F5A0;">[200 OK]</span> Resume verified. Navigating to contact gateway...
+</div>`;
+
+    // Execute given command string
+    function executeCommand(rawCmd) {
+      const trimmed = (rawCmd || "").trim();
+      if (!trimmed) return;
+
+      // Add to history
+      history.push(trimmed);
+      historyIndex = -1;
+
+      // Echo command line into output
+      const cmdEcho = document.createElement("p");
+      cmdEcho.className = "terminal-line";
+      cmdEcho.innerHTML = `<span class="prompt">uzair@cloud-node-01:~$</span> <span class="command">${escapeHTML(trimmed)}</span>`;
+      termOutput.appendChild(cmdEcho);
+
+      const normalized = trimmed.toLowerCase();
+
+      if (normalized === "clear") {
+        termOutput.innerHTML = "";
+      } else if (commands[normalized]) {
+        const respContainer = document.createElement("div");
+        respContainer.innerHTML = commands[normalized];
+        termOutput.appendChild(respContainer);
+      } else {
+        const err = document.createElement("p");
+        err.className = "terminal-line response";
+        err.style.color = "#EF4444";
+        err.innerHTML = `zsh: command not found: <strong style="color:#F8FAFC;">${escapeHTML(trimmed)}</strong>. Type '<span style="color:#00F5A0; cursor:pointer;" onclick="document.getElementById('terminal-input').value='help'; document.getElementById('terminal-input').dispatchEvent(new KeyboardEvent('keydown', {key:'Enter'}));">help</span>' for available commands.`;
+        termOutput.appendChild(err);
       }
-      requestAnimationFrame(raf);
 
-      if (typeof window.ScrollTrigger !== "undefined") {
-        lenis.on("scroll", window.ScrollTrigger.update);
-      }
+      scrollToBottom();
     }
 
-    // Ensure all cards are explicitly visible by default in case GSAP fails
-    document.querySelectorAll(".project-container-card, .bento-box, .git-commit-node").forEach(el => {
-      el.style.opacity = "1";
-      el.style.visibility = "visible";
-    });
-
-    if (typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined") {
-      window.gsap.registerPlugin(window.ScrollTrigger);
-
-      // Graceful reveal that does NOT hide cards if user is already at the section
-      window.ScrollTrigger.batch(".bento-box", {
-        start: "top 85%",
-        once: true,
-        onEnter: (batch) => {
-          window.gsap.fromTo(batch, 
-            { y: 25, opacity: 0.6 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "power2.out", overwrite: "auto" }
-          );
-        }
-      });
-
-      window.ScrollTrigger.batch(".project-container-card", {
-        start: "top 85%",
-        once: true,
-        onEnter: (batch) => {
-          window.gsap.fromTo(batch, 
-            { y: 25, opacity: 0.6 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out", overwrite: "auto" }
-          );
-        }
-      });
-    }
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 4. 3D MAGNETIC AVATAR & CARD TILT WITH SPOTLIGHT
-  // ═══════════════════════════════════════════════════════════════
-  function init3DMagneticTilt() {
-    const cards = document.querySelectorAll(".hero-identity-card, .hero-glass-terminal, .bento-box, .project-container-card, .commit-card-box");
-    const avatarStage = document.getElementById("avatarStage");
-
-    window.addEventListener("pointermove", (e) => {
-      const { clientX, clientY } = e;
-
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-      });
-
-      // Magnetic 3D tilt on Hero Avatar
-      if (avatarStage && window.innerWidth >= 768) {
-        const rect = avatarStage.getBoundingClientRect();
-        if (clientX >= rect.left - 40 && clientX <= rect.right + 40 && clientY >= rect.top - 40 && clientY <= rect.bottom + 40) {
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const normX = (clientX - cx) / (rect.width / 2);
-          const normY = (clientY - cy) / (rect.height / 2);
-          avatarStage.style.transform = `perspective(1000px) rotateY(${(normX * 12).toFixed(1)}deg) rotateX(${(-normY * 12).toFixed(1)}deg)`;
-        } else {
-          avatarStage.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
-        }
-      }
-    }, { passive: true });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 5. SLIDE-OVER ARCHITECTURE BLUEPRINT DRAWER
-  // ═══════════════════════════════════════════════════════════════
-  const blueprintData = {
-    nexora: {
-      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
-      title: "Nexora — Quick-Commerce Mobile Architecture",
-      diagram: `[React Native 0.81 (Mobile APK)]
-    ├── Expo Router v6 (Deep-Linked Route Architecture)
-    ├── SQLite Client Cache (Offline Order Queue)
-    └── Cloudflare Edge Proxy (6-Digit OTP Auth)
-           └── Real-Time Geolocation Fulfillment Radar`,
-      impact: "Zero-latency mobile checkout architecture with offline-first SQLite synchronization, OTP security boundaries, and responsive native UI running at locked 60 FPS."
-    },
-    kkk: {
-      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
-      title: "Kashmir Kesar Kingdom — Global Export Engine",
-      diagram: `[User Browser Across 12+ Nations]
-    ├── Cloudflare Edge CDN (SSL/TLS 1.3 Termination)
-    ├── NGINX Reverse Proxy (Brotli/Gzip: 95% Payload Drop)
-    ├── Multi-Currency Dynamic Worker (USD, EUR, GBP, AED, INR)
-    └── Service Worker Cache Storage (PWA Offline Catalog)`,
-      impact: "Reduced web asset footprint from 48.3MB to 2.43MB (95% drop) enabling instant load times over global cellular connections, integrated with an automated B2B RFQ cost estimator."
-    },
-    craver: {
-      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
-      title: "Craver Fast Food — Modular Ordering Engine",
-      diagram: `[Modular ES6+ Reactive Client]
-    ├── LocalStorage Persistent State (Cart & Coupon Engine)
-    ├── GitHub Actions Automated CI/CD Pipeline
-    └── Zero-Downtime GitHub Pages CDN Edge Deployment`,
-      impact: "Modular componentized architecture with real-time catalog search, dietary filter matrix, and continuous automated build validation upon git push."
-    },
-    sysinspect: {
-      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
-      title: "sys-inspect — Linux Kernel Telemetry CLI",
-      diagram: `[Direct /proc & /sys Memory Readers]
-    ├── Zombie/Defunct Process PID Tree Scanner
-    ├── Inode & File Descriptor Saturation Evaluator
-    └── Dynamic ANSI Health Triage Generator`,
-      impact: "Production Linux auditing CLI reporting kernel performance primitives, detecting memory leaks, and isolating zombie processes with strict defensive pipefail handling."
-    },
-    networklab: {
-      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
-      title: "Network Protocol Labs & Packet Inspector",
-      diagram: `[Wireshark Raw Interface eth0]
-    ├── TCP 3-Way Handshake Sequence Analysis
-    ├── CIDR Subnet Calculator (VLSM IPv4/IPv6)
-    └── BGP Dynamic Peering Route Simulator (ASN 64512)`,
-      impact: "In-depth packet capture and protocol verification across OSI Layers 2 through 7, auditing TCP window scaling, MTU fragmentation, and DNS authoritative propagation."
-    },
-    algoengine: {
-      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
-      title: "Algo-Engine — Python DSA & Distributed Algorithms",
-      diagram: `[Big-O Asymptotic Complexity Profiler]
-    ├── LRU Cache Engine (O(1) Memory Access)
-    ├── Graph Shortest-Path Router (Dijkstra Algorithm)
-    └── Automated PyTest Continuous Benchmark Suite`,
-      impact: "Clean implementations of distributed consensus primitives, tree balancing, and graph routing algorithms optimized for execution speed and minimal memory footprint."
-    }
-  };
-
-  function initArchitectureDrawer() {
-    const backdrop = document.getElementById("archDrawerBackdrop");
-    const closeBtn = document.getElementById("archDrawerClose");
-    const tagEl = document.getElementById("drawerTag");
-    const titleEl = document.getElementById("drawerTitle");
-    const diagramEl = document.getElementById("drawerDiagram");
-    const impactEl = document.getElementById("drawerImpact");
-
-    if (!backdrop) return;
-
-    function openDrawer(key) {
-      const data = blueprintData[key];
-      if (!data) return;
-
-      tagEl.textContent = data.tag;
-      titleEl.textContent = data.title;
-      diagramEl.textContent = data.diagram;
-      impactEl.textContent = data.impact;
-
-      backdrop.classList.add("is-open");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeDrawer() {
-      backdrop.classList.remove("is-open");
-      document.body.style.overflow = "";
-    }
-
-    document.querySelectorAll(".btn-blueprint-drawer[data-project]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const key = btn.dataset.project;
-        openDrawer(key);
-      });
-    });
-
-    if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
-    backdrop.addEventListener("click", (e) => {
-      if (e.target === backdrop) closeDrawer();
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
-        closeDrawer();
-      }
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 6. MOBILE NAVIGATION DRAWER
-  // ═══════════════════════════════════════════════════════════════
-  function initMobileDrawer() {
-    const toggleBtn = document.getElementById("mobileMenuBtn");
-    const drawer = document.getElementById("mobileNavDrawer");
-    const closeBtn = document.getElementById("mobileDrawerClose");
-    if (!toggleBtn || !drawer) return;
-
-    function openMobileMenu() {
-      drawer.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeMobileMenu() {
-      drawer.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-
-    toggleBtn.addEventListener("click", openMobileMenu);
-    if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
-
-    drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 7. COMMAND PALETTE (CMD + K) & RESUME SIMULATOR
-  // ═══════════════════════════════════════════════════════════════
-  function initCommandPalette() {
-    const modal = document.getElementById("cmdPaletteModal");
-    const triggerBtn = document.getElementById("cmdPaletteBtn");
-    const closeBtn = document.getElementById("cmdPaletteClose");
-    const input = document.getElementById("cmdSearchInput");
-    const results = document.getElementById("cmdResultsList");
-    if (!modal || !input || !results) return;
-
-    const items = [
-      { title: "Jump to Hero Terminal", icon: "fa-terminal", badge: "#terminal", action: () => scrollToId("terminal") },
-      { title: "Jump to 11-Domain Tech Stack Bento", icon: "fa-network-wired", badge: "#topology", action: () => scrollToId("topology") },
-      { title: "Jump to Active Containers Registry", icon: "fa-cubes", badge: "#containers", action: () => scrollToId("containers") },
-      { title: "Jump to Git Commit Graph Timeline", icon: "fa-code-commit", badge: "#git-log", action: () => scrollToId("git-log") },
-      { title: "Open SSH Contact Gateway", icon: "fa-satellite-dish", badge: "#contact", action: () => scrollToId("contact") },
-      { title: "Execute 'docker ps' in Terminal", icon: "fa-docker", badge: "CLI", action: () => runCli("docker ps") },
-      { title: "Execute 'k8s cluster' in Terminal", icon: "fa-dharmachakra", badge: "CLI", action: () => runCli("k8s cluster") },
-      { title: "Download Resume (curl -O resume.pdf)", icon: "fa-file-arrow-down", badge: "PDF", action: () => triggerResumeDownload() },
-      { title: "Direct WhatsApp Recruitment Chat", icon: "fa-whatsapp", badge: "Chat", action: () => window.open("https://wa.me/917889446114?text=Hi%20Uzair,%20I%20am%20reviewing%20your%20DevOps%20portfolio!", "_blank") },
-      { title: "Copy Email: uzairteeli123456789@gmail.com", icon: "fa-envelope", badge: "Copy", action: () => copyEmail() }
-    ];
-
-    let filtered = [...items];
-    let selectedIdx = 0;
-
-    function render() {
-      results.innerHTML = "";
-      filtered.forEach((it, idx) => {
-        const row = document.createElement("div");
-        row.className = `cmd-result-item ${idx === selectedIdx ? 'selected' : ''}`;
-        row.innerHTML = `
-          <div style="display:flex; align-items:center; gap:0.65rem;">
-            <i class="fa-solid ${it.icon}" style="color:#00F5A0; width:18px;"></i>
-            <span style="font-size:0.88rem; font-weight:500;">${it.title}</span>
-          </div>
-          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-slate); background:rgba(255,255,255,0.05); padding:0.15rem 0.45rem; border-radius:4px;">${it.badge}</span>
-        `;
-        row.addEventListener("click", () => {
-          close();
-          it.action();
-        });
-        results.appendChild(row);
-      });
-    }
-
-    function open() {
-      modal.classList.add("is-active");
-      document.body.style.overflow = "hidden";
-      input.value = "";
-      filtered = [...items];
-      selectedIdx = 0;
-      render();
-      setTimeout(() => input.focus(), 60);
-    }
-
-    function close() {
-      modal.classList.remove("is-active");
-      document.body.style.overflow = "";
-    }
-
-    input.addEventListener("input", (e) => {
-      const q = e.target.value.toLowerCase().trim();
-      filtered = items.filter(it => it.title.toLowerCase().includes(q) || it.badge.toLowerCase().includes(q));
-      selectedIdx = 0;
-      render();
-    });
-
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowDown") {
+    // Input keyboard event listener
+    termInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
         e.preventDefault();
-        selectedIdx = (selectedIdx + 1) % filtered.length;
-        render();
+        const cmd = termInput.value;
+        termInput.value = "";
+        executeCommand(cmd);
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        selectedIdx = (selectedIdx - 1 + filtered.length) % filtered.length;
-        render();
-      } else if (e.key === "Enter" && filtered[selectedIdx]) {
+        if (history.length > 0 && historyIndex < history.length - 1) {
+          historyIndex++;
+          termInput.value = history[history.length - 1 - historyIndex];
+        }
+      } else if (e.key === "ArrowDown") {
         e.preventDefault();
-        close();
-        filtered[selectedIdx].action();
-      } else if (e.key === "Escape") {
-        close();
+        if (historyIndex > 0) {
+          historyIndex--;
+          termInput.value = history[history.length - 1 - historyIndex];
+        } else if (historyIndex === 0) {
+          historyIndex = -1;
+          termInput.value = "";
+        }
       }
     });
 
-    window.addEventListener("keydown", (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        if (modal.classList.contains("is-active")) close();
-        else open();
-      }
+    // 1-Click Command Pills binding
+    pills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const cmd = pill.getAttribute("data-cmd") || pill.textContent.replace(/^[^\w]+/, '').trim();
+        if (cmd) {
+          termInput.value = "";
+          executeCommand(cmd);
+          termInput.focus();
+        }
+      });
     });
 
-    if (triggerBtn) triggerBtn.addEventListener("click", open);
-    if (closeBtn) closeBtn.addEventListener("click", close);
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) close();
+    // Focus input when user clicks anywhere inside the terminal body
+    termBody.addEventListener("click", () => {
+      termInput.focus();
     });
-  }
 
-  function scrollToId(id) {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  }
-
-  function runCli(command) {
-    scrollToId("terminal");
-    if (window.TerminalModule) {
-      window.TerminalModule.switchTab('zsh');
-      window.TerminalModule.typeAndExecute(command);
-    }
-  }
-
-  function copyEmail() {
-    const email = "uzairteeli123456789@gmail.com";
-    navigator.clipboard.writeText(email).then(() => {
-      alert("Email copied to clipboard: " + email);
-    });
-  }
-
-  function triggerResumeDownload() {
-    window.open("https://github.com/Uzair0123/portfolio/raw/main/docs/LINKEDIN_PROFILE.md", "_blank");
-  }
-  window.triggerResumeModal = triggerResumeDownload;
-
-  // ═══════════════════════════════════════════════════════════════
-  // 8. SSH CONTACT WEBHOOK DISPATCH
-  // ═══════════════════════════════════════════════════════════════
-  function initContactWebhook() {
-    const form = document.getElementById("sshContactForm");
-    const feedback = document.getElementById("sshFeedback");
-    if (!form || !feedback) return;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("senderName").value.trim();
-      const email = document.getElementById("senderEmail").value.trim();
-      const msg = document.getElementById("senderMessage").value.trim();
-
-      feedback.innerHTML = `
-        <div style="color:#38BDF8;">[CONNECT] Establishing TLS 1.3 socket with connect@uzair.cloud on port 22...</div>
-        <div style="color:#A855F7;">[AUTH] ED25519 signature validated. Dispatching payload...</div>
-      `;
-
-      setTimeout(() => {
-        feedback.innerHTML += `
-          <div style="color:#00F5A0; font-weight:700;">[200 OK] Packet delivered! Forwarding to Uzair's terminal mail client.</div>
-        `;
-        const mailto = `mailto:uzairteeli123456789@gmail.com?subject=Engineering%20Collaboration%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
-        setTimeout(() => {
-          window.location.href = mailto;
-        }, 1200);
-      }, 950);
-    });
+    // Initial scroll
+    scrollToBottom();
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 9. CODE TOGGLE (BASH VS PYTHON)
+  // 3. SMOOTH NAVIGATION FOR IN-PAGE ANCHORS
   // ═══════════════════════════════════════════════════════════════
-  function initCodeToggle() {
-    document.querySelectorAll(".auto-tab-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const tab = btn.dataset.tab;
-        document.querySelectorAll(".auto-tab-btn").forEach(b => b.classList.remove("active"));
-        document.querySelectorAll(".auto-panel").forEach(p => p.style.display = "none");
-
-        btn.classList.add("active");
-        const active = document.getElementById(`panel-${tab}`);
-        if (active) active.style.display = "block";
+  function initSmoothAnchorScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        if (targetId && targetId !== "#") {
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }
       });
     });
   }
@@ -625,15 +366,15 @@
   // ═══════════════════════════════════════════════════════════════
   // INITIALIZATION ON DOM READY
   // ═══════════════════════════════════════════════════════════════
-  document.addEventListener("DOMContentLoaded", () => {
-    initPreloaderBlastDoor();
-    initNetworkConstellationCanvas();
-    initSmoothScrollAndGSAP();
-    init3DMagneticTilt();
-    initArchitectureDrawer();
-    initMobileDrawer();
-    initCommandPalette();
-    initContactWebhook();
-    initCodeToggle();
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initNetworkTopologyCanvas();
+      initInteractiveTerminal();
+      initSmoothAnchorScroll();
+    });
+  } else {
+    initNetworkTopologyCanvas();
+    initInteractiveTerminal();
+    initSmoothAnchorScroll();
+  }
 })();

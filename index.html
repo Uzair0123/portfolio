@@ -21,6 +21,9 @@
 </head>
 <body>
 
+  <!-- Cloud Network Topology Canvas Background -->
+  <canvas id="network-bg"></canvas>
+
   <!-- ==================== 1. STATUS BAR / HUD NAV ==================== -->
   <nav class="status-nav">
     <div class="nav-container">
@@ -87,12 +90,17 @@
               <div class="terminal-title">zsh: 0</div>
             </div>
             <div class="terminal-body" id="termBody">
-              <p class="terminal-line"><span class="prompt">uzair@cloud-node-01:~$</span> <span class="command">whoami</span></p>
-              <p class="terminal-line response">Uzair Sultan — DevOps &amp; Cloud Infrastructure Architect</p>
-              <p class="terminal-line"><span class="prompt">uzair@cloud-node-01:~$</span> <span class="command" style="color: white">kubectl get nodes</span></p>
-              <p class="terminal-line response">ip-10-0-1-101.ap-south-1   Ready   control-plane   180d   v1.30.2</p>
-              <p class="terminal-line response">ip-10-0-1-102.ap-south-1   Ready   worker,node     180d   v1.30.2</p>
-              <p class="terminal-line"><span class="prompt">uzair@cloud-node-01:~$</span> <span class="cursor">█</span></p>
+              <div id="terminal-output">
+                <p class="terminal-line"><span class="prompt">uzair@cloud-node-01:~$</span> <span class="command">whoami</span></p>
+                <p class="terminal-line response">Uzair Sultan — DevOps &amp; Cloud Infrastructure Architect</p>
+                <p class="terminal-line"><span class="prompt">uzair@cloud-node-01:~$</span> <span class="command" style="color: white">kubectl get nodes</span></p>
+                <p class="terminal-line response">ip-10-0-1-101.ap-south-1   Ready   control-plane   180d   v1.30.2</p>
+                <p class="terminal-line response">ip-10-0-1-102.ap-south-1   Ready   worker,node     180d   v1.30.2</p>
+              </div>
+              <div class="terminal-input-row">
+                <span class="prompt">uzair@cloud-node-01:~$</span>
+                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus />
+              </div>
             </div>
           </div>
 
@@ -516,5 +524,7 @@
     </div>
   </footer>
 
+  <!-- Vanilla JS Engine -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
