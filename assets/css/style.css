@@ -557,15 +557,37 @@ code, kbd, pre, samp {
 }
 
 /* Domain-Specific Bento Highlights & Specular Hover Glows */
-#skill-docker-k8s {
+#skill-kubernetes {
   border-top: 2px solid var(--accent-k8s);
 }
-#skill-docker-k8s .card-badge {
+#skill-kubernetes .card-badge {
   color: var(--accent-k8s);
 }
-#skill-docker-k8s:hover {
+#skill-kubernetes:hover {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.4);
+}
+
+#skill-docker {
+  border-top: 2px solid var(--accent-k8s);
+}
+#skill-docker .card-badge {
+  color: var(--accent-k8s);
+}
+#skill-docker:hover {
   border-color: var(--accent-k8s);
   box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.35);
+}
+
+#skill-cicd {
+  border-top: 2px solid var(--accent-tf);
+}
+#skill-cicd .card-badge {
+  color: var(--accent-tf);
+}
+#skill-cicd:hover {
+  border-color: var(--accent-tf);
+  box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.4);
 }
 
 #skill-aws-cloud {
@@ -590,15 +612,26 @@ code, kbd, pre, samp {
   box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.35);
 }
 
-#skill-linux-networking {
+#skill-linux {
   border-top: 2px solid var(--accent-bash);
 }
-#skill-linux-networking .card-badge {
+#skill-linux .card-badge {
   color: var(--accent-bash);
 }
-#skill-linux-networking:hover {
+#skill-linux:hover {
   border-color: var(--accent-bash);
   box-shadow: 0 12px 30px -8px rgba(0, 245, 160, 0.35);
+}
+
+#skill-networking {
+  border-top: 2px solid var(--accent-k8s);
+}
+#skill-networking .card-badge {
+  color: var(--accent-k8s);
+}
+#skill-networking:hover {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.35);
 }
 
 #skill-python-bash {

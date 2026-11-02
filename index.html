@@ -104,21 +104,43 @@
         </header>
 
         <div class="bento-grid">
-          <!-- Card 1: Docker & K8s -->
-          <div class="bento-card" id="skill-docker-k8s">
+          <!-- Card 1: Kubernetes -->
+          <div class="bento-card" id="skill-kubernetes">
             <div class="card-header">
-              <span class="card-badge">CONTAINERS</span>
-              <h3>Docker &amp; K8s</h3>
+              <span class="card-badge">ORCHESTRATION</span>
+              <h3>Kubernetes (K8s)</h3>
             </div>
             <div class="card-body">
-              <p>Production containerization, multi-stage Docker builds, Kubernetes manifests, Pod topology, and Ingress routing.</p>
+              <p>Multi-node Pod replica management, rolling deployments, DaemonSets, ConfigMaps/Secrets, Helm charts, and Ingress-NGINX controllers.</p>
             </div>
           </div>
 
-          <!-- Card 2: AWS Cloud -->
+          <!-- Card 2: Docker Containers -->
+          <div class="bento-card" id="skill-docker">
+            <div class="card-header">
+              <span class="card-badge">CONTAINERIZATION</span>
+              <h3>Docker Containers</h3>
+            </div>
+            <div class="card-body">
+              <p>Production containerization, multi-stage Docker builds, layer caching, distroless minimal base images, and Docker Compose orchestration.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: CI/CD Pipelines -->
+          <div class="bento-card" id="skill-cicd">
+            <div class="card-header">
+              <span class="card-badge">CI / CD AUTOMATION</span>
+              <h3>CI/CD Pipelines</h3>
+            </div>
+            <div class="card-body">
+              <p>Automated build/test/release pipelines with GitHub Actions, container registry publishing, semantic version tagging, and automated continuous delivery.</p>
+            </div>
+          </div>
+
+          <!-- Card 4: AWS Cloud -->
           <div class="bento-card" id="skill-aws-cloud">
             <div class="card-header">
-              <span class="card-badge">CLOUD</span>
+              <span class="card-badge">CLOUD INFRASTRUCTURE</span>
               <h3>AWS Cloud</h3>
             </div>
             <div class="card-body">
@@ -126,7 +148,7 @@
             </div>
           </div>
 
-          <!-- Card 3: Terraform -->
+          <!-- Card 5: Terraform -->
           <div class="bento-card" id="skill-terraform">
             <div class="card-header">
               <span class="card-badge">IaC</span>
@@ -137,25 +159,36 @@
             </div>
           </div>
 
-          <!-- Card 4: Linux & Networking -->
-          <div class="bento-card" id="skill-linux-networking">
+          <!-- Card 6: Linux SysAdmin -->
+          <div class="bento-card" id="skill-linux">
             <div class="card-header">
-              <span class="card-badge">SYSTEMS</span>
-              <h3>Linux &amp; Networking</h3>
+              <span class="card-badge">SYSADMIN &amp; KERNEL</span>
+              <h3>Linux SysAdmin</h3>
             </div>
             <div class="card-body">
-              <p>Linux kernel internals, systemd services, /proc inspection, TCP/IP stack, BGP routing, and Wireshark packet capture.</p>
+              <p>Linux kernel internals (6.8+), systemd unit lifecycle, /proc inspection, process namespaces, cgroups, and UFW firewall hardening.</p>
             </div>
           </div>
 
-          <!-- Card 5: Python/Bash -->
+          <!-- Card 7: Computer Networking -->
+          <div class="bento-card" id="skill-networking">
+            <div class="card-header">
+              <span class="card-badge">NETWORKING</span>
+              <h3>Computer Networking</h3>
+            </div>
+            <div class="card-body">
+              <p>Deep packet inspection with Wireshark, TCP 3-way handshake analysis, CIDR subnetting, DNS resolution, BGP routing, and WireGuard VPN tunneling.</p>
+            </div>
+          </div>
+
+          <!-- Card 8: Python / Bash -->
           <div class="bento-card" id="skill-python-bash">
             <div class="card-header">
-              <span class="card-badge">AUTOMATION</span>
+              <span class="card-badge">AUTOMATION &amp; SCRIPTING</span>
               <h3>Python / Bash</h3>
             </div>
             <div class="card-body">
-              <p>Defensive shell scripting, automated server audits, boto3 cloud scripting, CI/CD pipeline jobs, and algorithmic testing.</p>
+              <p>Defensive shell scripting (set -euo pipefail), automated server audits, boto3 cloud scripting, CI/CD pipeline jobs, and algorithmic testing.</p>
             </div>
           </div>
         </div>
