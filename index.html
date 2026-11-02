@@ -106,6 +106,10 @@
             <i class="fa-solid fa-terminal"></i>
             <span>⌘K</span>
           </button>
+
+          <button class="hud-mobile-toggle-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
         </div>
 
       </div>
@@ -420,9 +424,13 @@ print(f"Audited {len(vols)} EBS")</code>
         <div class="container-cards-grid">
 
           <!-- 1. Nexora -->
-          <div class="project-container-card">
+          <div class="project-container-card card-theme-emerald">
             <div class="card-spotlight-border"></div>
             
+            <div class="project-banner-wrap">
+              <img src="assets/images/project-nexora.jpg" alt="Nexora Quick Commerce App" class="project-banner-img" loading="lazy">
+            </div>
+
             <div class="container-header-meta">
               <span class="container-hash-port">sha256:a8f4c219 • 8081:8081</span>
               <span class="container-status-pill"><span class="pulse-beacon-dot"></span> UP 21D</span>
@@ -458,9 +466,13 @@ print(f"Audited {len(vols)} EBS")</code>
           </div>
 
           <!-- 2. Kashmir Kesar Kingdom -->
-          <div class="project-container-card">
+          <div class="project-container-card card-theme-amber">
             <div class="card-spotlight-border"></div>
             
+            <div class="project-banner-wrap">
+              <img src="assets/images/project-kkk.jpg" alt="Kashmir Kesar Kingdom" class="project-banner-img" loading="lazy">
+            </div>
+
             <div class="container-header-meta">
               <span class="container-hash-port">sha256:b7190d4e • 443:80</span>
               <span class="container-status-pill"><span class="pulse-beacon-dot"></span> UP 60D</span>
@@ -499,9 +511,13 @@ print(f"Audited {len(vols)} EBS")</code>
           </div>
 
           <!-- 3. Craver Fast Food Co. -->
-          <div class="project-container-card">
+          <div class="project-container-card card-theme-cyan">
             <div class="card-spotlight-border"></div>
             
+            <div class="project-banner-wrap">
+              <img src="assets/images/project-craver.jpg" alt="Craver Fast Food Co." class="project-banner-img" loading="lazy">
+            </div>
+
             <div class="container-header-meta">
               <span class="container-hash-port">sha256:c3392b1a • 3000:3000</span>
               <span class="container-status-pill"><span class="pulse-beacon-dot"></span> UP 38D</span>
@@ -540,9 +556,18 @@ print(f"Audited {len(vols)} EBS")</code>
           </div>
 
           <!-- 4. sys-inspect -->
-          <div class="project-container-card">
+          <div class="project-container-card card-theme-green">
             <div class="card-spotlight-border"></div>
             
+            <div class="project-banner-wrap">
+              <div class="project-cli-banner">
+                <div style="color:var(--neon-emerald); font-weight:700; margin-bottom:0.3rem;"><i class="fa-solid fa-terminal"></i> sys-inspect --kernel-telemetry</div>
+                <div style="color:var(--text-slate);">[PROC] /proc/sys/kernel/pid_max: 4194304</div>
+                <div style="color:var(--text-primary);">[SOCKETS] ESTABLISHED: 48 | SYN_RECV: 0</div>
+                <div style="color:var(--neon-cyan);">[ZOMBIE_DETECT] 0 defunc threads found</div>
+              </div>
+            </div>
+
             <div class="container-header-meta">
               <span class="container-hash-port">sha256:d9910f8a • 9100:9100</span>
               <span class="container-status-pill"><span class="pulse-beacon-dot"></span> UP 12D</span>
@@ -578,9 +603,18 @@ print(f"Audited {len(vols)} EBS")</code>
           </div>
 
           <!-- 5. Network Protocol Labs -->
-          <div class="project-container-card">
+          <div class="project-container-card card-theme-blue">
             <div class="card-spotlight-border"></div>
             
+            <div class="project-banner-wrap">
+              <div class="project-cli-banner">
+                <div style="color:var(--neon-cyan); font-weight:700; margin-bottom:0.3rem;"><i class="fa-solid fa-network-wired"></i> wireshark --capture -i eth0</div>
+                <div style="color:var(--text-slate);">IP 10.0.1.42:443 &gt; 10.0.2.15:52314 [ACK]</div>
+                <div style="color:var(--text-primary);">TCP SEQ 1849202 ACK 1849740 WIN 65535</div>
+                <div style="color:var(--neon-emerald);">TLSv1.3 Handshake Finished (Encrypted)</div>
+              </div>
+            </div>
+
             <div class="container-header-meta">
               <span class="container-hash-port">sha256:e4481c7e • 53:53</span>
               <span class="container-status-pill"><span class="pulse-beacon-dot"></span> UP 5D</span>
@@ -616,9 +650,18 @@ print(f"Audited {len(vols)} EBS")</code>
           </div>
 
           <!-- 6. Algo-Engine & Python DSA -->
-          <div class="project-container-card">
+          <div class="project-container-card card-theme-purple">
             <div class="card-spotlight-border"></div>
             
+            <div class="project-banner-wrap">
+              <div class="project-cli-banner">
+                <div style="color:var(--neon-purple); font-weight:700; margin-bottom:0.3rem;"><i class="devicon-python-plain"></i> pytest tests/test_dijkstra.py -v</div>
+                <div style="color:var(--text-slate);">Graph: 100,000 vertices, 450,000 edges</div>
+                <div style="color:var(--text-primary);">Shortest Path Calculated in 8.4ms (O(E log V))</div>
+                <div style="color:var(--neon-emerald);">PASSED [100%] (LRU Cache Hit Ratio: 99.4%)</div>
+              </div>
+            </div>
+
             <div class="container-header-meta">
               <span class="container-hash-port">sha256:f12089ba • 8000:8000</span>
               <span class="container-status-pill"><span class="pulse-beacon-dot"></span> UP 18D</span>
@@ -829,6 +872,38 @@ print(f"Audited {len(vols)} EBS")</code>
       </div>
     </div>
   </footer>
+
+  <!-- ═══════════════ MOBILE NAVIGATION DRAWER ═══════════════ -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-drawer-top">
+      <div style="display:flex; align-items:center; gap:0.65rem;">
+        <img src="assets/images/avatar-3d.png" alt="Uzair Sultan" style="width:36px; height:36px; border-radius:50%; border:1.5px solid var(--neon-emerald); object-fit:cover;">
+        <span style="font-family:var(--font-mono); font-size:0.9rem; font-weight:700; color:#FFF;">uzair@cloud-node-01</span>
+      </div>
+      <button id="mobileDrawerClose" style="background:none; border:none; color:var(--text-primary); font-size:1.4rem; cursor:pointer;" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <ul class="mobile-nav-links-list">
+      <li><a href="#about" class="mobile-nav-link"><span>~/about</span> <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:var(--text-dark);"></i></a></li>
+      <li><a href="#topology" class="mobile-nav-link"><span>~/topology</span> <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:var(--text-dark);"></i></a></li>
+      <li><a href="#containers" class="mobile-nav-link"><span>~/containers</span> <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:var(--text-dark);"></i></a></li>
+      <li><a href="#git-log" class="mobile-nav-link"><span>~/git-log</span> <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:var(--text-dark);"></i></a></li>
+      <li><a href="#contact" class="mobile-nav-link"><span>~/contact</span> <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; color:var(--text-dark);"></i></a></li>
+    </ul>
+
+    <div class="mobile-drawer-actions">
+      <button class="btn-magnetic btn-magnetic-emerald" onclick="window.triggerResumeModal(); document.getElementById('mobileNavDrawer').classList.remove('open'); document.body.style.overflow='';" style="width:100%; justify-content:center;">
+        <i class="fa-solid fa-cloud-arrow-down"></i>
+        <span>Download Resume.pdf</span>
+      </button>
+      <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20am%20reviewing%20your%20DevOps%20portfolio!" target="_blank" class="conn-chip" style="width:100%; justify-content:center; padding:0.75rem;">
+        <i class="fa-brands fa-whatsapp" style="color:var(--neon-emerald);"></i>
+        <span>Direct Chat on WhatsApp</span>
+      </a>
+    </div>
+  </div>
 
   <!-- ═══════════════ COMMAND PALETTE MODAL ═══════════════ -->
   <div class="cmd-palette-backdrop" id="cmdPaletteModal">

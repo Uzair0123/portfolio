@@ -1,12 +1,13 @@
 /**
- * OLED Cyber-Cinema Orchestrator — Kinetic Motion Architecture
+ * OLED Cyber-Cinema Orchestrator — Kinetic Motion Architecture v3.5
  * -------------------------------------------------------------
  * 1. Blast Door Preloader Curtain
- * 2. 60FPS Interactive HTML5 Network Topology Canvas
- * 3. Lenis Smooth Scroll & GSAP ScrollTrigger Choreography
+ * 2. 60FPS Interactive HTML5 Network Topology Canvas (Multi-color & Data Packets)
+ * 3. Robust GSAP ScrollTrigger Choreography (No opacity freeze)
  * 4. 3D Magnetic Avatar & Card Tilt with Specular Spotlight
  * 5. Slide-Over Architecture Blueprint Drawer
- * 6. Command Palette (Cmd+K) & SSH Webhook Dispatch
+ * 6. Mobile Navigation Drawer & Touch Optimization
+ * 7. Command Palette (Cmd+K) & SSH Webhook Dispatch
  */
 
 (function () {
@@ -24,9 +25,8 @@
 
     const bootSteps = [
       { text: "[OK] Mounting Avatar Orbital HUD Frame...", at: 15 },
-      { text: "[OK] Initializing Lenis 60FPS Physics Engine...", at: 40 },
-      { text: "[OK] Spawning Interactive Cloud Constellation...", at: 70 },
-      { text: "[OK] Igniting Cyber-Cinema Shaders & Telemetry...", at: 90 },
+      { text: "[OK] Spawning Interactive Constellation Canvas...", at: 45 },
+      { text: "[OK] Initializing Multi-AZ Cloud Topologies...", at: 75 },
       { text: "⚡ [READY] Portfolio Control Plane Online.", at: 100 }
     ];
 
@@ -34,7 +34,7 @@
     let stepIndex = 0;
 
     const interval = setInterval(() => {
-      currentProgress += Math.floor(4 + Math.random() * 8);
+      currentProgress += Math.floor(6 + Math.random() * 10);
       if (currentProgress > 100) currentProgress = 100;
 
       bar.style.width = `${currentProgress}%`;
@@ -55,15 +55,17 @@
           curtain.classList.add("blast-open");
           setTimeout(() => {
             curtain.style.display = "none";
-            triggerHeroEntranceAnimation();
+            if (window.ScrollTrigger) {
+              window.ScrollTrigger.refresh();
+            }
           }, 850);
-        }, 300);
+        }, 250);
       }
-    }, 35);
+    }, 30);
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 2. 60FPS INTERACTIVE NETWORK TOPOLOGY CANVAS
+  // 2. 60FPS INTERACTIVE NETWORK TOPOLOGY CANVAS (UPGRADED)
   // ═══════════════════════════════════════════════════════════════
   function initNetworkConstellationCanvas() {
     const canvas = document.getElementById("networkCanvas");
@@ -72,10 +74,12 @@
     const ctx = canvas.getContext("2d");
     let width, height;
     let nodes = [];
-    const nodeCount = 55;
-    const maxDistance = 135;
+    let packets = [];
+    const isMobile = window.innerWidth < 768;
+    const nodeCount = isMobile ? 35 : 65;
+    const maxDistance = isMobile ? 110 : 145;
 
-    let mouse = { x: -9999, y: -9999, radius: 150 };
+    let mouse = { x: -9999, y: -9999, radius: 160 };
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -94,26 +98,60 @@
       mouse.y = -9999;
     });
 
-    // Create cloud infrastructure nodes
+    const colors = [
+      { r: 0, g: 245, b: 160 },   // Cyber Emerald
+      { r: 56, g: 189, b: 248 },  // Electric Cyan
+      { r: 168, g: 85, b: 247 },  // Plasma Violet
+      { r: 255, g: 138, b: 0 }    // Solar Amber
+    ];
+
     for (let i = 0; i < nodeCount; i++) {
+      const col = colors[i % colors.length];
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 2 + 1.2,
-        baseColor: i % 3 === 0 ? "rgba(0, 245, 160, 0.7)" : (i % 3 === 1 ? "rgba(56, 189, 248, 0.7)" : "rgba(168, 85, 247, 0.6)")
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 2.2 + 1.2,
+        color: col,
+        pulse: Math.random() * Math.PI
       });
     }
+
+    // Spawn animated data packets between nodes
+    setInterval(() => {
+      if (nodes.length < 2) return;
+      const i1 = Math.floor(Math.random() * nodes.length);
+      let closest = -1;
+      let minD = maxDistance;
+      for (let j = 0; j < nodes.length; j++) {
+        if (i1 === j) continue;
+        const d = Math.hypot(nodes[i1].x - nodes[j].x, nodes[i1].y - nodes[j].y);
+        if (d < minD) {
+          minD = d;
+          closest = j;
+        }
+      }
+      if (closest !== -1 && packets.length < 15) {
+        packets.push({
+          from: nodes[i1],
+          to: nodes[closest],
+          progress: 0,
+          speed: 0.02 + Math.random() * 0.02,
+          color: nodes[i1].color
+        });
+      }
+    }, 450);
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      // Update and draw nodes
+      // Draw and update nodes
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
         n.x += n.vx;
         n.y += n.vy;
+        n.pulse += 0.03;
 
         if (n.x < 0 || n.x > width) n.vx *= -1;
         if (n.y < 0 || n.y > height) n.vy *= -1;
@@ -124,30 +162,55 @@
         const dist = Math.hypot(dx, dy);
         if (dist < mouse.radius) {
           const force = (mouse.radius - dist) / mouse.radius;
-          n.x -= (dx / dist) * force * 3;
-          n.y -= (dy / dist) * force * 3;
+          n.x -= (dx / dist) * force * 3.5;
+          n.y -= (dy / dist) * force * 3.5;
         }
 
-        // Draw node
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = n.baseColor;
-        ctx.fill();
+        // Pulse size
+        const currentR = n.radius + Math.sin(n.pulse) * 0.6;
 
-        // Connect adjacent nodes
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(0.5, currentR), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, 0.85)`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, 0.6)`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Draw connections
         for (let j = i + 1; j < nodes.length; j++) {
           const n2 = nodes[j];
           const distNodes = Math.hypot(n.x - n2.x, n.y - n2.y);
           if (distNodes < maxDistance) {
-            const alpha = (1 - distNodes / maxDistance) * 0.22;
+            const alpha = (1 - distNodes / maxDistance) * 0.28;
             ctx.beginPath();
             ctx.moveTo(n.x, n.y);
             ctx.lineTo(n2.x, n2.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(${n.color.r}, ${n.color.g}, ${n.color.b}, ${alpha})`;
+            ctx.lineWidth = 0.85;
             ctx.stroke();
           }
         }
+      }
+
+      // Draw moving data packets
+      for (let p = packets.length - 1; p >= 0; p--) {
+        const pkt = packets[p];
+        pkt.progress += pkt.speed;
+        if (pkt.progress >= 1) {
+          packets.splice(p, 1);
+          continue;
+        }
+        const px = pkt.from.x + (pkt.to.x - pkt.from.x) * pkt.progress;
+        const py = pkt.from.y + (pkt.to.y - pkt.from.y) * pkt.progress;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgb(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = `rgb(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b})`;
+        ctx.fill();
+        ctx.shadowBlur = 0;
       }
 
       requestAnimationFrame(animate);
@@ -156,91 +219,60 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 3. LENIS SMOOTH SCROLL & GSAP SCROLLTRIGGER CHOREOGRAPHY
+  // 3. SAFE ANIMATION & SCROLL CHOREOGRAPHY (ALWAYS VISIBLE)
   // ═══════════════════════════════════════════════════════════════
-  let lenisInstance = null;
-
   function initSmoothScrollAndGSAP() {
-    if (typeof window.Lenis !== "undefined") {
-      lenisInstance = new window.Lenis({
-        duration: 1.2,
+    const isDesktop = window.innerWidth >= 1024;
+
+    // Initialize Lenis ONLY on Desktop to keep mobile touch scroll 100% native & fluid
+    if (isDesktop && typeof window.Lenis !== "undefined") {
+      const lenis = new window.Lenis({
+        duration: 1.1,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true
       });
 
       function raf(time) {
-        lenisInstance.raf(time);
+        lenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
+
+      if (typeof window.ScrollTrigger !== "undefined") {
+        lenis.on("scroll", window.ScrollTrigger.update);
+      }
     }
+
+    // Ensure all cards are explicitly visible by default in case GSAP fails
+    document.querySelectorAll(".project-container-card, .bento-box, .git-commit-node").forEach(el => {
+      el.style.opacity = "1";
+      el.style.visibility = "visible";
+    });
 
     if (typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined") {
       window.gsap.registerPlugin(window.ScrollTrigger);
 
-      if (lenisInstance) {
-        lenisInstance.on("scroll", window.ScrollTrigger.update);
-        window.gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
-        window.gsap.ticker.lagSmoothing(0);
-      }
-
-      // Bento Grid Stagger Animation
-      window.gsap.from(".bento-box", {
-        scrollTrigger: {
-          trigger: "#topology",
-          start: "top 80%"
-        },
-        y: 50,
-        opacity: 0,
-        scale: 0.96,
-        duration: 0.85,
-        stagger: 0.08,
-        ease: "power2.out"
+      // Graceful reveal that does NOT hide cards if user is already at the section
+      window.ScrollTrigger.batch(".bento-box", {
+        start: "top 85%",
+        once: true,
+        onEnter: (batch) => {
+          window.gsap.fromTo(batch, 
+            { y: 25, opacity: 0.6 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "power2.out", overwrite: "auto" }
+          );
+        }
       });
 
-      // Projects Stagger Animation
-      window.gsap.from(".project-container-card", {
-        scrollTrigger: {
-          trigger: "#containers",
-          start: "top 80%"
-        },
-        y: 45,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
-
-      // Git Log Commit Nodes Animation
-      window.gsap.from(".git-commit-node", {
-        scrollTrigger: {
-          trigger: "#git-log",
-          start: "top 80%"
-        },
-        x: -30,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.15,
-        ease: "power2.out"
-      });
-    }
-  }
-
-  function triggerHeroEntranceAnimation() {
-    if (typeof window.gsap !== "undefined") {
-      window.gsap.from(".hero-identity-card", {
-        scale: 0.92,
-        opacity: 0,
-        y: 30,
-        duration: 0.9,
-        ease: "back.out(1.2)"
-      });
-      window.gsap.from(".hero-glass-terminal", {
-        x: 40,
-        opacity: 0,
-        duration: 0.9,
-        delay: 0.15,
-        ease: "power3.out"
+      window.ScrollTrigger.batch(".project-container-card", {
+        start: "top 85%",
+        once: true,
+        onEnter: (batch) => {
+          window.gsap.fromTo(batch, 
+            { y: 25, opacity: 0.6 },
+            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out", overwrite: "auto" }
+          );
+        }
       });
     }
   }
@@ -264,14 +296,14 @@
       });
 
       // Magnetic 3D tilt on Hero Avatar
-      if (avatarStage) {
+      if (avatarStage && window.innerWidth >= 768) {
         const rect = avatarStage.getBoundingClientRect();
-        if (clientX >= rect.left - 50 && clientX <= rect.right + 50 && clientY >= rect.top - 50 && clientY <= rect.bottom + 50) {
+        if (clientX >= rect.left - 40 && clientX <= rect.right + 40 && clientY >= rect.top - 40 && clientY <= rect.bottom + 40) {
           const cx = rect.left + rect.width / 2;
           const cy = rect.top + rect.height / 2;
           const normX = (clientX - cx) / (rect.width / 2);
           const normY = (clientY - cy) / (rect.height / 2);
-          avatarStage.style.transform = `perspective(1000px) rotateY(${(normX * 14).toFixed(1)}deg) rotateX(${(-normY * 14).toFixed(1)}deg)`;
+          avatarStage.style.transform = `perspective(1000px) rotateY(${(normX * 12).toFixed(1)}deg) rotateX(${(-normY * 12).toFixed(1)}deg)`;
         } else {
           avatarStage.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
         }
@@ -287,11 +319,11 @@
       tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
       title: "Nexora — Quick-Commerce Mobile Architecture",
       diagram: `[React Native 0.81 (Mobile APK)]
-    ├── Expo Router v6 (Deep-Linked Navigation)
+    ├── Expo Router v6 (Deep-Linked Route Architecture)
     ├── SQLite Client Cache (Offline Order Queue)
-    └── Cloudflare Workers (6-Digit OTP Gateway)
-           └── Async Delivery Radar Engine (Sub-50ms Fulfillment)`,
-      impact: "Zero-latency mobile checkout architecture with offline-first SQLite synchronization, OTP security boundaries, and responsive native UI running at 60 FPS."
+    └── Cloudflare Edge Proxy (6-Digit OTP Auth)
+           └── Real-Time Geolocation Fulfillment Radar`,
+      impact: "Zero-latency mobile checkout architecture with offline-first SQLite synchronization, OTP security boundaries, and responsive native UI running at locked 60 FPS."
     },
     kkk: {
       tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
@@ -389,7 +421,34 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 6. COMMAND PALETTE (CMD + K) & RESUME SIMULATOR
+  // 6. MOBILE NAVIGATION DRAWER
+  // ═══════════════════════════════════════════════════════════════
+  function initMobileDrawer() {
+    const toggleBtn = document.getElementById("mobileMenuBtn");
+    const drawer = document.getElementById("mobileNavDrawer");
+    const closeBtn = document.getElementById("mobileDrawerClose");
+    if (!toggleBtn || !drawer) return;
+
+    function openMobileMenu() {
+      drawer.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileMenu() {
+      drawer.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    toggleBtn.addEventListener("click", openMobileMenu);
+    if (closeBtn) closeBtn.addEventListener("click", closeMobileMenu);
+
+    drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 7. COMMAND PALETTE (CMD + K) & RESUME SIMULATOR
   // ═══════════════════════════════════════════════════════════════
   function initCommandPalette() {
     const modal = document.getElementById("cmdPaletteModal");
@@ -516,7 +575,7 @@
   window.triggerResumeModal = triggerResumeDownload;
 
   // ═══════════════════════════════════════════════════════════════
-  // 7. SSH CONTACT WEBHOOK DISPATCH
+  // 8. SSH CONTACT WEBHOOK DISPATCH
   // ═══════════════════════════════════════════════════════════════
   function initContactWebhook() {
     const form = document.getElementById("sshContactForm");
@@ -547,7 +606,7 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 8. CODE TOGGLE (BASH VS PYTHON)
+  // 9. CODE TOGGLE (BASH VS PYTHON)
   // ═══════════════════════════════════════════════════════════════
   function initCodeToggle() {
     document.querySelectorAll(".auto-tab-btn").forEach(btn => {
@@ -572,6 +631,7 @@
     initSmoothScrollAndGSAP();
     init3DMagneticTilt();
     initArchitectureDrawer();
+    initMobileDrawer();
     initCommandPalette();
     initContactWebhook();
     initCodeToggle();
