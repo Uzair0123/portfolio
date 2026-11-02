@@ -23,7 +23,7 @@ const TerminalModule = {
   • <span style="color:#64748B;">clear</span>            - Flush the active terminal console buffer`,
 
     whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">System Architect // DevOps & Cloud Engineer</span>
-<span style="color:#94A3B8;">Education:</span> MCA (IGNOU, Currently Pursuing) • BCA (University of Kashmir, 1st Class)
+<span style="color:#94A3B8;">Education:</span> MCA (IGNOU, Started 2026 — Present) • BCA (University of Kashmir, 1st Class)
 <span style="color:#94A3B8;">Host Cluster:</span> AWS EKS (Kubernetes v1.30.2) • <span style="color:#38BDF8;">Kernel:</span> Linux 6.8.0-sysadmin x86_64
 
 <span style="color:#CBD5E1;">Systems builder focused on Linux kernel internals, Kubernetes orchestration, declarative Terraform infrastructure, and computer networking. Delivering fault-tolerant, self-healing platforms with zero tolerance for downtime.</span>`,
