@@ -691,6 +691,13 @@
       requestAnimationFrame(animateTracking);
     }
     animateTracking();
+
+    // Interactive tactile shockwave pulse on avatar click
+    avatarCard.addEventListener("click", () => {
+      avatarCard.classList.remove("avatar-shock-active");
+      void avatarCard.offsetWidth; // Force CSS repaint
+      avatarCard.classList.add("avatar-shock-active");
+    });
   }
 
   // ═══════════════════════════════════════════════════════════════
