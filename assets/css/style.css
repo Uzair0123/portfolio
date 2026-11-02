@@ -1,11 +1,53 @@
 /* ==========================================================================
-   UZAR PORTFOLIO — PHASE 1: STRUCTURAL CSS (HTML & CSS GRID ONLY)
-   Strictly structural layouts, semantic hierarchy, and responsive Grid/Flexbox.
-   Rule: Zero animations, zero hover effects, zero glassmorphism, zero glows.
+   UZAIR PORTFOLIO — PHASE 2: THE DARK OPS DESIGN SYSTEM
+   Base CSS, OLED Void Palette, Domain Accents & Typography System.
+   Rule: Zero complex animations, zero GSAP, zero glassmorphism (solid surfaces).
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. CSS Resets & Base Variables
+   1. Typography Imports (Google Fonts)
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+/* --------------------------------------------------------------------------
+   2. Design Tokens: The Dark Ops Palette
+   -------------------------------------------------------------------------- */
+:root {
+  /* Core Canvas & Surfaces */
+  --bg-void: #030508;              /* True OLED Void Black */
+  --card-surface: #0F172A;         /* Deep Slate Solid Card Surface */
+  --card-surface-subtle: #131E35;  /* Secondary Elevated Surface */
+  --terminal-void: #050811;        /* Terminal Body Deep Charcoal Void */
+
+  /* Text & Typographic Hierarchy */
+  --text-primary: #F8FAFC;        /* Crisp Alabaster White */
+  --text-muted: #94A3B8;          /* Slate Metallic */
+  --text-dim: #64748B;            /* Deep Graphite Technical Labels */
+
+  /* Domain-Coded Neon Accents */
+  --accent-bash: #00F5A0;         /* Cyber Emerald (Linux / Bash / Success) */
+  --accent-k8s: #38BDF8;          /* Electric Cyan (Docker / Kubernetes / Cloud) */
+  --accent-aws: #FF8A00;          /* Solar Flare Amber (AWS / VPC / Cloud Infra) */
+  --accent-tf: #A855F7;           /* Plasma Violet (Terraform / IaC / Systems) */
+
+  /* Borders & Specular Lines */
+  --border-subtle: rgba(255, 255, 255, 0.08); /* 1px High-Tech Specular Line */
+  --border-highlight: rgba(255, 255, 255, 0.16);
+
+  /* Typography Families */
+  --font-ui: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* Layout, Geometry & Spacing */
+  --max-width: 1200px;
+  --radius-sm: 6px;
+  --radius-btn: 10px;
+  --radius-card: 14px;
+  --radius-full: 9999px;
+}
+
+/* --------------------------------------------------------------------------
+   3. CSS Reset & Document Baseline
    -------------------------------------------------------------------------- */
 *,
 *::before,
@@ -15,68 +57,51 @@
   padding: 0;
 }
 
-:root {
-  /* Color Palette (Clean Solid Dark Theme) */
-  --bg-primary: #0a0d14;
-  --bg-secondary: #121722;
-  --bg-tertiary: #182030;
-  --bg-terminal: #05080f;
-
-  --border-color: #263043;
-  --border-light: #36445d;
-
-  --text-main: #f0f4fc;
-  --text-muted: #8b9bb4;
-  --text-dim: #55657e;
-
-  --accent-green: #10b981;
-  --accent-blue: #38bdf8;
-  --accent-amber: #f59e0b;
-  --accent-purple: #a855f7;
-
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", "SF Mono", Consolas, "Courier New", monospace;
-
-  /* Sizing & Spacing */
-  --max-width: 1200px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-}
-
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  background-color: var(--bg-void);
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  font-family: var(--font-sans);
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
   line-height: 1.6;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* --------------------------------------------------------------------------
-   2. Typography & Common Elements
+   4. Typographic Hierarchy
    -------------------------------------------------------------------------- */
-h1, h2, h3, h4 {
-  color: var(--text-main);
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-family: var(--font-ui);
   font-weight: 700;
-  line-height: 1.25;
+  letter-spacing: -0.025em; /* Tight editorial tracking */
+  line-height: 1.2;
 }
 
 h1 {
-  font-size: 2.75rem;
-  letter-spacing: -0.03em;
+  font-size: 3.25rem;
+  letter-spacing: -0.035em;
+  font-weight: 800;
 }
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
+  letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: 1rem;
 }
 
 p {
@@ -84,14 +109,15 @@ p {
 }
 
 a {
-  color: var(--accent-blue);
+  color: var(--accent-k8s);
   text-decoration: none;
 }
 
-ul {
-  list-style-position: inside;
+code, kbd, pre, samp {
+  font-family: var(--font-mono);
 }
 
+/* Layout Container */
 .container {
   width: 100%;
   max-width: var(--max-width);
@@ -103,57 +129,73 @@ ul {
 
 /* Common Section Header */
 .section-header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.section-header h2 {
+  font-size: 1.85rem;
+  color: var(--text-primary);
 }
 
 .section-subtitle {
   font-size: 1rem;
   color: var(--text-muted);
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
-/* Buttons */
+/* --------------------------------------------------------------------------
+   5. Buttons & Primary CTAs
+   -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-sans);
+  gap: 0.5rem;
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   font-weight: 600;
-  padding: 0.65rem 1.35rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
+  line-height: 1;
 }
 
+/* Primary CTA: Cyber Emerald Solid Accent */
 .btn-primary {
-  background-color: var(--text-main);
-  color: var(--bg-primary);
-  border-color: var(--text-main);
+  background-color: var(--accent-bash);
+  color: var(--bg-void);
+  border-color: var(--accent-bash);
+  font-weight: 700;
 }
 
+/* Secondary CTA: Cyber Emerald Specular Border */
 .btn-secondary {
-  background-color: var(--bg-secondary);
-  color: var(--text-main);
-  border-color: var(--border-color);
+  background-color: transparent;
+  color: var(--accent-bash);
+  border-color: var(--accent-bash);
+  font-weight: 600;
 }
 
+/* Compact Navigation CTA */
 .btn-sm {
-  padding: 0.35rem 0.85rem;
+  padding: 0.4rem 0.9rem;
   font-size: 0.82rem;
-  background-color: var(--bg-secondary);
-  color: var(--text-main);
-  border-color: var(--border-color);
+  background-color: transparent;
+  color: var(--accent-bash);
+  border: 1px solid var(--accent-bash);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
 }
 
 /* --------------------------------------------------------------------------
-   3. Global Navigation (Status Bar / Top HUD)
+   6. Top Status Bar / HUD Navigation
    -------------------------------------------------------------------------- */
 .status-nav {
   width: 100%;
-  background-color: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  background-color: var(--card-surface);
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -162,32 +204,32 @@ ul {
 .nav-container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .nav-brand {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
 .prompt-user {
-  color: var(--accent-green);
+  color: var(--accent-bash);
 }
 
 .prompt-host {
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .nav-status {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--text-muted);
@@ -196,20 +238,21 @@ ul {
 .status-item {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--accent-green);
+  background-color: var(--accent-bash);
+  display: inline-block;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.35rem;
 }
 
 .nav-link {
@@ -219,34 +262,34 @@ ul {
 }
 
 /* --------------------------------------------------------------------------
-   4. Hero Section (2-Column 50/50 Grid)
+   7. Hero Section (2-Column 50/50 Grid)
    -------------------------------------------------------------------------- */
 .hero-section {
-  padding: 4.5rem 0 3.5rem;
-  border-bottom: 1px solid var(--border-color);
+  padding: 5rem 0 4rem;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 3.5rem;
   align-items: center;
 }
 
-/* Left Column: Identity */
+/* Left Column: Identity & Direct Mission */
 .hero-identity {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 
 .hero-avatar-wrap {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 2px solid var(--accent-green);
+  border: 2px solid var(--accent-bash);
   overflow: hidden;
-  background-color: var(--bg-tertiary);
+  background-color: var(--card-surface);
 }
 
 .hero-avatar {
@@ -257,50 +300,52 @@ ul {
 }
 
 .hero-identity h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  color: var(--text-primary);
   line-height: 1;
 }
 
 .hero-identity h2 {
-  font-size: 1.35rem;
-  font-weight: 500;
-  color: var(--accent-blue);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--accent-k8s);
+  letter-spacing: -0.015em;
 }
 
 .hero-bio {
   font-size: 1.05rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .hero-actions {
   display: flex;
-  gap: 1rem;
+  gap: 1.1rem;
   margin-top: 0.5rem;
 }
 
-/* Right Column: Interactive Terminal Placeholder */
+/* Right Column: The Dark Ops Terminal */
 .hero-terminal {
   width: 100%;
 }
 
 .terminal-container {
   width: 100%;
-  background-color: var(--bg-terminal);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  background-color: var(--terminal-void);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .terminal-header {
-  background-color: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  padding: 0.65rem 1rem;
+  background-color: var(--card-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.75rem 1.15rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .terminal-dots {
@@ -310,39 +355,41 @@ ul {
 }
 
 .terminal-dot {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   display: inline-block;
 }
 
 .dot-red {
-  background-color: #ef4444;
+  background-color: #EF4444;
 }
 
 .dot-yellow {
-  background-color: #f59e0b;
+  background-color: #F59E0B;
 }
 
 .dot-green {
-  background-color: #10b981;
+  background-color: var(--accent-bash);
 }
 
 .terminal-title {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
 .terminal-body {
-  padding: 1.25rem;
-  min-height: 240px;
+  padding: 1.4rem;
+  min-height: 250px;
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  line-height: 1.7;
+  line-height: 1.75;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  background-color: var(--terminal-void);
 }
 
 .terminal-line {
@@ -350,12 +397,13 @@ ul {
 }
 
 .terminal-line .prompt {
-  color: var(--accent-green);
-  margin-right: 0.5rem;
+  color: var(--accent-bash);
+  margin-right: 0.55rem;
+  font-weight: 600;
 }
 
 .terminal-line .command {
-  color: var(--text-main);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -364,16 +412,16 @@ ul {
 }
 
 .terminal-line .cursor {
-  color: var(--accent-green);
+  color: var(--accent-bash);
   font-weight: bold;
 }
 
 /* --------------------------------------------------------------------------
-   5. Skills / Tech Stack (Bento Grid Container)
+   8. Skills & Infrastructure Matrix (Bento Grid)
    -------------------------------------------------------------------------- */
 .skills-section {
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .bento-grid {
@@ -383,44 +431,81 @@ ul {
 }
 
 .bento-card {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
+  background-color: var(--card-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.9rem;
 }
 
 .bento-card .card-header {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .card-badge {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent-blue);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .bento-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
+  color: var(--text-primary);
 }
 
 .bento-card p {
   font-size: 0.95rem;
-  line-height: 1.55;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Domain-Specific Bento Highlights */
+#skill-docker-k8s {
+  border-top: 2px solid var(--accent-k8s);
+}
+#skill-docker-k8s .card-badge {
+  color: var(--accent-k8s);
+}
+
+#skill-aws-cloud {
+  border-top: 2px solid var(--accent-aws);
+}
+#skill-aws-cloud .card-badge {
+  color: var(--accent-aws);
+}
+
+#skill-terraform {
+  border-top: 2px solid var(--accent-tf);
+}
+#skill-terraform .card-badge {
+  color: var(--accent-tf);
+}
+
+#skill-linux-networking {
+  border-top: 2px solid var(--accent-bash);
+}
+#skill-linux-networking .card-badge {
+  color: var(--accent-bash);
+}
+
+#skill-python-bash {
+  border-top: 2px solid var(--accent-bash);
+}
+#skill-python-bash .card-badge {
+  color: var(--accent-bash);
 }
 
 /* --------------------------------------------------------------------------
-   6. Projects Section (Card Layout CSS Grid)
+   9. Projects Section (Card Layout CSS Grid)
    -------------------------------------------------------------------------- */
 .projects-section {
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .projects-grid {
@@ -430,13 +515,13 @@ ul {
 }
 
 .project-card {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
+  background-color: var(--card-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .project-card-header {
@@ -444,9 +529,9 @@ ul {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.65rem;
+  font-size: 0.76rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
 }
 
 .project-port {
@@ -454,64 +539,110 @@ ul {
 }
 
 .project-status {
-  color: var(--accent-green);
+  color: var(--accent-bash);
   font-weight: 600;
 }
 
 .project-title {
-  font-size: 1.25rem;
-  margin-top: 0.15rem;
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-top: 0.1rem;
 }
 
 .project-summary {
-  font-size: 0.92rem;
-  line-height: 1.55;
+  font-size: 0.94rem;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
+/* Tech Tags: Monospace Domain Pills */
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
   list-style: none;
   padding: 0;
 }
 
 .tech-tags li {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  background-color: var(--bg-tertiary);
-  color: var(--accent-blue);
-  padding: 0.25rem 0.6rem;
+  font-size: 0.74rem;
+  background-color: var(--card-surface-subtle);
+  padding: 0.3rem 0.65rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+/* Domain Accent Accents for Projects */
+#proj-nexora {
+  border-left: 2px solid var(--accent-k8s);
+}
+#proj-nexora .tech-tags li {
+  color: var(--accent-k8s);
+}
+
+#proj-kkk {
+  border-left: 2px solid var(--accent-aws);
+}
+#proj-kkk .tech-tags li {
+  color: var(--accent-aws);
+}
+
+#proj-craver {
+  border-left: 2px solid var(--accent-k8s);
+}
+#proj-craver .tech-tags li {
+  color: var(--accent-k8s);
+}
+
+#proj-sysinspect {
+  border-left: 2px solid var(--accent-bash);
+}
+#proj-sysinspect .tech-tags li {
+  color: var(--accent-bash);
+}
+
+#proj-networklab {
+  border-left: 2px solid var(--accent-k8s);
+}
+#proj-networklab .tech-tags li {
+  color: var(--accent-k8s);
+}
+
+#proj-algoengine {
+  border-left: 2px solid var(--accent-tf);
+}
+#proj-algoengine .tech-tags li {
+  color: var(--accent-tf);
 }
 
 .project-footer {
   margin-top: auto;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-subtle);
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .project-link {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
+  color: var(--accent-bash);
 }
 
-/* Hidden container details for future phases */
+/* Hidden drawer details reserved for future phases */
 .project-details-hidden {
   display: none;
 }
 
 /* --------------------------------------------------------------------------
-   7. Experience & Credentials Section
+   10. Experience & Career Credentials Section
    -------------------------------------------------------------------------- */
 .experience-section {
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .experience-grid {
@@ -521,13 +652,13 @@ ul {
 }
 
 .experience-card {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
+  background-color: var(--card-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .experience-card-header {
@@ -535,7 +666,9 @@ ul {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.6rem;
 }
 
 .experience-date {
@@ -543,36 +676,38 @@ ul {
 }
 
 .experience-badge {
-  color: var(--accent-purple);
+  color: var(--accent-tf);
   font-weight: 700;
 }
 
 .experience-card h3 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
+  color: var(--text-primary);
 }
 
 .experience-institution {
-  font-size: 0.9rem;
-  color: var(--accent-blue);
+  font-size: 0.92rem;
+  color: var(--accent-k8s);
   margin-bottom: 0.25rem;
+  font-weight: 500;
 }
 
 .experience-points {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding-left: 1.1rem;
+  gap: 0.45rem;
+  padding-left: 1.15rem;
   list-style-type: disc;
 }
 
 /* --------------------------------------------------------------------------
-   8. Contact Section (2-Column Grid)
+   11. Contact & Communication Channels Section
    -------------------------------------------------------------------------- */
 .contact-section {
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .contact-grid {
@@ -583,54 +718,58 @@ ul {
 }
 
 .contact-form {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
+  background-color: var(--card-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.35rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .form-group label {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 0.65rem 0.85rem;
-  color: var(--text-main);
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
+  padding: 0.75rem 0.95rem;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.94rem;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--accent-blue);
+  border-color: var(--accent-bash);
 }
 
 .contact-channels {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
+  background-color: var(--card-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.15rem;
+}
+
+.contact-channels h3 {
+  font-size: 1.25rem;
 }
 
 .channels-list {
@@ -638,24 +777,30 @@ ul {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.95rem;
   font-size: 0.95rem;
+  font-family: var(--font-mono);
 }
 
 .channels-list strong {
   display: inline-block;
-  min-width: 80px;
-  color: var(--text-main);
+  min-width: 90px;
+  color: var(--text-muted);
+}
+
+.channels-list a {
+  color: var(--accent-bash);
 }
 
 /* --------------------------------------------------------------------------
-   9. Footer
+   12. Site Footer
    -------------------------------------------------------------------------- */
 .site-footer {
-  padding: 2.5rem 0;
-  background-color: var(--bg-secondary);
+  padding: 2.75rem 0;
+  background-color: var(--bg-void);
   font-size: 0.85rem;
   color: var(--text-dim);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .footer-content {
@@ -668,11 +813,12 @@ ul {
 
 .footer-telemetry {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 /* --------------------------------------------------------------------------
-   10. Responsive Media Queries (Mobile Viewports)
+   13. Responsive Viewports (Mobile & Tablet)
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   .nav-status {
@@ -683,12 +829,16 @@ ul {
 @media (max-width: 768px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
+  }
+
+  .hero-identity h1 {
+    font-size: 2.85rem;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
   }
 
   .nav-container {
@@ -698,8 +848,8 @@ ul {
   .nav-links {
     width: 100%;
     justify-content: space-between;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--border-color);
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--border-subtle);
   }
 
   .footer-content {
