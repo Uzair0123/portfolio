@@ -1,7 +1,6 @@
 /* ==========================================================================
-   UZAIR PORTFOLIO — PHASE 2: THE DARK OPS DESIGN SYSTEM
-   Base CSS, OLED Void Palette, Domain Accents & Typography System.
-   Rule: Zero complex animations, zero GSAP, zero glassmorphism (solid surfaces).
+   UZAIR PORTFOLIO — PHASE 3: HIGH-END UI POLISH
+   Glassmorphism, Specular Borders, Authentic Terminal UI & Hover Glows.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -10,14 +9,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 /* --------------------------------------------------------------------------
-   2. Design Tokens: The Dark Ops Palette
+   2. Design Tokens: The Dark Ops Palette & Glassmorphic Surfaces
    -------------------------------------------------------------------------- */
 :root {
-  /* Core Canvas & Surfaces */
+  /* Core Void & Glassmorphic Surfaces */
   --bg-void: #030508;              /* True OLED Void Black */
-  --card-surface: #0F172A;         /* Deep Slate Solid Card Surface */
-  --card-surface-subtle: #131E35;  /* Secondary Elevated Surface */
-  --terminal-void: #050811;        /* Terminal Body Deep Charcoal Void */
+  --card-surface: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(9, 13, 22, 0.8) 100%);
+  --card-surface-elevated: linear-gradient(135deg, rgba(20, 30, 55, 0.7) 0%, rgba(12, 18, 30, 0.9) 100%);
+  --terminal-bg: #000000;          /* Pure Terminal Void */
+  --terminal-topbar: #1E1E1E;      /* Authentic Dark Grey Terminal Topbar */
 
   /* Text & Typographic Hierarchy */
   --text-primary: #F8FAFC;        /* Crisp Alabaster White */
@@ -31,7 +31,7 @@
   --accent-tf: #A855F7;           /* Plasma Violet (Terraform / IaC / Systems) */
 
   /* Borders & Specular Lines */
-  --border-subtle: rgba(255, 255, 255, 0.08); /* 1px High-Tech Specular Line */
+  --border-subtle: rgba(255, 255, 255, 0.08); /* 1px Specular Line */
   --border-highlight: rgba(255, 255, 255, 0.16);
 
   /* Typography Families */
@@ -44,6 +44,9 @@
   --radius-btn: 10px;
   --radius-card: 14px;
   --radius-full: 9999px;
+
+  /* Universal Smooth Transitions */
+  --transition-smooth: all 0.3s ease;
 }
 
 /* --------------------------------------------------------------------------
@@ -80,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   font-family: var(--font-ui);
   font-weight: 700;
-  letter-spacing: -0.025em; /* Tight editorial tracking */
+  letter-spacing: -0.025em;
   line-height: 1.2;
 }
 
@@ -111,6 +114,7 @@ p {
 a {
   color: var(--accent-k8s);
   text-decoration: none;
+  transition: var(--transition-smooth);
 }
 
 code, kbd, pre, samp {
@@ -144,7 +148,7 @@ code, kbd, pre, samp {
 }
 
 /* --------------------------------------------------------------------------
-   5. Buttons & Primary CTAs
+   5. Buttons & Primary CTAs (With Glow Transitions)
    -------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
@@ -160,6 +164,7 @@ code, kbd, pre, samp {
   cursor: pointer;
   text-decoration: none;
   line-height: 1;
+  transition: var(--transition-smooth);
 }
 
 /* Primary CTA: Cyber Emerald Solid Accent */
@@ -170,12 +175,23 @@ code, kbd, pre, samp {
   font-weight: 700;
 }
 
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 245, 160, 0.45);
+}
+
 /* Secondary CTA: Cyber Emerald Specular Border */
 .btn-secondary {
   background-color: transparent;
   color: var(--accent-bash);
   border-color: var(--accent-bash);
   font-weight: 600;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background-color: rgba(0, 245, 160, 0.1);
+  box-shadow: 0 0 20px rgba(0, 245, 160, 0.25);
 }
 
 /* Compact Navigation CTA */
@@ -187,18 +203,27 @@ code, kbd, pre, samp {
   border: 1px solid var(--accent-bash);
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
+  transition: var(--transition-smooth);
+}
+
+.btn-sm:hover {
+  background-color: rgba(0, 245, 160, 0.15);
+  box-shadow: 0 0 15px rgba(0, 245, 160, 0.35);
 }
 
 /* --------------------------------------------------------------------------
-   6. Top Status Bar / HUD Navigation
+   6. Top Status Bar / HUD Navigation (Glassmorphic)
    -------------------------------------------------------------------------- */
 .status-nav {
   width: 100%;
-  background-color: var(--card-surface);
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: var(--transition-smooth);
 }
 
 .nav-container {
@@ -246,6 +271,7 @@ code, kbd, pre, samp {
   height: 8px;
   border-radius: 50%;
   background-color: var(--accent-bash);
+  box-shadow: 0 0 8px var(--accent-bash);
   display: inline-block;
 }
 
@@ -259,6 +285,11 @@ code, kbd, pre, samp {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--text-muted);
+  transition: var(--transition-smooth);
+}
+
+.nav-link:hover {
+  color: var(--accent-bash);
 }
 
 /* --------------------------------------------------------------------------
@@ -283,13 +314,21 @@ code, kbd, pre, samp {
   gap: 1.15rem;
 }
 
+/* Glowing Circular Avatar HUD Frame */
 .hero-avatar-wrap {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   border: 2px solid var(--accent-bash);
+  box-shadow: 0 0 25px rgba(0, 245, 160, 0.35), inset 0 0 15px rgba(0, 245, 160, 0.2);
   overflow: hidden;
-  background-color: var(--card-surface);
+  background-color: var(--bg-void);
+  transition: var(--transition-smooth);
+}
+
+.hero-avatar-wrap:hover {
+  box-shadow: 0 0 35px rgba(0, 245, 160, 0.55), inset 0 0 20px rgba(0, 245, 160, 0.3);
+  transform: scale(1.02);
 }
 
 .hero-avatar {
@@ -324,64 +363,101 @@ code, kbd, pre, samp {
   margin-top: 0.5rem;
 }
 
-/* Right Column: The Dark Ops Terminal */
+/* Right Column: Authentic macOS/Linux Terminal Window */
 .hero-terminal {
   width: 100%;
 }
 
 .terminal-container {
   width: 100%;
-  background-color: var(--terminal-void);
+  background-color: var(--terminal-bg);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 1px 1px rgba(255, 255, 255, 0.05);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: var(--transition-smooth);
 }
 
+.terminal-container:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 245, 160, 0.15);
+}
+
+/* Authentic Dark Grey Top Bar */
 .terminal-header {
-  background-color: var(--card-surface);
-  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--terminal-topbar);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: 0.75rem 1.15rem;
   display: flex;
   align-items: center;
-  gap: 1.1rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .terminal-dots {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
+/* macOS Terminal Controls */
 .terminal-dot {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
 }
 
 .dot-red {
-  background-color: #EF4444;
+  background-color: #FF5F56; /* Close */
 }
 
 .dot-yellow {
-  background-color: #F59E0B;
+  background-color: #FFBD2E; /* Minimize */
 }
 
 .dot-green {
-  background-color: var(--accent-bash);
+  background-color: #27C93F; /* Maximize */
+}
+
+/* Simulated Terminal Tabs */
+.terminal-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.terminal-tab {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  color: var(--text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.terminal-tab.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .terminal-title {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.76rem;
+  color: var(--text-dim);
   font-weight: 500;
 }
 
+/* Terminal Dark Body with Padding */
 .terminal-body {
-  padding: 1.4rem;
+  padding: 1.5rem;
   min-height: 250px;
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -389,7 +465,7 @@ code, kbd, pre, samp {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  background-color: var(--terminal-void);
+  background-color: var(--terminal-bg);
 }
 
 .terminal-line {
@@ -411,13 +487,22 @@ code, kbd, pre, samp {
   color: var(--text-muted);
 }
 
-.terminal-line .cursor {
+/* Pulsing Block Cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
   color: var(--accent-bash);
-  font-weight: bold;
+  font-weight: 700;
+  margin-left: 2px;
 }
 
 /* --------------------------------------------------------------------------
-   8. Skills & Infrastructure Matrix (Bento Grid)
+   8. Skills & Infrastructure Matrix (Bento Grid with Glassmorphism)
    -------------------------------------------------------------------------- */
 .skills-section {
   padding: 4.5rem 0;
@@ -431,13 +516,20 @@ code, kbd, pre, samp {
 }
 
 .bento-card {
-  background-color: var(--card-surface);
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
 }
 
 .bento-card .card-header {
@@ -464,12 +556,16 @@ code, kbd, pre, samp {
   color: var(--text-muted);
 }
 
-/* Domain-Specific Bento Highlights */
+/* Domain-Specific Bento Highlights & Specular Hover Glows */
 #skill-docker-k8s {
   border-top: 2px solid var(--accent-k8s);
 }
 #skill-docker-k8s .card-badge {
   color: var(--accent-k8s);
+}
+#skill-docker-k8s:hover {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.35);
 }
 
 #skill-aws-cloud {
@@ -478,12 +574,20 @@ code, kbd, pre, samp {
 #skill-aws-cloud .card-badge {
   color: var(--accent-aws);
 }
+#skill-aws-cloud:hover {
+  border-color: var(--accent-aws);
+  box-shadow: 0 12px 30px -8px rgba(255, 138, 0, 0.35);
+}
 
 #skill-terraform {
   border-top: 2px solid var(--accent-tf);
 }
 #skill-terraform .card-badge {
   color: var(--accent-tf);
+}
+#skill-terraform:hover {
+  border-color: var(--accent-tf);
+  box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.35);
 }
 
 #skill-linux-networking {
@@ -492,6 +596,10 @@ code, kbd, pre, samp {
 #skill-linux-networking .card-badge {
   color: var(--accent-bash);
 }
+#skill-linux-networking:hover {
+  border-color: var(--accent-bash);
+  box-shadow: 0 12px 30px -8px rgba(0, 245, 160, 0.35);
+}
 
 #skill-python-bash {
   border-top: 2px solid var(--accent-bash);
@@ -499,9 +607,13 @@ code, kbd, pre, samp {
 #skill-python-bash .card-badge {
   color: var(--accent-bash);
 }
+#skill-python-bash:hover {
+  border-color: var(--accent-bash);
+  box-shadow: 0 12px 30px -8px rgba(0, 245, 160, 0.35);
+}
 
 /* --------------------------------------------------------------------------
-   9. Projects Section (Card Layout CSS Grid)
+   9. Projects Section (Card Layout CSS Grid with Hover Glows)
    -------------------------------------------------------------------------- */
 .projects-section {
   padding: 4.5rem 0;
@@ -515,13 +627,20 @@ code, kbd, pre, samp {
 }
 
 .project-card {
-  background-color: var(--card-surface);
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
+  transition: var(--transition-smooth);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
 }
 
 .project-card-header {
@@ -567,19 +686,24 @@ code, kbd, pre, samp {
 .tech-tags li {
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  background-color: var(--card-surface-subtle);
+  background-color: rgba(255, 255, 255, 0.04);
   padding: 0.3rem 0.65rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
+  transition: var(--transition-smooth);
 }
 
-/* Domain Accent Accents for Projects */
+/* Domain Accent Borders & Hover Glows for Projects */
 #proj-nexora {
   border-left: 2px solid var(--accent-k8s);
 }
 #proj-nexora .tech-tags li {
   color: var(--accent-k8s);
+}
+#proj-nexora:hover {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.35);
 }
 
 #proj-kkk {
@@ -588,12 +712,20 @@ code, kbd, pre, samp {
 #proj-kkk .tech-tags li {
   color: var(--accent-aws);
 }
+#proj-kkk:hover {
+  border-color: var(--accent-aws);
+  box-shadow: 0 12px 30px -8px rgba(255, 138, 0, 0.35);
+}
 
 #proj-craver {
   border-left: 2px solid var(--accent-k8s);
 }
 #proj-craver .tech-tags li {
   color: var(--accent-k8s);
+}
+#proj-craver:hover {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.35);
 }
 
 #proj-sysinspect {
@@ -602,6 +734,10 @@ code, kbd, pre, samp {
 #proj-sysinspect .tech-tags li {
   color: var(--accent-bash);
 }
+#proj-sysinspect:hover {
+  border-color: var(--accent-bash);
+  box-shadow: 0 12px 30px -8px rgba(0, 245, 160, 0.35);
+}
 
 #proj-networklab {
   border-left: 2px solid var(--accent-k8s);
@@ -609,12 +745,20 @@ code, kbd, pre, samp {
 #proj-networklab .tech-tags li {
   color: var(--accent-k8s);
 }
+#proj-networklab:hover {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 12px 30px -8px rgba(56, 189, 248, 0.35);
+}
 
 #proj-algoengine {
   border-left: 2px solid var(--accent-tf);
 }
 #proj-algoengine .tech-tags li {
   color: var(--accent-tf);
+}
+#proj-algoengine:hover {
+  border-color: var(--accent-tf);
+  box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.35);
 }
 
 .project-footer {
@@ -630,6 +774,11 @@ code, kbd, pre, samp {
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--accent-bash);
+}
+
+.project-link:hover {
+  text-decoration: underline;
+  text-shadow: 0 0 10px rgba(0, 245, 160, 0.5);
 }
 
 /* Hidden drawer details reserved for future phases */
@@ -652,13 +801,22 @@ code, kbd, pre, samp {
 }
 
 .experience-card {
-  background-color: var(--card-surface);
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  transition: var(--transition-smooth);
+}
+
+.experience-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.7);
 }
 
 .experience-card-header {
@@ -718,13 +876,16 @@ code, kbd, pre, samp {
 }
 
 .contact-form {
-  background-color: var(--card-surface);
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
+  transition: var(--transition-smooth);
 }
 
 .form-group {
@@ -750,22 +911,27 @@ code, kbd, pre, samp {
   color: var(--text-primary);
   font-family: var(--font-ui);
   font-size: 0.94rem;
+  transition: var(--transition-smooth);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent-bash);
+  box-shadow: 0 0 10px rgba(0, 245, 160, 0.25);
 }
 
 .contact-channels {
-  background-color: var(--card-surface);
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-card);
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.15rem;
+  transition: var(--transition-smooth);
 }
 
 .contact-channels h3 {
@@ -790,6 +956,11 @@ code, kbd, pre, samp {
 
 .channels-list a {
   color: var(--accent-bash);
+  transition: var(--transition-smooth);
+}
+
+.channels-list a:hover {
+  text-shadow: 0 0 10px rgba(0, 245, 160, 0.5);
 }
 
 /* --------------------------------------------------------------------------
