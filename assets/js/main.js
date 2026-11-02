@@ -1,53 +1,259 @@
 /**
- * Cloud Control Plane & DevOps Orchestrator — Core UI Architecture
- * -----------------------------------------------------------------
- * Command Palette (Cmd+K), Interactive Spotlight, Telemetry Clock,
- * Architecture Topology Blueprints, Split Code Tabs & SSH Dispatch.
+ * OLED Cyber-Cinema Orchestrator — Kinetic Motion Architecture
+ * -------------------------------------------------------------
+ * 1. Blast Door Preloader Curtain
+ * 2. 60FPS Interactive HTML5 Network Topology Canvas
+ * 3. Lenis Smooth Scroll & GSAP ScrollTrigger Choreography
+ * 4. 3D Magnetic Avatar & Card Tilt with Specular Spotlight
+ * 5. Slide-Over Architecture Blueprint Drawer
+ * 6. Command Palette (Cmd+K) & SSH Webhook Dispatch
  */
 
 (function () {
   'use strict';
 
   // ═══════════════════════════════════════════════════════════════
-  // 1. GLOBAL STATE & TELEMETRY CLOCK
+  // 1. SYSTEM BOOT PRELOADER BLAST DOOR
   // ═══════════════════════════════════════════════════════════════
-  function initTelemetryClock() {
-    const uptimeEl = document.getElementById("hudUptimeCounter");
-    const latencyEl = document.getElementById("hudLatencyValue");
+  function initPreloaderBlastDoor() {
+    const curtain = document.getElementById("preloaderCurtain");
+    const bar = document.getElementById("preloaderBar");
+    const pct = document.getElementById("preloaderPct");
+    const logsContainer = document.getElementById("preloaderLogs");
+    if (!curtain || !bar || !pct) return;
 
-    // Dynamic Uptime counter (starts from realistic base and increments live)
-    let totalSeconds = 182 * 86400 + 14 * 3600 + 32 * 60 + 10;
+    const bootSteps = [
+      { text: "[OK] Mounting Avatar Orbital HUD Frame...", at: 15 },
+      { text: "[OK] Initializing Lenis 60FPS Physics Engine...", at: 40 },
+      { text: "[OK] Spawning Interactive Cloud Constellation...", at: 70 },
+      { text: "[OK] Igniting Cyber-Cinema Shaders & Telemetry...", at: 90 },
+      { text: "⚡ [READY] Portfolio Control Plane Online.", at: 100 }
+    ];
 
-    setInterval(() => {
-      totalSeconds++;
-      if (uptimeEl) {
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const mins = Math.floor((totalSeconds % 3600) / 60);
-        const secs = totalSeconds % 60;
-        uptimeEl.textContent = `${days}d ${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    let currentProgress = 0;
+    let stepIndex = 0;
+
+    const interval = setInterval(() => {
+      currentProgress += Math.floor(4 + Math.random() * 8);
+      if (currentProgress > 100) currentProgress = 100;
+
+      bar.style.width = `${currentProgress}%`;
+      pct.textContent = `${currentProgress}%`;
+
+      if (stepIndex < bootSteps.length && currentProgress >= bootSteps[stepIndex].at) {
+        if (logsContainer) {
+          const line = document.createElement("div");
+          line.textContent = bootSteps[stepIndex].text;
+          logsContainer.appendChild(line);
+        }
+        stepIndex++;
       }
-    }, 1000);
 
-    // Micro latency fluctuation (11ms - 15ms)
-    setInterval(() => {
-      if (latencyEl) {
-        const ms = Math.floor(11 + Math.random() * 5);
-        latencyEl.textContent = `${ms}ms`;
+      if (currentProgress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          curtain.classList.add("blast-open");
+          setTimeout(() => {
+            curtain.style.display = "none";
+            triggerHeroEntranceAnimation();
+          }, 850);
+        }, 300);
       }
-    }, 3500);
+    }, 35);
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 2. INTERACTIVE CURSOR SPOTLIGHT (LINEAR / VERCEL STYLE)
+  // 2. 60FPS INTERACTIVE NETWORK TOPOLOGY CANVAS
   // ═══════════════════════════════════════════════════════════════
-  function initSpotlightGlow() {
-    const cards = document.querySelectorAll(".control-card, .bento-card, .docker-container-card, .timeline-commit-card");
+  function initNetworkConstellationCanvas() {
+    const canvas = document.getElementById("networkCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    let width, height;
+    let nodes = [];
+    const nodeCount = 55;
+    const maxDistance = 135;
+
+    let mouse = { x: -9999, y: -9999, radius: 150 };
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+
+    window.addEventListener("pointermove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    }, { passive: true });
+
+    window.addEventListener("pointerleave", () => {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    // Create cloud infrastructure nodes
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 2 + 1.2,
+        baseColor: i % 3 === 0 ? "rgba(0, 245, 160, 0.7)" : (i % 3 === 1 ? "rgba(56, 189, 248, 0.7)" : "rgba(168, 85, 247, 0.6)")
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Update and draw nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
+        // Mouse repulsion
+        const dx = mouse.x - n.x;
+        const dy = mouse.y - n.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          n.x -= (dx / dist) * force * 3;
+          n.y -= (dy / dist) * force * 3;
+        }
+
+        // Draw node
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.fillStyle = n.baseColor;
+        ctx.fill();
+
+        // Connect adjacent nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j];
+          const distNodes = Math.hypot(n.x - n2.x, n.y - n2.y);
+          if (distNodes < maxDistance) {
+            const alpha = (1 - distNodes / maxDistance) * 0.22;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 3. LENIS SMOOTH SCROLL & GSAP SCROLLTRIGGER CHOREOGRAPHY
+  // ═══════════════════════════════════════════════════════════════
+  let lenisInstance = null;
+
+  function initSmoothScrollAndGSAP() {
+    if (typeof window.Lenis !== "undefined") {
+      lenisInstance = new window.Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true
+      });
+
+      function raf(time) {
+        lenisInstance.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    if (typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined") {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+
+      if (lenisInstance) {
+        lenisInstance.on("scroll", window.ScrollTrigger.update);
+        window.gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
+        window.gsap.ticker.lagSmoothing(0);
+      }
+
+      // Bento Grid Stagger Animation
+      window.gsap.from(".bento-box", {
+        scrollTrigger: {
+          trigger: "#topology",
+          start: "top 80%"
+        },
+        y: 50,
+        opacity: 0,
+        scale: 0.96,
+        duration: 0.85,
+        stagger: 0.08,
+        ease: "power2.out"
+      });
+
+      // Projects Stagger Animation
+      window.gsap.from(".project-container-card", {
+        scrollTrigger: {
+          trigger: "#containers",
+          start: "top 80%"
+        },
+        y: 45,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+
+      // Git Log Commit Nodes Animation
+      window.gsap.from(".git-commit-node", {
+        scrollTrigger: {
+          trigger: "#git-log",
+          start: "top 80%"
+        },
+        x: -30,
+        opacity: 0,
+        duration: 0.75,
+        stagger: 0.15,
+        ease: "power2.out"
+      });
+    }
+  }
+
+  function triggerHeroEntranceAnimation() {
+    if (typeof window.gsap !== "undefined") {
+      window.gsap.from(".hero-identity-card", {
+        scale: 0.92,
+        opacity: 0,
+        y: 30,
+        duration: 0.9,
+        ease: "back.out(1.2)"
+      });
+      window.gsap.from(".hero-glass-terminal", {
+        x: 40,
+        opacity: 0,
+        duration: 0.9,
+        delay: 0.15,
+        ease: "power3.out"
+      });
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 4. 3D MAGNETIC AVATAR & CARD TILT WITH SPOTLIGHT
+  // ═══════════════════════════════════════════════════════════════
+  function init3DMagneticTilt() {
+    const cards = document.querySelectorAll(".hero-identity-card, .hero-glass-terminal, .bento-box, .project-container-card, .commit-card-box");
+    const avatarStage = document.getElementById("avatarStage");
 
     window.addEventListener("pointermove", (e) => {
       const { clientX, clientY } = e;
-      document.documentElement.style.setProperty("--cursor-x", `${clientX}px`);
-      document.documentElement.style.setProperty("--cursor-y", `${clientY}px`);
 
       cards.forEach((card) => {
         const rect = card.getBoundingClientRect();
@@ -56,454 +262,318 @@
         card.style.setProperty("--mouse-x", `${x}px`);
         card.style.setProperty("--mouse-y", `${y}px`);
       });
+
+      // Magnetic 3D tilt on Hero Avatar
+      if (avatarStage) {
+        const rect = avatarStage.getBoundingClientRect();
+        if (clientX >= rect.left - 50 && clientX <= rect.right + 50 && clientY >= rect.top - 50 && clientY <= rect.bottom + 50) {
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const normX = (clientX - cx) / (rect.width / 2);
+          const normY = (clientY - cy) / (rect.height / 2);
+          avatarStage.style.transform = `perspective(1000px) rotateY(${(normX * 14).toFixed(1)}deg) rotateX(${(-normY * 14).toFixed(1)}deg)`;
+        } else {
+          avatarStage.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+        }
+      }
     }, { passive: true });
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 3. COMMAND PALETTE (CMD + K / CTRL + K)
+  // 5. SLIDE-OVER ARCHITECTURE BLUEPRINT DRAWER
   // ═══════════════════════════════════════════════════════════════
-  function initCommandPalette() {
-    const palette = document.getElementById("commandPaletteModal");
-    const triggerBtn = document.getElementById("cmdPaletteBtn");
-    const closeBtn = document.getElementById("cmdPaletteClose");
-    const input = document.getElementById("cmdPaletteInput");
-    const resultsContainer = document.getElementById("cmdPaletteResults");
-
-    if (!palette || !input || !resultsContainer) return;
-
-    const commands = [
-      { id: "sec-terminal", title: "Jump to Interactive Linux CLI", icon: "fa-terminal", badge: "~/terminal", action: () => scrollToSection("terminal") },
-      { id: "sec-topology", title: "Jump to 11-Domain Infrastructure Bento", icon: "fa-network-wired", badge: "~/topology", action: () => scrollToSection("topology") },
-      { id: "sec-containers", title: "Jump to Active Docker Containers", icon: "fa-cubes", badge: "~/containers", action: () => scrollToSection("containers") },
-      { id: "sec-pipelines", title: "Jump to CI/CD & ArgoCD Pipelines", icon: "fa-code-branch", badge: "~/pipelines", action: () => scrollToSection("pipelines") },
-      { id: "sec-gitlog", title: "Jump to Git Commit Graph Timeline", icon: "fa-code-commit", badge: "~/git-log", action: () => scrollToSection("git-log") },
-      { id: "sec-contact", title: "Open SSH Handshake & Webhook Gateway", icon: "fa-satellite-dish", badge: "~/init-contact", action: () => scrollToSection("contact") },
-      { id: "cmd-whoami", title: "Run 'whoami' in Terminal", icon: "fa-user-astronaut", badge: "CLI", action: () => runTerminalCmd("whoami") },
-      { id: "cmd-docker", title: "Run 'docker ps' in Terminal", icon: "fa-docker", badge: "CLI", action: () => runTerminalCmd("docker ps") },
-      { id: "cmd-k8s", title: "Run 'kubectl get nodes' in Terminal", icon: "fa-dharmachakra", badge: "CLI", action: () => runTerminalCmd("kubectl get nodes") },
-      { id: "cmd-resume", title: "Retrieve Resume (curl -O resume.pdf)", icon: "fa-file-arrow-down", badge: "DOCS", action: () => triggerResumeModal() },
-      { id: "cmd-wa", title: "Direct Recruitment Chat via WhatsApp", icon: "fa-whatsapp", badge: "+91 7889446114", action: () => window.open("https://wa.me/917889446114?text=Hi%20Uzair,%20I%20am%20reviewing%20your%20DevOps%20portfolio!", "_blank") },
-      { id: "cmd-email", title: "Copy Direct Engineer Email", icon: "fa-envelope", badge: "uzairteeli123456789@gmail.com", action: () => copyTextToClipboard("uzairteeli123456789@gmail.com", "Email copied to clipboard!") }
-    ];
-
-    let selectedIndex = 0;
-    let filteredCommands = [...commands];
-
-    function renderResults() {
-      resultsContainer.innerHTML = "";
-      if (filteredCommands.length === 0) {
-        resultsContainer.innerHTML = `<div class="cmd-empty-state"><i class="fa-solid fa-triangle-exclamation"></i> No matching infrastructure commands found.</div>`;
-        return;
-      }
-
-      filteredCommands.forEach((cmd, idx) => {
-        const item = document.createElement("div");
-        item.className = `cmd-item ${idx === selectedIndex ? 'selected' : ''}`;
-        item.dataset.index = idx;
-        item.innerHTML = `
-          <div class="cmd-item-left">
-            <span class="cmd-item-icon"><i class="fa-solid ${cmd.icon}"></i></span>
-            <span class="cmd-item-title">${cmd.title}</span>
-          </div>
-          <span class="cmd-item-badge">${cmd.badge}</span>
-        `;
-        item.addEventListener("click", () => executePaletteItem(idx));
-        resultsContainer.appendChild(item);
-      });
+  const blueprintData = {
+    nexora: {
+      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
+      title: "Nexora — Quick-Commerce Mobile Architecture",
+      diagram: `[React Native 0.81 (Mobile APK)]
+    ├── Expo Router v6 (Deep-Linked Navigation)
+    ├── SQLite Client Cache (Offline Order Queue)
+    └── Cloudflare Workers (6-Digit OTP Gateway)
+           └── Async Delivery Radar Engine (Sub-50ms Fulfillment)`,
+      impact: "Zero-latency mobile checkout architecture with offline-first SQLite synchronization, OTP security boundaries, and responsive native UI running at 60 FPS."
+    },
+    kkk: {
+      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
+      title: "Kashmir Kesar Kingdom — Global Export Engine",
+      diagram: `[User Browser Across 12+ Nations]
+    ├── Cloudflare Edge CDN (SSL/TLS 1.3 Termination)
+    ├── NGINX Reverse Proxy (Brotli/Gzip: 95% Payload Drop)
+    ├── Multi-Currency Dynamic Worker (USD, EUR, GBP, AED, INR)
+    └── Service Worker Cache Storage (PWA Offline Catalog)`,
+      impact: "Reduced web asset footprint from 48.3MB to 2.43MB (95% drop) enabling instant load times over global cellular connections, integrated with an automated B2B RFQ cost estimator."
+    },
+    craver: {
+      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
+      title: "Craver Fast Food — Modular Ordering Engine",
+      diagram: `[Modular ES6+ Reactive Client]
+    ├── LocalStorage Persistent State (Cart & Coupon Engine)
+    ├── GitHub Actions Automated CI/CD Pipeline
+    └── Zero-Downtime GitHub Pages CDN Edge Deployment`,
+      impact: "Modular componentized architecture with real-time catalog search, dietary filter matrix, and continuous automated build validation upon git push."
+    },
+    sysinspect: {
+      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
+      title: "sys-inspect — Linux Kernel Telemetry CLI",
+      diagram: `[Direct /proc & /sys Memory Readers]
+    ├── Zombie/Defunct Process PID Tree Scanner
+    ├── Inode & File Descriptor Saturation Evaluator
+    └── Dynamic ANSI Health Triage Generator`,
+      impact: "Production Linux auditing CLI reporting kernel performance primitives, detecting memory leaks, and isolating zombie processes with strict defensive pipefail handling."
+    },
+    networklab: {
+      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
+      title: "Network Protocol Labs & Packet Inspector",
+      diagram: `[Wireshark Raw Interface eth0]
+    ├── TCP 3-Way Handshake Sequence Analysis
+    ├── CIDR Subnet Calculator (VLSM IPv4/IPv6)
+    └── BGP Dynamic Peering Route Simulator (ASN 64512)`,
+      impact: "In-depth packet capture and protocol verification across OSI Layers 2 through 7, auditing TCP window scaling, MTU fragmentation, and DNS authoritative propagation."
+    },
+    algoengine: {
+      tag: "CONTAINER // ARCHITECTURE BLUEPRINT",
+      title: "Algo-Engine — Python DSA & Distributed Algorithms",
+      diagram: `[Big-O Asymptotic Complexity Profiler]
+    ├── LRU Cache Engine (O(1) Memory Access)
+    ├── Graph Shortest-Path Router (Dijkstra Algorithm)
+    └── Automated PyTest Continuous Benchmark Suite`,
+      impact: "Clean implementations of distributed consensus primitives, tree balancing, and graph routing algorithms optimized for execution speed and minimal memory footprint."
     }
+  };
 
-    function openPalette() {
-      palette.classList.add("is-active");
+  function initArchitectureDrawer() {
+    const backdrop = document.getElementById("archDrawerBackdrop");
+    const closeBtn = document.getElementById("archDrawerClose");
+    const tagEl = document.getElementById("drawerTag");
+    const titleEl = document.getElementById("drawerTitle");
+    const diagramEl = document.getElementById("drawerDiagram");
+    const impactEl = document.getElementById("drawerImpact");
+
+    if (!backdrop) return;
+
+    function openDrawer(key) {
+      const data = blueprintData[key];
+      if (!data) return;
+
+      tagEl.textContent = data.tag;
+      titleEl.textContent = data.title;
+      diagramEl.textContent = data.diagram;
+      impactEl.textContent = data.impact;
+
+      backdrop.classList.add("is-open");
       document.body.style.overflow = "hidden";
-      input.value = "";
-      filteredCommands = [...commands];
-      selectedIndex = 0;
-      renderResults();
-      setTimeout(() => input.focus(), 50);
     }
 
-    function closePalette() {
-      palette.classList.remove("is-active");
+    function closeDrawer() {
+      backdrop.classList.remove("is-open");
       document.body.style.overflow = "";
     }
 
-    function executePaletteItem(idx) {
-      const target = filteredCommands[idx];
-      if (target && target.action) {
-        closePalette();
-        target.action();
-      }
-    }
-
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-
-    function runTerminalCmd(command) {
-      scrollToSection("terminal");
-      if (window.TerminalModule) {
-        window.TerminalModule.switchTab('zsh');
-        window.TerminalModule.executeCommand(command);
-      }
-    }
-
-    // Input filtering
-    input.addEventListener("input", (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      filteredCommands = commands.filter(c => c.title.toLowerCase().includes(query) || c.badge.toLowerCase().includes(query));
-      selectedIndex = 0;
-      renderResults();
+    document.querySelectorAll(".btn-blueprint-drawer[data-project]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.dataset.project;
+        openDrawer(key);
+      });
     });
 
-    // Keyboard navigation inside palette
+    if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop) closeDrawer();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
+        closeDrawer();
+      }
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 6. COMMAND PALETTE (CMD + K) & RESUME SIMULATOR
+  // ═══════════════════════════════════════════════════════════════
+  function initCommandPalette() {
+    const modal = document.getElementById("cmdPaletteModal");
+    const triggerBtn = document.getElementById("cmdPaletteBtn");
+    const closeBtn = document.getElementById("cmdPaletteClose");
+    const input = document.getElementById("cmdSearchInput");
+    const results = document.getElementById("cmdResultsList");
+    if (!modal || !input || !results) return;
+
+    const items = [
+      { title: "Jump to Hero Terminal", icon: "fa-terminal", badge: "#terminal", action: () => scrollToId("terminal") },
+      { title: "Jump to 11-Domain Tech Stack Bento", icon: "fa-network-wired", badge: "#topology", action: () => scrollToId("topology") },
+      { title: "Jump to Active Containers Registry", icon: "fa-cubes", badge: "#containers", action: () => scrollToId("containers") },
+      { title: "Jump to Git Commit Graph Timeline", icon: "fa-code-commit", badge: "#git-log", action: () => scrollToId("git-log") },
+      { title: "Open SSH Contact Gateway", icon: "fa-satellite-dish", badge: "#contact", action: () => scrollToId("contact") },
+      { title: "Execute 'docker ps' in Terminal", icon: "fa-docker", badge: "CLI", action: () => runCli("docker ps") },
+      { title: "Execute 'k8s cluster' in Terminal", icon: "fa-dharmachakra", badge: "CLI", action: () => runCli("k8s cluster") },
+      { title: "Download Resume (curl -O resume.pdf)", icon: "fa-file-arrow-down", badge: "PDF", action: () => triggerResumeDownload() },
+      { title: "Direct WhatsApp Recruitment Chat", icon: "fa-whatsapp", badge: "Chat", action: () => window.open("https://wa.me/917889446114?text=Hi%20Uzair,%20I%20am%20reviewing%20your%20DevOps%20portfolio!", "_blank") },
+      { title: "Copy Email: uzairteeli123456789@gmail.com", icon: "fa-envelope", badge: "Copy", action: () => copyEmail() }
+    ];
+
+    let filtered = [...items];
+    let selectedIdx = 0;
+
+    function render() {
+      results.innerHTML = "";
+      filtered.forEach((it, idx) => {
+        const row = document.createElement("div");
+        row.className = `cmd-result-item ${idx === selectedIdx ? 'selected' : ''}`;
+        row.innerHTML = `
+          <div style="display:flex; align-items:center; gap:0.65rem;">
+            <i class="fa-solid ${it.icon}" style="color:#00F5A0; width:18px;"></i>
+            <span style="font-size:0.88rem; font-weight:500;">${it.title}</span>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-slate); background:rgba(255,255,255,0.05); padding:0.15rem 0.45rem; border-radius:4px;">${it.badge}</span>
+        `;
+        row.addEventListener("click", () => {
+          close();
+          it.action();
+        });
+        results.appendChild(row);
+      });
+    }
+
+    function open() {
+      modal.classList.add("is-active");
+      document.body.style.overflow = "hidden";
+      input.value = "";
+      filtered = [...items];
+      selectedIdx = 0;
+      render();
+      setTimeout(() => input.focus(), 60);
+    }
+
+    function close() {
+      modal.classList.remove("is-active");
+      document.body.style.overflow = "";
+    }
+
+    input.addEventListener("input", (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      filtered = items.filter(it => it.title.toLowerCase().includes(q) || it.badge.toLowerCase().includes(q));
+      selectedIdx = 0;
+      render();
+    });
+
     input.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        selectedIndex = (selectedIndex + 1) % filteredCommands.length;
-        renderResults();
-        ensureSelectedVisible();
+        selectedIdx = (selectedIdx + 1) % filtered.length;
+        render();
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
-        selectedIndex = (selectedIndex - 1 + filteredCommands.length) % filteredCommands.length;
-        renderResults();
-        ensureSelectedVisible();
-      } else if (e.key === "Enter") {
+        selectedIdx = (selectedIdx - 1 + filtered.length) % filtered.length;
+        render();
+      } else if (e.key === "Enter" && filtered[selectedIdx]) {
         e.preventDefault();
-        executePaletteItem(selectedIndex);
+        close();
+        filtered[selectedIdx].action();
       } else if (e.key === "Escape") {
-        e.preventDefault();
-        closePalette();
+        close();
       }
     });
 
-    function ensureSelectedVisible() {
-      const activeEl = resultsContainer.querySelector(".cmd-item.selected");
-      if (activeEl) {
-        activeEl.scrollIntoView({ block: "nearest" });
-      }
-    }
-
-    // Global Keybind (Cmd+K / Ctrl+K)
     window.addEventListener("keydown", (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        if (palette.classList.contains("is-active")) {
-          closePalette();
-        } else {
-          openPalette();
-        }
-      } else if (e.key === "Escape" && palette.classList.contains("is-active")) {
-        closePalette();
+        if (modal.classList.contains("is-active")) close();
+        else open();
       }
     });
 
-    if (triggerBtn) triggerBtn.addEventListener("click", openPalette);
-    if (closeBtn) closeBtn.addEventListener("click", closePalette);
-    palette.addEventListener("click", (e) => {
-      if (e.target === palette) closePalette();
+    if (triggerBtn) triggerBtn.addEventListener("click", open);
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) close();
     });
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // 4. RESUME DOWNLOAD MODAL WITH SIMULATED PROGRESS BAR
-  // ═══════════════════════════════════════════════════════════════
-  function triggerResumeModal() {
-    let modal = document.getElementById("resumeDownloadModal");
-    if (!modal) {
-      modal = document.createElement("div");
-      modal.id = "resumeDownloadModal";
-      modal.className = "terminal-progress-modal";
-      modal.innerHTML = `
-        <div class="progress-modal-card">
-          <div class="progress-header">
-            <span class="p-dot dot-red"></span>
-            <span class="p-dot dot-yellow"></span>
-            <span class="p-dot dot-green"></span>
-            <span class="p-title">curl -O resume.pdf // AWS S3 Artifact Delivery</span>
-          </div>
-          <div class="progress-body">
-            <div class="p-cmd">$ curl -sSL https://cdn.uzair.cloud/artifacts/Uzair_Sultan_DevOps_Resume.pdf -o resume.pdf</div>
-            <div class="p-bar-track">
-              <div class="p-bar-fill" id="resumeProgressBar"></div>
-            </div>
-            <div class="p-metrics">
-              <span id="resumePct">0%</span>
-              <span id="resumeSpeed">Connecting to S3 bucket...</span>
-            </div>
-            <div class="p-status-log" id="resumeStatusLog">[INIT] Resolving CloudFront distribution edge...</div>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-    }
-
-    modal.classList.add("is-active");
-    const bar = document.getElementById("resumeProgressBar");
-    const pct = document.getElementById("resumePct");
-    const speed = document.getElementById("resumeSpeed");
-    const log = document.getElementById("resumeStatusLog");
-
-    bar.style.width = "0%";
-    pct.textContent = "0%";
-    speed.textContent = "1.8 MB/s";
-    log.innerHTML = `<span style="color:#0EA5E9;">[TLS 1.3]</span> SSL Session Established with AWS S3 Edge`;
-
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += Math.floor(15 + Math.random() * 20);
-      if (progress > 100) progress = 100;
-
-      bar.style.width = `${progress}%`;
-      pct.textContent = `${progress}%`;
-
-      if (progress >= 30 && progress < 70) {
-        log.innerHTML = `<span style="color:#F97316;">[STREAM]</span> Transferring encrypted payload (384 KiB / 428 KiB)...`;
-        speed.textContent = "2.4 MB/s";
-      } else if (progress >= 70 && progress < 100) {
-        log.innerHTML = `<span style="color:#8B5CF6;">[VERIFY]</span> SHA-256 Checksum validation in progress...`;
-        speed.textContent = "2.1 MB/s";
-      } else if (progress >= 100) {
-        clearInterval(interval);
-        log.innerHTML = `<span style="color:#10B981;">[200 OK]</span> Download Verified. Opening official PDF...`;
-        speed.textContent = "Complete";
-
-        setTimeout(() => {
-          modal.classList.remove("is-active");
-          // Direct fallback to resume / LinkedIn profile or PDF link
-          window.open("https://github.com/Uzair0123/portfolio/raw/main/docs/LINKEDIN_PROFILE.md", "_blank");
-        }, 900);
-      }
-    }, 120);
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   }
-  window.triggerResumeModal = triggerResumeModal;
 
-  // ═══════════════════════════════════════════════════════════════
-  // 5. COPY HELPER WITH VISUAL TOAST
-  // ═══════════════════════════════════════════════════════════════
-  function copyTextToClipboard(text, successMsg) {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast(successMsg || "Copied to clipboard!");
-      });
-    } else {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      showToast(successMsg || "Copied to clipboard!");
+  function runCli(command) {
+    scrollToId("terminal");
+    if (window.TerminalModule) {
+      window.TerminalModule.switchTab('zsh');
+      window.TerminalModule.typeAndExecute(command);
     }
   }
 
-  function showToast(msg) {
-    let toast = document.getElementById("telemetryToast");
-    if (!toast) {
-      toast = document.createElement("div");
-      toast.id = "telemetryToast";
-      toast.className = "telemetry-toast";
-      document.body.appendChild(toast);
-    }
-    toast.innerHTML = `<span class="toast-dot"></span> ${msg}`;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 2800);
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 6. ARCHITECTURE TOPOLOGY FLIP TOGGLE (PROJECT CARDS)
-  // ═══════════════════════════════════════════════════════════════
-  function initProjectTopologyToggles() {
-    document.querySelectorAll(".btn-toggle-topology").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const card = e.currentTarget.closest(".docker-container-card");
-        if (card) {
-          card.classList.toggle("show-topology");
-          const isFlipped = card.classList.contains("show-topology");
-          e.currentTarget.innerHTML = isFlipped
-            ? `<i class="fa-solid fa-code"></i> Hide Topology`
-            : `<i class="fa-solid fa-diagram-project"></i> View Topology`;
-        }
-      });
+  function copyEmail() {
+    const email = "uzairteeli123456789@gmail.com";
+    navigator.clipboard.writeText(email).then(() => {
+      alert("Email copied to clipboard: " + email);
     });
   }
 
-  // ═══════════════════════════════════════════════════════════════
-  // 7. BASH & PYTHON SPLIT CODE TABS
-  // ═══════════════════════════════════════════════════════════════
-  function initCodeTabSwitchers() {
-    document.querySelectorAll(".code-tab-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const targetTab = e.currentTarget.dataset.tab;
-        const container = e.currentTarget.closest(".code-split-card");
-        if (!container) return;
-
-        container.querySelectorAll(".code-tab-btn").forEach(b => b.classList.remove("active"));
-        container.querySelectorAll(".code-snippet-panel").forEach(p => p.classList.remove("active"));
-
-        e.currentTarget.classList.add("active");
-        const activePanel = container.querySelector(`.code-snippet-panel[data-panel="${targetTab}"]`);
-        if (activePanel) activePanel.classList.add("active");
-      });
-    });
-
-    // Copy code snippet buttons
-    document.querySelectorAll(".btn-copy-snippet").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const snippetBlock = e.currentTarget.closest(".code-card-wrap").querySelector("code");
-        if (snippetBlock) {
-          copyTextToClipboard(snippetBlock.innerText, "Snippet copied to clipboard!");
-          e.currentTarget.innerHTML = `<i class="fa-solid fa-check"></i> Copied`;
-          setTimeout(() => {
-            e.currentTarget.innerHTML = `<i class="fa-regular fa-copy"></i> Copy`;
-          }, 2000);
-        }
-      });
-    });
+  function triggerResumeDownload() {
+    window.open("https://github.com/Uzair0123/portfolio/raw/main/docs/LINKEDIN_PROFILE.md", "_blank");
   }
+  window.triggerResumeModal = triggerResumeDownload;
 
   // ═══════════════════════════════════════════════════════════════
-  // 8. SSH HANDSHAKE & WEBHOOK DISPATCH FORM
+  // 7. SSH CONTACT WEBHOOK DISPATCH
   // ═══════════════════════════════════════════════════════════════
-  function initContactForm() {
+  function initContactWebhook() {
     const form = document.getElementById("sshContactForm");
-    const terminalOutput = document.getElementById("contactTerminalFeedback");
-    if (!form || !terminalOutput) return;
+    const feedback = document.getElementById("sshFeedback");
+    if (!form || !feedback) return;
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = document.getElementById("senderName").value.trim();
       const email = document.getElementById("senderEmail").value.trim();
-      const message = document.getElementById("senderMessage").value.trim();
+      const msg = document.getElementById("senderMessage").value.trim();
 
-      if (!name || !email || !message) {
-        terminalOutput.innerHTML = `<span style="color:#EF4444;">[400 BAD REQUEST] Error: All environment parameters ($SENDER_NAME, $RETURN_EMAIL, $PAYLOAD_MESSAGE) are required.</span>`;
-        return;
-      }
-
-      terminalOutput.innerHTML = `
-        <div style="color:#0EA5E9;">[CONNECT] Initializing SSH handshake with connect@uzair.cloud on port 22...</div>
-        <div style="color:#8B5CF6;">[TLS 1.3] Exchanging Diffie-Hellman ephemeral keys... Verified.</div>
-        <div style="color:#F97316;">[PACKET] Dispatching JSON payload via secure webhook...</div>
+      feedback.innerHTML = `
+        <div style="color:#38BDF8;">[CONNECT] Establishing TLS 1.3 socket with connect@uzair.cloud on port 22...</div>
+        <div style="color:#A855F7;">[AUTH] ED25519 signature validated. Dispatching payload...</div>
       `;
 
       setTimeout(() => {
-        terminalOutput.innerHTML += `
-          <div style="color:#10B981; font-weight:700;">[200 OK] Handshake Complete! Packet successfully routed to Uzair's terminal inbox.</div>
-          <div style="color:#CBD5E1; margin-top:0.3rem;">Forwarding to direct priority channel...</div>
+        feedback.innerHTML += `
+          <div style="color:#00F5A0; font-weight:700;">[200 OK] Packet delivered! Forwarding to Uzair's terminal mail client.</div>
         `;
-
-        const mailtoUrl = `mailto:uzairteeli123456789@gmail.com?subject=DevOps%20Collaboration%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
+        const mailto = `mailto:uzairteeli123456789@gmail.com?subject=Engineering%20Collaboration%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}%0A%0AFrom:%20${encodeURIComponent(name)}%20(${encodeURIComponent(email)})`;
         setTimeout(() => {
-          window.location.href = mailtoUrl;
+          window.location.href = mailto;
         }, 1200);
-      }, 1000);
+      }, 950);
     });
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 9. 3D AVATAR HEAD TRACKING & PARALLAX
+  // 8. CODE TOGGLE (BASH VS PYTHON)
   // ═══════════════════════════════════════════════════════════════
-  function initHeroAvatar3D() {
-    const hero = document.querySelector(".hero-control-plane");
-    const avatarCard = document.querySelector(".hero-avatar-card");
-    if (!hero || !avatarCard) return;
+  function initCodeToggle() {
+    document.querySelectorAll(".auto-tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll(".auto-tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".auto-panel").forEach(p => p.style.display = "none");
 
-    let targetRotX = 0, targetRotY = 0;
-    let curRotX = 0, curRotY = 0;
-
-    window.addEventListener("pointermove", (e) => {
-      const rect = hero.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const normX = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width / 2)));
-      const normY = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
-
-      targetRotY = normX * 8;
-      targetRotX = -normY * 8;
-    }, { passive: true });
-
-    function animateAvatar() {
-      curRotX += (targetRotX - curRotX) * 0.08;
-      curRotY += (targetRotY - curRotY) * 0.08;
-      avatarCard.style.transform = `perspective(1000px) rotateX(${curRotX.toFixed(2)}deg) rotateY(${curRotY.toFixed(2)}deg)`;
-      requestAnimationFrame(animateAvatar);
-    }
-    animateAvatar();
-
-    avatarCard.addEventListener("click", () => {
-      avatarCard.classList.remove("avatar-shock-active");
-      void avatarCard.offsetWidth;
-      avatarCard.classList.add("avatar-shock-active");
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 10. MOBILE MENU DRAWER & NAVIGATION
-  // ═══════════════════════════════════════════════════════════════
-  function initMobileMenu() {
-    const toggle = document.getElementById("mobileMenuBtn");
-    const drawer = document.getElementById("mobileNavDrawer");
-    const closeBtn = document.getElementById("mobileDrawerClose");
-    if (!toggle || !drawer) return;
-
-    toggle.addEventListener("click", () => drawer.classList.add("open"));
-    if (closeBtn) closeBtn.addEventListener("click", () => drawer.classList.remove("open"));
-
-    drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
-      link.addEventListener("click", () => drawer.classList.remove("open"));
-    });
-  }
-
-  // ═══════════════════════════════════════════════════════════════
-  // 11. SMOOTH SCROLL FOR HUD LINKS & KUBECTL CTA
-  // ═══════════════════════════════════════════════════════════════
-  function initSmoothNavigation() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        const href = this.getAttribute("href");
-        if (href === "#") return;
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: "smooth" });
-        }
+        btn.classList.add("active");
+        const active = document.getElementById(`panel-${tab}`);
+        if (active) active.style.display = "block";
       });
     });
-
-    const ctaKubectl = document.getElementById("ctaKubectlProjects");
-    if (ctaKubectl) {
-      ctaKubectl.addEventListener("click", () => {
-        const projectsSec = document.getElementById("containers") || document.getElementById("projects");
-        if (projectsSec) {
-          projectsSec.scrollIntoView({ behavior: "smooth" });
-          showToast("Scrolled to Active Docker Containers Registry");
-        }
-      });
-    }
-
-    const ctaCurlResume = document.getElementById("ctaCurlResume");
-    if (ctaCurlResume) {
-      ctaCurlResume.addEventListener("click", triggerResumeModal);
-    }
   }
 
   // ═══════════════════════════════════════════════════════════════
   // INITIALIZATION ON DOM READY
   // ═══════════════════════════════════════════════════════════════
   document.addEventListener("DOMContentLoaded", () => {
-    initTelemetryClock();
-    initSpotlightGlow();
+    initPreloaderBlastDoor();
+    initNetworkConstellationCanvas();
+    initSmoothScrollAndGSAP();
+    init3DMagneticTilt();
+    initArchitectureDrawer();
     initCommandPalette();
-    initProjectTopologyToggles();
-    initCodeTabSwitchers();
-    initContactForm();
-    initHeroAvatar3D();
-    initMobileMenu();
-    initSmoothNavigation();
+    initContactWebhook();
+    initCodeToggle();
   });
 })();

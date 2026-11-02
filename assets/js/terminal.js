@@ -1,177 +1,113 @@
 /**
- * Dark Ops Cloud Control Plane & Interactive Linux CLI
+ * OLED Cyber-Cinema Interactive Terminal & Auto-Typing Engine
  * -------------------------------------------------------------
- * Multi-tab Linux / ZSH / TMUX / HTOP / Network-Logs emulator
- * with rapid boot sequence, command parsing, and live telemetry.
+ * Linux / ZSH / TMUX / HTOP emulator with 1-click pill typewriter
+ * auto-exec, tab switching, and rich ANSI infrastructure telemetry.
  */
 
 const TerminalModule = {
   activeTab: 'zsh',
   history: [],
   historyIndex: -1,
-  bootFinished: false,
-  htopInterval: null,
-  networkInterval: null,
+  isTypingAuto: false,
 
   commands: {
     help: `Available Cloud Control & Linux Commands:
-  • <span class="term-accent-purple">whoami</span>          - Identity, systems background & engineering role
-  • <span class="term-accent-cyan">skills --list</span>   - 11-Domain infrastructure matrix (K8s, AWS, IaC, Linux)
-  • <span class="term-accent-emerald">docker ps</span>       - Active containerized production projects & ports
-  • <span class="term-accent-blue">kubectl get nodes</span> - Cluster topology, certifications & competency nodes
-  • <span class="term-accent-amber">ping uzair</span>       - Dispatch ICMP probe & open contact gateway
-  • <span class="term-accent-orange">curl -O resume.pdf</span>- Retrieve official engineer curriculum vitae
-  • <span class="term-accent-purple">neofetch</span>        - System telemetry, kernel version & workstation specs
-  • <span class="term-accent-emerald">uptime</span>          - Cluster availability, load averages & worker status
-  • <span class="term-accent-cyan">tree</span>            - Visual directory hierarchy of repository modules
-  • <span class="term-accent-red">sudo hire</span>       - Direct recruitment handshake (WhatsApp / Email)
-  • <span class="term-accent-muted">clear</span>           - Flush the active terminal console buffer`,
+  • <span style="color:#A855F7;">whoami</span>          - Systems identity & technical orientation
+  • <span style="color:#00F5A0;">docker ps</span>       - Active containerized production workloads & ports
+  • <span style="color:#38BDF8;">k8s cluster</span>     - EKS node topology, pods & cluster status
+  • <span style="color:#FF8A00;">aws stack</span>       - AWS VPC, subnets, EC2, ALB & S3 telemetry
+  • <span style="color:#38BDF8;">ping uzair</span>       - Dispatch ICMP probe & open contact gateway
+  • <span style="color:#00F5A0;">resume</span>           - Retrieve official engineer curriculum vitae (PDF)
+  • <span style="color:#A855F7;">skills</span>           - 11-Domain infrastructure matrix summary
+  • <span style="color:#64748B;">clear</span>            - Flush the active terminal console buffer`,
 
-    whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span class="term-accent-emerald">System Architect // DevOps & Cloud Engineer</span>
+    whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">System Architect // DevOps & Cloud Engineer</span>
 <span style="color:#94A3B8;">Education:</span> MCA (IGNOU, Currently Pursuing) • BCA (University of Kashmir, 1st Class)
-<span style="color:#94A3B8;">Location:</span> ap-south-1 (Srinagar / Remote) • <span class="term-accent-cyan">Status: READY FOR PRODUCTION DEPLOYMENT</span>
+<span style="color:#94A3B8;">Host Cluster:</span> AWS EKS (Kubernetes v1.30.2) • <span style="color:#38BDF8;">Kernel:</span> Linux 6.8.0-sysadmin x86_64
 
-<span style="color:#CBD5E1;">Systems builder specializing in Linux internals (/proc, systemd, cgroups), Kubernetes container orchestration, Infrastructure-as-Code (Terraform), Cloud Architecture (AWS), and low-level computer networking protocols (TCP/IP, BGP, CIDR). Builds resilient, self-healing platforms with zero tolerance for downtime.</span>`,
+<span style="color:#CBD5E1;">Systems builder focused on Linux kernel internals, Kubernetes orchestration, declarative Terraform infrastructure, and computer networking. Delivering fault-tolerant, self-healing platforms with zero tolerance for downtime.</span>`,
 
-    "skills --list": `<span class="term-accent-emerald">[1. LINUX & SYSTEMS]</span>      Ubuntu 24.04 LTS, Arch Linux, Systemd, Bash Scripting, Memory/Process Lifecycle, Grep/Sed/Awk
-<span class="term-accent-cyan">[2. CONTAINERS & K8S]</span>     Docker, Docker Compose, Podman, Kubernetes (EKS/K3s), Helm, Ingress-Nginx
-<span class="term-accent-orange">[3. AWS & CLOUD INFRA]</span>     VPC, EC2, S3, IAM (Least-Privilege), EKS, ALB, Route 53, CloudWatch, Lambda
-<span class="term-accent-purple">[4. INFRASTRUCTURE AS CODE]</span> Terraform, HashiCorp HCL, Modular AWS Blueprints, State Locking
-<span class="term-accent-emerald">[5. CI/CD & GITOPS]</span>         GitHub Actions, Automated Workflows, ArgoCD GitOps, Artifact Caching
-<span class="term-accent-blue">[6. NETWORKING & PROTOCOLS]</span>  TCP/IP 4-Layer, OSI 7-Layer, Subnetting/CIDR, DNS Resolution, TLS 1.3, Wireshark
-<span class="term-accent-amber">[7. PYTHON & AUTOMATION]</span>    Python 3, Boto3 AWS SDK, Automated Log Audit, Algorithm Optimization
-<span class="term-accent-cyan">[8. OBSERVABILITY]</span>          Prometheus Scrapes, Grafana Dashboards, Node Exporter, Log Rotation
-<span class="term-accent-red">[9. SECURITY & SECRETS]</span>     Zero-Trust, SSH Key Pairs, HashiCorp Vault Secrets, UFW/iptables Rules
-<span class="term-accent-purple">[10. DISTRIBUTED STORAGE]</span>    PostgreSQL 16 High-Availability Standby, Redis In-Memory Caching
-<span class="term-accent-emerald">[11. MOBILE & CLIENT APP]</span>   React Native 0.81, Expo SDK 54, Modern Modular ES6+ Architecture`,
+    "docker ps": `<span style="color:#94A3B8;">CONTAINER ID   IMAGE                               COMMAND               STATUS                    PORTS                     NAMES</span>
+<span style="color:#38BDF8;">a8f4c2190e31</span>   uzair/nexora:v1.0.0                 "expo-start"          <span style="color:#00F5A0;">Up 21 days (healthy)</span>      0.0.0.0:8081->8081/tcp    nexora-app
+<span style="color:#38BDF8;">b7190d4e5f22</span>   uzair/kashmir-kesar-kingdom:v2.4    "nginx -g 'daemon'"   <span style="color:#00F5A0;">Up 60 days (healthy)</span>      0.0.0.0:443->80/tcp       kkk-export-web
+<span style="color:#38BDF8;">c3392b1a8d05</span>   uzair/craver-fastfood:v1.4.2        "node server.js"      <span style="color:#00F5A0;">Up 38 days (healthy)</span>      0.0.0.0:3000->3000/tcp    craver-order-engine
+<span style="color:#38BDF8;">d9910f8a3c44</span>   uzair/sys-inspect:latest            "sys-inspect"         <span style="color:#00F5A0;">Up 12 days (healthy)</span>      127.0.0.1:9100->9100/tcp  sys-inspect-telemetry
+<span style="color:#38BDF8;">e4481c7e9b10</span>   uzair/network-lab:v3                "tcpdump -i eth0"     <span style="color:#00F5A0;">Up 5 days</span>                 0.0.0.0:53->53/udp        net-packet-lab`,
 
-    skills: `Type '<span class="term-accent-cyan">skills --list</span>' for full 11-Domain Infrastructure Matrix tree.`,
+    "k8s cluster": `<span style="color:#94A3B8;">NODE NAME                                    STATUS   ROLES           AGE    VERSION</span>
+<span style="color:#00F5A0;">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)
+<span style="color:#00F5A0;">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)
+<span style="color:#00F5A0;">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)
+<span style="color:#00F5A0;">ip-10-0-1-104.ap-south-1.compute.internal</span>    Ready    worker,edge     42d    v1.30.2 (Expo-Mobile-Pod)
 
-    "docker ps": `<span style="color:#94A3B8;">CONTAINER ID   IMAGE                               COMMAND                  CREATED         STATUS                    PORTS                     NAMES</span>
-<span class="term-accent-cyan">a8f4c2190e31</span>   uzair/nexora:v1.0.0-release         "expo start --tunnel"    3 weeks ago     <span class="term-accent-emerald">Up 21 days (healthy)</span>      0.0.0.0:8081->8081/tcp    nexora-app
-<span class="term-accent-cyan">b7190d4e5f22</span>   uzair/kashmir-kesar-kingdom:v2.4    "nginx -g 'daemon off'"  2 months ago    <span class="term-accent-emerald">Up 60 days (healthy)</span>      0.0.0.0:443->80/tcp       kkk-export-web
-<span class="term-accent-cyan">c3392b1a8d05</span>   uzair/craver-fastfood:v1.4.2        "node server.js"         1 month ago     <span class="term-accent-emerald">Up 38 days (healthy)</span>      0.0.0.0:3000->3000/tcp    craver-order-engine
-<span class="term-accent-cyan">d9910f8a3c44</span>   uzair/sys-inspect:latest            "sys-inspect --daemon"   12 days ago     <span class="term-accent-emerald">Up 12 days (healthy)</span>      127.0.0.1:9100->9100/tcp  sys-inspect-telemetry
-<span class="term-accent-cyan">e4481c7e9b10</span>   uzair/network-lab:v3                "tcpdump -i eth0"        5 days ago      <span class="term-accent-emerald">Up 5 days</span>                 0.0.0.0:53->53/udp        net-packet-lab`,
-
-    projects: `Forwarding to Docker Container Registry... Type '<span class="term-accent-emerald">docker ps</span>' or click [~/containers] in the HUD.`,
+<span style="color:#38BDF8;">POD HEALTH:</span> 12/12 Pods InSync • Ingress-NGINX: Active • CoreDNS: Running • Flannel CNI: 0 errors`,
 
     "kubectl get nodes": `<span style="color:#94A3B8;">NAME                                         STATUS   ROLES           AGE    VERSION</span>
-<span class="term-accent-emerald">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)
-<span class="term-accent-emerald">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)
-<span class="term-accent-emerald">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)
-<span class="term-accent-emerald">ip-10-0-1-104.ap-south-1.compute.internal</span>    Ready    worker,edge     42d    v1.30.2 (Expo-Mobile-Pod)
+<span style="color:#00F5A0;">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)
+<span style="color:#00F5A0;">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)
+<span style="color:#00F5A0;">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)
 
-<span class="term-accent-cyan">CLUSTER HEALTH:</span> 4/4 Nodes Ready • Kubelet: Active • Flannel CNI: Operational • CoreDNS: Running`,
+<span style="color:#38BDF8;">CLUSTER:</span> 4/4 Nodes Ready • Ready for production workloads.`,
 
-    "ping uzair": `<span class="term-accent-cyan">PING uzair.cloud (13.232.0.1): 56 data bytes</span>
+    "aws stack": `<span style="color:#FF8A00;">AWS TOPOLOGY // REGION: ap-south-1</span>
+├── <span style="color:#38BDF8;">VPC:</span> vpc-0a4b9c1d (CIDR: 10.0.0.0/16)
+│   ├── Public Subnets (ap-south-1a & 1b) -> Internet Gateway + ALB
+│   └── Private Subnets (ap-south-1a & 1b) -> NAT Gateway + EKS Nodes
+├── <span style="color:#00F5A0;">EKS Cluster:</span> portfolio-eks (Kubernetes v1.30.2, Managed NodeGroups)
+├── <span style="color:#A855F7;">Storage:</span> S3 bucket 'uzair-vault-artifacts' with CloudFront CDN
+└── <span style="color:#00F5A0;">Security:</span> IAM Least-Privilege Role Boundaries + KMS Encryption`,
+
+    "ping uzair": `<span style="color:#38BDF8;">PING uzair.cloud (13.232.0.1): 56 data bytes</span>
 64 bytes from 13.232.0.1: icmp_seq=0 ttl=64 time=0.042 ms
 64 bytes from 13.232.0.1: icmp_seq=1 ttl=64 time=0.038 ms
 64 bytes from 13.232.0.1: icmp_seq=2 ttl=64 time=0.040 ms
---- uzair.cloud ping statistics ---
-3 packets transmitted, 3 received, <span class="term-accent-emerald">0% packet loss</span>, rtt min/avg/max = 0.038/0.040/0.042 ms
-<span class="term-accent-emerald">Handshake Verified!</span> Opening Contact Terminal Gateway...`,
+<span style="color:#00F5A0;">--- 0% packet loss, handshake verified. Routing to Contact Gateway...</span>`,
 
-    "curl -O resume.pdf": `<span class="term-accent-cyan">% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span>
-                                 <span class="term-accent-cyan">Dload  Upload   Total   Spent    Left  Speed</span>
-100  428k  100  428k    0     0  2140k      0 --:--:-- --:--:-- --:--:-- 2140k
-<span class="term-accent-emerald">[SUCCESS 200 OK]</span> Saved 'Uzair_Sultan_DevOps_Resume.pdf' to active storage.`,
+    resume: `<span style="color:#38BDF8;">Retrieving official curriculum vitae artifact via S3 CDN...</span>
+<span style="color:#00F5A0;">[200 OK]</span> Download Verified. Opening resume modal...`,
 
-    uptime: `<span class="term-accent-emerald">21:05:00 up 182 days, 14:32,  2 users,  load average: 0.14, 0.08, 0.05</span>
-Cluster Pods: 12/12 Ready | Ingress: 0 5xx Errors | Network IO: 1.84 GB/s`,
-
-    neofetch: `<span class="term-accent-emerald">         _nnnn_         </span> <strong style="color:#F8FAFC;">uzair@cloud-node-01</strong>
-<span class="term-accent-emerald">        dGGGGMMb        </span> -------------------
-<span class="term-accent-emerald">       @p~qp~~qMb       </span> <span style="color:#94A3B8;">OS:</span> Ubuntu 24.04 LTS x86_64
-<span class="term-accent-emerald">       M|@||@) M|       </span> <span style="color:#94A3B8;">Host:</span> AWS EKS / Hybrid Linux Cluster
-<span class="term-accent-emerald">       @,----.JM|       </span> <span style="color:#94A3B8;">Kernel:</span> 6.8.0-sysadmin-production
-<span class="term-accent-emerald">      (<span style="color:#F59E0B;">'</span>_..--.._<span style="color:#F59E0B;">'</span>)      </span> <span style="color:#94A3B8;">Uptime:</span> 182 days, 14 hours
-<span class="term-accent-emerald">       /========\\       </span> <span style="color:#94A3B8;">Shell:</span> zsh 5.9 (tmux 3.4)
-<span class="term-accent-emerald">      / || \/ || \\      </span> <span style="color:#94A3B8;">Container Runtime:</span> containerd://1.7.15 / Docker 26.0
-<span class="term-accent-emerald">     |  ||    ||  |     </span> <span style="color:#94A3B8;">Orchestrator:</span> Kubernetes v1.30.2
-<span class="term-accent-emerald">     |__\\____//__|     </span> <span style="color:#94A3B8;">IaC:</span> Terraform v1.8.4
-<span class="term-accent-emerald">     (____/\____)     </span> <span style="color:#94A3B8;">Memory:</span> 3420MiB / 15890MiB (21%)`,
-
-    tree: `<span class="term-accent-cyan">uzair-portfolio/</span>
-├── <span class="term-accent-purple">infrastructure/</span>
-│   ├── terraform/ (vpc.tf, eks.tf, alb.tf)
-│   ├── k8s-manifests/ (deployments, services, ingress)
-│   └── docker/ (multi-stage alpine containers)
-├── <span class="term-accent-emerald">projects/</span>
-│   ├── nexora-mobile/ (React Native 0.81, Expo Router)
-│   ├── kashmir-kesar-kingdom/ (95% asset compression, PWA)
-│   ├── craver-fastfood/ (ES6+ modular, CI/CD)
-│   └── sys-inspect/ (Linux /proc telemetry CLI)
-└── <span class="term-accent-orange">telemetry/</span> (Prometheus, Grafana, Node-Exporter)
-<span class="term-accent-muted">4 directories, 18 files</span>`,
-
-    "sudo hire": `<span class="term-accent-emerald">[AUTH GRANTED]</span> Root elevation confirmed. Initiating direct recruitment bridge...
-<span class="term-accent-cyan">WhatsApp:</span> +91 7889446114
-<span class="term-accent-purple">Email:</span> uzairteeli123456789@gmail.com
-<span class="term-accent-amber">GitHub:</span> https://github.com/Uzair0123
-Launching instant WhatsApp channel...`
+    skills: `<span style="color:#00F5A0;">[CONTAINERS & K8S]</span> Docker, Kubernetes, Helm, Ingress-NGINX
+<span style="color:#FF8A00;">[AWS CLOUD INFRA]</span>  VPC, EC2, S3, IAM, EKS, ALB, CloudWatch
+<span style="color:#A855F7;">[INFRASTRUCTURE]</span>   Terraform HCL, GitOps (ArgoCD), GitHub Actions
+<span style="color:#00F5A0;">[LINUX & NETWORKS]</span> Ubuntu, Arch, Bash, Systemd, TCP/IP, Wireshark, BGP
+<span style="color:#38BDF8;">[CLIENT & MOBILE]</span>  React Native 0.81, Expo SDK 54, Modern Web PWA`
   },
 
-  bootLogs: [
-    { text: "[OK] Initializing Terraform state backend (AWS S3 + DynamoDB lock)...", delay: 200 },
-    { text: "[OK] Mounting Docker daemon socket (/var/run/docker.sock)...", delay: 450 },
-    { text: "[OK] Establishing BGP peering & VPC transit gateway routes (10.0.0.0/16)...", delay: 750 },
-    { text: "[OK] Kubelet connected: 4/4 nodes Ready across ap-south-1a & 1b...", delay: 1050 },
-    { text: "[OK] Ingress-NGINX controller active with TLS 1.3 certificates...", delay: 1300 },
-    { text: "⚡ <strong style='color:#10B981;'>Cloud Control Cluster Ready.</strong> Type '<span class='term-accent-cyan'>help</span>' or tap quick-chips below.", delay: 1550 }
-  ],
-
   init: function() {
-    this.container = document.getElementById("terminalApp");
-    this.body = document.getElementById("terminalBody");
-    this.input = document.getElementById("terminalInput");
+    this.container = document.getElementById("heroTerminal");
+    this.body = document.getElementById("termBody");
+    this.input = document.getElementById("termInput");
     this.tabZsh = document.getElementById("tabZsh");
     this.tabHtop = document.getElementById("tabHtop");
     this.tabLogs = document.getElementById("tabLogs");
-    this.htopView = document.getElementById("terminalHtopView");
-    this.logsView = document.getElementById("terminalLogsView");
-    this.zshView = document.getElementById("terminalZshView");
+    this.zshView = document.getElementById("termZshView");
+    this.htopView = document.getElementById("termHtopView");
+    this.logsView = document.getElementById("termLogsView");
 
     if (!this.body || !this.input) return;
 
     this.bindEvents();
-    this.runBootSequence();
+    this.initialBootGreeting();
   },
 
-  runBootSequence: function() {
-    this.body.innerHTML = "";
-    this.bootLogs.forEach((log) => {
-      setTimeout(() => {
-        const line = document.createElement("div");
-        line.className = "term-boot-line";
-        line.innerHTML = log.text;
-        this.body.appendChild(line);
-        this.body.scrollTop = this.body.scrollHeight;
-      }, log.delay);
-    });
-
-    setTimeout(() => {
-      this.bootFinished = true;
-      if (this.input) {
-        this.input.focus({ preventScroll: true });
-      }
-    }, 1650);
+  initialBootGreeting: function() {
+    this.body.innerHTML = `
+      <div style="color:#38BDF8; margin-bottom:0.4rem;">[BOOT] Initializing Cloud Control CLI session on ap-south-1...</div>
+      <div style="color:#00F5A0; margin-bottom:0.6rem;">⚡ <strong style="color:#FFF;">Uzair Sultan DevOps Node Online.</strong> Type '<span style="color:#38BDF8;">help</span>' or tap 1-click pills below.</div>
+    `;
   },
 
   bindEvents: function() {
     // Tab switching
-    if (this.tabZsh) {
-      this.tabZsh.addEventListener("click", () => this.switchTab('zsh'));
-    }
-    if (this.tabHtop) {
-      this.tabHtop.addEventListener("click", () => this.switchTab('htop'));
-    }
-    if (this.tabLogs) {
-      this.tabLogs.addEventListener("click", () => this.switchTab('logs'));
-    }
+    if (this.tabZsh) this.tabZsh.addEventListener("click", () => this.switchTab('zsh'));
+    if (this.tabHtop) this.tabHtop.addEventListener("click", () => this.switchTab('htop'));
+    if (this.tabLogs) this.tabLogs.addEventListener("click", () => this.switchTab('logs'));
 
-    // Terminal Input Navigation & Execution
+    // Input Execution
     this.input.addEventListener("keydown", (e) => {
+      if (this.isTypingAuto) return;
+
       if (e.key === "ArrowUp") {
         e.preventDefault();
         if (this.history.length && this.historyIndex < this.history.length - 1) {
@@ -191,8 +127,7 @@ Launching instant WhatsApp channel...`
         e.preventDefault();
         const current = this.input.value.trim().toLowerCase();
         if (current) {
-          const validCmds = Object.keys(this.commands);
-          const matches = validCmds.filter(c => c.startsWith(current));
+          const matches = Object.keys(this.commands).filter(c => c.startsWith(current));
           if (matches.length === 1) {
             this.input.value = matches[0];
           }
@@ -208,26 +143,49 @@ Launching instant WhatsApp channel...`
       }
     });
 
-    // Quick Command Chips
-    document.querySelectorAll(".term-chip[data-cmd]").forEach(chip => {
-      chip.addEventListener("click", (e) => {
+    // 1-Click Interactive Command Pills (Typewriter Animation)
+    document.querySelectorAll(".pill-cmd-btn[data-cmd]").forEach(pill => {
+      pill.addEventListener("click", (e) => {
         const cmd = e.currentTarget.dataset.cmd;
         if (cmd) {
           this.switchTab('zsh');
-          this.executeCommand(cmd.toLowerCase());
+          this.typeAndExecute(cmd.toLowerCase());
         }
       });
     });
 
-    // Click anywhere in terminal card to focus input
-    const termCard = document.querySelector(".terminal-window-card");
+    // Terminal window focus
+    const termCard = document.querySelector(".hero-glass-terminal");
     if (termCard) {
       termCard.addEventListener("click", () => {
-        if (this.activeTab === 'zsh' && this.input) {
+        if (this.activeTab === 'zsh' && this.input && !this.isTypingAuto) {
           this.input.focus({ preventScroll: true });
         }
       });
     }
+  },
+
+  typeAndExecute: function(cmd) {
+    if (this.isTypingAuto) return;
+    this.isTypingAuto = true;
+    this.input.value = "";
+    let i = 0;
+
+    const interval = setInterval(() => {
+      if (i < cmd.length) {
+        this.input.value += cmd.charAt(i);
+        i++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          this.history.push(cmd);
+          this.historyIndex = -1;
+          this.executeCommand(cmd);
+          this.input.value = "";
+          this.isTypingAuto = false;
+        }, 150);
+      }
+    }, 28);
   },
 
   switchTab: function(tabName) {
@@ -242,123 +200,123 @@ Launching instant WhatsApp channel...`
     if (tabName === 'zsh') {
       if (this.tabZsh) this.tabZsh.classList.add("active");
       if (this.zshView) this.zshView.style.display = "flex";
-      this.stopHtopSimulation();
-      this.stopNetworkSimulation();
+      this.stopHtop();
+      this.stopNetworkLogs();
       if (this.input) this.input.focus({ preventScroll: true });
     } else if (tabName === 'htop') {
       if (this.tabHtop) this.tabHtop.classList.add("active");
       if (this.htopView) this.htopView.style.display = "block";
-      this.stopNetworkSimulation();
-      this.startHtopSimulation();
+      this.stopNetworkLogs();
+      this.startHtop();
     } else if (tabName === 'logs') {
       if (this.tabLogs) this.tabLogs.classList.add("active");
       if (this.logsView) this.logsView.style.display = "block";
-      this.stopHtopSimulation();
-      this.startNetworkSimulation();
+      this.stopHtop();
+      this.startNetworkLogs();
     }
   },
 
-  startHtopSimulation: function() {
-    if (this.htopInterval) return;
-    this.updateHtopView();
-    this.htopInterval = setInterval(() => this.updateHtopView(), 1200);
+  startHtop: function() {
+    if (this.htopTimer) return;
+    this.renderHtop();
+    this.htopTimer = setInterval(() => this.renderHtop(), 1200);
   },
 
-  stopHtopSimulation: function() {
-    if (this.htopInterval) {
-      clearInterval(this.htopInterval);
-      this.htopInterval = null;
+  stopHtop: function() {
+    if (this.htopTimer) {
+      clearInterval(this.htopTimer);
+      this.htopTimer = null;
     }
   },
 
-  updateHtopView: function() {
+  renderHtop: function() {
     if (!this.htopView) return;
     const cpu1 = Math.floor(12 + Math.random() * 25);
     const cpu2 = Math.floor(18 + Math.random() * 32);
     const cpu3 = Math.floor(8 + Math.random() * 20);
-    const cpu4 = Math.floor(22 + Math.random() * 40);
-    const memMb = Math.floor(3200 + Math.random() * 400);
+    const cpu4 = Math.floor(20 + Math.random() * 35);
+    const memMb = Math.floor(3420 + Math.random() * 350);
 
-    const makeBar = (pct, colorClass) => {
-      const barsCount = Math.floor(pct / 5);
-      const filled = "|".repeat(barsCount);
-      const empty = " ".repeat(20 - barsCount);
-      return `[<span class="${colorClass}">${filled}</span>${empty} ${pct}%]`;
+    const bar = (pct, color) => {
+      const count = Math.floor(pct / 6);
+      return `[<span style="color:${color};">${"|".repeat(count)}</span>${" ".repeat(16 - count)} ${pct}%]`;
     };
 
     this.htopView.innerHTML = `
-<div class="htop-grid">
-  <div>0 ${makeBar(cpu1, 'term-accent-emerald')} Tasks: 48, 128 thr; 1 running</div>
-  <div>1 ${makeBar(cpu2, 'term-accent-cyan')} Load average: 0.18 0.12 0.08</div>
-  <div>2 ${makeBar(cpu3, 'term-accent-purple')} Uptime: 182 days, 14:32:05</div>
-  <div>3 ${makeBar(cpu4, 'term-accent-orange')} Cluster: ap-south-1 (Production)</div>
-  <div style="grid-column: 1 / -1; margin-top: 0.4rem;">
-    Mem [${makeBar(Math.floor((memMb / 16000) * 100), 'term-accent-emerald')} ${memMb}M/15.8G]  Swp [<span class="term-accent-muted">[                    ]</span> 0K/8.00G]
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; padding-bottom:0.75rem; border-bottom:1px dashed rgba(255,255,255,0.15); margin-bottom:0.75rem; font-size:0.74rem;">
+  <div>0 ${bar(cpu1, '#00F5A0')} Tasks: 48, 1 running</div>
+  <div>1 ${bar(cpu2, '#38BDF8')} Load: 0.18 0.12 0.08</div>
+  <div>2 ${bar(cpu3, '#A855F7')} Uptime: 182 days, 14:32:05</div>
+  <div>3 ${bar(cpu4, '#FF8A00')} Cluster: ap-south-1 (Production)</div>
+  <div style="grid-column: 1 / -1; margin-top:0.3rem;">
+    Mem [${bar(Math.floor((memMb / 16000) * 100), '#00F5A0')} ${memMb}M/15.8G]  Swp [ 0K/8.00G]
   </div>
 </div>
-<div class="htop-table-header">
-  <span>PID</span><span>USER</span><span>PRI</span><span>NI</span><span>VIRT</span><span>RES</span><span>SHR</span><span>S</span><span>CPU%</span><span>MEM%</span><span>COMMAND</span>
+<div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; background:#0284C7; color:#000; font-weight:700; padding:0.2rem 0.4rem; font-size:0.7rem;">
+  <span>PID</span><span>USER</span><span>PRI</span><span>VIRT</span><span>RES</span><span>CPU%</span><span>COMMAND</span>
 </div>
-<div class="htop-table-body">
-  <div class="htop-row"><span>1402</span><span>root</span><span>20</span><span>0</span><span>1.4G</span><span>248M</span><span>64M</span><span class="term-accent-emerald">S</span><span>8.2</span><span>1.5</span><span>dockerd -H fd:// --containerd=/run/containerd</span></div>
-  <div class="htop-row"><span>2189</span><span>uzair</span><span>20</span><span>0</span><span>980M</span><span>184M</span><span>48M</span><span class="term-accent-emerald">S</span><span>5.4</span><span>1.1</span><span>k3s server --disable=traefik</span></div>
-  <div class="htop-row"><span>3894</span><span>uzair</span><span>20</span><span>0</span><span>620M</span><span>112M</span><span>36M</span><span class="term-accent-emerald">S</span><span>3.1</span><span>0.7</span><span>node /srv/projects/craver/server.js</span></div>
-  <div class="htop-row"><span>4102</span><span>nginx</span><span>20</span><span>0</span><span>145M</span><span>38M</span><span>18M</span><span class="term-accent-emerald">S</span><span>1.8</span><span>0.2</span><span>nginx: worker process (kashmir-kesar)</span></div>
-  <div class="htop-row"><span>5510</span><span>uzair</span><span>20</span><span>0</span><span>210M</span><span>54M</span><span>22M</span><span class="term-accent-emerald">R</span><span>1.2</span><span>0.3</span><span>sys-inspect --kernel-telemetry --json</span></div>
-  <div class="htop-row"><span>6012</span><span>uzair</span><span>20</span><span>0</span><span>84M</span><span>18M</span><span>10M</span><span class="term-accent-emerald">S</span><span>0.4</span><span>0.1</span><span>zsh (tmux: cloud-control-session)</span></div>
+<div style="font-size:0.7rem; line-height:1.5; margin-top:0.3rem;">
+  <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
+    <span>1402</span><span>root</span><span>20</span><span>1.4G</span><span>248M</span><span style="color:#00F5A0;">8.2</span><span>dockerd -H fd://</span>
+  </div>
+  <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
+    <span>2189</span><span>uzair</span><span>20</span><span>980M</span><span>184M</span><span style="color:#00F5A0;">5.4</span><span>k3s server --disable=traefik</span>
+  </div>
+  <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
+    <span>3894</span><span>uzair</span><span>20</span><span>620M</span><span>112M</span><span style="color:#00F5A0;">3.1</span><span>node /srv/craver/server.js</span>
+  </div>
+  <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
+    <span>4102</span><span>nginx</span><span>20</span><span>145M</span><span>38M</span><span style="color:#00F5A0;">1.8</span><span>nginx: worker (kashmir-kesar)</span>
+  </div>
 </div>
 `;
   },
 
-  startNetworkSimulation: function() {
-    if (this.networkInterval) return;
-    this.networkLogsBuffer = [
-      `[${new Date().toISOString().substring(11, 19)}] [INGRESS] TLS 1.3 Handshake completed with Cloudflare edge proxy`,
-      `[${new Date().toISOString().substring(11, 19)}] [K8S] Pod 'uzair/api:v1' liveness probe HTTP 200 OK (latency: 1.4ms)`,
-      `[${new Date().toISOString().substring(11, 19)}] [ROUTER] BGP KeepAlive acknowledged on ASN 64512 (ap-south-1)`,
-      `[${new Date().toISOString().substring(11, 19)}] [SECURITY] Inbound packet evaluated by UFW: ACCEPT TCP:443 SRC:0.0.0.0/0`,
-      `[${new Date().toISOString().substring(11, 19)}] [GRAFANA] Prometheus scrape target /metrics: 24 metrics indexed in 8ms`
+  startNetworkLogs: function() {
+    if (this.logsTimer) return;
+    this.logBuffer = [
+      `[INGRESS] TLS 1.3 Handshake completed with Cloudflare Edge Anycast`,
+      `[K8S] Pod 'uzair/api:v1' liveness probe HTTP 200 OK (latency: 1.2ms)`,
+      `[ROUTER] BGP KeepAlive acknowledged on ASN 64512 (ap-south-1)`,
+      `[SECURITY] Inbound packet evaluated by UFW: ACCEPT TCP:443`,
+      `[PROMETHEUS] Target /metrics: 28 metrics indexed in 6ms`
     ];
-    this.renderNetworkLogs();
+    this.renderLogs();
 
-    this.networkInterval = setInterval(() => {
+    this.logsTimer = setInterval(() => {
       const now = new Date().toISOString().substring(11, 19);
-      const sampleEvents = [
-        `[${now}] [INGRESS] HTTP GET /api/v1/health 200 OK (0.8ms) via ALB-ap-south-1`,
+      const events = [
+        `[${now}] [INGRESS] HTTP GET /api/v1/health 200 OK (0.8ms) via AWS ALB`,
         `[${now}] [DOCKER] Container 'nexora-app' health check passed (0 restarts)`,
-        `[${now}] [TERRAFORM] Remote state lock verified on DynamoDB (hash: 4e96c15)`,
-        `[${now}] [REDIS] Cache hit for key 'session:cluster:telemetry' (0.2ms)`,
-        `[${now}] [PROMETHEUS] Node-exporter reports CPU temperature: 48°C (Normal)`,
-        `[${now}] [GITOPS] ArgoCD sync state: InSync (revision: main/4e96c15)`
+        `[${now}] [TERRAFORM] Remote state lock verified on DynamoDB (hash: 5a3d7aa)`,
+        `[${now}] [REDIS] Cache hit for key 'cluster:telemetry' (0.2ms)`,
+        `[${now}] [GITOPS] ArgoCD sync state: InSync (revision: main/5a3d7aa)`
       ];
-      const randomEvent = sampleEvents[Math.floor(Math.random() * sampleEvents.length)];
-      this.networkLogsBuffer.push(randomEvent);
-      if (this.networkLogsBuffer.length > 25) this.networkLogsBuffer.shift();
-      this.renderNetworkLogs();
+      this.logBuffer.push(events[Math.floor(Math.random() * events.length)]);
+      if (this.logBuffer.length > 20) this.logBuffer.shift();
+      this.renderLogs();
     }, 1800);
   },
 
-  stopNetworkSimulation: function() {
-    if (this.networkInterval) {
-      clearInterval(this.networkInterval);
-      this.networkInterval = null;
+  stopNetworkLogs: function() {
+    if (this.logsTimer) {
+      clearInterval(this.logsTimer);
+      this.logsTimer = null;
     }
   },
 
-  renderNetworkLogs: function() {
+  renderLogs: function() {
     if (!this.logsView) return;
     this.logsView.innerHTML = `
-<div class="network-logs-stream">
-  <div class="term-accent-emerald" style="margin-bottom:0.4rem; font-weight:700;">● STREAMING LIVE INGRESS & ROUTING TELEMETRY (TCP/IP 443 / BGP):</div>
-  ${this.networkLogsBuffer.map(log => `<div class="net-log-line">${log}</div>`).join('')}
-</div>`;
+      <div style="color:#00F5A0; font-weight:700; margin-bottom:0.5rem; font-size:0.75rem;">● LIVE INGRESS & ROUTING LOGS:</div>
+      ${this.logBuffer.map(l => `<div style="color:#94A3B8; font-size:0.75rem; margin-bottom:0.35rem; border-left:2px solid #38BDF8; padding-left:0.5rem;">${l}</div>`).join('')}
+    `;
     this.logsView.scrollTop = this.logsView.scrollHeight;
   },
 
   executeCommand: function(cmd) {
     if (!cmd) return;
 
-    // Echo command line
     this.appendOutput(`<div class="term-echo-line"><span class="term-prompt">uzair@cloud-node-01:~$</span> <span class="term-cmd-text">${cmd}</span></div>`);
 
     if (cmd === "clear") {
@@ -369,35 +327,19 @@ Launching instant WhatsApp channel...`
     if (cmd === "ping uzair") {
       this.appendOutput(`<div class="term-output">${this.commands["ping uzair"]}</div>`);
       setTimeout(() => {
-        const contactSec = document.getElementById("contact") || document.getElementById("init-contact");
+        const contactSec = document.getElementById("contact");
         if (contactSec) {
           contactSec.scrollIntoView({ behavior: "smooth" });
           const nameInput = document.getElementById("senderName");
           if (nameInput) nameInput.focus();
         }
-      }, 900);
+      }, 700);
       return;
     }
 
-    if (cmd === "curl -o resume.pdf" || cmd === "curl resume.pdf" || cmd === "resume") {
-      this.appendOutput(`<div class="term-output">${this.commands["curl -O resume.pdf"]}</div>`);
-      if (window.triggerResumeModal) {
-        window.triggerResumeModal();
-      }
-      return;
-    }
-
-    if (cmd === "sudo hire") {
-      this.appendOutput(`<div class="term-output">${this.commands["sudo hire"]}</div>`);
-      setTimeout(() => {
-        window.open("https://wa.me/917889446114?text=Hi%20Uzair,%20I%20saw%20your%20Cloud%20Control%20portfolio%20and%20would%20like%20to%20discuss%20an%20engineering%20opportunity!", "_blank");
-      }, 1200);
-      return;
-    }
-
-    if (cmd === "docker ps" || cmd === "kubectl get projects") {
-      const output = this.commands["docker ps"];
-      this.appendOutput(`<div class="term-output">${output}</div>`);
+    if (cmd === "resume" || cmd === "curl -o resume.pdf") {
+      this.appendOutput(`<div class="term-output">${this.commands["resume"]}</div>`);
+      if (window.triggerResumeModal) window.triggerResumeModal();
       return;
     }
 
@@ -405,7 +347,7 @@ Launching instant WhatsApp channel...`
     if (output) {
       this.appendOutput(`<div class="term-output">${output}</div>`);
     } else {
-      this.appendOutput(`<div class="term-output term-error">zsh: command not found: ${cmd}. Type '<span class="term-accent-cyan">help</span>' for available cloud commands.</div>`);
+      this.appendOutput(`<div class="term-output" style="color:#EF4444;">zsh: command not found: ${cmd}. Type '<span style="color:#00F5A0;">help</span>' or tap quick-pills.</div>`);
     }
 
     this.body.scrollTop = this.body.scrollHeight;
