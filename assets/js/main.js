@@ -1,11 +1,15 @@
 /**
  * Uzair Sultan — DevOps & Cloud Infrastructure Portfolio
- * Phase 4.5: Interactive Terminal Engine & Cloud Network Topology Canvas
+ * Phase 5: Cinematic Motion (GSAP, ScrollTrigger & Lenis)
  * ----------------------------------------------------------------------
  * 1. 60FPS Interactive HTML5 Network Topology Canvas (#network-bg)
  * 2. Interactive macOS/Linux Terminal Emulator (#terminal-input & #terminal-output)
  * 3. 1-Click Command Pills Dispatcher (.pill-cmd-btn)
- * 4. Smooth Anchor Navigation
+ * 4. Lenis Smooth Scrolling Orchestration
+ * 5. GSAP Hero Entrance Timeline Choreography
+ * 6. 3D Magnetic Avatar Tilt (Vanilla JS + GSAP)
+ * 7. Bento Grid & Projects ScrollTrigger (Cascade Reveal)
+ * 8. Responsive Performance via gsap.matchMedia()
  */
 
 (function () {
@@ -346,9 +350,225 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 3. SMOOTH NAVIGATION FOR IN-PAGE ANCHORS
+  // 3. LENIS CINEMATIC SMOOTH SCROLL INITIALIZATION
   // ═══════════════════════════════════════════════════════════════
-  function initSmoothAnchorScroll() {
+  function initLenisSmoothScroll() {
+    if (typeof window.Lenis === "undefined") return null;
+
+    const lenis = new window.Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: false // Native fluid touch on mobile devices
+    });
+
+    // Sync Lenis with GSAP ScrollTrigger if present
+    if (typeof window.ScrollTrigger !== "undefined") {
+      lenis.on("scroll", window.ScrollTrigger.update);
+    }
+
+    // Tie Lenis into the requestAnimationFrame loop alongside GSAP ticker
+    if (typeof window.gsap !== "undefined") {
+      window.gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      window.gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    return lenis;
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 4. GSAP CINEMATIC CHOREOGRAPHY & SCROLLTRIGGER
+  // ═══════════════════════════════════════════════════════════════
+  function initCinematicMotion() {
+    if (typeof window.gsap === "undefined") return;
+
+    if (typeof window.ScrollTrigger !== "undefined") {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+    }
+
+    const mm = window.gsap.matchMedia();
+
+    // ─────────────────────────────────────────────────────────────
+    // Desktop & Tablet Viewports (>= 768px): Full Cinematic Suite
+    // ─────────────────────────────────────────────────────────────
+    mm.add("(min-width: 768px)", () => {
+      // 1. Hero Entrance Timeline Choreography
+      const heroTl = window.gsap.timeline({
+        defaults: { ease: "power3.out" },
+        delay: 0.1
+      });
+
+      // Top HUD dropping down from y: -20 with opacity: 0
+      heroTl.from(".status-nav", {
+        y: -20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        clearProps: "transform,opacity"
+      });
+
+      // Pop Avatar into view with elastic easing
+      heroTl.from(".hero-avatar-wrap", {
+        scale: 0.4,
+        opacity: 0,
+        duration: 1.1,
+        ease: "elastic.out(1, 0.5)",
+        clearProps: "transform,opacity"
+      }, "-=0.5");
+
+      // Stagger Hero text sliding up from y: 40 with opacity: 0 & slight rotation (2deg)
+      heroTl.from([".hero-name-badge", ".hero-identity h1", ".hero-identity h2", ".hero-bio", ".hero-actions"], {
+        y: 40,
+        opacity: 0,
+        rotation: 2,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: "power3.out",
+        clearProps: "transform,opacity,rotation"
+      }, "-=0.7");
+
+      // Slide Terminal window in from the right (x: 50, opacity: 0)
+      heroTl.from([".terminal-container", ".terminal-1click-pills"], {
+        x: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.1,
+        ease: "power3.out",
+        clearProps: "transform,opacity"
+      }, "-=0.6");
+
+      // 2. 3D Magnetic Avatar Tilt (Vanilla JS + GSAP)
+      const avatarWrap = document.querySelector(".hero-avatar-wrap");
+      const avatar = document.querySelector(".hero-avatar");
+      if (avatarWrap && avatar) {
+        window.gsap.set(avatarWrap, { transformPerspective: 1000 });
+
+        const onMouseMove = (e) => {
+          const rect = avatarWrap.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const xNorm = (x / rect.width - 0.5) * 2;
+          const yNorm = (y / rect.height - 0.5) * 2;
+
+          window.gsap.to(avatar, {
+            rotateY: xNorm * 18,
+            rotateX: -yNorm * 18,
+            scale: 1.06,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto"
+          });
+        };
+
+        const onMouseLeave = () => {
+          window.gsap.to(avatar, {
+            rotateX: 0,
+            rotateY: 0,
+            scale: 1,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.4)",
+            overwrite: "auto"
+          });
+        };
+
+        avatarWrap.addEventListener("mousemove", onMouseMove);
+        avatarWrap.addEventListener("mouseleave", onMouseLeave);
+      }
+
+      // 3. Bento Grid ScrollTrigger (Cascade Reveal with stagger: 0.1)
+      const bentoGrid = document.querySelector(".bento-grid");
+      const bentoCards = document.querySelectorAll(".bento-card");
+      if (bentoGrid && bentoCards.length > 0) {
+        window.gsap.from(bentoCards, {
+          scrollTrigger: {
+            trigger: bentoGrid,
+            start: "top 85%",
+            once: true
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "transform,opacity"
+        });
+      }
+
+      // 4. Projects Grid ScrollTrigger (Cascade Reveal with stagger: 0.1)
+      const projectsGrid = document.querySelector(".projects-grid");
+      const projectCards = document.querySelectorAll(".project-card");
+      if (projectsGrid && projectCards.length > 0) {
+        window.gsap.from(projectCards, {
+          scrollTrigger: {
+            trigger: projectsGrid,
+            start: "top 85%",
+            once: true
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "transform,opacity"
+        });
+      }
+
+      // 5. Experience / Credentials Grid Cascade Reveal
+      const expGrid = document.querySelector(".experience-grid");
+      const expCards = document.querySelectorAll(".experience-card");
+      if (expGrid && expCards.length > 0) {
+        window.gsap.from(expCards, {
+          scrollTrigger: {
+            trigger: expGrid,
+            start: "top 85%",
+            once: true
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "transform,opacity"
+        });
+      }
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    // Mobile Screens (< 768px): Light, Fluid & Instant
+    // ─────────────────────────────────────────────────────────────
+    mm.add("(max-width: 767px)", () => {
+      // Gentle, lightweight entrance without heavy ScrollTriggers
+      window.gsap.from(".hero-identity", {
+        opacity: 0,
+        y: 25,
+        duration: 0.6,
+        ease: "power2.out",
+        clearProps: "all"
+      });
+      window.gsap.from(".hero-terminal", {
+        opacity: 0,
+        y: 25,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power2.out",
+        clearProps: "all"
+      });
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 5. SMOOTH ANCHOR NAVIGATION (LENIS INTEGRATED)
+  // ═══════════════════════════════════════════════════════════════
+  function initSmoothAnchorScroll(lenis) {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         const targetId = this.getAttribute("href");
@@ -356,7 +576,11 @@
           const targetEl = document.querySelector(targetId);
           if (targetEl) {
             e.preventDefault();
-            targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+            if (lenis && typeof lenis.scrollTo === "function") {
+              lenis.scrollTo(targetEl, { offset: -70 });
+            } else {
+              targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
           }
         }
       });
@@ -366,15 +590,17 @@
   // ═══════════════════════════════════════════════════════════════
   // INITIALIZATION ON DOM READY
   // ═══════════════════════════════════════════════════════════════
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      initNetworkTopologyCanvas();
-      initInteractiveTerminal();
-      initSmoothAnchorScroll();
-    });
-  } else {
+  function bootstrap() {
     initNetworkTopologyCanvas();
     initInteractiveTerminal();
-    initSmoothAnchorScroll();
+    const lenis = initLenisSmoothScroll();
+    initCinematicMotion();
+    initSmoothAnchorScroll(lenis);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootstrap);
+  } else {
+    bootstrap();
   }
 })();

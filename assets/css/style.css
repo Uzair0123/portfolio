@@ -1379,3 +1379,58 @@ code, kbd, pre, samp {
     display: none; /* Keep avatar and user prompt */
   }
 }
+
+/* ==========================================================================
+   Phase 5: Cinematic Motion & GPU Acceleration
+   ========================================================================== */
+
+/* Lenis Recommended Integration */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* GPU Hardware Acceleration for Cinematic Motion */
+.status-nav,
+.hero-avatar-wrap,
+.hero-avatar,
+.hero-name-badge,
+.hero-identity h1,
+.hero-identity h2,
+.hero-bio,
+.hero-actions,
+.terminal-container,
+.terminal-1click-pills,
+.bento-card,
+.project-card,
+.experience-card {
+  will-change: transform, opacity;
+}
+
+/* 3D Perspective Preservation for Avatar Tilt */
+.hero-avatar-wrap {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hero-avatar {
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
