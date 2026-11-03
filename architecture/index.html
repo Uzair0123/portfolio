@@ -24,7 +24,7 @@
   <script>(function(){const t=localStorage.getItem('uz_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="../assets/css/style.css?v=2.9.1">
+  <link rel="stylesheet" href="../assets/css/style.css?v=2.9.2">
 </head>
 <body class="arch-body">
 
@@ -570,6 +570,93 @@
         </div>
       </section>
 
+      <!-- ==================== 7. OPENTELEMETRY & JAEGER DISTRIBUTED TRACE WATERFALL ==================== -->
+      <section class="trace-section" id="otel-waterfall">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.75rem;">
+          <div class="section-tag-badge">DISTRIBUTED OBSERVABILITY (APM)</div>
+          <h2>OpenTelemetry &amp; Jaeger Distributed Request Tracing Waterfall</h2>
+          <p class="section-subtitle">
+            Observe asynchronous span propagation, context injection (<code style="color:var(--accent-bash);">traceparent</code>), and microsecond network overhead across Edge CDN, Envoy API Gateway, Kubernetes auth pods, and PostgreSQL multi-AZ transactions.
+          </p>
+        </header>
+
+        <div class="trace-card">
+          <!-- Controls Bar -->
+          <div class="trace-controls-bar">
+            <div class="trace-scenario-pills">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-right: 4px;">ROUTE:</span>
+              <button type="button" class="trace-pill-btn active" data-scenario="checkout">🛒 POST /checkout</button>
+              <button type="button" class="trace-pill-btn" data-scenario="auth">🔐 POST /auth/token</button>
+              <button type="button" class="trace-pill-btn" data-scenario="metrics">📊 GET /telemetry</button>
+            </div>
+
+            <div class="trace-fault-selector">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-right: 4px;">CHAOS PROBE:</span>
+              <button type="button" class="trace-fault-btn active" data-fault="normal">🟢 Normal (p50: 38ms)</button>
+              <button type="button" class="trace-fault-btn fault-slow" data-fault="slow">⚠️ DB Spike (p99: 412ms)</button>
+              <button type="button" class="trace-fault-btn fault-error" data-fault="timeout">💥 504 Timeout &amp; Retry</button>
+            </div>
+          </div>
+
+          <!-- Trace Meta Summary Strip -->
+          <div class="trace-meta-strip">
+            <div class="trace-meta-cell">
+              <span class="trace-meta-label">TRACE ID</span>
+              <span class="trace-meta-val" id="traceMetaId" style="color: var(--accent-k8s); font-size: 0.78rem;">4bf92f3577b34da6</span>
+            </div>
+            <div class="trace-meta-cell">
+              <span class="trace-meta-label">TOTAL DURATION</span>
+              <span class="trace-meta-val" id="traceMetaDuration" style="color: var(--accent-bash);">38.4 ms</span>
+            </div>
+            <div class="trace-meta-cell">
+              <span class="trace-meta-label">SPAN COUNT</span>
+              <span class="trace-meta-val" id="traceMetaSpans">7 Spans (4 Services)</span>
+            </div>
+            <div class="trace-meta-cell">
+              <span class="trace-meta-label">HTTP STATUS</span>
+              <span class="trace-meta-val" id="traceMetaStatus" style="color: var(--accent-bash);">200 OK (HTTP/2)</span>
+            </div>
+          </div>
+
+          <!-- Gantt Waterfall Chart -->
+          <div class="trace-gantt-wrap">
+            <div class="trace-timeline-header">
+              <span>SERVICE &amp; OPERATION SPAN</span>
+              <div class="trace-time-ruler" id="traceRuler">
+                <span>0ms</span>
+                <span>10ms</span>
+                <span>20ms</span>
+                <span>30ms</span>
+                <span>40ms</span>
+              </div>
+            </div>
+
+            <div class="trace-spans-container" id="traceSpansList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Selected Span Attribute Inspector Drawer -->
+          <div class="trace-span-drawer active" id="traceSpanDrawer">
+            <div class="trace-drawer-header">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span style="font-size: 1.1rem;">🔍</span>
+                <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700; color: #FFFFFF;" id="drawerSpanTitle">
+                  postgres-aurora: INSERT INTO orders
+                </span>
+              </div>
+              <span class="trace-service-badge" id="drawerSpanDuration" style="border-color: var(--accent-bash); color: var(--accent-bash);">
+                12.4 ms (32.3% of trace)
+              </span>
+            </div>
+            <div class="trace-attr-grid" id="drawerAttrGrid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -585,7 +672,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="../assets/js/main.js?v=2.9.1"></script>
-  <script src="../assets/js/architecture.js?v=2.9.1"></script>
+  <script src="../assets/js/main.js?v=2.9.2"></script>
+  <script src="../assets/js/architecture.js?v=2.9.2"></script>
 </body>
 </html>

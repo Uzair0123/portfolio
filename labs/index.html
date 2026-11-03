@@ -24,7 +24,7 @@
   <script>(function(){const t=localStorage.getItem('uz_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="../assets/css/style.css?v=2.9.1">
+  <link rel="stylesheet" href="../assets/css/style.css?v=2.9.2">
 </head>
 <body class="labs-body">
 
@@ -531,6 +531,75 @@
         </div>
       </section>
 
+      <!-- ==================== SIMULATOR 4: DOCKERFILE SECURITY & CIS BENCHMARK AUDITOR ==================== -->
+      <section class="labs-section-block" id="container-sec-auditor">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <div class="section-tag-badge">DEVSECOPS &amp; CONTAINER HARDENING</div>
+          <h2>Interactive Dockerfile Security &amp; CIS Benchmark Auditor</h2>
+          <p class="section-subtitle">
+            Paste or edit any container recipe to trigger real-time AST linting against enterprise CIS Docker benchmarks: detect root execution CVEs, package manager cache leaks, insecure ADD verbs, and hardcoded secrets.
+          </p>
+        </header>
+
+        <div class="docker-linter-card">
+          <!-- Presets Controls Bar -->
+          <div class="linter-presets-bar">
+            <div class="linter-presets-group">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-right: 4px;">LOAD PRESET:</span>
+              <button type="button" class="linter-preset-btn active" id="presetInsecureBtn">⚠️ Insecure Legacy Dockerfile</button>
+              <button type="button" class="linter-preset-btn" id="presetHardenedBtn">🛡️ Hardened Distroless Multi-Stage</button>
+              <button type="button" class="linter-preset-btn" id="presetClearBtn">↺ Reset</button>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-bash);">AST RULES: 8 ACTIVE</span>
+          </div>
+
+          <!-- Split Grid: Editor Left, Scorecard Right -->
+          <div class="linter-grid">
+            <!-- Left: Monospaced Textarea Editor -->
+            <div class="linter-editor-box">
+              <div class="linter-editor-topbar">
+                <span>📄 Dockerfile</span>
+                <span id="linterLinesCount">14 lines</span>
+              </div>
+              <textarea class="linter-textarea" id="dockerfileInput" spellcheck="false" autocomplete="off" placeholder="Paste your Dockerfile here to audit..."></textarea>
+            </div>
+
+            <!-- Right: Real-Time Scorecard & Violations List -->
+            <div class="linter-audit-panel">
+              <div class="linter-score-strip">
+                <div class="linter-grade-seal" id="linterGradeSeal">
+                  <span class="linter-grade-letter" id="linterGradeLetter">F</span>
+                  <span class="linter-grade-score" id="linterGradeScore">32 / 100</span>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                  <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700; color: #FFFFFF;" id="linterVerdict">
+                    ❌ HIGH SECURITY RISK
+                  </span>
+                  <div class="linter-counters-row">
+                    <span class="linter-pill-counter critical" id="countCritical">🔴 2 Critical</span>
+                    <span class="linter-pill-counter warning" id="countWarning">🟠 3 Warnings</span>
+                    <span class="linter-pill-counter passed" id="countPassed">🟢 3 Clean</span>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);" id="linterEstSize">
+                    Est. Compressed Layer: ~720 MB (Unoptimized)
+                  </span>
+                </div>
+              </div>
+
+              <!-- Violations Findings Container -->
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); display:flex; justify-content:space-between; align-items:center;">
+                <span>AUDIT FINDINGS &amp; REMEDIATIONS</span>
+                <span style="font-size: 0.7rem; color: var(--accent-cyan);">Click "Apply Fix" to auto-patch</span>
+              </div>
+              <div class="linter-violations-box" id="linterViolationsBox">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -546,7 +615,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="../assets/js/main.js?v=2.9.1"></script>
-  <script src="../assets/js/labs.js?v=2.9.1"></script>
+  <script src="../assets/js/main.js?v=2.9.2"></script>
+  <script src="../assets/js/labs.js?v=2.9.2"></script>
 </body>
 </html>

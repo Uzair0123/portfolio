@@ -333,11 +333,325 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
+  // 3. DOCKERFILE SECURITY & CIS BENCHMARK AUDITOR (HADOLINT AST)
+  // ═══════════════════════════════════════════════════════════════
+  function initDockerfileLinter() {
+    const input = document.getElementById("dockerfileInput");
+    const linesCount = document.getElementById("linterLinesCount");
+    const gradeSeal = document.getElementById("linterGradeSeal");
+    const gradeLetter = document.getElementById("linterGradeLetter");
+    const gradeScore = document.getElementById("linterGradeScore");
+    const verdict = document.getElementById("linterVerdict");
+    const countCritical = document.getElementById("countCritical");
+    const countWarning = document.getElementById("countWarning");
+    const countPassed = document.getElementById("countPassed");
+    const estSize = document.getElementById("linterEstSize");
+    const box = document.getElementById("linterViolationsBox");
+
+    const presetInsecure = document.getElementById("presetInsecureBtn");
+    const presetHardened = document.getElementById("presetHardenedBtn");
+    const presetClear = document.getElementById("presetClearBtn");
+
+    if (!input || !box) return;
+
+    const PRESET_INSECURE = `FROM node:latest
+WORKDIR /app
+ENV AWS_SECRET_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
+COPY . .
+RUN apt-get update && apt-get install -y curl wget
+ADD https://example.com/runtime.tar.gz /tmp/runtime.tar.gz
+RUN npm install
+EXPOSE 3000
+CMD ["node", "server.js"]`;
+
+    const PRESET_HARDENED = `# Stage 1: Ephemeral Build Pipeline
+FROM node:20.14.0-alpine3.20 AS builder
+WORKDIR /build
+COPY package*.json ./
+RUN npm ci --only=production
+COPY . .
+RUN npm run build
+
+# Stage 2: Distroless Minimal Non-Root Runtime
+FROM gcr.io/distroless/nodejs20-debian12:nonroot
+WORKDIR /app
+COPY --from=builder /build/dist ./dist
+COPY --from=builder /build/node_modules ./node_modules
+USER 10001:10001
+EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=3s --retries=3 \\
+  CMD ["/nodejs/bin/node", "-e", "require('http').get('http://localhost:3000/healthz', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"]
+CMD ["dist/server.js"]`;
+
+    function runAudit() {
+      const code = input.value;
+      const lines = code.split("\n");
+      if (linesCount) linesCount.textContent = `${lines.length} lines`;
+
+      const violations = [];
+      let hasUser = false;
+      let hasHealthcheck = false;
+      let isDistroless = false;
+
+      lines.forEach((line, idx) => {
+        const lineNum = idx + 1;
+        const trimmed = line.trim();
+
+        if (/distroless/i.test(trimmed)) {
+          isDistroless = true;
+        }
+
+        // Rule: DL3006 / CIS 4.2 - :latest tag
+        if (/^FROM\s+[\w./-]+:latest\b/i.test(trimmed)) {
+          violations.push({
+            code: "DL3006",
+            cis: "CIS 4.2",
+            severity: "warning",
+            line: lineNum,
+            title: "Mutable image tag ':latest' detected",
+            desc: "Using ':latest' creates unpredictable builds across environments and leaves pipelines open to upstream supply chain drift.",
+            fix: "Pin immutable semantic digest or explicit tag (e.g. node:20-alpine)",
+            action: () => {
+              input.value = input.value.replace(/:latest\b/g, ":20.14.0-alpine3.20");
+              runAudit();
+            }
+          });
+        }
+
+        // Rule: CIS 4.7 - Secret in ENV / ARG
+        if (/^(ENV|ARG)\s+.*(SECRET|KEY|PASSWORD|TOKEN|AUTH)=/i.test(trimmed)) {
+          violations.push({
+            code: "CIS 4.7",
+            cis: "CIS 4.7",
+            severity: "critical",
+            line: lineNum,
+            title: "Hardcoded credential detected in ENV instruction",
+            desc: "Environment secrets are baked into immutable image metadata layers and remain inspectable via 'docker inspect'.",
+            fix: "Inject via Kubernetes Secrets / HashiCorp Vault at runtime",
+            action: () => {
+              input.value = input.value.replace(/ENV\s+.*(SECRET|KEY|PASSWORD|TOKEN).*\n?/i, "# Secrets mounted via K8s Secret volume at runtime\n");
+              runAudit();
+            }
+          });
+        }
+
+        // Rule: DL3020 / CIS 4.4 - ADD instead of COPY
+        if (/^ADD\s+/i.test(trimmed) && !/ADD\s+--chown/i.test(trimmed)) {
+          violations.push({
+            code: "DL3020",
+            cis: "CIS 4.4",
+            severity: "warning",
+            line: lineNum,
+            title: "Insecure 'ADD' instruction used instead of 'COPY'",
+            desc: "'ADD' auto-extracts archives and fetches remote URLs without hash verification, introducing SSRF vulnerabilities.",
+            fix: "Use 'COPY' for local files or curl with checksum for remote tarballs",
+            action: () => {
+              input.value = input.value.replace(/^ADD\s+/gm, "COPY ");
+              runAudit();
+            }
+          });
+        }
+
+        // Rule: DL3009 - apt-get lists cached
+        if (/apt-get\s+install/i.test(trimmed) && !/rm\s+-rf\s+\/var\/lib\/apt\/lists/i.test(code)) {
+          violations.push({
+            code: "DL3009",
+            cis: "CIS 4.3",
+            severity: "warning",
+            line: lineNum,
+            title: "Apt package cache not cleaned up after install",
+            desc: "Package manager index caches bloat the image filesystem by 35MB+ and increase attack surface.",
+            fix: "Append '&& rm -rf /var/lib/apt/lists/*'",
+            action: () => {
+              input.value = input.value.replace(/(apt-get\s+install.*?)(\n|$)/i, "$1 && rm -rf /var/lib/apt/lists/*$2");
+              runAudit();
+            }
+          });
+        }
+
+        // Track USER directive
+        if (/^USER\s+/i.test(trimmed)) {
+          const userVal = trimmed.replace(/^USER\s+/i, "").trim();
+          if (userVal !== "0" && userVal !== "root") {
+            hasUser = true;
+          }
+        }
+
+        // Track HEALTHCHECK
+        if (/^HEALTHCHECK\s+/i.test(trimmed)) {
+          hasHealthcheck = true;
+        }
+      });
+
+      // Rule: DL3002 / CIS 4.1 - Root execution
+      if (!hasUser && !isDistroless) {
+        violations.push({
+          code: "DL3002",
+          cis: "CIS 4.1",
+          severity: "critical",
+          line: lines.length,
+          title: "Container executes with Root UID 0 privilege",
+          desc: "Processes running as root can break out of container sandboxes if Linux kernel namespace exploits exist.",
+          fix: "Add unprivileged user 'USER 10001:10001'",
+          action: () => {
+            input.value += "\nUSER 10001:10001";
+            runAudit();
+          }
+        });
+      }
+
+      // Rule: CIS 4.6 - Missing Healthcheck
+      if (!hasHealthcheck) {
+        violations.push({
+          code: "CIS 4.6",
+          cis: "CIS 4.6",
+          severity: "warning",
+          line: lines.length,
+          title: "Missing HEALTHCHECK instruction",
+          desc: "Without a healthcheck probe, container engines cannot detect deadlocked or zombie background processes.",
+          fix: "Define HEALTHCHECK --interval=30s probe",
+          action: () => {
+            input.value += '\nHEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:3000/healthz || exit 1';
+            runAudit();
+          }
+        });
+      }
+
+      // Calculate Score
+      let score = 100;
+      let criticals = 0;
+      let warnings = 0;
+
+      violations.forEach(v => {
+        if (v.severity === "critical") {
+          score -= 32;
+          criticals++;
+        } else {
+          score -= 14;
+          warnings++;
+        }
+      });
+
+      score = Math.max(0, score);
+      const passed = Math.max(0, 8 - (criticals + warnings));
+
+      let grade = "F";
+      let verdictText = "❌ CRITICAL SECURITY VULNERABILITIES";
+      let sealClass = "";
+
+      if (score >= 95) {
+        grade = "A+";
+        verdictText = "🛡️ CIS BENCHMARK PRODUCTION COMPLIANT";
+        sealClass = "pass";
+      } else if (score >= 80) {
+        grade = "B";
+        verdictText = "🟡 MINOR SECURITY WARNINGS";
+      } else if (score >= 60) {
+        grade = "C";
+        verdictText = "🟠 SUBOPTIMAL CONTAINER CONFIGURATION";
+      } else {
+        grade = "F";
+        verdictText = "❌ CRITICAL SECURITY VULNERABILITIES";
+      }
+
+      if (gradeLetter) gradeLetter.textContent = grade;
+      if (gradeScore) gradeScore.textContent = `${score} / 100`;
+      if (verdict) verdict.textContent = verdictText;
+
+      if (gradeSeal) {
+        gradeSeal.className = `linter-grade-seal ${sealClass}`;
+        gradeSeal.style.borderColor = score >= 90 ? "var(--accent-bash)" : (score >= 65 ? "var(--accent-aws)" : "#EF4444");
+        gradeSeal.style.color = score >= 90 ? "var(--accent-bash)" : (score >= 65 ? "var(--accent-aws)" : "#EF4444");
+        gradeSeal.style.boxShadow = score >= 90 ? "0 0 20px var(--glow-primary)" : "0 0 20px rgba(239, 68, 68, 0.3)";
+      }
+
+      if (countCritical) countCritical.textContent = `🔴 ${criticals} Critical`;
+      if (countWarning) countWarning.textContent = `🟠 ${warnings} Warnings`;
+      if (countPassed) countPassed.textContent = `🟢 ${passed} Passed`;
+
+      if (estSize) {
+        estSize.textContent = isDistroless
+          ? "Est. Layer Size: ~18.4 MB (Distroless Minimal)"
+          : (score < 50 ? "Est. Layer Size: ~840 MB (Unoptimized)" : "Est. Layer Size: ~124 MB (Alpine)");
+      }
+
+      box.innerHTML = "";
+      if (violations.length === 0) {
+        box.innerHTML = `
+          <div style="text-align:center; padding: 2.5rem 1rem; color: var(--accent-bash); font-family: var(--font-mono); font-size: 0.85rem;">
+            ✓ 0 Vulnerabilities Detected • Ready for Production Kubernetes Deployment
+          </div>
+        `;
+        return;
+      }
+
+      violations.forEach(v => {
+        const card = document.createElement("div");
+        card.className = `violation-card ${v.severity}`;
+
+        const badgeColor = v.severity === "critical" ? "background:rgba(239,68,68,0.2); color:#EF4444;" : "background:rgba(255,138,0,0.2); color:#FF8A00;";
+
+        card.innerHTML = `
+          <div class="violation-header">
+            <span class="violation-code">${v.code} (${v.cis})</span>
+            <span class="violation-badge" style="${badgeColor}">${v.severity.toUpperCase()}</span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: #FFFFFF;">${v.title}</div>
+          <p class="violation-desc">${v.desc}</p>
+          <div class="violation-action-row">
+            <span class="violation-line-ref">Line ${v.line} • Recommended: ${v.fix}</span>
+            <button type="button" class="btn-apply-fix">Apply Fix 🪄</button>
+          </div>
+        `;
+
+        card.querySelector(".btn-apply-fix").addEventListener("click", () => {
+          v.action();
+        });
+
+        box.appendChild(card);
+      });
+    }
+
+    input.addEventListener("input", runAudit);
+
+    if (presetInsecure) {
+      presetInsecure.addEventListener("click", () => {
+        presetInsecure.classList.add("active");
+        if (presetHardened) presetHardened.classList.remove("active");
+        input.value = PRESET_INSECURE;
+        runAudit();
+      });
+    }
+
+    if (presetHardened) {
+      presetHardened.addEventListener("click", () => {
+        presetHardened.classList.add("active");
+        if (presetInsecure) presetInsecure.classList.remove("active");
+        input.value = PRESET_HARDENED;
+        runAudit();
+      });
+    }
+
+    if (presetClear) {
+      presetClear.addEventListener("click", () => {
+        if (presetInsecure) presetInsecure.classList.remove("active");
+        if (presetHardened) presetHardened.classList.remove("active");
+        input.value = "FROM alpine:3.20\nCMD [\"echo\", \"hello\"]";
+        runAudit();
+      });
+    }
+
+    input.value = PRESET_INSECURE;
+    runAudit();
+  }
+
+  // ═══════════════════════════════════════════════════════════════
   // INITIALIZATION ON DOM READY
   // ═══════════════════════════════════════════════════════════════
   function initLabs() {
     initK8sHpaSimulator();
     initHtopMonitor();
+    initDockerfileLinter();
   }
 
   if (document.readyState === "loading") {

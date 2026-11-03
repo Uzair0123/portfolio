@@ -1672,7 +1672,7 @@
                 <span><kbd class="ctrl-kbd">ESC</kbd> Close</span>
               </div>
               <span class="cmd-footer-mobile">Tap to jump • Swipe down to close</span>
-              <span style="color: var(--accent-bash);">UZ-OS v2.9.1</span>
+              <span style="color: var(--accent-bash);">UZ-OS v2.9.2</span>
             </div>
           </div>
         </div>
@@ -1733,6 +1733,24 @@
         desc: 'DevOps Chaos Simulator, K8s HPA Scaling & Linux htop Cockpit',
         badge: 'Lab',
         action: () => { window.location.href = root + 'labs/'; }
+      },
+      {
+        id: 'nav-trace',
+        category: 'pages',
+        icon: '⏱️',
+        title: 'OpenTelemetry Trace Waterfall',
+        desc: 'Observe distributed p99 request propagation & span telemetry',
+        badge: 'APM',
+        action: () => { window.location.href = root + 'architecture/#otel-waterfall'; }
+      },
+      {
+        id: 'nav-linter',
+        category: 'pages',
+        icon: '🛡️',
+        title: 'Dockerfile Security Auditor',
+        desc: 'Scan container recipes against CIS benchmarks & CVE rules',
+        badge: 'DevSecOps',
+        action: () => { window.location.href = root + 'labs/#container-sec-auditor'; }
       },
       {
         id: 'nav-credentials',
