@@ -346,28 +346,112 @@ code, kbd, pre, samp {
   gap: 1.15rem;
 }
 
-/* Glowing Circular Avatar HUD Frame */
+/* Glowing Circular Avatar HUD Frame with Multi-Layered Moving Orbital Rings */
 .hero-avatar-wrap {
-  width: 120px;
-  height: 120px;
+  position: relative;
+  width: 124px;
+  height: 124px;
   border-radius: 50%;
-  border: 2px solid var(--accent-bash);
-  box-shadow: 0 0 25px rgba(0, 245, 160, 0.35), inset 0 0 15px rgba(0, 245, 160, 0.2);
-  overflow: hidden;
-  background-color: var(--bg-void);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  background: transparent;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  cursor: pointer;
   transition: var(--transition-smooth);
 }
 
+/* Layer 1: Conic Gradient Rotating Energy Ring */
+.hero-avatar-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  padding: 2.5px;
+  background: conic-gradient(
+    from 0deg,
+    #00F5A0 0%,
+    #38BDF8 25%,
+    #A855F7 50%,
+    #FF8A00 75%,
+    #00F5A0 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spinAvatarRing 6s linear infinite;
+  box-shadow: 0 0 25px rgba(0, 245, 160, 0.45);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Layer 2: Counter-Rotating Dashed Cyber Telemetry Orbit */
+.hero-avatar-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(56, 189, 248, 0.45);
+  animation: spinAvatarRingReverse 18s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Layer 3: Orbiting Active Photon Satellite */
+.avatar-orbit-satellite {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  animation: spinAvatarRing 7s linear infinite;
+}
+
+.avatar-orbit-satellite::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00F5A0;
+  box-shadow: 0 0 10px #00F5A0, 0 0 20px #00F5A0;
+}
+
 .hero-avatar-wrap:hover {
-  box-shadow: 0 0 35px rgba(0, 245, 160, 0.55), inset 0 0 20px rgba(0, 245, 160, 0.3);
-  transform: scale(1.02);
+  transform: scale(1.04);
+}
+
+.hero-avatar-wrap:hover::before {
+  box-shadow: 0 0 35px rgba(0, 245, 160, 0.75);
+  animation-duration: 3s;
 }
 
 .hero-avatar {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
   display: block;
+  border: 2px solid rgba(15, 23, 42, 0.9);
+  background-color: var(--bg-void);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.85);
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+}
+
+@keyframes spinAvatarRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spinAvatarRingReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
 }
 
 /* Hero Name / Status Badge */

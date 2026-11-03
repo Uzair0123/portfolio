@@ -678,7 +678,7 @@
       }, "-=0.5");
 
       // Stagger Hero text sliding up from y: 40 with opacity: 0 & slight rotation (2deg)
-      heroTl.from([".hero-name-badge", ".hero-name-glamour", ".hero-tagline-creed", ".hero-role-sub", ".hero-bio", ".hero-actions"], {
+      heroTl.from([".hero-name-glamour", ".hero-tagline-creed", ".hero-role-sub", ".hero-bio", ".hero-actions"], {
         y: 40,
         opacity: 0,
         rotation: 2,
