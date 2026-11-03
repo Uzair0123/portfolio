@@ -230,6 +230,28 @@
       const mouseParallaxX = hasMouse ? (mouse.x - width / 2) * 0.025 : 0;
       const mouseParallaxY = hasMouse ? (mouse.y - height / 2) * 0.025 : 0;
 
+      // ── Liquid Floating Wave Ribbons ───────────────────────────
+      const waveTime = frameCount * 0.015;
+      ctx.beginPath();
+      ctx.moveTo(0, height * 0.35);
+      for (let x = 0; x <= width; x += 25) {
+        const y = height * 0.35 + Math.sin(x * 0.003 + waveTime) * 45 + Math.cos(x * 0.006 + waveTime * 0.8) * 25;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.15)";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(0, height * 0.68);
+      for (let x = 0; x <= width; x += 25) {
+        const y = height * 0.68 + Math.sin(x * 0.0025 - waveTime * 0.9) * 55 + Math.cos(x * 0.005 + waveTime * 0.5) * 30;
+        ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = "rgba(0, 245, 160, 0.12)";
+      ctx.lineWidth = 3.5;
+      ctx.stroke();
+
       // ── A. Render 3D Floating Polyhedra (Depth Layer 2) ────────
       for (let p = 0; p < polyhedra.length; p++) {
         const poly = polyhedra[p];
@@ -964,14 +986,14 @@
       });
 
       function applyAuroraProfile(p) {
-        const orbEm = document.querySelector(".orb-emerald");
-        const orbCy = document.querySelector(".orb-cyan");
-        const orbVi = document.querySelector(".orb-violet");
-        const orbAm = document.querySelector(".orb-amber");
-        if (orbEm) window.gsap.to(orbEm, { opacity: p.em, duration: 1.2, overwrite: "auto" });
-        if (orbCy) window.gsap.to(orbCy, { opacity: p.cy, duration: 1.2, overwrite: "auto" });
-        if (orbVi) window.gsap.to(orbVi, { opacity: p.vi, duration: 1.2, overwrite: "auto" });
-        if (orbAm) window.gsap.to(orbAm, { opacity: p.am, duration: 1.2, overwrite: "auto" });
+        const blobEm = document.querySelector(".blob-emerald, .orb-emerald");
+        const blobCy = document.querySelector(".blob-cyan, .orb-cyan");
+        const blobVi = document.querySelector(".blob-violet, .orb-violet");
+        const blobAm = document.querySelector(".blob-amber, .orb-amber");
+        if (blobEm) window.gsap.to(blobEm, { opacity: p.em * 0.65, duration: 1.2, overwrite: "auto" });
+        if (blobCy) window.gsap.to(blobCy, { opacity: p.cy * 0.65, duration: 1.2, overwrite: "auto" });
+        if (blobVi) window.gsap.to(blobVi, { opacity: p.vi * 0.65, duration: 1.2, overwrite: "auto" });
+        if (blobAm) window.gsap.to(blobAm, { opacity: p.am * 0.65, duration: 1.2, overwrite: "auto" });
       }
     });
 

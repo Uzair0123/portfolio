@@ -69,7 +69,7 @@ html {
 }
 
 body {
-  background-color: var(--bg-void);
+  background-color: transparent !important;
   color: var(--text-primary);
   font-family: var(--font-ui);
   line-height: 1.6;
@@ -78,18 +78,175 @@ body {
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
-/* Cloud Network Topology Background Canvas */
-#network-bg {
+/* ==========================================================================
+   Animated Liquid Floating Cosmic Background Universe
+   ========================================================================== */
+.liquid-bg-container {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 35%, #080d1a 0%, #030508 85%);
+}
+
+.liquid-mesh-blob {
+  position: absolute;
+  filter: blur(75px);
+  will-change: transform, border-radius;
+  opacity: 0.65;
+  mix-blend-mode: screen;
+}
+
+/* Blob 1: Cyber Emerald Liquid Lava */
+.blob-emerald {
+  width: 620px;
+  height: 620px;
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle, #00F5A0 0%, rgba(0, 245, 160, 0.45) 40%, transparent 70%);
+  animation: liquidMorph1 18s ease-in-out infinite alternate;
+}
+
+/* Blob 2: Electric Cyan Liquid Flow */
+.blob-cyan {
+  width: 700px;
+  height: 700px;
+  top: 28%;
+  right: -15%;
+  background: radial-gradient(circle, #38BDF8 0%, rgba(56, 189, 248, 0.42) 45%, transparent 70%);
+  animation: liquidMorph2 22s ease-in-out infinite alternate;
+}
+
+/* Blob 3: Tech Violet Liquid Plasma */
+.blob-violet {
+  width: 640px;
+  height: 640px;
+  bottom: -15%;
+  left: 8%;
+  background: radial-gradient(circle, #A855F7 0%, rgba(168, 85, 247, 0.42) 45%, transparent 70%);
+  animation: liquidMorph3 20s ease-in-out infinite alternate;
+}
+
+/* Blob 4: Radiant Molten Amber */
+.blob-amber {
+  width: 580px;
+  height: 580px;
+  top: 55%;
+  left: -12%;
+  background: radial-gradient(circle, #FF8A00 0%, rgba(255, 138, 0, 0.38) 45%, transparent 70%);
+  animation: liquidMorph4 24s ease-in-out infinite alternate;
+}
+
+/* Blob 5: Central Pulsing Chroma Core */
+.blob-center {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(168, 85, 247, 0.3) 50%, transparent 70%);
+  animation: liquidPulseCenter 12s ease-in-out infinite alternate;
+}
+
+/* Organic Liquid Morphing Keyframes (Fluid Shape Warping) */
+@keyframes liquidMorph1 {
+  0% {
+    border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+    transform: translate(140px, 90px) rotate(120deg) scale(1.18);
+  }
+  66% {
+    border-radius: 30% 70% 70% 30% / 50% 30% 70% 50%;
+    transform: translate(90px, 160px) rotate(240deg) scale(0.94);
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(0, 0) rotate(360deg) scale(1.08);
+  }
+}
+
+@keyframes liquidMorph2 {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    border-radius: 30% 70% 60% 40% / 50% 60% 30% 60%;
+    transform: translate(-160px, -80px) rotate(-110deg) scale(1.16);
+  }
+  66% {
+    border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+    transform: translate(-100px, 120px) rotate(-220deg) scale(0.92);
+  }
+  100% {
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 55%;
+    transform: translate(0, 0) rotate(-360deg) scale(1.06);
+  }
+}
+
+@keyframes liquidMorph3 {
+  0% {
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    border-radius: 70% 30% 80% 20% / 40% 60% 40% 60%;
+    transform: translate(120px, -120px) scale(1.22);
+  }
+  100% {
+    border-radius: 30% 70% 40% 60% / 60% 40% 70% 30%;
+    transform: translate(-70px, -60px) scale(0.95);
+  }
+}
+
+@keyframes liquidMorph4 {
+  0% {
+    border-radius: 35% 65% 55% 45% / 45% 55% 45% 55%;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    border-radius: 65% 35% 30% 70% / 55% 45% 65% 35%;
+    transform: translate(150px, -100px) scale(1.18);
+  }
+  100% {
+    border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+    transform: translate(60px, 80px) scale(1);
+  }
+}
+
+@keyframes liquidPulseCenter {
+  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.35; }
+  50% { transform: translate(-50%, -50%) scale(1.25); opacity: 0.65; }
+  100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.4; }
+}
+
+#network-bg {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  opacity: 0.88;
+  z-index: 2;
+  opacity: 1;
   pointer-events: none;
+}
+
+/* Ensure all content sits prominently above the liquid universe */
+nav.status-nav,
+main,
+footer {
+  position: relative;
+  z-index: 10;
 }
 
 /* --------------------------------------------------------------------------
@@ -2013,74 +2170,10 @@ html.lenis, html.lenis body {
 }
 
 /* ==========================================================================
-   Section-Specific Morphologies & Ambient Floating Background Universe
+   Section-Specific Morphologies & Cyber Interfaces
    ========================================================================== */
 
-/* 1. Atmospheric Nebula Orbs (Cosmic Background Depth) */
-.ambient-nebula-orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-  z-index: -2;
-  will-change: transform, opacity;
-}
-
-.orb-emerald {
-  width: 540px;
-  height: 540px;
-  background: radial-gradient(circle, rgba(0, 245, 160, 0.28) 0%, transparent 70%);
-  top: 5%;
-  left: -8%;
-  animation: orbFloat1 20s ease-in-out infinite alternate;
-}
-
-.orb-cyan {
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.26) 0%, transparent 70%);
-  top: 40%;
-  right: -10%;
-  animation: orbFloat2 24s ease-in-out infinite alternate;
-}
-
-.orb-violet {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, transparent 70%);
-  bottom: 8%;
-  left: 15%;
-  animation: orbFloat3 22s ease-in-out infinite alternate;
-}
-
-.orb-amber {
-  width: 540px;
-  height: 540px;
-  background: radial-gradient(circle, rgba(255, 138, 0, 0.22) 0%, transparent 70%);
-  top: 62%;
-  left: -8%;
-  animation: orbFloat1 26s ease-in-out infinite alternate;
-}
-
-@keyframes orbFloat1 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(90px, 60px) scale(1.12); }
-  100% { transform: translate(140px, 30px) scale(1.05); }
-}
-
-@keyframes orbFloat2 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-100px, -80px) scale(1.15); }
-  100% { transform: translate(-60px, -120px) scale(0.95); }
-}
-
-@keyframes orbFloat3 {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(80px, -60px) scale(1.18); }
-  100% { transform: translate(40px, -100px) scale(1.02); }
-}
-
-/* 2. Cyber-Chamfered Bento Grid Morphology */
+/* 1. Cyber-Chamfered Bento Grid Morphology */
 .cyber-chamfer {
   clip-path: polygon(
     0 0,

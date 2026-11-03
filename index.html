@@ -17,18 +17,19 @@
   <meta property="og:image" content="assets/images/avatar-3d.png">
 
   <!-- Structural CSS (Phase 1) -->
-  <link rel="stylesheet" href="assets/css/style.css?v=2.2.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.3.0">
 </head>
 <body>
 
-  <!-- Atmospheric Nebula Orbs (Cosmic Background Depth) -->
-  <div class="ambient-nebula-orb orb-emerald"></div>
-  <div class="ambient-nebula-orb orb-cyan"></div>
-  <div class="ambient-nebula-orb orb-violet"></div>
-  <div class="ambient-nebula-orb orb-amber"></div>
-
-  <!-- Cloud Network Topology Canvas Background (With 3D Floating Server Cubes) -->
-  <canvas id="network-bg"></canvas>
+  <!-- ==================== ANIMATED LIQUID FLOATING COSMIC BACKGROUND ==================== -->
+  <div class="liquid-bg-container" aria-hidden="true">
+    <div class="liquid-mesh-blob blob-emerald"></div>
+    <div class="liquid-mesh-blob blob-cyan"></div>
+    <div class="liquid-mesh-blob blob-violet"></div>
+    <div class="liquid-mesh-blob blob-amber"></div>
+    <div class="liquid-mesh-blob blob-center"></div>
+    <canvas id="network-bg"></canvas>
+  </div>
 
   <!-- ==================== 1. STATUS BAR / HUD NAV ==================== -->
   <nav class="status-nav">
@@ -876,6 +877,6 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 
   <!-- Vanilla JS & Cinematic Motion Orchestrator -->
-  <script src="assets/js/main.js?v=2.2.0"></script>
+  <script src="assets/js/main.js?v=2.3.0"></script>
 </body>
 </html>
