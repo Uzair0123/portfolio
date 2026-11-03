@@ -1048,6 +1048,176 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
+  // 5.1. 3D HOLOGRAPHIC SPATIAL TILT ENGINE (DESKTOP >= 768px)
+  // ═══════════════════════════════════════════════════════════════
+  function initCard3DTilt() {
+    if (typeof window.gsap === "undefined") return;
+
+    const cards = document.querySelectorAll(
+      ".bento-card, .project-card, .server-blade-card, .commit-node-card, .channel-tile, .pipeline-card"
+    );
+    if (!cards.length) return;
+
+    cards.forEach((card) => {
+      let bounds = null;
+
+      card.addEventListener("pointerenter", () => {
+        if (window.innerWidth < 768) return;
+        bounds = card.getBoundingClientRect();
+      }, { passive: true });
+
+      card.addEventListener("pointermove", (e) => {
+        if (window.innerWidth < 768) return;
+        if (!bounds) bounds = card.getBoundingClientRect();
+
+        const mouseX = e.clientX - bounds.left;
+        const mouseY = e.clientY - bounds.top;
+
+        // Normalized cursor offset: -0.5 to +0.5
+        const normX = (mouseX / bounds.width) - 0.5;
+        const normY = (mouseY / bounds.height) - 0.5;
+
+        // Controlled, cinematic spatial tilt angles (max ~6.5 deg)
+        const rotateX = -normY * 13;
+        const rotateY = normX * 13;
+
+        window.gsap.to(card, {
+          rotateX: rotateX,
+          rotateY: rotateY,
+          y: -6,
+          duration: 0.28,
+          ease: "power1.out",
+          transformPerspective: 1000,
+          overwrite: "auto"
+        });
+      }, { passive: true });
+
+      card.addEventListener("pointerleave", () => {
+        if (window.innerWidth < 768) return;
+        bounds = null;
+        window.gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          y: 0,
+          duration: 0.75,
+          ease: "elastic.out(1, 0.45)",
+          transformPerspective: 1000,
+          overwrite: "auto"
+        });
+      }, { passive: true });
+    });
+
+    // Reset inline transforms if viewport drops below 768px to keep mobile 100% native
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 768) {
+        cards.forEach((card) => {
+          window.gsap.set(card, { clearProps: "rotateX,rotateY,y,transformPerspective" });
+        });
+      }
+    }, { passive: true });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 5.2. CYBERNETIC DECRYPTION SCRAMBLE ENGINE
+  // ═══════════════════════════════════════════════════════════════
+  function initDecryptionScramble() {
+    const glyphs = "0123456789ABCDEFλ#$_<>%*+-=~/";
+
+    function triggerScramble(el) {
+      if (!el || el._isScrambling) return;
+
+      const original = el.getAttribute("data-original-text") || el.textContent.trim();
+      if (!el.getAttribute("data-original-text")) {
+        el.setAttribute("data-original-text", original);
+      }
+
+      el._isScrambling = true;
+      const len = original.length;
+      let frame = 0;
+      const totalFrames = 12;
+
+      if (el._scrambleTimer) clearInterval(el._scrambleTimer);
+
+      el._scrambleTimer = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const lockedChars = Math.floor(progress * len);
+
+        let result = "";
+        for (let i = 0; i < len; i++) {
+          const char = original[i];
+          // Preserve spaces, brackets, hyphens, and delimiters for rock-solid stability
+          if (
+            char === " " ||
+            char === "\n" ||
+            char === "\t" ||
+            char === "-" ||
+            char === ">" ||
+            char === "[" ||
+            char === "]" ||
+            char === ":" ||
+            char === "—" ||
+            char === "+" ||
+            char === "(" ||
+            char === ")" ||
+            char === "/" ||
+            char === "✓" ||
+            char === "⎇" ||
+            char === "●"
+          ) {
+            result += char;
+            continue;
+          }
+
+          if (i < lockedChars) {
+            result += char;
+          } else {
+            result += glyphs[Math.floor(Math.random() * glyphs.length)];
+          }
+        }
+
+        el.textContent = result;
+
+        if (frame >= totalFrames) {
+          clearInterval(el._scrambleTimer);
+          el._scrambleTimer = null;
+          el.textContent = original;
+          setTimeout(() => {
+            el._isScrambling = false;
+          }, 180);
+        }
+      }, 26);
+    }
+
+    // Direct element targets
+    const directTargets = document.querySelectorAll(
+      ".bento-card h3, .server-blade-card .project-title, .commit-node-card h3, .channel-value, .commit-hash-pill code"
+    );
+
+    directTargets.forEach((el) => {
+      el.setAttribute("data-original-text", el.textContent.trim());
+
+      el.addEventListener("pointerenter", () => {
+        triggerScramble(el);
+      }, { passive: true });
+    });
+
+    // Also trigger title scramble on parent card hover
+    const parentCards = document.querySelectorAll(
+      ".bento-card, .server-blade-card, .commit-node-card, .channel-tile"
+    );
+
+    parentCards.forEach((card) => {
+      card.addEventListener("pointerenter", () => {
+        const titleEl = card.querySelector("h3, .project-title, .channel-value, .commit-hash-pill code");
+        if (titleEl) {
+          triggerScramble(titleEl);
+        }
+      }, { passive: true });
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
   // 6. INTERACTIVE CI/CD GITOPS PIPELINE ENGINE
   // ═══════════════════════════════════════════════════════════════
   function initPipelineSimulator() {
@@ -1266,6 +1436,8 @@
     const lenis = initLenisSmoothScroll();
     initCinematicMotion();
     initSpotlightCards();
+    initCard3DTilt();
+    initDecryptionScramble();
     initPipelineSimulator();
     initDirectChannelsClipboard();
     initSmoothAnchorScroll(lenis);
