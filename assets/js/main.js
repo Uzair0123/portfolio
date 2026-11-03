@@ -252,7 +252,7 @@
         else if (poly.x > width + 120) poly.x = -100;
 
         const projected = poly.vertices.map((v) => project3D(v, poly, mouseParallaxX, mouseParallaxY));
-        const baseAlpha = 0.28 + Math.sin(poly.pulse) * 0.08;
+        const baseAlpha = 0.65 + Math.sin(poly.pulse) * 0.15;
         const colStr = `${poly.color.r}, ${poly.color.g}, ${poly.color.b}`;
 
         // Draw wireframe edges
@@ -265,7 +265,7 @@
           ctx.lineTo(p2.x, p2.y);
         }
         ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1.25;
         ctx.stroke();
 
         if (poly.type === "cube") {
@@ -275,16 +275,16 @@
           ctx.lineTo(projected[2].x, projected[2].y);
           ctx.moveTo(projected[4].x, projected[4].y);
           ctx.lineTo(projected[6].x, projected[6].y);
-          ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.35})`;
-          ctx.lineWidth = 0.6;
+          ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.5})`;
+          ctx.lineWidth = 0.8;
           ctx.stroke();
         } else {
           // Octahedron internal core axis
           ctx.beginPath();
           ctx.moveTo(projected[0].x, projected[0].y);
           ctx.lineTo(projected[5].x, projected[5].y);
-          ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.4})`;
-          ctx.lineWidth = 0.7;
+          ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.55})`;
+          ctx.lineWidth = 0.9;
           ctx.stroke();
         }
 
@@ -292,8 +292,8 @@
         for (let v = 0; v < projected.length; v++) {
           const pv = projected[v];
           ctx.beginPath();
-          ctx.arc(pv.x, pv.y, 1.6, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${colStr}, ${baseAlpha + 0.25})`;
+          ctx.arc(pv.x, pv.y, 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${colStr}, ${Math.min(1, baseAlpha + 0.3)})`;
           ctx.fill();
         }
       }
@@ -322,15 +322,15 @@
           d.x = Math.random() * width;
         }
 
-        const alpha = 0.25 + Math.sin(d.seed) * 0.2;
+        const alpha = 0.45 + Math.sin(d.seed) * 0.3;
         ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.arc(d.x, d.y, Math.max(1, d.r), 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${d.color.r}, ${d.color.g}, ${d.color.b}, ${alpha})`;
         ctx.fill();
       }
 
       // ── C. Render Ascending Telemetry Matrix Glyphs ─────────────
-      ctx.font = "9px 'JetBrains Mono', 'Fira Code', monospace";
+      ctx.font = "600 11px 'JetBrains Mono', 'Fira Code', monospace";
       for (let g = 0; g < glyphs.length; g++) {
         const gl = glyphs[g];
         gl.y += gl.vy;
@@ -344,7 +344,7 @@
 
         // Natural fade in at bottom, fade out at top
         const vertFactor = Math.sin((gl.y / height) * Math.PI);
-        const gAlpha = Math.max(0.05, Math.min(0.32, vertFactor * 0.35 + Math.sin(gl.pulse) * 0.05));
+        const gAlpha = Math.max(0.3, Math.min(0.75, vertFactor * 0.75 + Math.sin(gl.pulse) * 0.15));
 
         ctx.fillStyle = `rgba(${gl.color.r}, ${gl.color.g}, ${gl.color.b}, ${gAlpha})`;
         ctx.fillText(gl.text, gl.x, gl.y);
@@ -382,7 +382,7 @@
         // Draw particle node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.78)`;
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.85)`;
         ctx.fill();
 
         // Connect nearby particles with thin network lines
@@ -393,12 +393,12 @@
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.35;
+            const alpha = (1 - dist / maxDistance) * 0.45;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
-            ctx.lineWidth = 0.75;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
 
             // Randomly dispatch photon packets along connected edge
@@ -415,12 +415,12 @@
           const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
 
           if (mDist < 160) {
-            const mAlpha = (1 - mDist / 160) * 0.45;
+            const mAlpha = (1 - mDist / 160) * 0.65;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.strokeStyle = `rgba(56, 189, 248, ${mAlpha})`;
-            ctx.lineWidth = 0.9;
+            ctx.lineWidth = 1.2;
             ctx.stroke();
           }
         }
@@ -477,8 +477,8 @@
         const curY = pA.y + (pB.y - pA.y) * pkt.progress;
 
         ctx.beginPath();
-        ctx.arc(curX, curY, 2.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 0.95)`;
+        ctx.arc(curX, curY, 2.8, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 1)`;
         ctx.fill();
 
         const tailProgress = Math.max(0, pkt.progress - 0.12);
@@ -487,8 +487,8 @@
         ctx.beginPath();
         ctx.moveTo(curX, curY);
         ctx.lineTo(tailX, tailY);
-        ctx.strokeStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 0.5)`;
-        ctx.lineWidth = 1.8;
+        ctx.strokeStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 0.7)`;
+        ctx.lineWidth = 2.4;
         ctx.stroke();
       }
 

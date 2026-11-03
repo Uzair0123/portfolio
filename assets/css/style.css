@@ -88,7 +88,7 @@ body {
   width: 100%;
   height: 100%;
   z-index: -1;
-  opacity: 0.4;
+  opacity: 0.88;
   pointer-events: none;
 }
 
@@ -349,13 +349,13 @@ code, kbd, pre, samp {
 /* Glowing Circular Avatar HUD Frame with Multi-Layered Moving Orbital Rings */
 .hero-avatar-wrap {
   position: relative;
-  width: 124px;
-  height: 124px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
   background: transparent;
   perspective: 1000px;
   transform-style: preserve-3d;
@@ -363,38 +363,29 @@ code, kbd, pre, samp {
   transition: var(--transition-smooth);
 }
 
-/* Layer 1: Conic Gradient Rotating Energy Ring */
-.hero-avatar-wrap::before {
-  content: "";
+/* Layer 1: Core Rotating Neon Multi-Color Border Ring */
+.avatar-ring-spin {
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  padding: 2.5px;
-  background: conic-gradient(
-    from 0deg,
-    #00F5A0 0%,
-    #38BDF8 25%,
-    #A855F7 50%,
-    #FF8A00 75%,
-    #00F5A0 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: spinAvatarRing 6s linear infinite;
-  box-shadow: 0 0 25px rgba(0, 245, 160, 0.45);
+  border: 3px solid transparent;
+  border-top-color: #00F5A0;
+  border-right-color: #38BDF8;
+  border-bottom-color: #A855F7;
+  border-left-color: #FF8A00;
+  box-shadow: 0 0 20px rgba(0, 245, 160, 0.55), inset 0 0 14px rgba(56, 189, 248, 0.4);
+  animation: spinAvatarRing 3.5s linear infinite;
   pointer-events: none;
   z-index: 2;
 }
 
 /* Layer 2: Counter-Rotating Dashed Cyber Telemetry Orbit */
-.hero-avatar-wrap::after {
-  content: "";
+.avatar-ring-dashed {
   position: absolute;
-  inset: -14px;
+  inset: -15px;
   border-radius: 50%;
-  border: 1.5px dashed rgba(56, 189, 248, 0.45);
-  animation: spinAvatarRingReverse 18s linear infinite;
+  border: 1.5px dashed rgba(56, 189, 248, 0.6);
+  animation: spinAvatarRingReverse 14s linear infinite;
   pointer-events: none;
   z-index: 1;
 }
@@ -402,11 +393,11 @@ code, kbd, pre, samp {
 /* Layer 3: Orbiting Active Photon Satellite */
 .avatar-orbit-satellite {
   position: absolute;
-  inset: -14px;
+  inset: -15px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 3;
-  animation: spinAvatarRing 7s linear infinite;
+  animation: spinAvatarRing 5.5s linear infinite;
 }
 
 .avatar-orbit-satellite::after {
@@ -415,20 +406,20 @@ code, kbd, pre, samp {
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: #00F5A0;
-  box-shadow: 0 0 10px #00F5A0, 0 0 20px #00F5A0;
+  box-shadow: 0 0 12px #00F5A0, 0 0 24px #00F5A0;
 }
 
 .hero-avatar-wrap:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
-.hero-avatar-wrap:hover::before {
-  box-shadow: 0 0 35px rgba(0, 245, 160, 0.75);
-  animation-duration: 3s;
+.hero-avatar-wrap:hover .avatar-ring-spin {
+  box-shadow: 0 0 35px rgba(0, 245, 160, 0.85);
+  animation-duration: 2s;
 }
 
 .hero-avatar {
@@ -437,9 +428,9 @@ code, kbd, pre, samp {
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  border: 2px solid rgba(15, 23, 42, 0.9);
+  border: 3px solid #030508;
   background-color: var(--bg-void);
-  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.85);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
   transform-style: preserve-3d;
   transform: translateZ(0);
 }
@@ -2029,43 +2020,43 @@ html.lenis, html.lenis body {
 .ambient-nebula-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(140px);
+  filter: blur(100px);
   pointer-events: none;
   z-index: -2;
   will-change: transform, opacity;
 }
 
 .orb-emerald {
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(0, 245, 160, 0.16) 0%, transparent 70%);
+  width: 540px;
+  height: 540px;
+  background: radial-gradient(circle, rgba(0, 245, 160, 0.28) 0%, transparent 70%);
   top: 5%;
   left: -8%;
   animation: orbFloat1 20s ease-in-out infinite alternate;
 }
 
 .orb-cyan {
-  width: 580px;
-  height: 580px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, transparent 70%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.26) 0%, transparent 70%);
   top: 40%;
   right: -10%;
   animation: orbFloat2 24s ease-in-out infinite alternate;
 }
 
 .orb-violet {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.24) 0%, transparent 70%);
   bottom: 8%;
   left: 15%;
   animation: orbFloat3 22s ease-in-out infinite alternate;
 }
 
 .orb-amber {
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(255, 138, 0, 0.12) 0%, transparent 70%);
+  width: 540px;
+  height: 540px;
+  background: radial-gradient(circle, rgba(255, 138, 0, 0.22) 0%, transparent 70%);
   top: 62%;
   left: -8%;
   animation: orbFloat1 26s ease-in-out infinite alternate;
