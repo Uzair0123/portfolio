@@ -30,6 +30,7 @@ jobs:
           node -c assets/js/main.js
           node -c assets/js/architecture.js
           node -c assets/js/labs.js
+          node -c assets/js/credentials.js
           echo "Portfolio JavaScript validated successfully!"
 
       - name: Setup Pages

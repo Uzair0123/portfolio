@@ -3891,3 +3891,341 @@ html.lenis, html.lenis body {
 .htop-fkey strong {
   color: var(--accent-cyan);
 }
+
+/* ==========================================================================
+   ACADEMIC DOSSIER & CERTIFIED LEDGER (/credentials/)
+   ========================================================================== */
+.credentials-page {
+  padding-top: 5rem;
+  padding-bottom: 6rem;
+}
+
+.cred-section-block {
+  margin-bottom: 4.5rem;
+}
+
+/* Academic Dossier Cards */
+.academic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+.academic-card {
+  background: rgba(8, 12, 20, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.85rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.85);
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.academic-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.2);
+}
+
+.academic-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.85rem;
+}
+
+.academic-degree-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+.academic-degree-badge.mca {
+  background: rgba(0, 245, 160, 0.1);
+  color: var(--accent-bash);
+  border: 1px solid rgba(0, 245, 160, 0.25);
+}
+.academic-degree-badge.bca {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-k8s);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.academic-timeline {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-dim);
+}
+
+.academic-card-body h3 {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.academic-institution {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.academic-research-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.academic-research-list li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.academic-research-list li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--accent-bash);
+}
+
+/* Industry Certifications Grid */
+.cert-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+.cert-showcase-card {
+  background: rgba(8, 12, 20, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.85rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.85);
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-showcase-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 245, 160, 0.45);
+  box-shadow: 0 20px 40px -10px rgba(0, 245, 160, 0.2);
+}
+
+.cert-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.85rem;
+}
+
+.cert-badge-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+.cert-badge-pill.docker {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-k8s);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+.cert-badge-pill.cicd {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--accent-tf);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.cert-issuer {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.cert-cid-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.45rem 0.75rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--accent-bash);
+  word-break: break-all;
+}
+
+.cert-action-row {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.85rem;
+}
+
+/* Recruiter Dossier & Action Hub Card */
+.recruiter-dossier-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(8, 12, 20, 0.95) 100%);
+  border: 1px solid rgba(0, 245, 160, 0.35);
+  border-radius: var(--radius-card);
+  padding: 2.25rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  box-shadow: 0 20px 45px -15px rgba(0, 245, 160, 0.2);
+}
+
+.recruiter-info h3 {
+  font-size: 1.45rem;
+  color: var(--text-primary);
+  margin-bottom: 0.45rem;
+}
+.recruiter-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 600px;
+}
+
+.recruiter-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* Verification Modal */
+.cert-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 5, 8, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1.5rem;
+}
+
+.cert-modal-backdrop.active {
+  display: flex;
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.cert-modal-window {
+  background: #0B111E;
+  border: 1px solid rgba(0, 245, 160, 0.4);
+  border-radius: var(--radius-card);
+  max-width: 620px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 245, 160, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.cert-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1rem;
+}
+
+.cert-modal-header h3 {
+  font-size: 1.3rem;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.cert-modal-close {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+.cert-modal-close:hover {
+  background: #EF4444;
+  border-color: #EF4444;
+}
+
+.cert-hash-box {
+  background: #030508;
+  border: 1px solid rgba(0, 245, 160, 0.25);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #00F5A0;
+  word-break: break-all;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cert-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.cert-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
