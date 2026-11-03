@@ -21,7 +21,12 @@
 </head>
 <body>
 
-  <!-- Cloud Network Topology Canvas Background -->
+  <!-- Atmospheric Nebula Orbs (Cosmic Background Depth) -->
+  <div class="ambient-nebula-orb orb-emerald"></div>
+  <div class="ambient-nebula-orb orb-cyan"></div>
+  <div class="ambient-nebula-orb orb-violet"></div>
+
+  <!-- Cloud Network Topology Canvas Background (With 3D Floating Server Cubes) -->
   <canvas id="network-bg"></canvas>
 
   <!-- ==================== 1. STATUS BAR / HUD NAV ==================== -->
@@ -130,19 +135,27 @@
         </header>
 
         <div class="bento-grid">
-          <!-- Card 1: Kubernetes -->
-          <div class="bento-card" id="skill-kubernetes">
+          <!-- Card 1: Kubernetes (Hero Asymmetric Bento) -->
+          <div class="bento-card bento-hero-card cyber-chamfer" id="skill-kubernetes">
             <div class="card-header">
-              <span class="card-badge">ORCHESTRATION</span>
-              <h3>Kubernetes (K8s)</h3>
+              <div class="card-badge-row">
+                <span class="card-badge">CORE ORCHESTRATION</span>
+                <span class="bento-micro-badge"><span class="pulse-dot"></span> 3/3 NODES INSYNC</span>
+              </div>
+              <h3>Kubernetes (K8s) Cluster Engine</h3>
             </div>
             <div class="card-body">
-              <p>Multi-node Pod replica management, rolling deployments, DaemonSets, ConfigMaps/Secrets, Helm charts, and Ingress-NGINX controllers.</p>
+              <p>Multi-node Pod replica management, rolling deployments, DaemonSets, ConfigMaps/Secrets, Helm charts, and Ingress-NGINX controllers with automated self-healing.</p>
+              <div class="pod-replica-matrix">
+                <div class="pod-cell"><span class="pod-dot ready"></span> master-01: v1.30.2</div>
+                <div class="pod-cell"><span class="pod-dot ready"></span> worker-01: ready</div>
+                <div class="pod-cell"><span class="pod-dot ready"></span> worker-02: ready</div>
+              </div>
             </div>
           </div>
 
           <!-- Card 2: Docker Containers -->
-          <div class="bento-card" id="skill-docker">
+          <div class="bento-card cyber-chamfer" id="skill-docker">
             <div class="card-header">
               <span class="card-badge">CONTAINERIZATION</span>
               <h3>Docker Containers</h3>
@@ -153,7 +166,7 @@
           </div>
 
           <!-- Card 3: CI/CD Pipelines -->
-          <div class="bento-card" id="skill-cicd">
+          <div class="bento-card cyber-chamfer" id="skill-cicd">
             <div class="card-header">
               <span class="card-badge">CI / CD AUTOMATION</span>
               <h3>CI/CD Pipelines</h3>
@@ -163,11 +176,14 @@
             </div>
           </div>
 
-          <!-- Card 4: AWS Cloud -->
-          <div class="bento-card" id="skill-aws-cloud">
+          <!-- Card 4: AWS Cloud (High-Density Multi-AZ Bento) -->
+          <div class="bento-card bento-tall-card cyber-chamfer" id="skill-aws-cloud">
             <div class="card-header">
-              <span class="card-badge">CLOUD INFRASTRUCTURE</span>
-              <h3>AWS Cloud</h3>
+              <div class="card-badge-row">
+                <span class="card-badge">MULTI-REGION CLOUD</span>
+                <span class="bento-micro-badge aws"><span class="aws-dot"></span> AP-SOUTH-1</span>
+              </div>
+              <h3>AWS Cloud Infrastructure</h3>
             </div>
             <div class="card-body">
               <p>VPC architecture, subnets, EC2, Application Load Balancers, S3 storage policies, IAM least-privilege, and CloudWatch telemetry.</p>
@@ -175,9 +191,9 @@
           </div>
 
           <!-- Card 5: Terraform -->
-          <div class="bento-card" id="skill-terraform">
+          <div class="bento-card cyber-chamfer" id="skill-terraform">
             <div class="card-header">
-              <span class="card-badge">IaC</span>
+              <span class="card-badge">IaC DECLARATIVE</span>
               <h3>Terraform</h3>
             </div>
             <div class="card-body">
@@ -186,7 +202,7 @@
           </div>
 
           <!-- Card 6: Linux SysAdmin -->
-          <div class="bento-card" id="skill-linux">
+          <div class="bento-card cyber-chamfer" id="skill-linux">
             <div class="card-header">
               <span class="card-badge">SYSADMIN &amp; KERNEL</span>
               <h3>Linux SysAdmin</h3>
@@ -197,9 +213,9 @@
           </div>
 
           <!-- Card 7: Computer Networking -->
-          <div class="bento-card" id="skill-networking">
+          <div class="bento-card cyber-chamfer" id="skill-networking">
             <div class="card-header">
-              <span class="card-badge">NETWORKING</span>
+              <span class="card-badge">NETWORKING PROTOCOLS</span>
               <h3>Computer Networking</h3>
             </div>
             <div class="card-body">
@@ -208,7 +224,7 @@
           </div>
 
           <!-- Card 8: Python / Bash -->
-          <div class="bento-card" id="skill-python-bash">
+          <div class="bento-card cyber-chamfer" id="skill-python-bash">
             <div class="card-header">
               <span class="card-badge">AUTOMATION &amp; SCRIPTING</span>
               <h3>Python / Bash</h3>
@@ -354,7 +370,20 @@
         <div class="projects-grid">
           
           <!-- Project 1: Nexora -->
-          <article class="project-card" id="proj-nexora">
+          <article class="project-card server-blade-card" id="proj-nexora">
+            <div class="blade-chassis-strip">
+              <div class="blade-rack-ear">
+                <span class="rack-rivet"></span>
+                <span class="rack-rivet"></span>
+              </div>
+              <div class="blade-faceplate">
+                <div class="blade-leds">
+                  <span class="blade-led led-green" title="SYSTEM_READY"></span>
+                  <span class="blade-led led-amber" title="STORAGE_IO"></span>
+                </div>
+                <span class="blade-unit-id">BLADE 01 // 1U</span>
+              </div>
+            </div>
             <header class="project-card-header">
               <span class="project-port">sha256:a8f4c219 • 8081:8081</span>
               <span class="project-status">UP 21D (Healthy)</span>
@@ -378,7 +407,20 @@
           </article>
 
           <!-- Project 2: Kashmir Kesar Kingdom -->
-          <article class="project-card" id="proj-kkk">
+          <article class="project-card server-blade-card" id="proj-kkk">
+            <div class="blade-chassis-strip">
+              <div class="blade-rack-ear">
+                <span class="rack-rivet"></span>
+                <span class="rack-rivet"></span>
+              </div>
+              <div class="blade-faceplate">
+                <div class="blade-leds">
+                  <span class="blade-led led-green" title="SYSTEM_READY"></span>
+                  <span class="blade-led led-amber" title="STORAGE_IO"></span>
+                </div>
+                <span class="blade-unit-id">BLADE 02 // 1U</span>
+              </div>
+            </div>
             <header class="project-card-header">
               <span class="project-port">sha256:b7190d4e • 443:80</span>
               <span class="project-status">UP 60D (Healthy)</span>
@@ -403,7 +445,20 @@
           </article>
 
           <!-- Project 3: Craver Fast Food Co. -->
-          <article class="project-card" id="proj-craver">
+          <article class="project-card server-blade-card" id="proj-craver">
+            <div class="blade-chassis-strip">
+              <div class="blade-rack-ear">
+                <span class="rack-rivet"></span>
+                <span class="rack-rivet"></span>
+              </div>
+              <div class="blade-faceplate">
+                <div class="blade-leds">
+                  <span class="blade-led led-green" title="SYSTEM_READY"></span>
+                  <span class="blade-led led-amber" title="STORAGE_IO"></span>
+                </div>
+                <span class="blade-unit-id">BLADE 03 // 1U</span>
+              </div>
+            </div>
             <header class="project-card-header">
               <span class="project-port">sha256:c3392b1a • 3000:3000</span>
               <span class="project-status">UP 38D (Healthy)</span>
@@ -428,7 +483,20 @@
           </article>
 
           <!-- Project 4: sys-inspect Telemetry CLI -->
-          <article class="project-card" id="proj-sysinspect">
+          <article class="project-card server-blade-card" id="proj-sysinspect">
+            <div class="blade-chassis-strip">
+              <div class="blade-rack-ear">
+                <span class="rack-rivet"></span>
+                <span class="rack-rivet"></span>
+              </div>
+              <div class="blade-faceplate">
+                <div class="blade-leds">
+                  <span class="blade-led led-green" title="SYSTEM_READY"></span>
+                  <span class="blade-led led-amber" title="STORAGE_IO"></span>
+                </div>
+                <span class="blade-unit-id">BLADE 04 // 1U</span>
+              </div>
+            </div>
             <header class="project-card-header">
               <span class="project-port">sha256:d9910f8a • 9100:9100</span>
               <span class="project-status">UP 12D (Healthy)</span>
@@ -452,7 +520,20 @@
           </article>
 
           <!-- Project 5: Network Protocol Labs -->
-          <article class="project-card" id="proj-networklab">
+          <article class="project-card server-blade-card" id="proj-networklab">
+            <div class="blade-chassis-strip">
+              <div class="blade-rack-ear">
+                <span class="rack-rivet"></span>
+                <span class="rack-rivet"></span>
+              </div>
+              <div class="blade-faceplate">
+                <div class="blade-leds">
+                  <span class="blade-led led-green" title="SYSTEM_READY"></span>
+                  <span class="blade-led led-amber" title="STORAGE_IO"></span>
+                </div>
+                <span class="blade-unit-id">BLADE 05 // 1U</span>
+              </div>
+            </div>
             <header class="project-card-header">
               <span class="project-port">sha256:e4481c7e • 53:53</span>
               <span class="project-status">UP 5D (Healthy)</span>
@@ -476,7 +557,20 @@
           </article>
 
           <!-- Project 6: Algo-Engine & Python DSA -->
-          <article class="project-card" id="proj-algoengine">
+          <article class="project-card server-blade-card" id="proj-algoengine">
+            <div class="blade-chassis-strip">
+              <div class="blade-rack-ear">
+                <span class="rack-rivet"></span>
+                <span class="rack-rivet"></span>
+              </div>
+              <div class="blade-faceplate">
+                <div class="blade-leds">
+                  <span class="blade-led led-green" title="SYSTEM_READY"></span>
+                  <span class="blade-led led-amber" title="STORAGE_IO"></span>
+                </div>
+                <span class="blade-unit-id">BLADE 06 // 1U</span>
+              </div>
+            </div>
             <header class="project-card-header">
               <span class="project-port">sha256:f12089ba • 8000:8000</span>
               <span class="project-status">UP 18D (Healthy)</span>
@@ -511,80 +605,133 @@
           <p class="section-subtitle">Formal computer science education and engineering experience.</p>
         </header>
 
-        <div class="experience-grid">
-          
-          <div class="experience-card">
-            <header class="experience-card-header">
-              <span class="experience-date">2026 — Present</span>
-              <span class="experience-badge">CURRENT</span>
-            </header>
-            <h3>Master of Computer Applications (MCA)</h3>
-            <p class="experience-institution">Indira Gandhi National Open University (IGNOU)</p>
-            <ul class="experience-points">
-              <li>Advanced study of distributed operating systems, computer networking protocols, and cloud computing.</li>
-              <li>Practical research in high-availability clusters and container orchestration.</li>
-            </ul>
-          </div>
+        <div class="commit-ledger-timeline">
+          <!-- Continuous Central Glowing Branch Spine -->
+          <div class="timeline-branch-spine"></div>
 
-          <div class="experience-card">
-            <header class="experience-card-header">
-              <span class="experience-date">2021 — 2024</span>
-              <span class="experience-badge">FIRST CLASS</span>
-            </header>
-            <h3>Bachelor of Computer Applications (BCA)</h3>
-            <p class="experience-institution">University of Kashmir • First Class Distinction</p>
-            <ul class="experience-points">
-              <li>Graduated with first-class honors focusing on Operating Systems, Database Management, and Data Communications.</li>
-              <li>Built foundational shell utilities and web architecture prototypes.</li>
-            </ul>
-          </div>
-
-          <div class="experience-card">
-            <header class="experience-card-header">
-              <span class="experience-date">2024 — 2026</span>
-              <span class="experience-badge">COMMERCIAL</span>
-            </header>
-            <h3>Systems Architect &amp; Software Engineer</h3>
-            <p class="experience-institution">Client Solutions &amp; Open-Source Projects</p>
-            <ul class="experience-points">
-              <li>Engineered Kashmir Kesar Kingdom with 95% asset compression and dynamic currency conversion.</li>
-              <li>Developed Nexora quick-commerce mobile application using React Native 0.81 and Expo Router v6.</li>
-              <li>Created sys-inspect CLI tool for Linux kernel and process telemetry.</li>
-            </ul>
-          </div>
-
-          <div class="experience-card" id="cert-docker">
-            <header class="experience-card-header">
-              <span class="experience-date">Issued Oct 2026</span>
-              <span class="experience-badge" style="color:var(--accent-k8s);">CERTIFIED</span>
-            </header>
-            <h3>Docker Essentials: A Developer Introduction</h3>
-            <p class="experience-institution">Cognitive Class • IBM Developer Skills Network</p>
-            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); margin-bottom:0.4rem;">
-              Credential ID: 963031e61d0745338ded287cf0331aff
+          <!-- Commit Node 1: MCA -->
+          <div class="commit-node-entry active-head">
+            <div class="commit-node-marker">
+              <span class="node-ring"></span>
+              <span class="node-dot"></span>
             </div>
-            <ul class="experience-points">
-              <li>Mastered core Docker fundamentals, container execution, and working with multi-stage Docker images.</li>
-              <li>Strengthened containerization role within modern application architectures, CI/CD, and DevOps workflows.</li>
-            </ul>
-          </div>
-
-          <div class="experience-card" id="cert-cicd">
-            <header class="experience-card-header">
-              <span class="experience-date">Issued Oct 2026</span>
-              <span class="experience-badge" style="color:var(--accent-tf);">CERTIFIED</span>
-            </header>
-            <h3>DevOps &amp; CI/CD Automation</h3>
-            <p class="experience-institution">Mltio University</p>
-            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); margin-bottom:0.4rem;">
-              Credential ID: MU-ACAD-2026-EZYAPPYZ
+            <div class="commit-node-card">
+              <header class="commit-card-header">
+                <div class="commit-hash-pill">
+                  <span class="git-icon">⎇</span>
+                  <code>HEAD -&gt; master-degree [commit 0c4b91f]</code>
+                </div>
+                <span class="commit-badge current">2026 — PRESENT</span>
+              </header>
+              <h3>Master of Computer Applications (MCA)</h3>
+              <p class="experience-institution">Indira Gandhi National Open University (IGNOU)</p>
+              <ul class="experience-points">
+                <li>Advanced study of distributed operating systems, computer networking protocols, and cloud computing.</li>
+                <li>Practical research in high-availability clusters and container orchestration.</li>
+              </ul>
             </div>
-            <ul class="experience-points">
-              <li>Advanced practical skills in automated CI/CD pipeline architecture, continuous integration, and continuous deployment.</li>
-              <li>Engineered automated workflow triggers, artifact registries, and release deployment lifecycle management.</li>
-            </ul>
           </div>
 
+          <!-- Commit Node 2: Docker Essentials -->
+          <div class="commit-node-entry verified-cert" id="cert-docker">
+            <div class="commit-node-marker">
+              <span class="node-ring cert-k8s"></span>
+              <span class="node-dot"></span>
+            </div>
+            <div class="commit-node-card">
+              <header class="commit-card-header">
+                <div class="commit-hash-pill">
+                  <span class="git-icon">✓</span>
+                  <code>tag: v1.0.0-docker [commit 963031e]</code>
+                </div>
+                <span class="commit-badge cert-k8s">VERIFIED CERTIFICATION</span>
+              </header>
+              <h3>Docker Essentials: A Developer Introduction</h3>
+              <p class="experience-institution">Cognitive Class • IBM Developer Skills Network • <span class="cert-date">Issued Oct 2026</span></p>
+              <div class="credential-hash-strip">
+                <span class="hash-label">SHA256 CID:</span>
+                <code>963031e61d0745338ded287cf0331aff</code>
+              </div>
+              <ul class="experience-points">
+                <li>Mastered core Docker fundamentals, container execution, and working with multi-stage Docker images.</li>
+                <li>Strengthened containerization role within modern application architectures, CI/CD, and DevOps workflows.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Commit Node 3: DevOps & CI/CD Automation -->
+          <div class="commit-node-entry verified-cert" id="cert-cicd">
+            <div class="commit-node-marker">
+              <span class="node-ring cert-tf"></span>
+              <span class="node-dot"></span>
+            </div>
+            <div class="commit-node-card">
+              <header class="commit-card-header">
+                <div class="commit-hash-pill">
+                  <span class="git-icon">✓</span>
+                  <code>tag: v1.0.0-cicd [commit mu-2026]</code>
+                </div>
+                <span class="commit-badge cert-tf">VERIFIED CERTIFICATION</span>
+              </header>
+              <h3>DevOps &amp; CI/CD Automation</h3>
+              <p class="experience-institution">Mltio University • <span class="cert-date">Issued Oct 2026</span></p>
+              <div class="credential-hash-strip">
+                <span class="hash-label">CREDENTIAL ID:</span>
+                <code>MU-ACAD-2026-EZYAPPYZ</code>
+              </div>
+              <ul class="experience-points">
+                <li>Advanced practical skills in automated CI/CD pipeline architecture, continuous integration, and continuous deployment.</li>
+                <li>Engineered automated workflow triggers, artifact registries, and release deployment lifecycle management.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Commit Node 4: Systems Architect & Commercial Work -->
+          <div class="commit-node-entry">
+            <div class="commit-node-marker">
+              <span class="node-ring"></span>
+              <span class="node-dot"></span>
+            </div>
+            <div class="commit-node-card">
+              <header class="commit-card-header">
+                <div class="commit-hash-pill">
+                  <span class="git-icon">⎇</span>
+                  <code>branch: commercial-prod [commit 8e41a20]</code>
+                </div>
+                <span class="commit-badge">2024 — 2026</span>
+              </header>
+              <h3>Systems Architect &amp; Software Engineer</h3>
+              <p class="experience-institution">Client Solutions &amp; Open-Source Projects</p>
+              <ul class="experience-points">
+                <li>Engineered Kashmir Kesar Kingdom with 95% asset compression and dynamic currency conversion.</li>
+                <li>Developed Nexora quick-commerce mobile application using React Native 0.81 and Expo Router v6.</li>
+                <li>Created sys-inspect CLI tool for Linux kernel and process telemetry.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Commit Node 5: BCA First Class -->
+          <div class="commit-node-entry">
+            <div class="commit-node-marker">
+              <span class="node-ring"></span>
+              <span class="node-dot"></span>
+            </div>
+            <div class="commit-node-card">
+              <header class="commit-card-header">
+                <div class="commit-hash-pill">
+                  <span class="git-icon">●</span>
+                  <code>root: init-foundation [commit bca-dist]</code>
+                </div>
+                <span class="commit-badge">2021 — 2024</span>
+              </header>
+              <h3>Bachelor of Computer Applications (BCA)</h3>
+              <p class="experience-institution">University of Kashmir • First Class Distinction</p>
+              <ul class="experience-points">
+                <li>Graduated with first-class honors focusing on Operating Systems, Database Management, and Data Communications.</li>
+                <li>Built foundational shell utilities and web architecture prototypes.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -29,7 +29,7 @@
     let height = 0;
     let particles = [];
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 35 : 70;
+    const particleCount = isMobile ? 32 : 68;
     const maxDistance = isMobile ? 110 : 145;
 
     let mouse = { x: -9999, y: -9999 };
@@ -41,7 +41,7 @@
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // Track mouse on desktop for interactive node linking
+    // Track mouse on desktop for interactive node linking & 3D parallax
     window.addEventListener("pointermove", (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
@@ -52,28 +52,207 @@
       mouse.y = -9999;
     });
 
-    // Color palette: Cyber Emerald (#00F5A0) & Electric Cyan (#38BDF8)
+    // Color palette: Cyber Emerald (#00F5A0), Electric Cyan (#38BDF8) & Tech Violet (#818CF8)
     const palette = [
       { r: 0, g: 245, b: 160 },   // Cyber Emerald (--accent-bash)
-      { r: 56, g: 189, b: 248 }   // Electric Cyan (--accent-k8s)
+      { r: 56, g: 189, b: 248 },  // Electric Cyan (--accent-k8s)
+      { r: 129, g: 140, b: 248 }  // Tech Violet (--accent-violet)
     ];
 
     for (let i = 0; i < particleCount; i++) {
-      const col = palette[i % palette.length];
+      const col = palette[i % 2]; // Alternating Emerald & Cyan for node particles
       particles.push({
         x: Math.random() * (width || window.innerWidth),
         y: Math.random() * (height || window.innerHeight),
-        vx: (Math.random() - 0.5) * 0.55,
-        vy: (Math.random() - 0.5) * 0.55,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
         radius: Math.random() * 1.8 + 1,
         color: col
       });
     }
 
+    // ─────────────────────────────────────────────────────────────
+    // 3D Floating Isometric Server Wireframe Cubes
+    // ─────────────────────────────────────────────────────────────
+    const cubeCount = isMobile ? 3 : 6;
+    const cubes = [];
+
+    // Unit cube 8 vertices (centered at origin)
+    const cubeVertices = [
+      [-1, -1, -1],
+      [ 1, -1, -1],
+      [ 1,  1, -1],
+      [-1,  1, -1],
+      [-1, -1,  1],
+      [ 1, -1,  1],
+      [ 1,  1,  1],
+      [-1,  1,  1]
+    ];
+
+    // 12 wireframe edge indices
+    const cubeEdges = [
+      [0, 1], [1, 2], [2, 3], [3, 0], // back face
+      [4, 5], [5, 6], [6, 7], [7, 4], // front face
+      [0, 4], [1, 5], [2, 6], [3, 7]  // connecting edges
+    ];
+
+    for (let c = 0; c < cubeCount; c++) {
+      cubes.push({
+        x: Math.random() * (width || window.innerWidth),
+        y: Math.random() * (height || window.innerHeight),
+        z: Math.random() * 220 + 160,
+        size: Math.random() * 16 + (isMobile ? 18 : 28),
+        rx: Math.random() * Math.PI * 2,
+        ry: Math.random() * Math.PI * 2,
+        rz: Math.random() * Math.PI * 2,
+        vrx: (Math.random() - 0.5) * 0.007 + 0.003,
+        vry: (Math.random() - 0.5) * 0.007 + 0.004,
+        vrz: (Math.random() - 0.5) * 0.005,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: -(Math.random() * 0.28 + 0.15), // gently drifts upward like server heat/nodes
+        color: palette[c % palette.length],
+        pulse: Math.random() * Math.PI * 2
+      });
+    }
+
+    function project3D(v, cube, parallaxX, parallaxY) {
+      const [vx, vy, vz] = v;
+      const s = cube.size;
+      const x0 = vx * s;
+      const y0 = vy * s;
+      const z0 = vz * s;
+
+      // Rotate around X
+      const cx = Math.cos(cube.rx), sx = Math.sin(cube.rx);
+      const y1 = y0 * cx - z0 * sx;
+      const z1 = y0 * sx + z0 * cx;
+
+      // Rotate around Y
+      const cy = Math.cos(cube.ry), sy = Math.sin(cube.ry);
+      const x2 = x0 * cy + z1 * sy;
+      const z2 = -x0 * sy + z1 * cy;
+
+      // Rotate around Z
+      const cz = Math.cos(cube.rz), sz = Math.sin(cube.rz);
+      const x3 = x2 * cz - y1 * sz;
+      const y3 = x2 * sz + y1 * cz;
+
+      // Perspective projection
+      const fov = 350;
+      const totalZ = z2 + cube.z;
+      const scale = fov / (fov + totalZ);
+
+      return {
+        x: (cube.x + parallaxX) + x3 * scale,
+        y: (cube.y + parallaxY) + y3 * scale,
+        z: totalZ,
+        scale: scale
+      };
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // Photon Data Packets & Radar Ripples
+    // ─────────────────────────────────────────────────────────────
+    const packets = [];
+    const maxPackets = isMobile ? 6 : 14;
+
+    function spawnPacket(p1Index, p2Index, color) {
+      if (packets.length >= maxPackets) return;
+      packets.push({
+        from: p1Index,
+        to: p2Index,
+        progress: 0,
+        speed: Math.random() * 0.02 + 0.015,
+        color: color
+      });
+    }
+
+    const ripples = [];
+    let frameCount = 0;
+
+    function spawnRipple(x, y, color) {
+      if (ripples.length >= 4) return;
+      ripples.push({
+        x: x,
+        y: y,
+        radius: 4,
+        maxRadius: Math.random() * 25 + 45,
+        alpha: 0.6,
+        color: color
+      });
+    }
+
     function animate() {
       ctx.clearRect(0, 0, width, height);
+      frameCount++;
 
-      // Update & render particles
+      // ── A. Render Floating 3D Wireframe Server Cubes ────────────
+      const mouseParallaxX = mouse.x > 0 ? (mouse.x - width / 2) * 0.025 : 0;
+      const mouseParallaxY = mouse.y > 0 ? (mouse.y - height / 2) * 0.025 : 0;
+
+      for (let c = 0; c < cubes.length; c++) {
+        const cube = cubes[c];
+        cube.rx += cube.vrx;
+        cube.ry += cube.vry;
+        cube.rz += cube.vrz;
+        cube.pulse += 0.02;
+
+        cube.x += cube.vx;
+        cube.y += cube.vy;
+
+        // Wrap around vertically
+        if (cube.y < -120) {
+          cube.y = height + 100;
+          cube.x = Math.random() * width;
+        } else if (cube.y > height + 120) {
+          cube.y = -100;
+          cube.x = Math.random() * width;
+        }
+
+        if (cube.x < -120) cube.x = width + 100;
+        else if (cube.x > width + 120) cube.x = -100;
+
+        // Project all 8 vertices
+        const projected = cubeVertices.map((v) => project3D(v, cube, mouseParallaxX, mouseParallaxY));
+
+        // Base opacity with subtle breathing pulse
+        const baseAlpha = 0.28 + Math.sin(cube.pulse) * 0.08;
+        const colStr = `${cube.color.r}, ${cube.color.g}, ${cube.color.b}`;
+
+        // Draw wireframe edges
+        ctx.beginPath();
+        for (let e = 0; e < cubeEdges.length; e++) {
+          const [i1, i2] = cubeEdges[e];
+          const p1 = projected[i1];
+          const p2 = projected[i2];
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+        }
+        ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Draw an internal diagonal server blade rack rail across front and back faces
+        ctx.beginPath();
+        ctx.moveTo(projected[0].x, projected[0].y);
+        ctx.lineTo(projected[2].x, projected[2].y);
+        ctx.moveTo(projected[4].x, projected[4].y);
+        ctx.lineTo(projected[6].x, projected[6].y);
+        ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.35})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+
+        // Draw glowing vertex pins
+        for (let v = 0; v < projected.length; v++) {
+          const pv = projected[v];
+          ctx.beginPath();
+          ctx.arc(pv.x, pv.y, 1.6, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${colStr}, ${baseAlpha + 0.2})`;
+          ctx.fill();
+        }
+      }
+
+      // ── B. Update & Render Node Particles & Grid Lines ──────────
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
@@ -89,7 +268,7 @@
         // Draw particle node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.7)`;
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.75)`;
         ctx.fill();
 
         // Connect nearby particles with thin cloud network lines
@@ -107,6 +286,11 @@
             ctx.strokeStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
             ctx.lineWidth = 0.75;
             ctx.stroke();
+
+            // Randomly dispatch photon packets along connected edge
+            if (Math.random() < 0.0025) {
+              spawnPacket(i, j, p.color);
+            }
           }
         }
 
@@ -126,6 +310,75 @@
             ctx.stroke();
           }
         }
+      }
+
+      // ── C. Periodic Hexagonal Radar Ripples ─────────────────────
+      if (frameCount % 90 === 0 && particles.length > 0) {
+        const randP = particles[Math.floor(Math.random() * particles.length)];
+        spawnRipple(randP.x, randP.y, randP.color);
+      }
+
+      for (let r = ripples.length - 1; r >= 0; r--) {
+        const rip = ripples[r];
+        rip.radius += 0.75;
+        rip.alpha = (1 - rip.radius / rip.maxRadius) * 0.55;
+
+        if (rip.alpha <= 0.01 || rip.radius >= rip.maxRadius) {
+          ripples.splice(r, 1);
+          continue;
+        }
+
+        // Draw 6-sided radar hexagon
+        ctx.beginPath();
+        for (let k = 0; k < 6; k++) {
+          const angle = (k * Math.PI) / 3;
+          const hx = rip.x + rip.radius * Math.cos(angle);
+          const hy = rip.y + rip.radius * Math.sin(angle);
+          if (k === 0) ctx.moveTo(hx, hy);
+          else ctx.lineTo(hx, hy);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = `rgba(${rip.color.r}, ${rip.color.g}, ${rip.color.b}, ${rip.alpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // ── D. Render Photon Data Packets ───────────────────────────
+      for (let pIdx = packets.length - 1; pIdx >= 0; pIdx--) {
+        const pkt = packets[pIdx];
+        const pA = particles[pkt.from];
+        const pB = particles[pkt.to];
+
+        if (!pA || !pB) {
+          packets.splice(pIdx, 1);
+          continue;
+        }
+
+        pkt.progress += pkt.speed;
+        if (pkt.progress >= 1) {
+          packets.splice(pIdx, 1);
+          continue;
+        }
+
+        const curX = pA.x + (pB.x - pA.x) * pkt.progress;
+        const curY = pA.y + (pB.y - pA.y) * pkt.progress;
+
+        // Draw glowing photon packet head
+        ctx.beginPath();
+        ctx.arc(curX, curY, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 0.95)`;
+        ctx.fill();
+
+        // Draw short glowing tail
+        const tailProgress = Math.max(0, pkt.progress - 0.12);
+        const tailX = pA.x + (pB.x - pA.x) * tailProgress;
+        const tailY = pA.y + (pB.y - pA.y) * tailProgress;
+        ctx.beginPath();
+        ctx.moveTo(curX, curY);
+        ctx.lineTo(tailX, tailY);
+        ctx.strokeStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 0.5)`;
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
       }
 
       requestAnimationFrame(animate);
@@ -522,7 +775,7 @@
 
       // 5. Projects Grid ScrollTrigger (Cascade Reveal with stagger: 0.1)
       const projectsGrid = document.querySelector(".projects-grid");
-      const projectCards = document.querySelectorAll(".project-card");
+      const projectCards = document.querySelectorAll(".project-card, .server-blade-card");
       if (projectsGrid && projectCards.length > 0) {
         window.gsap.from(projectCards, {
           scrollTrigger: {
@@ -539,9 +792,9 @@
         });
       }
 
-      // 6. Experience / Credentials Grid Cascade Reveal
-      const expGrid = document.querySelector(".experience-grid");
-      const expCards = document.querySelectorAll(".experience-card");
+      // 6. Experience / Credentials Git Commit Ledger Cascade Reveal
+      const expGrid = document.querySelector(".commit-ledger-timeline, .experience-grid");
+      const expCards = document.querySelectorAll(".commit-node-entry, .experience-card");
       if (expGrid && expCards.length > 0) {
         window.gsap.from(expCards, {
           scrollTrigger: {
@@ -549,10 +802,10 @@
             start: "top 85%",
             once: true
           },
-          y: 50,
+          y: 40,
           opacity: 0,
           duration: 0.75,
-          stagger: 0.1,
+          stagger: 0.12,
           ease: "power3.out",
           clearProps: "transform,opacity"
         });
@@ -605,7 +858,9 @@
   // 5. SPECULAR SPOTLIGHT BORDER GLOW ENGINE (LINEAR.APP STYLE)
   // ═══════════════════════════════════════════════════════════════
   function initSpotlightCards() {
-    const cards = document.querySelectorAll(".bento-card, .project-card, .channel-tile, .pipeline-card, .pipeline-stage, .experience-card");
+    const cards = document.querySelectorAll(
+      ".bento-card, .project-card, .server-blade-card, .commit-node-card, .commit-node-entry, .channel-tile, .pipeline-card, .pipeline-stage, .experience-card"
+    );
     if (!cards.length) return;
 
     cards.forEach((card) => {
