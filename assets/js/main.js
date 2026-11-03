@@ -425,12 +425,12 @@
       }, "-=0.5");
 
       // Stagger Hero text sliding up from y: 40 with opacity: 0 & slight rotation (2deg)
-      heroTl.from([".hero-name-badge", ".hero-identity h1", ".hero-identity h2", ".hero-bio", ".hero-actions"], {
+      heroTl.from([".hero-name-badge", ".hero-name-glamour", ".hero-tagline-creed", ".hero-role-sub", ".hero-bio", ".hero-actions"], {
         y: 40,
         opacity: 0,
         rotation: 2,
         duration: 0.85,
-        stagger: 0.12,
+        stagger: 0.1,
         ease: "power3.out",
         clearProps: "transform,opacity,rotation"
       }, "-=0.7");
@@ -503,7 +503,24 @@
         });
       }
 
-      // 4. Projects Grid ScrollTrigger (Cascade Reveal with stagger: 0.1)
+      // 4. CI/CD Pipeline Section ScrollTrigger
+      const pipelineCard = document.querySelector(".pipeline-card");
+      if (pipelineCard) {
+        window.gsap.from(pipelineCard, {
+          scrollTrigger: {
+            trigger: pipelineCard,
+            start: "top 85%",
+            once: true
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "transform,opacity"
+        });
+      }
+
+      // 5. Projects Grid ScrollTrigger (Cascade Reveal with stagger: 0.1)
       const projectsGrid = document.querySelector(".projects-grid");
       const projectCards = document.querySelectorAll(".project-card");
       if (projectsGrid && projectCards.length > 0) {
@@ -522,7 +539,7 @@
         });
       }
 
-      // 5. Experience / Credentials Grid Cascade Reveal
+      // 6. Experience / Credentials Grid Cascade Reveal
       const expGrid = document.querySelector(".experience-grid");
       const expCards = document.querySelectorAll(".experience-card");
       if (expGrid && expCards.length > 0) {
@@ -535,6 +552,25 @@
           y: 50,
           opacity: 0,
           duration: 0.75,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "transform,opacity"
+        });
+      }
+
+      // 7. Communication Gateways Grid Cascade Reveal
+      const channelsGrid = document.querySelector(".channels-gateway-grid");
+      const channelTiles = document.querySelectorAll(".channel-tile");
+      if (channelsGrid && channelTiles.length > 0) {
+        window.gsap.from(channelTiles, {
+          scrollTrigger: {
+            trigger: channelsGrid,
+            start: "top 85%",
+            once: true
+          },
+          y: 35,
+          opacity: 0,
+          duration: 0.65,
           stagger: 0.1,
           ease: "power3.out",
           clearProps: "transform,opacity"
@@ -566,7 +602,213 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
-  // 5. SMOOTH ANCHOR NAVIGATION (LENIS INTEGRATED)
+  // 5. SPECULAR SPOTLIGHT BORDER GLOW ENGINE (LINEAR.APP STYLE)
+  // ═══════════════════════════════════════════════════════════════
+  function initSpotlightCards() {
+    const cards = document.querySelectorAll(".bento-card, .project-card, .channel-tile, .pipeline-card, .pipeline-stage, .experience-card");
+    if (!cards.length) return;
+
+    cards.forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+      }, { passive: true });
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 6. INTERACTIVE CI/CD GITOPS PIPELINE ENGINE
+  // ═══════════════════════════════════════════════════════════════
+  function initPipelineSimulator() {
+    const dispatchBtn = document.getElementById("dispatchPipelineBtn");
+    const resetBtn = document.getElementById("resetPipelineBtn");
+    const statusBadge = document.getElementById("pipelineStatus");
+    const timerDisplay = document.getElementById("pipelineTimer");
+    const consoleBody = document.getElementById("pipelineConsoleLogs");
+
+    if (!dispatchBtn || !consoleBody) return;
+
+    let isRunning = false;
+    let timerInterval = null;
+    let startTime = 0;
+
+    const stages = [
+      {
+        id: "stage-commit",
+        delay: 700,
+        runningLog: "[STEP 1/5] Git commit webhook received on main branch (SHA: 96adb24). Checking branch policies...",
+        passedLog: "✓ [PASS] Semantic linter & GPG signature verified (0 errors). Dispatching OCI builder worker."
+      },
+      {
+        id: "stage-build",
+        delay: 850,
+        runningLog: "[STEP 2/5] Compiling Docker multi-stage build 'uzair/cloud-app:v1.2.0'. Mounting layer cache...",
+        passedLog: "✓ [PASS] Docker multi-arch image built (linux/amd64, linux/arm64). Image size: 48.2MB."
+      },
+      {
+        id: "stage-scan",
+        delay: 800,
+        runningLog: "[STEP 3/5] Trivy scanning image layers for CVEs and SAST policy violations...",
+        passedLog: "✓ [PASS] Security Gate Passed: 0 CRITICAL, 0 HIGH, 0 MEDIUM vulnerabilities detected."
+      },
+      {
+        id: "stage-helm",
+        delay: 750,
+        runningLog: "[STEP 4/5] Packaging declarative Helm chart v1.2.0. Signing OCI artifact...",
+        passedLog: "✓ [PASS] OCI bundle pushed to Amazon ECR (ap-south-1). Digest: sha256:8f4c2190e31."
+      },
+      {
+        id: "stage-deploy",
+        delay: 950,
+        runningLog: "[STEP 5/5] ArgoCD detected target state diff. Initiating rolling update on EKS worker nodes...",
+        passedLog: "⚡ [COMPLETE] 3/3 Pod replicas Ready (100% InSync). Ingress controller routes active. Zero downtime verified!"
+      }
+    ];
+
+    function appendLog(text, type = "info") {
+      const p = document.createElement("p");
+      p.className = `log-line ${type}`;
+      p.textContent = text;
+      consoleBody.appendChild(p);
+      consoleBody.scrollTop = consoleBody.scrollHeight;
+    }
+
+    function resetPipeline() {
+      if (isRunning) return;
+      clearInterval(timerInterval);
+      if (timerDisplay) timerDisplay.textContent = "RUNTIME: 0.00s";
+
+      stages.forEach((s) => {
+        const el = document.getElementById(s.id);
+        if (el) {
+          el.classList.remove("running", "passed");
+          const stateEl = el.querySelector(".stage-state");
+          if (stateEl) stateEl.textContent = "STANDBY";
+        }
+      });
+
+      if (statusBadge) {
+        statusBadge.className = "pipeline-status-badge ready";
+        statusBadge.textContent = "STATUS: STANDBY";
+      }
+
+      consoleBody.innerHTML = '<p class="log-line info">[STANDBY] Runner ready on \'ap-south-1a-eks-runner\'. Click \'Dispatch Deployment Workflow\' to execute.</p>';
+      dispatchBtn.style.display = "inline-flex";
+      dispatchBtn.disabled = false;
+      if (resetBtn) resetBtn.style.display = "none";
+    }
+
+    async function runPipeline() {
+      if (isRunning) return;
+      isRunning = true;
+      dispatchBtn.disabled = true;
+      if (resetBtn) resetBtn.style.display = "none";
+
+      if (statusBadge) {
+        statusBadge.className = "pipeline-status-badge running";
+        statusBadge.textContent = "STATUS: RUNNING WORKFLOW...";
+      }
+
+      consoleBody.innerHTML = "";
+      startTime = Date.now();
+      timerInterval = setInterval(() => {
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+        if (timerDisplay) timerDisplay.textContent = `RUNTIME: ${elapsed}s`;
+      }, 50);
+
+      appendLog(`[DISPATCH] Workflow triggered by user on branch 'main'. Host: ap-south-1a`, "cyan");
+
+      for (let i = 0; i < stages.length; i++) {
+        const s = stages[i];
+        const el = document.getElementById(s.id);
+        const stateEl = el ? el.querySelector(".stage-state") : null;
+
+        if (el) {
+          el.classList.add("running");
+          if (stateEl) stateEl.textContent = "RUNNING...";
+        }
+
+        appendLog(s.runningLog, "amber");
+        await new Promise((resolve) => setTimeout(resolve, s.delay));
+
+        if (el) {
+          el.classList.remove("running");
+          el.classList.add("passed");
+          if (stateEl) stateEl.textContent = "PASSED ✓";
+        }
+
+        appendLog(s.passedLog, "green");
+      }
+
+      clearInterval(timerInterval);
+      const totalElapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+      if (timerDisplay) timerDisplay.textContent = `RUNTIME: ${totalElapsed}s`;
+
+      if (statusBadge) {
+        statusBadge.className = "pipeline-status-badge success";
+        statusBadge.textContent = "STATUS: DEPLOYED (200 OK)";
+      }
+
+      appendLog(`🎉 [PIPELINE SUCCESS] Production cluster updated in ${totalElapsed}s with 0 downtime.`, "green");
+
+      isRunning = false;
+      dispatchBtn.style.display = "none";
+      if (resetBtn) {
+        resetBtn.style.display = "inline-flex";
+        resetBtn.onclick = resetPipeline;
+      }
+    }
+
+    dispatchBtn.addEventListener("click", runPipeline);
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 7. DIRECT CHANNELS CLIPBOARD ENGINE
+  // ═══════════════════════════════════════════════════════════════
+  function initDirectChannelsClipboard() {
+    const copyBtns = document.querySelectorAll(".copy-email-btn");
+    copyBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const email = btn.getAttribute("data-email") || "uzairteeli123456789@gmail.com";
+        const copyText = btn.querySelector(".copy-text");
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(() => {
+            btn.classList.add("copied");
+            if (copyText) copyText.textContent = "Copied! ✓";
+            setTimeout(() => {
+              btn.classList.remove("copied");
+              if (copyText) copyText.textContent = "Copy";
+            }, 2200);
+          }).catch(() => fallbackCopy(email, btn, copyText));
+        } else {
+          fallbackCopy(email, btn, copyText);
+        }
+      });
+    });
+
+    function fallbackCopy(text, btn, copyText) {
+      const tempInput = document.createElement("input");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      btn.classList.add("copied");
+      if (copyText) copyText.textContent = "Copied! ✓";
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        if (copyText) copyText.textContent = "Copy";
+      }, 2200);
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 8. SMOOTH ANCHOR NAVIGATION (LENIS INTEGRATED)
   // ═══════════════════════════════════════════════════════════════
   function initSmoothAnchorScroll(lenis) {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -595,6 +837,9 @@
     initInteractiveTerminal();
     const lenis = initLenisSmoothScroll();
     initCinematicMotion();
+    initSpotlightCards();
+    initPipelineSimulator();
+    initDirectChannelsClipboard();
     initSmoothAnchorScroll(lenis);
   }
 

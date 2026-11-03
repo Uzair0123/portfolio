@@ -387,6 +387,53 @@ code, kbd, pre, samp {
   width: fit-content;
 }
 
+.hero-name-glamour {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0.35rem 0 0.45rem;
+  background: linear-gradient(
+    135deg,
+    #00F5A0 0%,
+    #38BDF8 28%,
+    #A855F7 58%,
+    #FF8A00 85%,
+    #00F5A0 100%
+  );
+  background-size: 260% 260%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shinyGradientShift 7s ease infinite;
+  filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.4));
+  display: inline-block;
+  will-change: background-position, filter;
+}
+
+@keyframes shinyGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-tagline-creed {
+  font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+}
+
+.hero-role-sub {
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-k8s);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.65rem;
+}
+
 .hero-identity h1 {
   font-size: clamp(2.2rem, 4.2vw, 3.8rem);
   color: var(--text-primary);
@@ -699,6 +746,7 @@ code, kbd, pre, samp {
 /* Domain Highlights & Specular Hover Glows */
 #skill-kubernetes {
   border-top: 2px solid var(--accent-k8s);
+  --card-spotlight-color: rgba(56, 189, 248, 0.55);
 }
 #skill-kubernetes .card-badge {
   color: var(--accent-k8s);
@@ -710,6 +758,7 @@ code, kbd, pre, samp {
 
 #skill-docker {
   border-top: 2px solid var(--accent-k8s);
+  --card-spotlight-color: rgba(56, 189, 248, 0.55);
 }
 #skill-docker .card-badge {
   color: var(--accent-k8s);
@@ -720,18 +769,20 @@ code, kbd, pre, samp {
 }
 
 #skill-cicd {
-  border-top: 2px solid var(--accent-tf);
+  border-top: 2px solid var(--accent-bash);
+  --card-spotlight-color: rgba(0, 245, 160, 0.55);
 }
 #skill-cicd .card-badge {
-  color: var(--accent-tf);
+  color: var(--accent-bash);
 }
 #skill-cicd:hover {
-  border-color: var(--accent-tf);
-  box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.4);
+  border-color: var(--accent-bash);
+  box-shadow: 0 12px 30px -8px rgba(0, 245, 160, 0.4);
 }
 
 #skill-aws-cloud {
   border-top: 2px solid var(--accent-aws);
+  --card-spotlight-color: rgba(255, 138, 0, 0.55);
 }
 #skill-aws-cloud .card-badge {
   color: var(--accent-aws);
@@ -743,6 +794,7 @@ code, kbd, pre, samp {
 
 #skill-terraform {
   border-top: 2px solid var(--accent-tf);
+  --card-spotlight-color: rgba(168, 85, 247, 0.55);
 }
 #skill-terraform .card-badge {
   color: var(--accent-tf);
@@ -754,6 +806,7 @@ code, kbd, pre, samp {
 
 #skill-linux {
   border-top: 2px solid var(--accent-bash);
+  --card-spotlight-color: rgba(0, 245, 160, 0.55);
 }
 #skill-linux .card-badge {
   color: var(--accent-bash);
@@ -765,6 +818,7 @@ code, kbd, pre, samp {
 
 #skill-networking {
   border-top: 2px solid var(--accent-k8s);
+  --card-spotlight-color: rgba(56, 189, 248, 0.55);
 }
 #skill-networking .card-badge {
   color: var(--accent-k8s);
@@ -776,6 +830,7 @@ code, kbd, pre, samp {
 
 #skill-python-bash {
   border-top: 2px solid var(--accent-bash);
+  --card-spotlight-color: rgba(0, 245, 160, 0.55);
 }
 #skill-python-bash .card-badge {
   color: var(--accent-bash);
@@ -784,6 +839,285 @@ code, kbd, pre, samp {
   border-color: var(--accent-bash);
   box-shadow: 0 12px 30px -8px rgba(0, 245, 160, 0.35);
 }
+
+/* --------------------------------------------------------------------------
+   8.5. Specular Spotlight Border Glow (Linear / Vercel Style)
+   -------------------------------------------------------------------------- */
+.bento-card,
+.project-card,
+.channel-tile,
+.pipeline-card,
+.experience-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card > *,
+.project-card > *,
+.channel-tile > *,
+.pipeline-card > *,
+.experience-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.bento-card::before,
+.project-card::before,
+.channel-tile::before,
+.pipeline-card::before,
+.experience-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    380px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    var(--card-spotlight-color, rgba(56, 189, 248, 0.45)),
+    transparent 65%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.bento-card:hover::before,
+.project-card:hover::before,
+.channel-tile:hover::before,
+.pipeline-card:hover::before,
+.experience-card:hover::before {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   8.6. Automated CI/CD Pipeline Engine (Live DAG & Stream)
+   -------------------------------------------------------------------------- */
+.pipeline-section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pipeline-card {
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.65rem;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.8);
+}
+
+.pipeline-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pipeline-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.pipeline-badge-meta strong.accent-text {
+  color: var(--accent-bash);
+}
+
+.pipeline-status-badge {
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  transition: var(--transition-smooth);
+}
+
+.pipeline-status-badge.ready {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent-k8s);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.pipeline-status-badge.running {
+  background: rgba(255, 138, 0, 0.15);
+  color: var(--accent-aws);
+  border: 1px solid rgba(255, 138, 0, 0.4);
+  animation: blink 1.2s infinite;
+}
+
+.pipeline-status-badge.success {
+  background: rgba(0, 245, 160, 0.15);
+  color: var(--accent-bash);
+  border: 1px solid rgba(0, 245, 160, 0.4);
+  box-shadow: 0 0 15px rgba(0, 245, 160, 0.35);
+}
+
+.pipeline-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.pipeline-dag {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.85rem;
+  align-items: stretch;
+  padding: 0.5rem 0;
+}
+
+.pipeline-stage {
+  background: rgba(11, 17, 33, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 1.15rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.45rem;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.pipeline-stage .stage-icon {
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.pipeline-stage .stage-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.pipeline-stage h4 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 700;
+}
+
+.pipeline-stage p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.pipeline-stage .stage-state {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-dim);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--transition-smooth);
+  margin-top: 0.25rem;
+}
+
+.pipeline-stage.running {
+  border-color: var(--accent-k8s);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+}
+.pipeline-stage.running .stage-state {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--accent-k8s);
+  border-color: var(--accent-k8s);
+}
+
+.pipeline-stage.passed {
+  border-color: var(--accent-bash);
+  box-shadow: 0 0 16px rgba(0, 245, 160, 0.35);
+}
+.pipeline-stage.passed .stage-state {
+  background: rgba(0, 245, 160, 0.2);
+  color: var(--accent-bash);
+  border-color: var(--accent-bash);
+}
+
+.pipeline-connector {
+  display: none;
+}
+
+.pipeline-console {
+  background: #04070D;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.console-header {
+  background: #0D1525;
+  padding: 0.55rem 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.console-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.console-title {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.console-timer {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-bash);
+  font-weight: 700;
+}
+
+.console-body {
+  padding: 1rem 1.15rem;
+  min-height: 120px;
+  max-height: 220px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.log-line {
+  margin: 0;
+  word-break: break-word;
+}
+.log-line.info { color: var(--text-muted); }
+.log-line.cyan { color: var(--accent-k8s); font-weight: 600; }
+.log-line.amber { color: var(--accent-aws); }
+.log-line.green { color: var(--accent-bash); font-weight: 700; }
 
 /* --------------------------------------------------------------------------
    9. Projects Section (Card Layout CSS Grid)
@@ -1111,29 +1445,170 @@ code, kbd, pre, samp {
   font-size: 1.25rem;
 }
 
-.channels-list {
-  list-style: none;
-  padding: 0;
+.channels-header {
+  margin-bottom: 0.5rem;
+}
+
+.channels-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-bash);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.channels-gateway-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.15rem;
+}
+
+.channel-tile {
+  background: rgba(11, 17, 33, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
-  font-size: 0.95rem;
-  font-family: var(--font-mono);
-}
-
-.channels-list strong {
-  display: inline-block;
-  min-width: 90px;
-  color: var(--text-muted);
-}
-
-.channels-list a {
-  color: var(--accent-bash);
+  justify-content: space-between;
+  gap: 0.85rem;
   transition: var(--transition-smooth);
 }
 
-.channels-list a:hover {
-  text-shadow: 0 0 10px rgba(0, 245, 160, 0.5);
+.channel-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.8);
+}
+
+.channel-tile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.channel-protocol {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.protocol-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.protocol-dot.dot-green { background: #00F5A0; box-shadow: 0 0 8px #00F5A0; }
+.protocol-dot.dot-cyan { background: #38BDF8; box-shadow: 0 0 8px #38BDF8; }
+.protocol-dot.dot-purple { background: #A855F7; box-shadow: 0 0 8px #A855F7; }
+.protocol-dot.dot-amber { background: #FF8A00; box-shadow: 0 0 8px #FF8A00; }
+
+.channel-status-pill {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--accent-bash);
+  background: rgba(0, 245, 160, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.channel-tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.channel-value {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.channel-value.email-value {
+  font-size: 0.88rem;
+}
+
+.channel-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.channel-tile-action {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.channel-tile-action.dual-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.channel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  padding: 0.45rem 0.85rem;
+}
+
+.arrow-icon {
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.channel-btn:hover .arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+.copy-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-btn);
+  transition: var(--transition-smooth);
+}
+
+.copy-email-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-bash);
+  background: rgba(0, 245, 160, 0.08);
+}
+
+.copy-email-btn.copied {
+  color: var(--accent-bash);
+  border-color: var(--accent-bash);
+  background: rgba(0, 245, 160, 0.15);
+}
+
+.status-indicator-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-bash);
 }
 
 /* --------------------------------------------------------------------------
@@ -1213,6 +1688,10 @@ code, kbd, pre, samp {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .pipeline-dag {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .nav-status {
@@ -1323,6 +1802,25 @@ code, kbd, pre, samp {
     gap: 1.5rem;
   }
 
+  .pipeline-dag {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .pipeline-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .channels-gateway-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-name-glamour {
+    font-size: clamp(2.3rem, 8.5vw, 3.6rem);
+    text-align: center;
+  }
+
   .terminal-body {
     padding: 1.15rem;
     min-height: 210px;
@@ -1410,14 +1908,18 @@ html.lenis, html.lenis body {
 .hero-avatar-wrap,
 .hero-avatar,
 .hero-name-badge,
-.hero-identity h1,
-.hero-identity h2,
+.hero-name-glamour,
+.hero-tagline-creed,
+.hero-role-sub,
 .hero-bio,
 .hero-actions,
 .terminal-container,
 .terminal-1click-pills,
 .bento-card,
 .project-card,
+.pipeline-card,
+.pipeline-stage,
+.channel-tile,
 .experience-card {
   will-change: transform, opacity;
 }

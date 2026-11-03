@@ -41,6 +41,7 @@
       <div class="nav-links">
         <a href="#about" class="nav-link">~/about</a>
         <a href="#skills" class="nav-link">~/skills</a>
+        <a href="#pipeline" class="nav-link">~/pipeline</a>
         <a href="#projects" class="nav-link">~/projects</a>
         <a href="#experience" class="nav-link">~/experience</a>
         <a href="#contact" class="nav-link">~/contact</a>
@@ -63,8 +64,9 @@
             <span class="status-dot"></span>
             <span>UZAIR SULTAN // CLOUD ARCHITECT</span>
           </div>
-          <h1>I Build. I Automate. I Deploy.</h1>
-          <h2>Linux · Cloud · DevOps · Infrastructure</h2>
+          <h1 class="hero-name-glamour">UZAIR SULTAN</h1>
+          <p class="hero-tagline-creed">I Build. I Automate. I Deploy.</p>
+          <h2 class="hero-role-sub">Linux · Cloud · DevOps · Infrastructure</h2>
           <p class="hero-bio">
             From Linux systems to cloud infrastructure, I turn code into automated, production-ready deployments.
           </p>
@@ -219,7 +221,129 @@
       </div>
     </section>
 
-    <!-- ==================== 4. PROJECTS SECTION (CARD LAYOUT) ==================== -->
+    <!-- ==================== 4. CI/CD PIPELINE ENGINE (LIVE DAG) ==================== -->
+    <section id="pipeline" class="pipeline-section">
+      <div class="container">
+        <header class="section-header">
+          <div class="section-tag-badge">GITOPS AUTOMATION</div>
+          <h2>Automated CI/CD Pipeline Engine</h2>
+          <p class="section-subtitle">
+            Interactive Continuous Deployment DAG: Watch automated linting, multi-stage Docker compilation, security gates, and zero-downtime rollouts execute in real-time.
+          </p>
+        </header>
+
+        <div class="pipeline-card" style="--card-spotlight-color: rgba(0, 245, 160, 0.45);">
+          <!-- Control Header -->
+          <div class="pipeline-controls">
+            <div class="pipeline-info">
+              <span class="pipeline-badge-meta">BRANCH: <strong class="accent-text">main</strong></span>
+              <span class="pipeline-badge-meta">TARGET: <strong class="accent-text">aws-eks-cluster-prod</strong></span>
+              <span class="pipeline-status-badge ready" id="pipelineStatus">STATUS: STANDBY</span>
+            </div>
+            <div class="pipeline-actions">
+              <button class="btn btn-primary btn-sm" id="dispatchPipelineBtn">
+                <span class="btn-icon">⚡</span> Dispatch Deployment Workflow
+              </button>
+              <button class="btn btn-secondary btn-sm" id="resetPipelineBtn" style="display:none;">
+                ↺ Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- DAG Stage Graph -->
+          <div class="pipeline-dag" id="pipelineDag">
+            <!-- Stage 1: Commit -->
+            <div class="pipeline-stage" id="stage-commit" data-step="1">
+              <div class="stage-icon">⚡</div>
+              <div class="stage-meta">
+                <span class="stage-tag">STAGE 01</span>
+                <h4>Git Trigger</h4>
+                <p>SHA: <code>96adb24</code></p>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-connector">
+              <div class="connector-line"><span class="connector-pulse"></span></div>
+            </div>
+
+            <!-- Stage 2: Docker Build -->
+            <div class="pipeline-stage" id="stage-build" data-step="2">
+              <div class="stage-icon">🐳</div>
+              <div class="stage-meta">
+                <span class="stage-tag">STAGE 02</span>
+                <h4>OCI Build</h4>
+                <p>Multi-stage Cache</p>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-connector">
+              <div class="connector-line"><span class="connector-pulse"></span></div>
+            </div>
+
+            <!-- Stage 3: Security Scan -->
+            <div class="pipeline-stage" id="stage-scan" data-step="3">
+              <div class="stage-icon">🛡️</div>
+              <div class="stage-meta">
+                <span class="stage-tag">STAGE 03</span>
+                <h4>Trivy Scan</h4>
+                <p>0 CVEs / Hardened</p>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-connector">
+              <div class="connector-line"><span class="connector-pulse"></span></div>
+            </div>
+
+            <!-- Stage 4: Helm Artifact -->
+            <div class="pipeline-stage" id="stage-helm" data-step="4">
+              <div class="stage-icon">📦</div>
+              <div class="stage-meta">
+                <span class="stage-tag">STAGE 04</span>
+                <h4>Helm Package</h4>
+                <p>ECR Registry Push</p>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-connector">
+              <div class="connector-line"><span class="connector-pulse"></span></div>
+            </div>
+
+            <!-- Stage 5: EKS Deploy -->
+            <div class="pipeline-stage" id="stage-deploy" data-step="5">
+              <div class="stage-icon">☸️</div>
+              <div class="stage-meta">
+                <span class="stage-tag">STAGE 05</span>
+                <h4>EKS GitOps</h4>
+                <p>Zero-Downtime Rollout</p>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live ANSI Execution Terminal -->
+          <div class="pipeline-console">
+            <div class="console-header">
+              <div class="console-dots">
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-yellow"></span>
+                <span class="terminal-dot dot-green"></span>
+              </div>
+              <span class="console-title">workflow-runner.log — bash</span>
+              <span class="console-timer" id="pipelineTimer">RUNTIME: 0.00s</span>
+            </div>
+            <div class="console-body" id="pipelineConsoleLogs">
+              <p class="log-line info">[STANDBY] Runner 'ap-south-1a-eks-runner' initialized. Click 'Dispatch Deployment Workflow' to trigger automated rollout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. PROJECTS SECTION (CARD LAYOUT) ==================== -->
     <section id="projects" class="projects-section">
       <div class="container">
         <header class="section-header">
@@ -491,25 +615,100 @@
             <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
 
-          <!-- Direct Channels -->
+          <!-- Advanced Direct Channels Hub -->
           <div class="contact-channels">
-            <h3>Direct Channels</h3>
-            <p>Connect directly via messaging or review code repositories:</p>
-            
-            <ul class="channels-list">
-              <li>
-                <strong>WhatsApp:</strong> 
-                <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20am%20reviewing%20your%20DevOps%20portfolio!" target="_blank" rel="noopener noreferrer">+91 7889446114</a>
-              </li>
-              <li>
-                <strong>Email:</strong> 
-                <a href="mailto:uzairteeli123456789@gmail.com">uzairteeli123456789@gmail.com</a>
-              </li>
-              <li>
-                <strong>GitHub:</strong> 
-                <a href="https://github.com/Uzair0123" target="_blank" rel="noopener noreferrer">github.com/Uzair0123</a>
-              </li>
-            </ul>
+            <div class="channels-header">
+              <span class="channels-badge">TELEMETRY INSYNC</span>
+              <h3>Infrastructure Gateways</h3>
+              <p>Direct communication bridges for cloud consulting, engineering roles, and open source:</p>
+            </div>
+
+            <div class="channels-gateway-grid">
+              <!-- Channel 1: WhatsApp -->
+              <div class="channel-tile" id="channel-whatsapp" style="--card-spotlight-color: rgba(0, 245, 160, 0.55);">
+                <div class="channel-tile-top">
+                  <div class="channel-protocol">
+                    <span class="protocol-dot dot-green"></span>
+                    <span>PROTOCOL: E2EE WHATSAPP</span>
+                  </div>
+                  <span class="channel-status-pill">ACTIVE DISPATCH</span>
+                </div>
+                <div class="channel-tile-body">
+                  <div class="channel-value">+91 7889446114</div>
+                  <p class="channel-desc">End-to-end encrypted direct messaging for immediate architecture &amp; project inquiries.</p>
+                </div>
+                <div class="channel-tile-action">
+                  <a href="https://wa.me/917889446114?text=Hi%20Uzair,%20I%20am%20reviewing%20your%20DevOps%20portfolio!" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm channel-btn">
+                    <span>Chat on WhatsApp</span>
+                    <span class="arrow-icon">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Channel 2: Email -->
+              <div class="channel-tile" id="channel-email" style="--card-spotlight-color: rgba(56, 189, 248, 0.55);">
+                <div class="channel-tile-top">
+                  <div class="channel-protocol">
+                    <span class="protocol-dot dot-cyan"></span>
+                    <span>PROTOCOL: SMTP / SECURE MAIL</span>
+                  </div>
+                  <span class="channel-status-pill">FAST RESPONSE</span>
+                </div>
+                <div class="channel-tile-body">
+                  <div class="channel-value email-value">uzairteeli123456789@gmail.com</div>
+                  <p class="channel-desc">Official mailbox for enterprise opportunities, contracts, and engineering RFPs.</p>
+                </div>
+                <div class="channel-tile-action dual-action">
+                  <a href="mailto:uzairteeli123456789@gmail.com" class="btn btn-primary btn-sm channel-btn">
+                    <span>Send Mail</span>
+                    <span class="arrow-icon">↗</span>
+                  </a>
+                  <button type="button" class="btn btn-secondary btn-sm copy-email-btn" data-email="uzairteeli123456789@gmail.com">
+                    <span class="copy-text">Copy</span>
+                    <span class="copy-icon">📋</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Channel 3: GitHub -->
+              <div class="channel-tile" id="channel-github" style="--card-spotlight-color: rgba(168, 85, 247, 0.55);">
+                <div class="channel-tile-top">
+                  <div class="channel-protocol">
+                    <span class="protocol-dot dot-purple"></span>
+                    <span>VCS: GITHUB REMOTE</span>
+                  </div>
+                  <span class="channel-status-pill">PUBLIC REPOS</span>
+                </div>
+                <div class="channel-tile-body">
+                  <div class="channel-value">github.com/Uzair0123</div>
+                  <p class="channel-desc">Infrastructure as Code configurations, Docker microservices, and automated workflows.</p>
+                </div>
+                <div class="channel-tile-action">
+                  <a href="https://github.com/Uzair0123" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm channel-btn">
+                    <span>Inspect Repositories</span>
+                    <span class="arrow-icon">↗</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Channel 4: Cluster Location -->
+              <div class="channel-tile" id="channel-location" style="--card-spotlight-color: rgba(255, 138, 0, 0.55);">
+                <div class="channel-tile-top">
+                  <div class="channel-protocol">
+                    <span class="protocol-dot dot-amber"></span>
+                    <span>REGION: AP-SOUTH-1 (INDIA)</span>
+                  </div>
+                  <span class="channel-status-pill">OPEN TO RELOCATE</span>
+                </div>
+                <div class="channel-tile-body">
+                  <div class="channel-value">Srinagar, J&amp;K, India</div>
+                  <p class="channel-desc">Available for Remote, Hybrid, or On-site worldwide Cloud &amp; DevOps deployments.</p>
+                </div>
+                <div class="channel-tile-action">
+                  <span class="status-indicator-badge">🟢 AVAILABLE FOR IMMEDIATE ROLE</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
