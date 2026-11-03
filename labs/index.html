@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Simulators &amp; Systems Cockpit — Uzair Sultan</title>
+  <meta name="description" content="Interactive Kubernetes Horizontal Pod Autoscaler (HPA) chaos sandbox, live Linux htop systems monitor, and GitOps CI/CD pipeline simulators by Uzair Sultan.">
+  <meta name="theme-color" content="#030508">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="DevOps Simulators &amp; Systems Cockpit — Uzair Sultan">
+  <meta property="og:description" content="Interactive Kubernetes HPA chaos sandbox, real-time Linux htop cockpit, and automated CI/CD pipeline simulator.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="../assets/css/style.css?v=2.8.0">
+</head>
+<body class="labs-body">
+
+  <!-- ==================== BACKGROUND LIQUID MESH UNIVERSE ==================== -->
+  <div class="liquid-bg-container" aria-hidden="true">
+    <div class="liquid-mesh-blob blob-emerald"></div>
+    <div class="liquid-mesh-blob blob-cyan"></div>
+    <div class="liquid-mesh-blob blob-violet"></div>
+    <div class="liquid-mesh-blob blob-amber"></div>
+    <div class="liquid-mesh-blob blob-center"></div>
+    <canvas id="network-bg"></canvas>
+  </div>
+
+  <!-- ==================== STATUS BAR / HUD NAV ==================== -->
+  <nav class="status-nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none;">
+          <img src="../assets/images/avatar-3d.png" alt="Uzair Avatar" class="nav-avatar">
+          <span class="prompt-user">uzair</span><span class="prompt-host">@cloud-node-01:~/labs$</span>
+        </a>
+      </div>
+
+      <div class="nav-status">
+        <span class="status-item"><span class="status-dot"></span> SIMULATOR: LIVE</span>
+        <span class="status-item">HPA: ARMED</span>
+        <span class="status-item">REGION: ap-south-1</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="../" class="nav-link">~/hub</a>
+        <a href="../architecture/" class="nav-link">~/architecture</a>
+        <a href="./" class="nav-link active">~/labs</a>
+        <a href="../#contact" class="nav-link">~/contact</a>
+        <a href="../" class="btn btn-sm">Return to Hub ←</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="labs-page">
+    <div class="container">
+
+      <!-- ==================== PAGE HEADER HUD ==================== -->
+      <header class="arch-header-hud" style="margin-bottom: 2rem;">
+        <div class="arch-breadcrumbs">
+          <a href="../">~/mission-control</a>
+          <span>/</span>
+          <a href="../architecture/">systems-architecture</a>
+          <span>/</span>
+          <span style="color: var(--accent-bash);">devops-simulators-lab</span>
+        </div>
+
+        <div class="arch-title-wrap">
+          <div class="section-tag-badge" style="margin-bottom: 0.6rem;">LIVE SYSTEMS ENGINEERING COCKPIT</div>
+          <h1>Interactive DevOps &amp; Chaos Engineering Labs</h1>
+          <p class="arch-lead-subtitle">
+            Hands-on systems sandboxes to test distributed cluster autoscaling, simulate hardware node outages, and observe real-time Linux kernel telemetry.
+          </p>
+        </div>
+      </header>
+
+      <!-- ==================== SIMULATOR 1: KUBERNETES HPA & CHAOS MONKEY ==================== -->
+      <section class="labs-section-block">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <div class="section-tag-badge">AUTONOMOUS CLOUD RESILIENCE</div>
+          <h2>Kubernetes HPA &amp; Chaos Monkey Autoscaler</h2>
+          <p class="section-subtitle">
+            Inject traffic spikes up to 10,000 req/s to trigger horizontal pod autoscaling (HPA), or simulate sudden node hardware failures to watch Kubernetes automatically evict and self-heal pods with zero dropped connections.
+          </p>
+        </header>
+
+        <div class="k8s-sim-card">
+          <!-- Controls Header -->
+          <div class="k8s-sim-controls">
+            <div class="k8s-action-group">
+              <button type="button" class="k8s-btn inject" id="k8sBtnInject">
+                <span>⚡</span> Inject 10,000 RPS Traffic Spike
+              </button>
+              <button type="button" class="k8s-btn drain" id="k8sBtnDrain">
+                <span>💥</span> Drain Worker-02 (Chaos Monkey)
+              </button>
+              <button type="button" class="k8s-btn reset" id="k8sBtnReset">
+                <span>↺</span> Reset Cluster
+              </button>
+            </div>
+            <span class="k8s-status-badge ready" id="k8sStatusBadge">CLUSTER STANDBY: 3 REPLICAS INSYNC</span>
+          </div>
+
+          <!-- Telemetry Banner -->
+          <div class="k8s-telemetry-banner">
+            <div class="k8s-metric-tile">
+              <span class="k8s-metric-title">AGGREGATE CLUSTER CPU</span>
+              <span class="k8s-metric-val" id="k8sCpuText">18%</span>
+              <div class="k8s-gauge-track">
+                <div class="k8s-gauge-fill" id="k8sCpuGauge" style="width: 18%;"></div>
+              </div>
+            </div>
+
+            <div class="k8s-metric-tile">
+              <span class="k8s-metric-title">INGRESS THROUGHPUT</span>
+              <span class="k8s-metric-val" id="k8sRpsText" style="color: var(--accent-cyan);">1,200 req/s</span>
+            </div>
+
+            <div class="k8s-metric-tile">
+              <span class="k8s-metric-title">ACTIVE REPLICAS / DESIRED</span>
+              <span class="k8s-metric-val" id="k8sReplicasText" style="color: var(--accent-bash);">3 / 3 Ready</span>
+            </div>
+
+            <div class="k8s-metric-tile">
+              <span class="k8s-metric-title">HPA SCALE POLICY</span>
+              <span class="k8s-metric-val" style="font-size: 0.85rem; color: #CBD5E1;">CPU &gt; 70% • Min: 3 / Max: 12</span>
+            </div>
+          </div>
+
+          <!-- Worker Nodes Topology -->
+          <div class="k8s-cluster-nodes-wrap">
+            <!-- Node 1 -->
+            <div class="k8s-worker-node" id="k8sWorker1Node">
+              <div class="k8s-node-header">
+                <span class="k8s-node-title"><span>💻</span> worker-node-01 (ap-south-1a)</span>
+                <span class="node-badge ready">Ready (v1.30.2)</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);">
+                Capacity: 4 vCPU • 16GB RAM • Ingress Route: InSync
+              </div>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="k8s-worker-node" id="k8sWorker2Node">
+              <div class="k8s-node-header">
+                <span class="k8s-node-title"><span>💻</span> worker-node-02 (ap-south-1b)</span>
+                <span class="node-badge ready" id="k8sWorker2Status">Ready (v1.30.2)</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);">
+                Capacity: 4 vCPU • 16GB RAM • Ingress Route: InSync
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Pod Matrix -->
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight:700; color:var(--text-muted);">
+              POD REPLICA POOL (api-gateway deployment):
+            </span>
+            <div class="k8s-pods-grid" id="k8sPodsGrid">
+              <!-- Initial 3 Pods -->
+              <div class="k8s-pod-card healthy" id="pod-1" data-node="worker-01">
+                <div class="pod-card-header">
+                  <span class="pod-pulse-dot ready"></span>
+                  <span class="pod-name">pod/api-gateway-7f9a1</span>
+                </div>
+                <div class="pod-card-meta">
+                  <span class="pod-host">worker-01</span>
+                  <span class="pod-status-text">Running (Ready 1/1)</span>
+                </div>
+              </div>
+
+              <div class="k8s-pod-card healthy" id="pod-2" data-node="worker-02">
+                <div class="pod-card-header">
+                  <span class="pod-pulse-dot ready"></span>
+                  <span class="pod-name">pod/api-gateway-7f9a2</span>
+                </div>
+                <div class="pod-card-meta">
+                  <span class="pod-host">worker-02</span>
+                  <span class="pod-status-text">Running (Ready 1/1)</span>
+                </div>
+              </div>
+
+              <div class="k8s-pod-card healthy" id="pod-3" data-node="worker-01">
+                <div class="pod-card-header">
+                  <span class="pod-pulse-dot ready"></span>
+                  <span class="pod-name">pod/api-gateway-7f9a3</span>
+                </div>
+                <div class="pod-card-meta">
+                  <span class="pod-host">worker-01</span>
+                  <span class="pod-status-text">Running (Ready 1/1)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Event Log Stream -->
+          <div style="display:flex; flex-direction:column; gap:0.4rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.72rem; color:var(--text-dim);">
+              KUBE-EVENT LOG STREAM:
+            </span>
+            <div class="k8s-console-logs" id="k8sConsoleLogs">
+              <p class="k8s-log-line cyan">[SYSTEM] Kubernetes cluster v1.30.2 initialized. 3 pods assigned across 2 worker nodes.</p>
+              <p class="k8s-log-line green">[HPA] Target policy active: averageUtilization: 70%. Ready for traffic simulation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SIMULATOR 2: LIVE LINUX HTOP SYSTEMS COCKPIT ==================== -->
+      <section class="labs-section-block">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <div class="section-tag-badge">KERNEL &amp; PROCESS TELEMETRY</div>
+          <h2>Live Linux Systems Performance Cockpit</h2>
+          <p class="section-subtitle">
+            Real-time interactive terminal emulation observing 8 CPU core runqueues, memory buffers, and active Linux container daemons with live 650ms stream telemetry.
+          </p>
+        </header>
+
+        <div class="htop-cockpit-card" id="htopCockpit">
+          <!-- Titlebar -->
+          <div class="htop-titlebar">
+            <div class="htop-dots">
+              <span class="htop-dot red"></span>
+              <span class="htop-dot amber"></span>
+              <span class="htop-dot green"></span>
+            </div>
+            <span class="htop-titlebar-title">cloud-node-01 — htop 3.3.0 — Linux 6.11.2-zen1 (x86_64)</span>
+            <button type="button" class="btn btn-secondary btn-sm" id="htopToggleBtn" style="font-size:0.7rem; padding:0.2rem 0.6rem;">
+              Pause Telemetry ⏸
+            </button>
+          </div>
+
+          <!-- Body -->
+          <div class="htop-body">
+            <!-- Meters Grid -->
+            <div class="htop-meters-grid">
+              <!-- Left Column: Cores 1-4 & Memory -->
+              <div class="htop-meter-col">
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">1</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar1" style="width: 28%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal1">28%</span>
+                </div>
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">2</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar2" style="width: 42%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal2">42%</span>
+                </div>
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">3</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar3" style="width: 19%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal3">19%</span>
+                </div>
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">4</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar4" style="width: 36%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal4">36%</span>
+                </div>
+                <div class="htop-meter-row" style="margin-top: 0.4rem;">
+                  <span class="htop-meter-label" style="color:#00F5A0; font-size:0.68rem; width:auto; padding-right:4px;">Mem</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopMemBar" style="width: 26%; background:#00F5A0;"></div></div>
+                  <span class="htop-meter-val" id="htopMemMeter" style="width:90px; font-size:0.7rem;">4.18G / 16.0G</span>
+                </div>
+              </div>
+
+              <!-- Right Column: Cores 5-8 & System Info -->
+              <div class="htop-meter-col">
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">5</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar5" style="width: 52%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal5">52%</span>
+                </div>
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">6</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar6" style="width: 24%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal6">24%</span>
+                </div>
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">7</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar7" style="width: 38%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal7">38%</span>
+                </div>
+                <div class="htop-meter-row">
+                  <span class="htop-meter-label">8</span>
+                  <div class="htop-meter-track"><div class="htop-meter-fill" id="htopCoreBar8" style="width: 45%;"></div></div>
+                  <span class="htop-meter-val" id="htopCoreVal8">45%</span>
+                </div>
+                <div style="font-size:0.72rem; color:var(--text-dim); margin-top:0.4rem; display:flex; justify-content:space-between;">
+                  <span>Tasks: <strong style="color:#FFF;">142 total, 2 running</strong></span>
+                  <span>Load average: <strong style="color:#00F5A0;" id="htopLoadAvg">0.38, 0.42, 0.35</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Process Table -->
+            <div class="htop-table-wrap">
+              <table class="htop-table">
+                <thead>
+                  <tr>
+                    <th>PID</th>
+                    <th>USER</th>
+                    <th>PRI</th>
+                    <th>NI</th>
+                    <th>VIRT</th>
+                    <th>RES</th>
+                    <th>S</th>
+                    <th>CPU%</th>
+                    <th>MEM%</th>
+                    <th>TIME+</th>
+                    <th>COMMAND</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1042</td>
+                    <td>root</td>
+                    <td>20</td>
+                    <td>0</td>
+                    <td>2.1G</td>
+                    <td>142M</td>
+                    <td style="color:#00F5A0;">S</td>
+                    <td>2.4</td>
+                    <td>0.9</td>
+                    <td>42:15.18</td>
+                    <td class="htop-proc-name">/usr/bin/containerd</td>
+                  </tr>
+                  <tr>
+                    <td>1184</td>
+                    <td>root</td>
+                    <td>20</td>
+                    <td>0</td>
+                    <td>3.4G</td>
+                    <td>285M</td>
+                    <td style="color:#00F5A0;">S</td>
+                    <td>3.8</td>
+                    <td>1.8</td>
+                    <td>68:40.12</td>
+                    <td class="htop-proc-name">/usr/bin/kubelet --config=/etc/kubernetes/kubelet.conf</td>
+                  </tr>
+                  <tr>
+                    <td>1390</td>
+                    <td>root</td>
+                    <td>20</td>
+                    <td>0</td>
+                    <td>1.8G</td>
+                    <td>94M</td>
+                    <td style="color:#00F5A0;">S</td>
+                    <td>1.1</td>
+                    <td>0.6</td>
+                    <td>14:02.95</td>
+                    <td class="htop-proc-name">/usr/bin/dockerd -H fd:// --containerd=/run/containerd.sock</td>
+                  </tr>
+                  <tr>
+                    <td>2104</td>
+                    <td>10001</td>
+                    <td>20</td>
+                    <td>0</td>
+                    <td>512M</td>
+                    <td>48M</td>
+                    <td style="color:#00F5A0;">S</td>
+                    <td>1.8</td>
+                    <td>0.3</td>
+                    <td>09:12.44</td>
+                    <td class="htop-proc-name">/app/gateway --port=8080 --metrics=true</td>
+                  </tr>
+                  <tr>
+                    <td>2480</td>
+                    <td>nginx</td>
+                    <td>20</td>
+                    <td>0</td>
+                    <td>128M</td>
+                    <td>24M</td>
+                    <td style="color:#00F5A0;">S</td>
+                    <td>0.7</td>
+                    <td>0.2</td>
+                    <td>03:44.20</td>
+                    <td class="htop-proc-name">nginx: worker process</td>
+                  </tr>
+                  <tr>
+                    <td>3200</td>
+                    <td>uzair</td>
+                    <td>20</td>
+                    <td>0</td>
+                    <td>64M</td>
+                    <td>12M</td>
+                    <td style="color:#38BDF8;">R</td>
+                    <td>0.2</td>
+                    <td>0.1</td>
+                    <td>00:45.10</td>
+                    <td class="htop-proc-name">sys-inspect --interval=5s --daemon</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Footer Function Keys -->
+          <div class="htop-footer">
+            <span class="htop-fkey"><strong>F1</strong> Help</span>
+            <span class="htop-fkey"><strong>F2</strong> Setup</span>
+            <span class="htop-fkey"><strong>F3</strong> Search</span>
+            <span class="htop-fkey"><strong>F4</strong> Filter</span>
+            <span class="htop-fkey"><strong>F5</strong> Tree</span>
+            <span class="htop-fkey"><strong>F6</strong> SortBy</span>
+            <span class="htop-fkey"><strong>F9</strong> Kill</span>
+            <span class="htop-fkey"><strong>F10</strong> Quit</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SIMULATOR 3: CI/CD PIPELINE SIMULATOR ==================== -->
+      <section class="labs-section-block">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <div class="section-tag-badge">AUTOMATED GITOPS DISPATCH</div>
+          <h2>Interactive CI/CD Deployment Pipeline DAG</h2>
+          <p class="section-subtitle">
+            Execute a live zero-downtime containerized deployment workflow: observe semantic versioning, multi-stage Docker compilation, security gating, and rolling EKS cluster synchronization in real-time.
+          </p>
+        </header>
+
+        <div class="pipeline-card" style="--card-spotlight-color: rgba(0, 245, 160, 0.45);">
+          <!-- Control Header -->
+          <div class="pipeline-controls">
+            <div class="pipeline-info">
+              <span class="pipeline-badge-meta">BRANCH: <strong class="accent-text">main</strong></span>
+              <span class="pipeline-badge-meta">TARGET: <strong class="accent-text">aws-eks-cluster-prod</strong></span>
+              <span class="pipeline-status-badge ready" id="pipelineStatus">STATUS: STANDBY</span>
+            </div>
+            <div class="pipeline-actions">
+              <button class="btn btn-primary btn-sm" id="dispatchPipelineBtn">
+                <span class="btn-icon">⚡</span> Dispatch Deployment Workflow
+              </button>
+              <button class="btn btn-secondary btn-sm" id="resetPipelineBtn" style="display: none;">
+                <span>↺</span> Reset DAG
+              </button>
+              <span class="pipeline-timer" id="pipelineTimer">RUNTIME: 0.00s</span>
+            </div>
+          </div>
+
+          <!-- Visual DAG Pipeline Stages -->
+          <div class="pipeline-dag">
+            <div class="pipeline-stage" id="stage-checkout">
+              <div class="stage-icon">📥</div>
+              <div class="stage-info">
+                <span class="stage-name">1. Checkout &amp; Lint</span>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage-connector"></div>
+
+            <div class="pipeline-stage" id="stage-docker">
+              <div class="stage-icon">🐳</div>
+              <div class="stage-info">
+                <span class="stage-name">2. Docker Build</span>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage-connector"></div>
+
+            <div class="pipeline-stage" id="stage-scan">
+              <div class="stage-icon">🛡️</div>
+              <div class="stage-info">
+                <span class="stage-name">3. Security Gate</span>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage-connector"></div>
+
+            <div class="pipeline-stage" id="stage-helm">
+              <div class="stage-icon">📦</div>
+              <div class="stage-info">
+                <span class="stage-name">4. OCI Registry</span>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+
+            <div class="pipeline-stage-connector"></div>
+
+            <div class="pipeline-stage" id="stage-deploy">
+              <div class="stage-icon">☸️</div>
+              <div class="stage-info">
+                <span class="stage-name">5. ArgoCD Rollout</span>
+                <span class="stage-state">STANDBY</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Console Stream Output -->
+          <div class="pipeline-console">
+            <div class="console-header">
+              <div class="console-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="console-title">GitHub Actions Runner ap-south-1a — Live Stream</span>
+            </div>
+            <div class="console-body" id="pipelineConsoleLogs">
+              <p class="log-line info">Waiting for workflow dispatch trigger... Press "Dispatch Deployment Workflow" to execute pipeline.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="terminal-footer">
+    <div class="container footer-content">
+      <p class="copyright">Uzair Sultan // Cloud &amp; DevOps Infrastructure Architect</p>
+      <p class="footer-telemetry">HOST: cloud-node-01 | REGION: ap-south-1 | DEVOPS_LAB: ACTIVE</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="../assets/js/main.js?v=2.8.0"></script>
+  <script src="../assets/js/labs.js?v=2.8.0"></script>
+</body>
+</html>
