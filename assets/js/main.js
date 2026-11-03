@@ -556,93 +556,91 @@
     const commands = {
       help: `
 <div class="terminal-line response">
-  <span style="color:#00F5A0; font-weight:700;">AVAILABLE CLOUD CONTROL &amp; LINUX COMMANDS:</span><br>
-  • <span style="color:#38BDF8; font-weight:600;">whoami</span>          <span style="color:#94A3B8;">— Identity, engineering background &amp; philosophy</span><br>
-  • <span style="color:#00F5A0; font-weight:600;">skills</span>          <span style="color:#94A3B8;">— Core technology stack &amp; engineering pillars</span><br>
-  • <span style="color:#FF8A00; font-weight:600;">docker ps</span>       <span style="color:#94A3B8;">— List active containerized microservices &amp; ports</span><br>
-  • <span style="color:#38BDF8; font-weight:600;">kubectl get nodes</span> <span style="color:#94A3B8;">— Inspect Kubernetes cluster nodes &amp; topology</span><br>
-  • <span style="color:#A855F7; font-weight:600;">aws stack</span>       <span style="color:#94A3B8;">— AWS VPC, EKS, ALB &amp; CloudFront infrastructure</span><br>
-  • <span style="color:#00F5A0; font-weight:600;">certs</span>           <span style="color:#94A3B8;">— Verified industry certifications &amp; credentials</span><br>
-  • <span style="color:#38BDF8; font-weight:600;">ping uzair</span>       <span style="color:#94A3B8;">— Test low-latency connection to contact gateway</span><br>
-  • <span style="color:#A855F7; font-weight:600;">projects</span>        <span style="color:#94A3B8;">— Production architecture systems &amp; deployments</span><br>
+  <span style="color:#00F5A0; font-weight:700;">AVAILABLE LEARNING LAB &amp; LINUX COMMANDS:</span><br>
+  • <span style="color:#38BDF8; font-weight:600;">whoami</span>          <span style="color:#94A3B8;">— Identity, educational standing &amp; target roles</span><br>
+  • <span style="color:#00F5A0; font-weight:600;">sys-inspect</span>     <span style="color:#94A3B8;">— Run local Linux /proc kernel telemetry diagnostics</span><br>
+  • <span style="color:#00F5A0; font-weight:600;">skills</span>          <span style="color:#94A3B8;">— Transparent three-level technical competency matrix</span><br>
+  • <span style="color:#FF8A00; font-weight:600;">docker ps</span>       <span style="color:#94A3B8;">— List active containerized services in local Docker lab</span><br>
+  • <span style="color:#38BDF8; font-weight:600;">k8s lab</span>         <span style="color:#94A3B8;">— Simulated Kubernetes learning lab topology model</span><br>
+  • <span style="color:#A855F7; font-weight:600;">aws roadmap</span>     <span style="color:#94A3B8;">— AWS core infrastructure study progression</span><br>
+  • <span style="color:#00F5A0; font-weight:600;">certs</span>           <span style="color:#94A3B8;">— Verified academic degrees &amp; course certificates</span><br>
+  • <span style="color:#38BDF8; font-weight:600;">ping uzair</span>       <span style="color:#94A3B8;">— Verify reachability to contact gateway</span><br>
+  • <span style="color:#A855F7; font-weight:600;">projects</span>        <span style="color:#94A3B8;">— Real-world personal projects &amp; lab exercises</span><br>
   • <span style="color:#64748B; font-weight:600;">clear</span>           <span style="color:#94A3B8;">— Clear the active terminal buffer</span>
 </div>`,
 
       whoami: `
 <div class="terminal-line response">
-  <strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">DevOps &amp; Cloud Infrastructure Architect</span><br>
-  <span style="color:#94A3B8;">From Linux kernel systems to cloud infrastructure, I turn code into automated, production-ready deployments.</span><br>
-  <span style="color:#38BDF8;">Education:</span> Master of Computer Applications (IGNOU, Started 2026 — Present) • BCA (1st Class)<br>
-  <span style="color:#A855F7;">Mission:</span> Building self-healing, zero-downtime platforms with declarative IaC and hardened security.
+  <strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">MCA Student | Linux &amp; IT Infrastructure | DevOps Fundamentals</span><br>
+  <span style="color:#94A3B8;">Building practical foundations in Linux system administration, networking, Docker containerization, and automated workflows.</span><br>
+  <span style="color:#38BDF8;">Education:</span> Master of Computer Applications (MCA, IGNOU) • BCA (University of Kashmir, 1st Class Distinction)<br>
+  <span style="color:#A855F7;">Target Roles:</span> IT Infrastructure Internships, Linux SysAdmin Internships, Cloud/DevOps Internships.
 </div>`,
 
       skills: `
 <div class="terminal-line response">
-  <span style="color:#00F5A0; font-weight:700;">• [CONTAINERS &amp; K8S]</span>  <span style="color:#F8FAFC;">Docker, Multi-stage Builds, Kubernetes, Helm, Ingress-NGINX</span><br>
-  <span style="color:#FF8A00; font-weight:700;">• [AWS CLOUD INFRA]</span>   <span style="color:#F8FAFC;">VPC, EC2, S3, IAM, EKS, ALB, Route 53, CloudWatch</span><br>
-  <span style="color:#A855F7; font-weight:700;">• [INFRASTRUCTURE]</span>    <span style="color:#F8FAFC;">Terraform HCL, GitOps (ArgoCD), GitHub Actions, Ansible</span><br>
-  <span style="color:#00F5A0; font-weight:700;">• [LINUX &amp; NETWORKS]</span>  <span style="color:#F8FAFC;">Ubuntu, Arch, Bash Scripting, Systemd, TCP/IP, Wireshark, BGP</span><br>
-  <span style="color:#38BDF8; font-weight:700;">• [CI/CD &amp; DEVOPS]</span>    <span style="color:#F8FAFC;">Automated Linting, Security Scanning, Zero-Downtime Rollouts</span>
+  <span style="color:#00F5A0; font-weight:700;">• [PRACTISED &amp; BUILT]</span>  <span style="color:#F8FAFC;">Linux /proc, Bash (set -euo pipefail), Docker, Compose, Networking, Git/GitHub Actions, NGINX</span><br>
+  <span style="color:#38BDF8; font-weight:700;">• [CURRENTLY LEARNING]</span>  <span style="color:#F8FAFC;">AWS Cloud Core (VPC, EC2, S3, IAM), Kubernetes Architecture &amp; Workloads, Terraform IaC</span><br>
+  <span style="color:#A855F7; font-weight:700;">• [EXPLORING NEXT]</span>      <span style="color:#F8FAFC;">Production Container Orchestration, Ansible Automation, Observability, Cloud Security</span>
 </div>`,
 
       certs: `
 <div class="terminal-line response">
-  <strong style="color:#F8FAFC;">VERIFIED INDUSTRY CERTIFICATIONS:</strong><br>
+  <strong style="color:#F8FAFC;">VERIFIED ACADEMIC &amp; COURSE CREDENTIALS:</strong><br>
+  • <span style="color:#00F5A0; font-weight:700;">Bachelor of Computer Applications (BCA)</span><br>
+    <span style="color:#94A3B8;">Institution:</span> University of Kashmir • <span style="color:#00F5A0;">First Class Distinction</span> (2021 — 2024)<br>
+    <span style="color:#94A3B8;">Focus:</span> Operating Systems, Database Management Systems, Data Communications.<br><br>
   • <span style="color:#38BDF8; font-weight:700;">Docker Essentials: A Developer Introduction</span><br>
     <span style="color:#94A3B8;">Issuer:</span> Cognitive Class (IBM Developer Skills Network) • <span style="color:#00F5A0;">Issued Oct 2026</span><br>
-    <span style="color:#94A3B8;">Credential ID:</span> <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span><br>
-    <span style="color:#94A3B8;">Focus:</span> Containerization, Docker images, and modern microservices workflows.<br><br>
+    <span style="color:#94A3B8;">Credential ID:</span> <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span><br><br>
   • <span style="color:#00F5A0; font-weight:700;">DevOps &amp; CI/CD Automation</span><br>
     <span style="color:#94A3B8;">Issuer:</span> Mltio University • <span style="color:#00F5A0;">Issued Oct 2026</span><br>
-    <span style="color:#94A3B8;">Credential ID:</span> <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span><br>
-    <span style="color:#94A3B8;">Focus:</span> Automated delivery pipelines, testing gates, and infrastructure orchestration.
+    <span style="color:#94A3B8;">Credential ID:</span> <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span>
 </div>`,
 
       "docker ps": `
 <div class="terminal-line response" style="font-size:0.8rem; overflow-x:auto;">
-  <span style="color:#94A3B8;">CONTAINER ID   IMAGE                               COMMAND               STATUS                    PORTS                     NAMES</span><br>
-  <span style="color:#38BDF8;">a8f4c2190e31</span>   uzair/nexora:v1.0.0                 "expo-start"          <span style="color:#00F5A0;">Up 21 days (healthy)</span>      0.0.0.0:8081-&gt;8081/tcp    nexora-app<br>
-  <span style="color:#38BDF8;">b7190d4e5f22</span>   uzair/kashmir-kesar-kingdom:v2.4    "nginx -g 'daemon'"   <span style="color:#00F5A0;">Up 60 days (healthy)</span>      0.0.0.0:443-&gt;80/tcp       kkk-export-web<br>
-  <span style="color:#38BDF8;">c3392b1a8d05</span>   uzair/craver-fastfood:v1.4.2        "node server.js"      <span style="color:#00F5A0;">Up 38 days (healthy)</span>      0.0.0.0:3000-&gt;3000/tcp    craver-order-engine<br>
-  <span style="color:#38BDF8;">d9910f8a3c44</span>   uzair/sys-inspect:latest            "sys-inspect"         <span style="color:#00F5A0;">Up 12 days (healthy)</span>      127.0.0.1:9100-&gt;9100/tcp  sys-inspect-telemetry
+  <span style="color:#94A3B8;">CONTAINER ID   IMAGE                          COMMAND               STATUS                    PORTS                    NAMES</span><br>
+  <span style="color:#38BDF8;">c3392b1a8d05</span>   craver-restaurant:latest       "nginx -g 'daemon'"   <span style="color:#00F5A0;">Up 4 hours (healthy)</span>      0.0.0.0:8085-&gt;80/tcp     craver-web<br>
+  <span style="color:#38BDF8;">a8f4c2190e31</span>   craver-api:latest              "python app.py"       <span style="color:#00F5A0;">Up 4 hours (healthy)</span>      0.0.0.0:5000-&gt;5000/tcp   craver-api<br>
+  <span style="color:#38BDF8;">b7190d4e5f22</span>   redis:alpine                   "redis-server"        <span style="color:#00F5A0;">Up 4 hours</span>                6379/tcp (internal net)  craver-db<br>
+  <span style="color:#38BDF8;">d9910f8a3c44</span>   ollama/ollama:latest           "ollama serve"        <span style="color:#00F5A0;">Up 4 hours (healthy)</span>      11434/tcp                craver-ai
 </div>`,
 
       "kubectl get nodes": `
 <div class="terminal-line response" style="font-size:0.8rem; overflow-x:auto;">
-  <span style="color:#94A3B8;">NAME                                         STATUS   ROLES           AGE    VERSION</span><br>
-  <span style="color:#00F5A0;">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)<br>
-  <span style="color:#00F5A0;">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)<br>
-  <span style="color:#00F5A0;">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)<br>
-  <span style="color:#38BDF8;">CLUSTER STATUS:</span> 3/3 Nodes Ready • 12/12 Pods InSync • Ingress-NGINX: Active • Flannel CNI: 0 errors
+  <strong style="color:#38BDF8;">[KUBERNETES CONCEPTUAL LEARNING LAB]</strong><br>
+  <span style="color:#94A3B8;">NAME                                         STATUS   ROLES           VERSION</span><br>
+  <span style="color:#00F5A0;">k8s-lab-control-plane</span>                        Ready    control-plane   v1.30.2 (Minikube/K3s)<br>
+  <span style="color:#00F5A0;">k8s-lab-worker-01</span>                            Ready    worker          v1.30.2 (AMD Ryzen)<br>
+  <span style="color:#00F5A0;">k8s-lab-worker-02</span>                            Ready    worker          v1.30.2 (AMD Ryzen)<br>
+  <span style="color:#38BDF8;">LAB TOPOLOGY:</span> 3/3 Nodes Ready • Educational model for studying Pod scheduling &amp; HPA.
 </div>`,
 
       "aws stack": `
 <div class="terminal-line response">
-  <span style="color:#FF8A00; font-weight:700;">AWS TOPOLOGY // REGION: ap-south-1 (Mumbai)</span><br>
-  ├── <span style="color:#38BDF8;">VPC:</span> vpc-0a4b9c1d (CIDR: 10.0.0.0/16)<br>
-  │   ├── Public Subnets (ap-south-1a &amp; 1b) -&gt; Internet Gateway + Application Load Balancer<br>
-  │   └── Private Subnets (ap-south-1a &amp; 1b) -&gt; NAT Gateway + EKS Managed Nodes<br>
-  ├── <span style="color:#00F5A0;">EKS Cluster:</span> portfolio-eks (v1.30.2, Multi-AZ)<br>
-  ├── <span style="color:#A855F7;">Storage &amp; CDN:</span> S3 bucket 'uzair-vault-artifacts' with CloudFront Edge Caching<br>
-  └── <span style="color:#00F5A0;">Security:</span> IAM Least-Privilege Role Policies + AWS Secrets Manager
+  <span style="color:#FF8A00; font-weight:700;">AWS ARCHITECTURE STUDY ROADMAP</span><br>
+  ├── <span style="color:#38BDF8;">VPC Fundamentals:</span> CIDR blocks (10.0.0.0/16), Public/Private subnets, IGW &amp; NAT Gateways<br>
+  ├── <span style="color:#00F5A0;">Compute &amp; Security:</span> EC2 instance lifecycles, Security Groups, IAM least-privilege roles<br>
+  ├── <span style="color:#A855F7;">Storage &amp; Delivery:</span> S3 bucket policies, versioning, and CloudFront CDN integration<br>
+  └── <span style="color:#00F5A0;">Status:</span> Active theoretical &amp; lab study in MCA cloud computing curriculum.
 </div>`,
 
       "ping uzair": `
 <div class="terminal-line response">
-  <span style="color:#38BDF8;">PING uzair.cloud (13.232.0.1): 56 data bytes</span><br>
-  64 bytes from 13.232.0.1: icmp_seq=0 ttl=64 time=0.038 ms<br>
-  64 bytes from 13.232.0.1: icmp_seq=1 ttl=64 time=0.035 ms<br>
-  64 bytes from 13.232.0.1: icmp_seq=2 ttl=64 time=0.037 ms<br>
+  <span style="color:#38BDF8;">PING uzair.gateway: 56 data bytes</span><br>
+  64 bytes from uzair.gateway: icmp_seq=0 ttl=64 time=0.038 ms<br>
+  64 bytes from uzair.gateway: icmp_seq=1 ttl=64 time=0.035 ms<br>
   <span style="color:#00F5A0;">--- 0% packet loss, handshake verified. Route open to uzairteeli123456789@gmail.com ---</span>
 </div>`,
 
       projects: `
 <div class="terminal-line response">
-  <strong style="color:#F8FAFC;">PRODUCTION ARCHITECTURE PROJECTS:</strong><br>
-  • <span style="color:#38BDF8; font-weight:600;">Nexora Mobile App</span> — React Native 0.81 &amp; Expo SDK 54 cross-platform client<br>
-  • <span style="color:#00F5A0; font-weight:600;">Kashmir Kesar Kingdom</span> — Global export e-commerce architecture (NGINX, AWS)<br>
-  • <span style="color:#FF8A00; font-weight:600;">Craver Fastfood</span> — High-throughput food ordering engine (Node.js, React)<br>
-  • <span style="color:#A855F7; font-weight:600;">Sys-Inspect Telemetry</span> — Linux node exporter and system inspection utility<br>
+  <strong style="color:#F8FAFC;">PROJECTS &amp; TECHNICAL LABS:</strong><br>
+  • <span style="color:#38BDF8; font-weight:600;">sys-inspect</span> — Linux /proc kernel metrics &amp; network socket diagnostics CLI<br>
+  • <span style="color:#00F5A0; font-weight:600;">Craver Fast Food</span> — Multi-container Compose stack &amp; GitHub Actions CI/CD<br>
+  • <span style="color:#FF8A00; font-weight:600;">Kashmir Kesar Kingdom</span> — High-performance web portal (95% asset compression)<br>
+  • <span style="color:#A855F7; font-weight:600;">Docker Network Lab</span> — Custom isolated bridge network segregation lab<br>
   <span style="color:#94A3B8;">(Tip: Scroll down to #projects or type 'docker ps' to see active containers)</span>
 </div>`
     };
@@ -1237,32 +1235,32 @@
       {
         id: "stage-commit",
         delay: 700,
-        runningLog: "[STEP 1/5] Git commit webhook received on main branch (SHA: 96adb24). Checking branch policies...",
-        passedLog: "✓ [PASS] Semantic linter & GPG signature verified (0 errors). Dispatching OCI builder worker."
+        runningLog: "[STEP 1/5] Git push event received on 'main'. Running file sanity & index integrity checks...",
+        passedLog: "✓ [PASS] Gate 1 passed: index.html, Dockerfile & core configs validated (0 errors)."
       },
       {
         id: "stage-build",
         delay: 850,
-        runningLog: "[STEP 2/5] Compiling Docker multi-stage build 'uzair/cloud-app:v1.2.0'. Mounting layer cache...",
-        passedLog: "✓ [PASS] Docker multi-arch image built (linux/amd64, linux/arm64). Image size: 48.2MB."
+        runningLog: "[STEP 2/5] Compiling Docker image 'craver-restaurant:latest' using nginx:alpine minimal layer...",
+        passedLog: "✓ [PASS] Docker container build complete. Image size: 23.4MB (minimal attack surface)."
       },
       {
         id: "stage-scan",
         delay: 800,
-        runningLog: "[STEP 3/5] Trivy scanning image layers for CVEs and SAST policy violations...",
-        passedLog: "✓ [PASS] Security Gate Passed: 0 CRITICAL, 0 HIGH, 0 MEDIUM vulnerabilities detected."
+        runningLog: "[STEP 3/5] Trivy scanning image layers for CRITICAL and HIGH CVE vulnerabilities...",
+        passedLog: "✓ [PASS] Security Gate Passed: 0 CRITICAL, 0 HIGH CVEs. Image safe for release."
       },
       {
         id: "stage-helm",
         delay: 750,
-        runningLog: "[STEP 4/5] Packaging declarative Helm chart v1.2.0. Signing OCI artifact...",
-        passedLog: "✓ [PASS] OCI bundle pushed to Amazon ECR (ap-south-1). Digest: sha256:8f4c2190e31."
+        runningLog: "[STEP 4/5] Starting container in isolated runner & executing live HTTP smoke test (curl -I)...",
+        passedLog: "✓ [PASS] HTTP 200 OK verified. Tagged and pushed to Docker Hub registry."
       },
       {
         id: "stage-deploy",
         delay: 950,
-        runningLog: "[STEP 5/5] ArgoCD detected target state diff. Initiating rolling update on EKS worker nodes...",
-        passedLog: "⚡ [COMPLETE] 3/3 Pod replicas Ready (100% InSync). Ingress controller routes active. Zero downtime verified!"
+        runningLog: "[STEP 5/5] Executing Blue/Green cutover: updating NGINX upstream & triggering 'nginx -s reload'...",
+        passedLog: "⚡ [COMPLETE] Traffic switched to Green container. Zero connections dropped during cutover."
       }
     ];
 
@@ -1293,7 +1291,7 @@
         statusBadge.textContent = "STATUS: STANDBY";
       }
 
-      consoleBody.innerHTML = '<p class="log-line info">[STANDBY] Runner ready on \'ap-south-1a-eks-runner\'. Click \'Dispatch Deployment Workflow\' to execute.</p>';
+      consoleBody.innerHTML = '<p class="log-line info">[STANDBY] GitHub Actions runner ready. Click \'Dispatch Deployment Workflow\' to execute automated pipeline simulation.</p>';
       dispatchBtn.style.display = "inline-flex";
       dispatchBtn.disabled = false;
       if (resetBtn) resetBtn.style.display = "none";
@@ -1317,7 +1315,7 @@
         if (timerDisplay) timerDisplay.textContent = `RUNTIME: ${elapsed}s`;
       }, 50);
 
-      appendLog(`[DISPATCH] Workflow triggered by user on branch 'main'. Host: ap-south-1a`, "cyan");
+      appendLog(`[DISPATCH] Workflow triggered by push to 'main'. Runner: ubuntu-latest`, "cyan");
 
       for (let i = 0; i < stages.length; i++) {
         const s = stages[i];
@@ -1350,7 +1348,7 @@
         statusBadge.textContent = "STATUS: DEPLOYED (200 OK)";
       }
 
-      appendLog(`🎉 [PIPELINE SUCCESS] Production cluster updated in ${totalElapsed}s with 0 downtime.`, "green");
+      appendLog(`🎉 [WORKFLOW SUCCESS] Pipeline completed in ${totalElapsed}s. Blue/Green simulation passed cleanly.`, "green");
 
       isRunning = false;
       dispatchBtn.style.display = "none";
@@ -1721,7 +1719,7 @@
         category: 'pages',
         icon: '📐',
         title: '~/architecture',
-        desc: 'Systems Architecture, Multi-AZ VPC, EKS & IaC Blueprints',
+        desc: 'Systems Architecture, Ingress Routing & Multi-AZ Conceptual Models',
         badge: 'Page',
         action: () => { window.location.href = root + 'architecture/'; }
       },
@@ -1730,7 +1728,7 @@
         category: 'pages',
         icon: '🧪',
         title: '~/labs',
-        desc: 'DevOps Chaos Simulator, K8s HPA Scaling & Linux htop Cockpit',
+        desc: 'DevOps Learning Lab, K8s HPA Scaling & Linux Diagnostics Cockpit',
         badge: 'Lab',
         action: () => { window.location.href = root + 'labs/'; }
       },
@@ -1739,7 +1737,7 @@
         category: 'pages',
         icon: '⏱️',
         title: 'OpenTelemetry Trace Waterfall',
-        desc: 'Observe distributed p99 request propagation & span telemetry',
+        desc: 'Observe distributed request propagation & span telemetry simulation',
         badge: 'APM',
         action: () => { window.location.href = root + 'architecture/#otel-waterfall'; }
       },
@@ -1766,7 +1764,7 @@
         category: 'pages',
         icon: '⚡',
         title: '~/projects',
-        desc: 'Production Kubernetes Cluster, GitOps Engine & Server Blades',
+        desc: 'Personal Projects, Linux Diagnostics, Docker Labs & Server Blades',
         badge: 'Section',
         action: () => { 
           if (isSubdir) {
@@ -1782,7 +1780,7 @@
         category: 'pages',
         icon: '📡',
         title: '~/contact',
-        desc: 'Encrypted Direct Channels (Email, LinkedIn, GitHub)',
+        desc: 'Encrypted Direct Channels (Email, WhatsApp, GitHub)',
         badge: 'Contact',
         action: () => { 
           if (isSubdir) {
@@ -1798,15 +1796,17 @@
         category: 'actions',
         icon: '📋',
         title: 'Copy Recruiter Dossier',
-        desc: 'One-click copy executive summary & competencies to clipboard',
+        desc: 'One-click copy candidate summary & competencies to clipboard',
         badge: 'Clipboard',
         action: () => {
-          const summary = `UZAIR SULTAN — CLOUD & DEVOPS INFRASTRUCTURE ARCHITECT
-Core: Kubernetes (EKS/K3s), AWS (VPC, IAM, ALB), Terraform IaC, Docker, CI/CD GitOps.
-Verified Certifications: IBM Docker Essentials, Mltio CI/CD Automation.
-Education: Master of Computer Applications (MCA), BCA.
-Location: Srinagar, India (Open to Relocate Worldwide / Remote).
-Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/portfolio/`;
+          const summary = `UZAIR SULTAN — MCA Student | Linux & IT Infrastructure | DevOps Fundamentals
+Candidate: Aspiring IT Infrastructure & Cloud/DevOps Professional
+Target Roles: IT Infrastructure, Linux SysAdmin, Cloud, DevOps Internships & Junior Roles.
+Education: Master of Computer Applications (MCA, IGNOU) • BCA (1st Class Distinction).
+Competencies: Linux /proc, Bash automation, Docker & Compose, Git & GitHub Actions CI/CD, NGINX, Networking.
+Verified Certs: IBM Docker Essentials, Mltio CI/CD Automation.
+Location: Srinagar, India (Open to Remote / Relocate).
+Email: uzairteeli123456789@gmail.com | Portfolio: https://uzair0123.github.io/portfolio/`;
           navigator.clipboard.writeText(summary).then(() => {
             SoundFX.playChime();
             showToast('✓ Recruiter Dossier copied to clipboard!');
@@ -1818,12 +1818,12 @@ Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/por
         category: 'actions',
         icon: '✉️',
         title: 'Copy Email Address',
-        desc: 'uzair.sultan.cloud@gmail.com',
+        desc: 'uzairteeli123456789@gmail.com',
         badge: 'Copy',
         action: () => {
-          navigator.clipboard.writeText('uzair.sultan.cloud@gmail.com').then(() => {
+          navigator.clipboard.writeText('uzairteeli123456789@gmail.com').then(() => {
             SoundFX.playChime();
-            showToast('✓ Copied uzair.sultan.cloud@gmail.com');
+            showToast('✓ Copied uzairteeli123456789@gmail.com');
           });
         }
       },
@@ -1842,8 +1842,8 @@ Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/por
         id: 'act-attestation',
         category: 'actions',
         icon: '🛡️',
-        title: 'Sigstore Cosign Attestation Ledger',
-        desc: 'Inspect SLSA v1.0 Level 3 cryptographic provenance & container digest',
+        title: 'Software Supply Chain Attestation Demo',
+        desc: 'Inspect SLSA Level 3 reference model, in-toto provenance & Sigstore standards',
         badge: 'SupplyChain',
         action: () => {
           window.location.href = root + 'credentials/#supply-chain-ledger';
@@ -1853,7 +1853,7 @@ Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/por
         id: 'act-pulse',
         category: 'actions',
         icon: '📡',
-        title: 'Refresh Production Telemetry Pulse',
+        title: 'Refresh Live Telemetry Pulse',
         desc: 'Fetch real-time GitHub Actions CI/CD status and Core Web Vitals',
         badge: 'Telemetry',
         action: () => {
@@ -2253,7 +2253,7 @@ Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/por
     updateClientVitals();
     window.addEventListener("load", updateClientVitals, { passive: true });
 
-    // 3. Live GitHub REST API Production Pulse
+    // 3. Live GitHub REST API Telemetry Pulse
     async function fetchGitHubPulse(force = false) {
       const CACHE_KEY = "uz_gh_pulse_cache";
       const CACHE_TTL = 300000;
@@ -2302,8 +2302,8 @@ Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/por
         applyGitHubData(pulseData);
       } catch (err) {
         applyGitHubData({
-          commit: { sha: "960316e", msg: "feat(v2.9.2): sprint 2 opentelemetry trace waterfall & hadolint auditor", date: new Date().toISOString() },
-          run: { num: 54, status: "completed", conclusion: "success", workflow: "Deploy Portfolio to GitHub Pages" }
+          commit: { sha: "960316e", msg: "feat(audit): truthful professional positioning & 3-tier skills matrix", date: new Date().toISOString() },
+          run: { num: 55, status: "completed", conclusion: "success", workflow: "Deploy Portfolio to GitHub Pages" }
         });
       }
     }
@@ -2341,7 +2341,7 @@ Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/por
         refreshBtn.style.transform = "rotate(360deg)";
         fetchGitHubPulse(true).then(() => {
           SoundFX.playChime();
-          showToast("✓ Production Telemetry Pulse refreshed from GitHub API");
+          showToast("✓ Live Repository Telemetry refreshed from GitHub API");
           setTimeout(() => { refreshBtn.style.transform = "rotate(0deg)"; }, 400);
         });
       });

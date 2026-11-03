@@ -1,5 +1,5 @@
 /**
- * Uzair Sultan — DevOps & Cloud Infrastructure Portfolio
+ * Uzair Sultan — MCA Student | Linux & IT Infrastructure | DevOps Fundamentals
  * Interactive DevOps Cockpit & Systems Simulators Engine (/labs/)
  * ----------------------------------------------------------------------
  * 1. Kubernetes Horizontal Pod Autoscaler (HPA) & Chaos Monkey Sandbox
@@ -579,7 +579,7 @@ CMD ["dist/server.js"]`;
       if (violations.length === 0) {
         box.innerHTML = `
           <div style="text-align:center; padding: 2.5rem 1rem; color: var(--accent-bash); font-family: var(--font-mono); font-size: 0.85rem;">
-            ✓ 0 Vulnerabilities Detected • Ready for Production Kubernetes Deployment
+            ✓ 0 CIS Violations Detected • Recipe Meets Container Hardening Benchmarks
           </div>
         `;
         return;

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevOps Simulators &amp; Systems Cockpit — Uzair Sultan</title>
-  <meta name="description" content="Interactive Kubernetes Horizontal Pod Autoscaler (HPA) chaos sandbox, live Linux htop systems monitor, and GitOps CI/CD pipeline simulators by Uzair Sultan.">
+  <title>DevOps Simulators &amp; Systems Learning Lab — Uzair Sultan</title>
+  <meta name="description" content="Interactive Kubernetes Horizontal Pod Autoscaler (HPA) educational simulation, live Linux systems monitor, and Dockerfile CIS security auditor by Uzair Sultan.">
   <meta name="theme-color" content="#030508">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="DevOps Simulators &amp; Systems Cockpit — Uzair Sultan">
-  <meta property="og:description" content="Interactive Kubernetes HPA chaos sandbox, real-time Linux htop cockpit, and automated CI/CD pipeline simulator.">
+  <meta property="og:title" content="DevOps Simulators &amp; Systems Learning Lab — Uzair Sultan">
+  <meta property="og:description" content="Interactive educational Kubernetes HPA sandbox, Linux systems cockpit, and Dockerfile CIS benchmark auditor.">
   <meta property="og:type" content="website">
 
   <!-- Favicon -->
@@ -44,14 +44,14 @@
       <div class="nav-brand">
         <a href="../" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none;">
           <img src="../assets/images/avatar-3d.png" alt="Uzair Avatar" class="nav-avatar">
-          <span class="prompt-user">uzair</span><span class="prompt-host">@cloud-node-01:~/labs$</span>
+          <span class="prompt-user">uzair</span><span class="prompt-host">@linux-lab:~/labs$</span>
         </a>
       </div>
 
       <div class="nav-status">
-        <span class="status-item"><span class="status-dot"></span> SIMULATOR: LIVE</span>
-        <span class="status-item">HPA: ARMED</span>
-        <span class="status-item">REGION: ap-south-1</span>
+        <span class="status-item"><span class="status-dot"></span> LAB: CLOUD SIMULATOR</span>
+        <span class="status-item">TOPOLOGY: K8S SANDBOX</span>
+        <span class="status-item">FOCUS: HPA &amp; RESILIENCE</span>
       </div>
 
       <div class="nav-links">
@@ -91,10 +91,10 @@
         </div>
 
         <div class="arch-title-wrap">
-          <div class="section-tag-badge" style="margin-bottom: 0.6rem;">LIVE SYSTEMS ENGINEERING COCKPIT</div>
+          <div class="section-tag-badge" style="margin-bottom: 0.6rem;">INTERACTIVE LEARNING SANDBOXES</div>
           <h1>Interactive DevOps &amp; Chaos Engineering Labs</h1>
           <p class="arch-lead-subtitle">
-            Hands-on systems sandboxes to test distributed cluster autoscaling, simulate hardware node outages, and observe real-time Linux kernel telemetry.
+            Educational systems sandboxes designed to explore how distributed clusters autoscale, how Kubernetes responds to node drain events, and how Linux kernel diagnostics work.
           </p>
         </div>
       </header>
@@ -102,10 +102,10 @@
       <!-- ==================== SIMULATOR 1: KUBERNETES HPA & CHAOS MONKEY ==================== -->
       <section class="labs-section-block">
         <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
-          <div class="section-tag-badge">AUTONOMOUS CLOUD RESILIENCE</div>
-          <h2>Kubernetes HPA &amp; Chaos Monkey Autoscaler</h2>
+          <div class="section-tag-badge">AUTONOMOUS CLOUD RESILIENCE (EDUCATIONAL SANDBOX)</div>
+          <h2>Kubernetes HPA &amp; Chaos Monkey Simulation</h2>
           <p class="section-subtitle">
-            Inject traffic spikes up to 10,000 req/s to trigger horizontal pod autoscaling (HPA), or simulate sudden node hardware failures to watch Kubernetes automatically evict and self-heal pods with zero dropped connections.
+            Interactive simulation demonstrating Horizontal Pod Autoscaling (HPA) dynamics and pod self-healing during node drains in a 3-replica Kubernetes cluster.
           </p>
         </header>
 
@@ -123,7 +123,7 @@
                 <span>↺</span> Reset Cluster
               </button>
             </div>
-            <span class="k8s-status-badge ready" id="k8sStatusBadge">CLUSTER STANDBY: 3 REPLICAS INSYNC</span>
+            <span class="k8s-status-badge ready" id="k8sStatusBadge">SIMULATED CLUSTER: 3 REPLICAS INSYNC</span>
           </div>
 
           <!-- Telemetry Banner -->
@@ -437,10 +437,10 @@
       <!-- ==================== SIMULATOR 3: CI/CD PIPELINE SIMULATOR ==================== -->
       <section class="labs-section-block">
         <header class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
-          <div class="section-tag-badge">AUTOMATED GITOPS DISPATCH</div>
-          <h2>Interactive CI/CD Deployment Pipeline DAG</h2>
+          <div class="section-tag-badge">AUTOMATED CI/CD SIMULATION</div>
+          <h2>Interactive CI/CD Deployment Pipeline Simulator</h2>
           <p class="section-subtitle">
-            Execute a live zero-downtime containerized deployment workflow: observe semantic versioning, multi-stage Docker compilation, security gating, and rolling EKS cluster synchronization in real-time.
+            Simulated GitHub Actions workflow modeling the automated test, container vulnerability scan (Trivy), and Blue/Green deployment cutover implemented in craver-fast-food.
           </p>
         </header>
 
@@ -449,7 +449,7 @@
           <div class="pipeline-controls">
             <div class="pipeline-info">
               <span class="pipeline-badge-meta">BRANCH: <strong class="accent-text">main</strong></span>
-              <span class="pipeline-badge-meta">TARGET: <strong class="accent-text">aws-eks-cluster-prod</strong></span>
+              <span class="pipeline-badge-meta">RUNNER: <strong class="accent-text">ubuntu-latest (GitHub VM)</strong></span>
               <span class="pipeline-status-badge ready" id="pipelineStatus">STATUS: STANDBY</span>
             </div>
             <div class="pipeline-actions">
@@ -468,7 +468,7 @@
             <div class="pipeline-stage" id="stage-checkout">
               <div class="stage-icon">📥</div>
               <div class="stage-info">
-                <span class="stage-name">1. Checkout &amp; Lint</span>
+                <span class="stage-name">1. Checkout &amp; Sanity</span>
                 <span class="stage-state">STANDBY</span>
               </div>
             </div>
@@ -488,7 +488,7 @@
             <div class="pipeline-stage" id="stage-scan">
               <div class="stage-icon">🛡️</div>
               <div class="stage-info">
-                <span class="stage-name">3. Security Gate</span>
+                <span class="stage-name">3. Trivy Security Scan</span>
                 <span class="stage-state">STANDBY</span>
               </div>
             </div>
@@ -498,7 +498,7 @@
             <div class="pipeline-stage" id="stage-helm">
               <div class="stage-icon">📦</div>
               <div class="stage-info">
-                <span class="stage-name">4. OCI Registry</span>
+                <span class="stage-name">4. Smoke Test &amp; Push</span>
                 <span class="stage-state">STANDBY</span>
               </div>
             </div>
@@ -506,9 +506,9 @@
             <div class="pipeline-stage-connector"></div>
 
             <div class="pipeline-stage" id="stage-deploy">
-              <div class="stage-icon">☸️</div>
+              <div class="stage-icon">🔄</div>
               <div class="stage-info">
-                <span class="stage-name">5. ArgoCD Rollout</span>
+                <span class="stage-name">5. Blue/Green Sim</span>
                 <span class="stage-state">STANDBY</span>
               </div>
             </div>
@@ -522,10 +522,10 @@
                 <span class="dot yellow"></span>
                 <span class="dot green"></span>
               </div>
-              <span class="console-title">GitHub Actions Runner ap-south-1a — Live Stream</span>
+              <span class="console-title">GitHub Actions Runner VM — Live Simulation Stream</span>
             </div>
             <div class="console-body" id="pipelineConsoleLogs">
-              <p class="log-line info">Waiting for workflow dispatch trigger... Press "Dispatch Deployment Workflow" to execute pipeline.</p>
+              <p class="log-line info">Waiting for workflow dispatch trigger... Press "Dispatch Deployment Workflow" to execute pipeline simulation.</p>
             </div>
           </div>
         </div>
@@ -655,13 +655,13 @@
 
       <!-- Bottom Baseline Bar -->
       <div class="footer-bottom-baseline">
-        <p>&copy; 2026 Uzair Sultan // Cloud &amp; DevOps Infrastructure Architect</p>
+        <p>&copy; 2026 Uzair Sultan // MCA Student • Linux &amp; IT Infrastructure • DevOps Fundamentals</p>
         <div class="footer-links-row">
           <a href="https://github.com/Uzair0123/portfolio" target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a>
           <span>•</span>
           <a href="https://linkedin.com/in/uzair-sultan-dev" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <span>•</span>
-          <span style="color: var(--accent-bash);">UZ-OS v2.9.3-PROD</span>
+          <span style="color: var(--accent-bash);">UZ-LABS v2.9.4</span>
         </div>
       </div>
 

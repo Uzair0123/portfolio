@@ -12,90 +12,125 @@ const TerminalModule = {
   isTypingAuto: false,
 
   commands: {
-    help: `Available Cloud Control & Linux Commands:
-  • <span style="color:#A855F7;">whoami</span>          - Systems identity & technical orientation
-  • <span style="color:#00F5A0;">docker ps</span>       - Active containerized production workloads & ports
-  • <span style="color:#38BDF8;">k8s cluster</span>     - EKS node topology, pods & cluster status
-  • <span style="color:#FF8A00;">aws stack</span>       - AWS VPC, subnets, EC2, ALB & S3 telemetry
-  • <span style="color:#00F5A0;">certs</span>           - Verified credentials & industry certifications
-  • <span style="color:#38BDF8;">ping uzair</span>       - Dispatch ICMP probe & open contact gateway
-  • <span style="color:#00F5A0;">resume</span>           - Retrieve official engineer curriculum vitae (PDF)
-  • <span style="color:#A855F7;">skills</span>           - 11-Domain infrastructure matrix summary
+    help: `Available Learning Lab & Linux Diagnostic Commands:
+  • <span style="color:#A855F7;">whoami</span>          - Candidate identity & educational standing
+  • <span style="color:#00F5A0;">sys-inspect</span>     - Run local Linux kernel /proc telemetry scan
+  • <span style="color:#00F5A0;">docker ps</span>       - Active containerized services in local Docker lab
+  • <span style="color:#38BDF8;">k8s lab</span>         - Kubernetes learning lab & pod topology model
+  • <span style="color:#FF8A00;">skills</span>          - Transparent three-level skills matrix
+  • <span style="color:#00F5A0;">certs</span>           - Verified academic degrees & course certificates
+  • <span style="color:#38BDF8;">ping uzair</span>       - Dispatch reachability check to contact gateway
   • <span style="color:#64748B;">clear</span>            - Flush the active terminal console buffer`,
 
-    whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">System Architect // DevOps & Cloud Engineer</span>
-<span style="color:#94A3B8;">Education:</span> MCA (IGNOU, Started 2026 — Present) • BCA (University of Kashmir, 1st Class)
-<span style="color:#94A3B8;">Certifications:</span> Docker Essentials (IBM Cognitive Class) • DevOps & CI/CD Automation (Mltio University)
-<span style="color:#94A3B8;">Host Cluster:</span> AWS EKS (Kubernetes v1.30.2) • <span style="color:#38BDF8;">Kernel:</span> Linux 6.8.0-sysadmin x86_64
+    whoami: `<strong style="color:#F8FAFC;">Uzair Sultan</strong> — <span style="color:#00F5A0; font-weight:700;">MCA Student | Linux &amp; IT Infrastructure | DevOps Fundamentals</span>
+<span style="color:#94A3B8;">Education:</span> Master of Computer Applications (MCA, IGNOU) • BCA (University of Kashmir, 1st Class Distinction)
+<span style="color:#94A3B8;">Certifications:</span> Docker Essentials (IBM Cognitive Class) • DevOps &amp; CI/CD Automation (Mltio University)
+<span style="color:#94A3B8;">Host Workstation:</span> Arch Linux x86_64 • <span style="color:#38BDF8;">Kernel:</span> 6.8+ • <span style="color:#00F5A0;">Container Engine:</span> Docker Engine &amp; Compose
 
-<span style="color:#CBD5E1;">Systems builder focused on Linux kernel internals, Kubernetes orchestration, declarative Terraform infrastructure, and computer networking. Delivering fault-tolerant, self-healing platforms with zero tolerance for downtime.</span>`,
+<span style="color:#CBD5E1;">Systems builder focused on Linux administration, /proc kernel metrics, networking fundamentals (TCP/IP, sockets), Docker containerization, and defensive Bash automation. Seeking IT Infrastructure, Linux SysAdmin, and DevOps Internships.</span>`,
 
-    certs: `<strong style="color:#F8FAFC;">Verified Industry Certifications:</strong>
+    "sys-inspect": `<strong style="color:#00F5A0;">=== LINUX SYSTEM &amp; NETWORK HEALTH INSPECTOR (sys-inspect) ===</strong>
+<span style="color:#F8FAFC;">[CPU &amp; Memory Health]</span>
+Load Average (1m, 5m, 15m) : 0.24, 0.18, 0.14
+Memory Utilization         : <span style="color:#00F5A0;">[OK] 32.4%</span> (Parsed directly from /proc/meminfo)
+
+<span style="color:#F8FAFC;">[Storage &amp; Inode Health (Root /)]</span>
+Disk Block Usage           : <span style="color:#00F5A0;">[OK] 42%</span> (/dev/nvme0n1p2)
+Inode Usage                : <span style="color:#00F5A0;">[OK] 18%</span> (Root filesystem healthy)
+
+<span style="color:#F8FAFC;">[Network &amp; Connectivity]</span>
+Listening Sockets (TCP/UDP): 8 ports open (ss -tuln audit)
+DNS Resolution Check       : <span style="color:#00F5A0;">[OK] (google.com resolved via getent hosts)</span>
+
+<span style="color:#F8FAFC;">[Process Health &amp; Zombie Detection]</span>
+Zombie Processes Detected  : <span style="color:#00F5A0;">[OK] 0</span> (ps -eo stat scan clean)`,
+
+    certs: `<strong style="color:#F8FAFC;">Verified Academic &amp; Course Credentials:</strong>
+  • <span style="color:#00F5A0; font-weight:700;">Bachelor of Computer Applications (BCA)</span>
+    Institution: <span style="color:#F8FAFC;">University of Kashmir</span> • 2021 — 2024
+    Honors: <span style="color:#00F5A0;">First Class Distinction</span> • Focus: Operating Systems, Relational DBs, Computer Networks.
+
   • <span style="color:#38BDF8; font-weight:700;">Docker Essentials: A Developer Introduction</span>
     Issuer: <span style="color:#F8FAFC;">Cognitive Class (IBM Developer Skills Network)</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
     Credential ID: <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span>
-    Focus: Docker container execution, image layers, and modern DevOps microservices.
+    Focus: Docker container execution, image layers, and microservices containerization.
 
-  • <span style="color:#A855F7; font-weight:700;">DevOps & CI/CD Automation</span>
+  • <span style="color:#A855F7; font-weight:700;">DevOps &amp; CI/CD Automation</span>
     Issuer: <span style="color:#F8FAFC;">Mltio University</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
     Credential ID: <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span>
     Focus: Automated GitHub Actions pipelines, security gates, and continuous delivery.`,
 
-    certifications: `<strong style="color:#F8FAFC;">Verified Industry Certifications:</strong>
+    certifications: `<strong style="color:#F8FAFC;">Verified Academic &amp; Course Credentials:</strong>
+  • <span style="color:#00F5A0; font-weight:700;">Bachelor of Computer Applications (BCA)</span>
+    Institution: <span style="color:#F8FAFC;">University of Kashmir</span> • 2021 — 2024
+    Honors: <span style="color:#00F5A0;">First Class Distinction</span> • Focus: Operating Systems, Relational DBs, Computer Networks.
+
   • <span style="color:#38BDF8; font-weight:700;">Docker Essentials: A Developer Introduction</span>
     Issuer: <span style="color:#F8FAFC;">Cognitive Class (IBM Developer Skills Network)</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
     Credential ID: <span style="color:#A855F7;">963031e61d0745338ded287cf0331aff</span>
-    Focus: Docker container execution, image layers, and modern DevOps microservices.
+    Focus: Docker container execution, image layers, and microservices containerization.
 
-  • <span style="color:#A855F7; font-weight:700;">DevOps & CI/CD Automation</span>
+  • <span style="color:#A855F7; font-weight:700;">DevOps &amp; CI/CD Automation</span>
     Issuer: <span style="color:#F8FAFC;">Mltio University</span> • Issued: <span style="color:#00F5A0;">Oct 2026</span>
     Credential ID: <span style="color:#A855F7;">MU-ACAD-2026-EZYAPPYZ</span>
     Focus: Automated GitHub Actions pipelines, security gates, and continuous delivery.`,
 
-    "docker ps": `<span style="color:#94A3B8;">CONTAINER ID   IMAGE                               COMMAND               STATUS                    PORTS                     NAMES</span>
-<span style="color:#38BDF8;">a8f4c2190e31</span>   uzair/nexora:v1.0.0                 "expo-start"          <span style="color:#00F5A0;">Up 21 days (healthy)</span>      0.0.0.0:8081->8081/tcp    nexora-app
-<span style="color:#38BDF8;">b7190d4e5f22</span>   uzair/kashmir-kesar-kingdom:v2.4    "nginx -g 'daemon'"   <span style="color:#00F5A0;">Up 60 days (healthy)</span>      0.0.0.0:443->80/tcp       kkk-export-web
-<span style="color:#38BDF8;">c3392b1a8d05</span>   uzair/craver-fastfood:v1.4.2        "node server.js"      <span style="color:#00F5A0;">Up 38 days (healthy)</span>      0.0.0.0:3000->3000/tcp    craver-order-engine
-<span style="color:#38BDF8;">d9910f8a3c44</span>   uzair/sys-inspect:latest            "sys-inspect"         <span style="color:#00F5A0;">Up 12 days (healthy)</span>      127.0.0.1:9100->9100/tcp  sys-inspect-telemetry
-<span style="color:#38BDF8;">e4481c7e9b10</span>   uzair/network-lab:v3                "tcpdump -i eth0"     <span style="color:#00F5A0;">Up 5 days</span>                 0.0.0.0:53->53/udp        net-packet-lab`,
+    "docker ps": `<span style="color:#94A3B8;">CONTAINER ID   IMAGE                          COMMAND               STATUS                    PORTS                    NAMES</span>
+<span style="color:#38BDF8;">c3392b1a8d05</span>   craver-restaurant:latest       "nginx -g 'daemon'"   <span style="color:#00F5A0;">Up 4 hours (healthy)</span>      0.0.0.0:8085->80/tcp     craver-web
+<span style="color:#38BDF8;">a8f4c2190e31</span>   craver-api:latest              "python app.py"       <span style="color:#00F5A0;">Up 4 hours (healthy)</span>      0.0.0.0:5000->5000/tcp   craver-api
+<span style="color:#38BDF8;">b7190d4e5f22</span>   redis:alpine                   "redis-server"        <span style="color:#00F5A0;">Up 4 hours</span>                6379/tcp (internal net)  craver-db
+<span style="color:#38BDF8;">d9910f8a3c44</span>   ollama/ollama:latest           "ollama serve"        <span style="color:#00F5A0;">Up 4 hours (healthy)</span>      11434/tcp                craver-ai
 
-    "k8s cluster": `<span style="color:#94A3B8;">NODE NAME                                    STATUS   ROLES           AGE    VERSION</span>
-<span style="color:#00F5A0;">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)
-<span style="color:#00F5A0;">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)
-<span style="color:#00F5A0;">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)
-<span style="color:#00F5A0;">ip-10-0-1-104.ap-south-1.compute.internal</span>    Ready    worker,edge     42d    v1.30.2 (Expo-Mobile-Pod)
+<span style="color:#38BDF8;">NETWORK BRIDGE:</span> restaurant-net (isolated backend, internal service discovery active)`,
 
-<span style="color:#38BDF8;">POD HEALTH:</span> 12/12 Pods InSync • Ingress-NGINX: Active • CoreDNS: Running • Flannel CNI: 0 errors`,
+    "k8s lab": `<strong style="color:#38BDF8;">[KUBERNETES CONCEPTUAL LEARNING LAB]</strong>
+<span style="color:#94A3B8;">Type:</span> Architectural Simulation &amp; Learning Topology (Minikube / K3s lab model)
+<span style="color:#94A3B8;">Topology:</span> 1 Control-Plane Node • 2 Worker Nodes (Simulated Multi-Zone Lab)
+<span style="color:#94A3B8;">Study Primitives:</span>
+  • Pod replica pools &amp; Horizontal Pod Autoscaler (HPA) policies
+  • Ingress-NGINX routing &amp; NodePort/ClusterIP service abstractions
+  • Chaos Monkey resilience simulations (node evictions &amp; pod self-healing)
+<span style="color:#00F5A0;">Status: Ready for interactive experimentation in ~/labs.</span>`,
 
-    "kubectl get nodes": `<span style="color:#94A3B8;">NAME                                         STATUS   ROLES           AGE    VERSION</span>
-<span style="color:#00F5A0;">ip-10-0-1-101.ap-south-1.compute.internal</span>    Ready    control-plane   180d   v1.30.2 (Ubuntu 24.04 LTS)
-<span style="color:#00F5A0;">ip-10-0-1-102.ap-south-1.compute.internal</span>    Ready    worker,node     180d   v1.30.2 (AMD Ryzen 5000)
-<span style="color:#00F5A0;">ip-10-0-1-103.ap-south-1.compute.internal</span>    Ready    worker,gpu      95d    v1.30.2 (NVIDIA GTX 1650)
+    "k8s cluster": `<strong style="color:#38BDF8;">[KUBERNETES CONCEPTUAL LEARNING LAB]</strong>
+<span style="color:#94A3B8;">Type:</span> Architectural Simulation &amp; Learning Topology (Minikube / K3s lab model)
+<span style="color:#94A3B8;">Topology:</span> 1 Control-Plane Node • 2 Worker Nodes (Simulated Multi-Zone Lab)
+<span style="color:#94A3B8;">Study Primitives:</span>
+  • Pod replica pools &amp; Horizontal Pod Autoscaler (HPA) policies
+  • Ingress-NGINX routing &amp; NodePort/ClusterIP service abstractions
+  • Chaos Monkey resilience simulations (node evictions &amp; pod self-healing)
+<span style="color:#00F5A0;">Status: Ready for interactive experimentation in ~/labs.</span>`,
 
-<span style="color:#38BDF8;">CLUSTER:</span> 4/4 Nodes Ready • Ready for production workloads.`,
+    "kubectl get nodes": `<strong style="color:#38BDF8;">[KUBERNETES CONCEPTUAL LEARNING LAB]</strong>
+<span style="color:#94A3B8;">NAME                                         STATUS   ROLES           VERSION</span>
+<span style="color:#00F5A0;">k8s-lab-control-plane</span>                        Ready    control-plane   v1.30.2 (Minikube/K3s)
+<span style="color:#00F5A0;">k8s-lab-worker-01</span>                            Ready    worker          v1.30.2 (AMD Ryzen)
+<span style="color:#00F5A0;">k8s-lab-worker-02</span>                            Ready    worker          v1.30.2 (AMD Ryzen)
 
-    "aws stack": `<span style="color:#FF8A00;">AWS TOPOLOGY // REGION: ap-south-1</span>
-├── <span style="color:#38BDF8;">VPC:</span> vpc-0a4b9c1d (CIDR: 10.0.0.0/16)
-│   ├── Public Subnets (ap-south-1a & 1b) -> Internet Gateway + ALB
-│   └── Private Subnets (ap-south-1a & 1b) -> NAT Gateway + EKS Nodes
-├── <span style="color:#00F5A0;">EKS Cluster:</span> portfolio-eks (Kubernetes v1.30.2, Managed NodeGroups)
-├── <span style="color:#A855F7;">Storage:</span> S3 bucket 'uzair-vault-artifacts' with CloudFront CDN
-└── <span style="color:#00F5A0;">Security:</span> IAM Least-Privilege Role Boundaries + KMS Encryption`,
+<span style="color:#38BDF8;">LAB TOPOLOGY:</span> 3/3 Nodes Ready • Educational model for studying Pod scheduling &amp; HPA.`,
 
-    "ping uzair": `<span style="color:#38BDF8;">PING uzair.cloud (13.232.0.1): 56 data bytes</span>
-64 bytes from 13.232.0.1: icmp_seq=0 ttl=64 time=0.042 ms
-64 bytes from 13.232.0.1: icmp_seq=1 ttl=64 time=0.038 ms
-64 bytes from 13.232.0.1: icmp_seq=2 ttl=64 time=0.040 ms
-<span style="color:#00F5A0;">--- 0% packet loss, handshake verified. Routing to Contact Gateway...</span>`,
+    "aws stack": `<span style="color:#FF8A00;">AWS ARCHITECTURE STUDY ROADMAP</span>
+├── <span style="color:#38BDF8;">VPC Fundamentals:</span> CIDR blocks (10.0.0.0/16), Public/Private subnets, IGW &amp; NAT Gateways
+├── <span style="color:#00F5A0;">Compute &amp; Security:</span> EC2 instance lifecycles, Security Groups, IAM least-privilege roles
+├── <span style="color:#A855F7;">Storage &amp; Delivery:</span> S3 bucket policies, versioning, and CloudFront CDN integration
+└── <span style="color:#00F5A0;">Status:</span> Active theoretical &amp; lab study in MCA cloud computing curriculum.`,
 
-    resume: `<span style="color:#38BDF8;">Retrieving official curriculum vitae artifact via S3 CDN...</span>
-<span style="color:#00F5A0;">[200 OK]</span> Download Verified. Opening resume modal...`,
+    "ping uzair": `<span style="color:#38BDF8;">PING uzair.gateway: 56 data bytes</span>
+64 bytes from uzair.gateway: icmp_seq=0 ttl=64 time=0.042 ms
+64 bytes from uzair.gateway: icmp_seq=1 ttl=64 time=0.038 ms
+<span style="color:#00F5A0;">--- 0% packet loss, verified reachability. Routing to Contact Gateway...</span>`,
 
-    skills: `<span style="color:#00F5A0;">[CONTAINERS & K8S]</span> Docker, Kubernetes, Helm, Ingress-NGINX
-<span style="color:#FF8A00;">[AWS CLOUD INFRA]</span>  VPC, EC2, S3, IAM, EKS, ALB, CloudWatch
-<span style="color:#A855F7;">[INFRASTRUCTURE]</span>   Terraform HCL, GitOps (ArgoCD), GitHub Actions
-<span style="color:#00F5A0;">[LINUX & NETWORKS]</span> Ubuntu, Arch, Bash, Systemd, TCP/IP, Wireshark, BGP
-<span style="color:#38BDF8;">[CLIENT & MOBILE]</span>  React Native 0.81, Expo SDK 54, Modern Web PWA`
+    resume: `<span style="color:#38BDF8;">Opening official curriculum vitae dossier...</span>
+<span style="color:#00F5A0;">[200 OK]</span> Verified. Navigating to credentials dossier.`,
+
+    skills: `<strong style="color:#00F5A0;">[LEVEL 1: PRACTISED &amp; BUILT]</strong>
+Linux Systems (/proc, systemd, storage, permissions) • Defensive Bash (set -euo pipefail) • Networking (TCP/IP, DNS, ss) • Docker &amp; Compose • Git &amp; GitHub Actions CI/CD • NGINX • Python basics.
+
+<strong style="color:#38BDF8;">[LEVEL 2: CURRENTLY LEARNING]</strong>
+AWS Core Infrastructure (VPC, Subnets, EC2, S3, IAM) • Kubernetes Architecture (Control plane, Pods, Deployments, Services, HPA) • Terraform IaC (HCL syntax, state).
+
+<strong style="color:#A855F7;">[LEVEL 3: EXPLORING NEXT]</strong>
+Production Container Orchestration • Ansible Configuration Management • Prometheus &amp; Grafana Observability • Zero-Trust Cloud Security.`
   },
 
   init: function() {
@@ -118,8 +153,8 @@ const TerminalModule = {
 
   initialBootGreeting: function() {
     this.body.innerHTML = `
-      <div style="color:#38BDF8; margin-bottom:0.4rem;">[BOOT] Initializing Cloud Control CLI session on ap-south-1...</div>
-      <div style="color:#00F5A0; margin-bottom:0.6rem;">⚡ <strong style="color:#FFF;">Uzair Sultan DevOps Node Online.</strong> Type '<span style="color:#38BDF8;">help</span>' or tap 1-click pills below.</div>
+      <div style="color:#38BDF8; margin-bottom:0.4rem;">[BOOT] Initializing Linux Learning Lab environment...</div>
+      <div style="color:#00F5A0; margin-bottom:0.6rem;">⚡ <strong style="color:#FFF;">Uzair Sultan Systems Console Online.</strong> Type '<span style="color:#38BDF8;">help</span>' or tap 1-click pills below.</div>
     `;
   },
 
@@ -270,9 +305,9 @@ const TerminalModule = {
     this.htopView.innerHTML = `
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; padding-bottom:0.75rem; border-bottom:1px dashed rgba(255,255,255,0.15); margin-bottom:0.75rem; font-size:0.74rem;">
   <div>0 ${bar(cpu1, '#00F5A0')} Tasks: 48, 1 running</div>
-  <div>1 ${bar(cpu2, '#38BDF8')} Load: 0.18 0.12 0.08</div>
-  <div>2 ${bar(cpu3, '#A855F7')} Uptime: 182 days, 14:32:05</div>
-  <div>3 ${bar(cpu4, '#FF8A00')} Cluster: ap-south-1 (Production)</div>
+  <div>1 ${bar(cpu2, '#38BDF8')} Load: 0.24 0.18 0.14</div>
+  <div>2 ${bar(cpu3, '#A855F7')} Host: Arch Linux x86_64</div>
+  <div>3 ${bar(cpu4, '#FF8A00')} Mode: Systems Learning Lab</div>
   <div style="grid-column: 1 / -1; margin-top:0.3rem;">
     Mem [${bar(Math.floor((memMb / 16000) * 100), '#00F5A0')} ${memMb}M/15.8G]  Swp [ 0K/8.00G]
   </div>
@@ -282,16 +317,16 @@ const TerminalModule = {
 </div>
 <div style="font-size:0.7rem; line-height:1.5; margin-top:0.3rem;">
   <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
-    <span>1402</span><span>root</span><span>20</span><span>1.4G</span><span>248M</span><span style="color:#00F5A0;">8.2</span><span>dockerd -H fd://</span>
+    <span>1402</span><span>root</span><span>20</span><span>1.4G</span><span>248M</span><span style="color:#00F5A0;">4.2</span><span>dockerd -H fd://</span>
   </div>
   <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
-    <span>2189</span><span>uzair</span><span>20</span><span>980M</span><span>184M</span><span style="color:#00F5A0;">5.4</span><span>k3s server --disable=traefik</span>
+    <span>2189</span><span>uzair</span><span>20</span><span>320M</span><span>94M</span><span style="color:#00F5A0;">2.1</span><span>python3 backend/app.py</span>
   </div>
   <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
-    <span>3894</span><span>uzair</span><span>20</span><span>620M</span><span>112M</span><span style="color:#00F5A0;">3.1</span><span>node /srv/craver/server.js</span>
+    <span>3894</span><span>uzair</span><span>20</span><span>48M</span><span>16M</span><span style="color:#00F5A0;">1.5</span><span>bash sys-inspect.sh</span>
   </div>
   <div style="display:grid; grid-template-columns:50px 60px 40px 60px 60px 50px 1fr; gap:0.4rem; padding:0.15rem 0.4rem;">
-    <span>4102</span><span>nginx</span><span>20</span><span>145M</span><span>38M</span><span style="color:#00F5A0;">1.8</span><span>nginx: worker (kashmir-kesar)</span>
+    <span>4102</span><span>nginx</span><span>20</span><span>145M</span><span>38M</span><span style="color:#00F5A0;">1.2</span><span>nginx: worker process</span>
   </div>
 </div>
 `;
@@ -300,22 +335,22 @@ const TerminalModule = {
   startNetworkLogs: function() {
     if (this.logsTimer) return;
     this.logBuffer = [
-      `[INGRESS] TLS 1.3 Handshake completed with Cloudflare Edge Anycast`,
-      `[K8S] Pod 'uzair/api:v1' liveness probe HTTP 200 OK (latency: 1.2ms)`,
-      `[ROUTER] BGP KeepAlive acknowledged on ASN 64512 (ap-south-1)`,
-      `[SECURITY] Inbound packet evaluated by UFW: ACCEPT TCP:443`,
-      `[PROMETHEUS] Target /metrics: 28 metrics indexed in 6ms`
+      `[SYS-INSPECT] /proc/loadavg read: 0.24, 0.18, 0.14 (1m, 5m, 15m)`,
+      `[DOCKER] Container 'craver-web' healthy (port 8085->80)`,
+      `[NETWORK] Sockets audit: 8 listening TCP/UDP ports detected via ss`,
+      `[SECURITY] UFW state: Active • Default incoming deny policy in place`,
+      `[DNS] getent hosts google.com: resolved successfully`
     ];
     this.renderLogs();
 
     this.logsTimer = setInterval(() => {
       const now = new Date().toISOString().substring(11, 19);
       const events = [
-        `[${now}] [INGRESS] HTTP GET /api/v1/health 200 OK (0.8ms) via AWS ALB`,
-        `[${now}] [DOCKER] Container 'nexora-app' health check passed (0 restarts)`,
-        `[${now}] [TERRAFORM] Remote state lock verified on DynamoDB (hash: 5a3d7aa)`,
-        `[${now}] [REDIS] Cache hit for key 'cluster:telemetry' (0.2ms)`,
-        `[${now}] [GITOPS] ArgoCD sync state: InSync (revision: main/5a3d7aa)`
+        `[${now}] [SYS-INSPECT] Memory usage: 32.4% computed from /proc/meminfo`,
+        `[${now}] [DOCKER] Container 'craver-api' health check HTTP 200 OK`,
+        `[${now}] [NGINX] Reverse proxy upstream health check passed`,
+        `[${now}] [ACTIONS] GitHub Actions CI runner: Trivy scan passed (0 CVEs)`,
+        `[${now}] [STORAGE] Root filesystem / block usage: 42% (healthy)`
       ];
       this.logBuffer.push(events[Math.floor(Math.random() * events.length)]);
       if (this.logBuffer.length > 20) this.logBuffer.shift();

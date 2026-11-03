@@ -1,5 +1,5 @@
 /**
- * Uzair Sultan — DevOps & Cloud Infrastructure Portfolio
+ * Uzair Sultan — MCA Student | Linux & IT Infrastructure | DevOps Fundamentals
  * Credentials, Certifications & Academic Dossier Engine (/credentials/)
  * ----------------------------------------------------------------------
  * 1. Cryptographic Certificate Inspector & Modal Verification
@@ -41,10 +41,10 @@
         "GitHub Actions Workflow Architecture",
         "Automated Test & Security Gating (SAST/Trivy)",
         "Semantic Versioning & Git Release Automation",
-        "Container Registry Publishing (GHCR/ECR)",
-        "Zero-Downtime Rolling Update Deployments"
+        "Container Registry Publishing (GHCR/Docker Hub)",
+        "Blue/Green Cutover Simulation & Deployment Workflows"
       ],
-      description: "Advanced verification in automated continuous integration and continuous deployment pipelines, artifact provenance signing, branch protection rules, and cloud infrastructure release lifecycles."
+      description: "Advanced verification in automated continuous integration and continuous deployment pipelines, container vulnerability gating with Trivy, artifact publishing, and automated deployment cutovers."
     }
   };
 
@@ -134,26 +134,49 @@
     const copyDossierBtn = document.getElementById("copyDossierBtn");
     if (!copyDossierBtn) return;
 
-    const summaryText = `Uzair Sultan — DevOps & Cloud Infrastructure Architect
-Location: Srinagar, J&K, India (Open to Remote & Global Relocation)
+    const summaryText = `Uzair Sultan — MCA Student | Linux & IT Infrastructure | DevOps Fundamentals
+Headline: Aspiring IT Infrastructure & Cloud/DevOps Professional
+Location: Srinagar, J&K, India (Open to Remote, Hybrid & Global Relocation)
 Email: uzairteeli123456789@gmail.com | Phone/WhatsApp: +91 7889446114
 GitHub: https://github.com/Uzair0123
 Portfolio: https://uzair0123.github.io/portfolio/
 
-ACADEMIC QUALIFICATIONS:
-• Master of Computer Applications (MCA) — IGNOU (2026 — Present)
-  Focus: Distributed Systems, High-Availability Cloud Infrastructure & Networking.
-• Bachelor of Computer Applications (BCA) — University of Kashmir (2021 — 2024)
-  Honors: First Class Distinction in Operating Systems, Database Systems & Algorithms.
+TARGET ROLES:
+• IT Infrastructure Internships
+• Linux System Administration Internships
+• Cloud Infrastructure Internships
+• DevOps Internships
+• Junior Technical Support / Infrastructure Roles
 
-VERIFIED INDUSTRY CERTIFICATIONS:
+ACADEMIC QUALIFICATIONS:
+• Master of Computer Applications (MCA) — IGNOU (2026 — Present, Active Student)
+  Focus: Distributed Systems, Advanced Computer Networking & Operating Systems.
+• Bachelor of Computer Applications (BCA) — University of Kashmir (2021 — 2024)
+  Honors: First Class Distinction in Operating Systems, Database Management Systems & Networks.
+
+VERIFIED COURSE CERTIFICATIONS:
 • Docker Essentials: A Developer Introduction (Cognitive Class / IBM Skills Network)
   CID: 963031e61d0745338ded287cf0331aff
 • DevOps & CI/CD Automation (Mltio University)
   CID: MU-ACAD-2026-EZYAPPYZ
 
-CORE TECHNICAL TOOLKIT:
-Docker, Kubernetes (v1.30), AWS Cloud (VPC, EKS, ALB, S3, IAM, CloudFront), Terraform HCL, Linux Kernel Primitives, Bash Automation, NGINX, GitOps, CI/CD Pipelines.`;
+THREE-LEVEL TECHNICAL COMPETENCIES:
+[Practised & Built]
+• Linux Systems Administration & Kernel Primitives (/proc, systemd, storage, permissions)
+• Defensive Bash Scripting (set -euo pipefail, stream processing, sys-inspect CLI)
+• Networking Fundamentals & Sockets (TCP/IP, DNS diagnostics, ss -tuln, bridge networks)
+• Docker Engine & Docker Compose (multi-service environments, volumes, network isolation)
+• Git & GitHub Actions CI/CD (automation, test gates, Trivy CVE scanning, image publishing)
+• NGINX Web Server & Reverse Proxy (upstream proxying, hot-reloading)
+• Python Fundamentals (REST APIs, Redis datastore integration)
+
+[Currently Learning]
+• AWS Cloud Core (VPC, Subnets, EC2, S3, IAM, Security Groups)
+• Kubernetes Architecture & Objects (Control plane, Pods, Deployments, Services, HPA)
+• Terraform & Infrastructure as Code (HCL syntax, state management concepts)
+
+[Exploring Next]
+• Production Container Orchestration • Ansible Automation • Prometheus/Grafana Observability • Zero-Trust Cloud Security.`;
 
     copyDossierBtn.addEventListener("click", () => {
       if (navigator.clipboard && navigator.clipboard.writeText) {

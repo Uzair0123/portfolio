@@ -1,5 +1,5 @@
 /**
- * Uzair Sultan — DevOps & Cloud Infrastructure Portfolio
+ * Uzair Sultan — MCA Student | Linux & IT Infrastructure | DevOps Fundamentals
  * Systems & Cloud Architecture Blueprint Engine
  * ----------------------------------------------------------------------
  * 1. Interactive SVG Architecture Topology Switcher
@@ -17,12 +17,12 @@
   const systemBlueprints = {
     nexora: {
       title: "Nexora Quick-Commerce Distributed Cloud Topology",
-      badge: "K8S MICROSERVICES // MULTI-AZ CLOUD",
-      summary: "High-throughput mobile e-commerce platform engineered for sub-30ms cart operations, geographic CDN caching, and zero-downtime rolling deployments.",
+      badge: "CONCEPTUAL TOPOLOGY // MULTI-AZ ARCHITECTURE",
+      summary: "Conceptual distributed architecture model exploring sub-30ms cart operations, geographic CDN caching, and rolling deployment topologies.",
       stats: {
-        region: "AWS ap-south-1 (Mumbai)",
+        region: "AWS ap-south-1 (Target Design)",
         ingress: "AWS ALB + NGINX Ingress Controller",
-        availability: "99.99% Multi-AZ SLA",
+        availability: "Multi-AZ Redundancy Model",
         caching: "Redis Cluster (In-Memory Hot Carts)"
       },
       nodes: {
@@ -51,8 +51,8 @@
           metrics: "Capacity: 15,000 req/sec | Ingress Latency: 1.2ms"
         },
         eks: {
-          name: "AWS EKS Kubernetes Cluster (v1.30)",
-          role: "Container Orchestration & Workload Execution",
+          name: "Kubernetes Cluster Architecture (Target: EKS v1.30)",
+          role: "Container Orchestration & Workload Execution (Conceptual Model)",
           protocol: "Calico CNI • Mutual mTLS Service Mesh",
           redundancy: "Managed Node Groups (Spot + On-Demand)",
           health: "Kubelet Liveness & Readiness Probes (10s)",
@@ -316,7 +316,7 @@
         name: "Stage 0: Base Operating System (Alpine v3.20.2 Minimal)",
         size: "5.42 MB",
         purpose: "Clean, stripped Alpine Linux root filesystem with minimal attack surface.",
-        security: "Zero vulnerabilities • CVE Scanner: Passed (0 issues)"
+        security: "Trivy CVE Gate: Passed (Clean Alpine Base Image)"
       },
       builder: {
         name: "Stage 1: Multi-Stage Compiler & Build Toolchain",
