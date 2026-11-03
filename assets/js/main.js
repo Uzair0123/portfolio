@@ -1428,6 +1428,717 @@
   }
 
   // ═══════════════════════════════════════════════════════════════
+  // 9. SPRINT 1: WEB AUDIO SYNTHESIZER (0 KB NATIVE AUDIO ENGINE)
+  // ═══════════════════════════════════════════════════════════════
+  const SoundFX = (function () {
+    let ctx = null;
+    let enabled = localStorage.getItem('uz_sound_enabled') !== 'false';
+
+    function initCtx() {
+      if (!ctx && (window.AudioContext || window.webkitAudioContext)) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        ctx = new AudioCtx();
+      }
+      if (ctx && ctx.state === 'suspended') {
+        ctx.resume();
+      }
+    }
+
+    window.addEventListener('pointerdown', function unlock() {
+      initCtx();
+      window.removeEventListener('pointerdown', unlock);
+    }, { once: true, passive: true });
+
+    return {
+      isEnabled: () => enabled,
+      toggle: function () {
+        enabled = !enabled;
+        localStorage.setItem('uz_sound_enabled', enabled ? 'true' : 'false');
+        if (enabled) {
+          initCtx();
+          this.playChime();
+        }
+        return enabled;
+      },
+      playClick: function () {
+        if (!enabled) return;
+        initCtx();
+        if (!ctx) return;
+        try {
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(1400, now);
+          osc.frequency.exponentialRampToValueAtTime(350, now + 0.025);
+          gain.gain.setValueAtTime(0.045, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.025);
+        } catch (e) {}
+      },
+      playPop: function () {
+        if (!enabled) return;
+        initCtx();
+        if (!ctx) return;
+        try {
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.04);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } catch (e) {}
+      },
+      playOpen: function () {
+        if (!enabled) return;
+        initCtx();
+        if (!ctx) return;
+        try {
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(640, now + 0.06);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        } catch (e) {}
+      },
+      playClose: function () {
+        if (!enabled) return;
+        initCtx();
+        if (!ctx) return;
+        try {
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(540, now);
+          osc.frequency.exponentialRampToValueAtTime(220, now + 0.04);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } catch (e) {}
+      },
+      playChime: function () {
+        if (!enabled) return;
+        initCtx();
+        if (!ctx) return;
+        try {
+          const now = ctx.currentTime;
+          [523.25, 659.25, 783.99].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            const start = now + idx * 0.055;
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.05, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.16);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.16);
+          });
+        } catch (e) {}
+      }
+    };
+  })();
+
+  // ═══════════════════════════════════════════════════════════════
+  // 10. TOAST NOTIFICATION HUD ENGINE
+  // ═══════════════════════════════════════════════════════════════
+  function showToast(message) {
+    let wrap = document.getElementById('hudToastWrap');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.id = 'hudToastWrap';
+      wrap.className = 'hud-toast-wrap';
+      document.body.appendChild(wrap);
+    }
+    const toast = document.createElement('div');
+    toast.className = 'hud-toast';
+    toast.innerHTML = message;
+    wrap.appendChild(toast);
+    setTimeout(() => {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 2600);
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // 11. DYNAMIC COLOR MATRIX THEME MANAGER
+  // ═══════════════════════════════════════════════════════════════
+  const ThemeManager = (function () {
+    const THEMES = ['emerald', 'cyan', 'violet', 'amber'];
+    const LABELS = {
+      emerald: 'Cyber Emerald',
+      cyan: 'Tokyo Cyan',
+      violet: 'Synthwave',
+      amber: 'Solar Flare'
+    };
+
+    function getTheme() {
+      return localStorage.getItem('uz_theme') || 'emerald';
+    }
+
+    function setTheme(theme) {
+      if (!THEMES.includes(theme)) theme = 'emerald';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('uz_theme', theme);
+      syncThemeUI(theme);
+    }
+
+    function cycleTheme() {
+      const current = getTheme();
+      const nextIdx = (THEMES.indexOf(current) + 1) % THEMES.length;
+      const next = THEMES[nextIdx];
+      setTheme(next);
+      SoundFX.playPop();
+      showToast(`🎨 Theme: ${LABELS[next]}`);
+      return next;
+    }
+
+    function syncThemeUI(theme) {
+      document.querySelectorAll('.hud-theme-badge').forEach(el => {
+        el.textContent = LABELS[theme] || theme;
+      });
+    }
+
+    return {
+      init: function () {
+        const initial = getTheme();
+        setTheme(initial);
+      },
+      getTheme,
+      setTheme,
+      cycleTheme,
+      LABELS,
+      THEMES
+    };
+  })();
+
+  // ═══════════════════════════════════════════════════════════════
+  // 12. CMD+K COMMAND PALETTE & MOBILE QUICK DOCK ENGINE
+  // ═══════════════════════════════════════════════════════════════
+  function initCommandSuite() {
+    ThemeManager.init();
+
+    const path = window.location.pathname;
+    const isSubdir = path.includes('/architecture/') || 
+                     path.includes('/labs/') || 
+                     path.includes('/credentials/');
+    const root = isSubdir ? '../' : './';
+
+    // Inject Command Palette Modal if missing
+    if (!document.getElementById('cmdPaletteModal')) {
+      const modalHTML = `
+        <div class="cmd-palette-backdrop" id="cmdPaletteModal" role="dialog" aria-modal="true" aria-label="Command Palette">
+          <div class="cmd-palette-dialog">
+            <div class="cmd-pull-handle" aria-hidden="true"></div>
+            <div class="cmd-header">
+              <div class="cmd-search-wrap">
+                <span class="cmd-search-icon">⚡</span>
+                <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command or jump to page... (ESC to close)" autocomplete="off" spellcheck="false" />
+                <button class="cmd-close-btn" id="cmdCloseBtn" aria-label="Close Command Palette">✕</button>
+              </div>
+              <div class="cmd-filter-chips" role="tablist">
+                <button class="cmd-chip active" data-filter="all">All</button>
+                <button class="cmd-chip" data-filter="pages">Pages 📐</button>
+                <button class="cmd-chip" data-filter="actions">Actions ⚡</button>
+                <button class="cmd-chip" data-filter="themes">Themes 🎨</button>
+                <button class="cmd-chip" data-filter="sound">Sound 🔊</button>
+              </div>
+            </div>
+            <div class="cmd-body" id="cmdListBody"></div>
+            <div class="cmd-footer">
+              <div class="cmd-footer-hints cmd-footer-desktop">
+                <span><kbd class="ctrl-kbd">↑↓</kbd> Navigate</span>
+                <span><kbd class="ctrl-kbd">↵</kbd> Select</span>
+                <span><kbd class="ctrl-kbd">ESC</kbd> Close</span>
+              </div>
+              <span class="cmd-footer-mobile">Tap to jump • Swipe down to close</span>
+              <span style="color: var(--accent-bash);">UZ-OS v2.9.1</span>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    // Inject Mobile Quick Dock if missing
+    if (!document.getElementById('mobileDock')) {
+      const dockHTML = `
+        <aside class="mobile-quick-dock" id="mobileDock" aria-label="Quick Actions Dock">
+          <button class="dock-btn dock-btn-main" id="mobileDockPaletteBtn" aria-label="Open Command Menu">
+            <span class="dock-pulse-dot"></span>
+            <span>⚡ ⌘K Jump</span>
+          </button>
+          <button class="dock-btn" id="mobileDockSoundBtn" aria-label="Toggle Sound">
+            <span id="mobileSoundIcon">${SoundFX.isEnabled() ? '🔊' : '🔇'}</span>
+          </button>
+          <button class="dock-btn" id="mobileDockThemeBtn" aria-label="Cycle Theme">
+            <span>🎨</span>
+          </button>
+        </aside>
+      `;
+      document.body.insertAdjacentHTML('beforeend', dockHTML);
+    }
+
+    const modal = document.getElementById('cmdPaletteModal');
+    const input = document.getElementById('cmdInput');
+    const listBody = document.getElementById('cmdListBody');
+    const closeBtn = document.getElementById('cmdCloseBtn');
+    let currentFilter = 'all';
+    let selectedIndex = 0;
+
+    const COMMAND_ITEMS = [
+      {
+        id: 'nav-hub',
+        category: 'pages',
+        icon: '🏠',
+        title: '~/hub',
+        desc: 'Main Portfolio, Identity, Skills & Terminal Emulator',
+        badge: 'Hub',
+        action: () => { window.location.href = root; }
+      },
+      {
+        id: 'nav-arch',
+        category: 'pages',
+        icon: '📐',
+        title: '~/architecture',
+        desc: 'Systems Architecture, Multi-AZ VPC, EKS & IaC Blueprints',
+        badge: 'Page',
+        action: () => { window.location.href = root + 'architecture/'; }
+      },
+      {
+        id: 'nav-labs',
+        category: 'pages',
+        icon: '🧪',
+        title: '~/labs',
+        desc: 'DevOps Chaos Simulator, K8s HPA Scaling & Linux htop Cockpit',
+        badge: 'Lab',
+        action: () => { window.location.href = root + 'labs/'; }
+      },
+      {
+        id: 'nav-credentials',
+        category: 'pages',
+        icon: '📜',
+        title: '~/credentials',
+        desc: 'Academic Dossier, IBM Docker & Mltio CI/CD Cert Ledger',
+        badge: 'Ledger',
+        action: () => { window.location.href = root + 'credentials/'; }
+      },
+      {
+        id: 'nav-projects',
+        category: 'pages',
+        icon: '⚡',
+        title: '~/projects',
+        desc: 'Production Kubernetes Cluster, GitOps Engine & Server Blades',
+        badge: 'Section',
+        action: () => { 
+          if (isSubdir) {
+            window.location.href = root + '#projects';
+          } else {
+            const el = document.getElementById('projects');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      },
+      {
+        id: 'nav-contact',
+        category: 'pages',
+        icon: '📡',
+        title: '~/contact',
+        desc: 'Encrypted Direct Channels (Email, LinkedIn, GitHub)',
+        badge: 'Contact',
+        action: () => { 
+          if (isSubdir) {
+            window.location.href = root + '#contact';
+          } else {
+            const el = document.getElementById('contact');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      },
+      {
+        id: 'act-dossier',
+        category: 'actions',
+        icon: '📋',
+        title: 'Copy Recruiter Dossier',
+        desc: 'One-click copy executive summary & competencies to clipboard',
+        badge: 'Clipboard',
+        action: () => {
+          const summary = `UZAIR SULTAN — CLOUD & DEVOPS INFRASTRUCTURE ARCHITECT
+Core: Kubernetes (EKS/K3s), AWS (VPC, IAM, ALB), Terraform IaC, Docker, CI/CD GitOps.
+Verified Certifications: IBM Docker Essentials, Mltio CI/CD Automation.
+Education: Master of Computer Applications (MCA), BCA.
+Location: Srinagar, India (Open to Relocate Worldwide / Remote).
+Email: uzair.sultan.cloud@gmail.com | Portfolio: https://uzair0123.github.io/portfolio/`;
+          navigator.clipboard.writeText(summary).then(() => {
+            SoundFX.playChime();
+            showToast('✓ Recruiter Dossier copied to clipboard!');
+          });
+        }
+      },
+      {
+        id: 'act-email',
+        category: 'actions',
+        icon: '✉️',
+        title: 'Copy Email Address',
+        desc: 'uzair.sultan.cloud@gmail.com',
+        badge: 'Copy',
+        action: () => {
+          navigator.clipboard.writeText('uzair.sultan.cloud@gmail.com').then(() => {
+            SoundFX.playChime();
+            showToast('✓ Copied uzair.sultan.cloud@gmail.com');
+          });
+        }
+      },
+      {
+        id: 'act-chaos',
+        category: 'actions',
+        icon: '💥',
+        title: 'Simulate Chaos Monkey & HPA Spike',
+        desc: 'Jump into Chaos Lab and trigger 10,000 req/s traffic burst',
+        badge: 'Simulator',
+        action: () => {
+          window.location.href = root + 'labs/';
+        }
+      },
+      {
+        id: 'theme-emerald',
+        category: 'themes',
+        icon: '🟢',
+        title: 'Theme: Cyber Emerald',
+        desc: 'Default Linux Bash & Kubernetes Emerald Green',
+        badge: 'Default',
+        action: () => {
+          ThemeManager.setTheme('emerald');
+          SoundFX.playPop();
+          showToast('🎨 Theme: Cyber Emerald');
+        }
+      },
+      {
+        id: 'theme-cyan',
+        category: 'themes',
+        icon: '🔵',
+        title: 'Theme: Tokyo Cyan',
+        desc: 'Electric Blue, Cloud Ingress & Cyberpunk Neon',
+        badge: 'Theme',
+        action: () => {
+          ThemeManager.setTheme('cyan');
+          SoundFX.playPop();
+          showToast('🎨 Theme: Tokyo Cyan');
+        }
+      },
+      {
+        id: 'theme-violet',
+        category: 'themes',
+        icon: '🟣',
+        title: 'Theme: Synthwave Violet',
+        desc: 'Plasma Violet, Deep Space & Terraform Matrix',
+        badge: 'Theme',
+        action: () => {
+          ThemeManager.setTheme('violet');
+          SoundFX.playPop();
+          showToast('🎨 Theme: Synthwave');
+        }
+      },
+      {
+        id: 'theme-amber',
+        category: 'themes',
+        icon: '🟠',
+        title: 'Theme: Solar Flare Amber',
+        desc: 'Solarized Gold, AWS Amber & Classic Terminal Hue',
+        badge: 'Theme',
+        action: () => {
+          ThemeManager.setTheme('amber');
+          SoundFX.playPop();
+          showToast('🎨 Theme: Solar Flare');
+        }
+      },
+      {
+        id: 'sound-toggle',
+        category: 'sound',
+        icon: '🔊',
+        title: 'Toggle Sound Effects (0 KB Web Audio)',
+        desc: 'Turn mechanical keyclicks & acoustic telemetry ON or MUTED',
+        badge: 'Audio',
+        action: () => {
+          const state = SoundFX.toggle();
+          syncSoundIcons(state);
+          showToast(state ? '🔊 Audio FX: ENABLED' : '🔇 Audio FX: MUTED');
+        }
+      }
+    ];
+
+    function syncSoundIcons(enabled) {
+      const icon = enabled ? '🔊' : '🔇';
+      const topIcon = document.getElementById('soundToggleIcon');
+      if (topIcon) topIcon.textContent = icon;
+      const mobIcon = document.getElementById('mobileSoundIcon');
+      if (mobIcon) mobIcon.textContent = icon;
+    }
+
+    function renderList() {
+      const query = input.value.trim().toLowerCase();
+      let filtered = COMMAND_ITEMS.filter(item => {
+        const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+        if (!matchesFilter) return false;
+        if (!query) return true;
+        return item.title.toLowerCase().includes(query) ||
+               item.desc.toLowerCase().includes(query) ||
+               item.badge.toLowerCase().includes(query);
+      });
+
+      if (filtered.length === 0) {
+        listBody.innerHTML = `
+          <div class="cmd-empty-state">
+            <p>No commands found for "<strong>${query}</strong>"</p>
+            <p style="font-size:0.75rem; margin-top:0.35rem; color:var(--text-dim);">Try searching for "architecture", "theme", "resume", or "labs"</p>
+          </div>
+        `;
+        return;
+      }
+
+      const groups = {
+        pages: { title: 'Navigation & Blueprints', items: [] },
+        actions: { title: 'Operations & Recruiter Tools', items: [] },
+        themes: { title: 'Theme Matrix Customizer', items: [] },
+        sound: { title: 'Acoustic Telemetry', items: [] }
+      };
+
+      filtered.forEach((item, index) => {
+        if (groups[item.category]) {
+          groups[item.category].items.push({ item, globalIndex: index });
+        }
+      });
+
+      if (selectedIndex >= filtered.length) {
+        selectedIndex = 0;
+      }
+
+      let html = '';
+      let flatIndex = 0;
+
+      Object.keys(groups).forEach(key => {
+        const grp = groups[key];
+        if (grp.items.length === 0) return;
+        html += `<div class="cmd-group-title">${grp.title}</div>`;
+        grp.items.forEach(({ item }) => {
+          const isSelected = flatIndex === selectedIndex;
+          html += `
+            <div class="cmd-item ${isSelected ? 'selected' : ''}" data-index="${flatIndex}" role="button" tabindex="0">
+              <div class="cmd-item-left">
+                <span class="cmd-item-icon">${item.icon}</span>
+                <div class="cmd-item-text">
+                  <span class="cmd-item-title">${item.title}</span>
+                  <span class="cmd-item-desc">${item.desc}</span>
+                </div>
+              </div>
+              <span class="cmd-item-badge">${item.badge}</span>
+            </div>
+          `;
+          flatIndex++;
+        });
+      });
+
+      listBody.innerHTML = html;
+
+      listBody.querySelectorAll('.cmd-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          executeItem(filtered[idx]);
+        });
+        el.addEventListener('mouseenter', () => {
+          const idx = parseInt(el.getAttribute('data-index'), 10);
+          selectedIndex = idx;
+          updateSelectedVisual();
+        });
+      });
+    }
+
+    function updateSelectedVisual() {
+      listBody.querySelectorAll('.cmd-item').forEach((el, idx) => {
+        if (idx === selectedIndex) {
+          el.classList.add('selected');
+          el.scrollIntoView({ block: 'nearest' });
+        } else {
+          el.classList.remove('selected');
+        }
+      });
+    }
+
+    function executeItem(item) {
+      if (!item) return;
+      SoundFX.playClick();
+      closePalette();
+      setTimeout(() => {
+        item.action();
+      }, 120);
+    }
+
+    function openPalette() {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      input.value = '';
+      currentFilter = 'all';
+      selectedIndex = 0;
+      updateFilterChipsUI();
+      renderList();
+      SoundFX.playOpen();
+      setTimeout(() => {
+        input.focus();
+      }, 50);
+    }
+
+    function closePalette() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      SoundFX.playClose();
+    }
+
+    function updateFilterChipsUI() {
+      modal.querySelectorAll('.cmd-chip').forEach(btn => {
+        if (btn.getAttribute('data-filter') === currentFilter) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    modal.querySelectorAll('.cmd-chip').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentFilter = btn.getAttribute('data-filter');
+        selectedIndex = 0;
+        updateFilterChipsUI();
+        renderList();
+        SoundFX.playClick();
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closePalette);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closePalette();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        if (modal.classList.contains('active')) {
+          closePalette();
+        } else {
+          openPalette();
+        }
+        return;
+      }
+
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        e.preventDefault();
+        closePalette();
+        return;
+      }
+
+      if (modal.classList.contains('active')) {
+        const items = listBody.querySelectorAll('.cmd-item');
+        if (items.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex + 1) % items.length;
+          updateSelectedVisual();
+          SoundFX.playClick();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+          updateSelectedVisual();
+          SoundFX.playClick();
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const query = input.value.trim().toLowerCase();
+          const filtered = COMMAND_ITEMS.filter(item => {
+            const matchesFilter = currentFilter === 'all' || item.category === currentFilter;
+            if (!matchesFilter) return false;
+            if (!query) return true;
+            return item.title.toLowerCase().includes(query) ||
+                   item.desc.toLowerCase().includes(query) ||
+                   item.badge.toLowerCase().includes(query);
+          });
+          if (filtered[selectedIndex]) {
+            executeItem(filtered[selectedIndex]);
+          }
+        }
+      }
+    });
+
+    input.addEventListener('input', () => {
+      selectedIndex = 0;
+      renderList();
+    });
+
+    const topPaletteBtn = document.getElementById('cmdPaletteBtn');
+    if (topPaletteBtn) topPaletteBtn.addEventListener('click', openPalette);
+
+    const topSoundBtn = document.getElementById('soundToggleBtn');
+    if (topSoundBtn) {
+      topSoundBtn.addEventListener('click', () => {
+        const state = SoundFX.toggle();
+        syncSoundIcons(state);
+        showToast(state ? '🔊 Audio FX: ENABLED' : '🔇 Audio FX: MUTED');
+      });
+    }
+
+    const topThemeBtn = document.getElementById('themeToggleBtn');
+    if (topThemeBtn) {
+      topThemeBtn.addEventListener('click', () => {
+        ThemeManager.cycleTheme();
+      });
+    }
+
+    const mobPaletteBtn = document.getElementById('mobileDockPaletteBtn');
+    if (mobPaletteBtn) mobPaletteBtn.addEventListener('click', openPalette);
+
+    const mobSoundBtn = document.getElementById('mobileDockSoundBtn');
+    if (mobSoundBtn) {
+      mobSoundBtn.addEventListener('click', () => {
+        const state = SoundFX.toggle();
+        syncSoundIcons(state);
+        showToast(state ? '🔊 Audio FX: ENABLED' : '🔇 Audio FX: MUTED');
+      });
+    }
+
+    const mobThemeBtn = document.getElementById('mobileDockThemeBtn');
+    if (mobThemeBtn) {
+      mobThemeBtn.addEventListener('click', () => {
+        ThemeManager.cycleTheme();
+      });
+    }
+
+    document.querySelectorAll('.btn, .nav-link, .pill-cmd-btn, .tab-btn').forEach(el => {
+      el.addEventListener('click', () => {
+        SoundFX.playClick();
+      });
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
   // INITIALIZATION ON DOM READY
   // ═══════════════════════════════════════════════════════════════
   function bootstrap() {
@@ -1446,6 +2157,7 @@
     initPipelineSimulator();
     initDirectChannelsClipboard();
     initSmoothAnchorScroll(lenis);
+    initCommandSuite();
   }
 
   if (document.readyState === "loading") {

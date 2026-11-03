@@ -16,8 +16,11 @@
   <meta property="og:description" content="Portfolio of Uzair — Cloud Infrastructure, Kubernetes, Linux SysAdmin, and CI/CD Automation.">
   <meta property="og:image" content="assets/images/avatar-3d.png">
 
+  <!-- Theme Preload Script (Zero FOUC) -->
+  <script>(function(){const t=localStorage.getItem('uz_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+
   <!-- Structural CSS (Phase 1) -->
-  <link rel="stylesheet" href="assets/css/style.css?v=2.9.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=2.9.1">
 </head>
 <body>
 
@@ -53,6 +56,18 @@
         <a href="#projects" class="nav-link">~/projects</a>
         <a href="#contact" class="nav-link">~/contact</a>
         <a href="./credentials/" class="btn btn-sm" style="border-color: rgba(56, 189, 248, 0.4); color: var(--accent-cyan);">Dossier 📜</a>
+      </div>
+
+      <div class="nav-controls">
+        <button class="hud-ctrl-btn hud-palette-trigger" id="cmdPaletteBtn" title="Command Palette (Cmd+K)" aria-label="Open Command Palette">
+          <span class="ctrl-kbd">⌘K</span>
+        </button>
+        <button class="hud-ctrl-btn hud-sound-toggle" id="soundToggleBtn" title="Toggle Sound FX" aria-label="Toggle Sound Effects">
+          <span id="soundToggleIcon">🔊</span>
+        </button>
+        <button class="hud-ctrl-btn hud-theme-toggle" id="themeToggleBtn" title="Switch Theme Matrix" aria-label="Switch Theme">
+          <span>🎨</span>
+        </button>
       </div>
     </div>
   </nav>
@@ -890,6 +905,6 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 
   <!-- Vanilla JS & Cinematic Motion Orchestrator -->
-  <script src="assets/js/main.js?v=2.9.0"></script>
+  <script src="assets/js/main.js?v=2.9.1"></script>
 </body>
 </html>
