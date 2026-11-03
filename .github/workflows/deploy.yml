@@ -28,6 +28,7 @@ jobs:
         run: |
           node -c assets/js/terminal.js
           node -c assets/js/main.js
+          node -c assets/js/architecture.js
           echo "Portfolio JavaScript validated successfully!"
 
       - name: Setup Pages

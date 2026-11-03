@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systems Architecture &amp; Cloud Blueprints — Uzair Sultan</title>
+  <meta name="description" content="Production cloud architecture blueprints, high-availability ingress routing, interactive SVG data flows, and multi-stage container build topologies by Uzair Sultan.">
+  <meta name="theme-color" content="#030508">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Systems Architecture &amp; Cloud Blueprints — Uzair Sultan">
+  <meta property="og:description" content="Interactive distributed systems topologies, high-availability ingress flows, and declarative IaC manifests.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="../assets/css/style.css?v=2.7.0">
+</head>
+<body class="arch-body">
+
+  <!-- ==================== BACKGROUND LIQUID MESH UNIVERSE ==================== -->
+  <div class="liquid-bg-container" aria-hidden="true">
+    <div class="liquid-mesh-blob blob-emerald"></div>
+    <div class="liquid-mesh-blob blob-cyan"></div>
+    <div class="liquid-mesh-blob blob-violet"></div>
+    <div class="liquid-mesh-blob blob-amber"></div>
+    <div class="liquid-mesh-blob blob-center"></div>
+    <canvas id="network-bg"></canvas>
+  </div>
+
+  <!-- ==================== STATUS BAR / HUD NAV ==================== -->
+  <nav class="status-nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none;">
+          <img src="../assets/images/avatar-3d.png" alt="Uzair Avatar" class="nav-avatar">
+          <span class="prompt-user">uzair</span><span class="prompt-host">@cloud-node-01:~/architecture$</span>
+        </a>
+      </div>
+
+      <div class="nav-status">
+        <span class="status-item"><span class="status-dot"></span> TOPOLOGY: ONLINE</span>
+        <span class="status-item">INGRESS: MULTI-AZ</span>
+        <span class="status-item">REGION: ap-south-1</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="../" class="nav-link">~/hub</a>
+        <a href="./" class="nav-link active">~/architecture</a>
+        <a href="../#projects" class="nav-link">~/projects</a>
+        <a href="../#contact" class="nav-link">~/contact</a>
+        <a href="../" class="btn btn-sm">Return to Hub ←</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="arch-page">
+    <div class="container">
+
+      <!-- ==================== 1. ARCHITECTURE HEADER HUD ==================== -->
+      <header class="arch-header-hud">
+        <div class="arch-breadcrumbs">
+          <a href="../">~/mission-control</a>
+          <span>/</span>
+          <span style="color: var(--accent-bash);">systems-architecture</span>
+          <span>/</span>
+          <span style="color: #FFFFFF;">topology-explorer</span>
+        </div>
+
+        <div class="arch-title-wrap">
+          <div class="section-tag-badge" style="margin-bottom: 0.6rem;">DISTRIBUTED CLOUD BLUEPRINTS</div>
+          <h1 id="activeSystemTitle">Nexora Quick-Commerce Distributed Cloud Topology</h1>
+          <p class="arch-lead-subtitle" id="activeSystemSummary">
+            High-throughput mobile e-commerce platform engineered for sub-30ms cart operations, geographic CDN caching, and zero-downtime rolling deployments across Amazon Web Services.
+          </p>
+        </div>
+      </header>
+
+      <!-- ==================== 2. SYSTEM SWITCHER TABS ==================== -->
+      <div class="arch-system-tabs" role="tablist">
+        <button type="button" class="arch-system-tab active" data-system="nexora" role="tab">
+          <span>⚡ 01: Nexora Quick-Commerce</span>
+          <span class="badge-mini">EKS + Redis</span>
+        </button>
+        <button type="button" class="arch-system-tab" data-system="kkk" role="tab">
+          <span>🌍 02: Kashmir Kesar Kingdom</span>
+          <span class="badge-mini">NGINX + 95% Compression</span>
+        </button>
+        <button type="button" class="arch-system-tab" data-system="sysinspect" role="tab">
+          <span>🐧 03: sys-inspect Telemetry</span>
+          <span class="badge-mini">Linux /proc Kernel</span>
+        </button>
+      </div>
+
+      <!-- ==================== 3. ARCHITECTURE TELEMETRY GRID ==================== -->
+      <div class="arch-telemetry-grid">
+        <div class="arch-telemetry-tile">
+          <span class="arch-tile-label">PRIMARY DEPLOYMENT REGION</span>
+          <span class="arch-tile-value" id="statRegion">AWS ap-south-1 (Mumbai)</span>
+        </div>
+        <div class="arch-telemetry-tile">
+          <span class="arch-tile-label">INGRESS ROUTING CONTROLLER</span>
+          <span class="arch-tile-value" id="statIngress">AWS ALB + NGINX Ingress</span>
+        </div>
+        <div class="arch-telemetry-tile">
+          <span class="arch-tile-label">HIGH-AVAILABILITY TARGET</span>
+          <span class="arch-tile-value" id="statAvailability">99.99% Multi-AZ SLA</span>
+        </div>
+        <div class="arch-telemetry-tile">
+          <span class="arch-tile-label">STATE &amp; CACHING STRATEGY</span>
+          <span class="arch-tile-value" id="statCaching">Redis Cluster (Hot Carts)</span>
+        </div>
+      </div>
+
+      <!-- ==================== 4. INTERACTIVE TOPOLOGY WORKSPACE ==================== -->
+      <div class="arch-workspace-grid">
+        
+        <!-- Left Column: The Interactive SVG Topology Canvas -->
+        <div class="arch-canvas-card">
+          <div class="arch-canvas-header">
+            <span class="arch-active-badge" id="activeSystemBadge">K8S MICROSERVICES // MULTI-AZ CLOUD</span>
+            <span class="arch-canvas-hint">⚡ Click or hover nodes to inspect live telemetry</span>
+          </div>
+
+          <!-- DIAGRAM 1: Nexora Quick-Commerce Cloud Topology -->
+          <div class="topology-diagram-container active" data-system="nexora" id="diag-nexora">
+            <svg class="topology-svg" viewBox="0 0 880 440" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="busGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.2"/>
+                  <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#00F5A0" stop-opacity="0.9"/>
+                </linearGradient>
+                <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#0B132B" stop-opacity="0.95"/>
+                </linearGradient>
+                <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              <!-- Connection Bus Lines -->
+              <!-- Client -> CloudFront -->
+              <path d="M 140 220 L 250 220" class="topology-bus-line cyan" fill="none" stroke-width="2.5" />
+              <!-- CloudFront -> ALB -->
+              <path d="M 370 220 L 470 220" class="topology-bus-line emerald" fill="none" stroke-width="2.5" />
+              <!-- ALB -> EKS -->
+              <path d="M 590 220 L 680 220" class="topology-bus-line cyan" fill="none" stroke-width="2.5" />
+              <!-- EKS -> Redis (Branch Top) -->
+              <path d="M 740 180 C 740 120, 770 100, 800 100" class="topology-bus-line amber" fill="none" stroke-width="2" />
+              <!-- EKS -> Aurora DB (Branch Bottom) -->
+              <path d="M 740 260 C 740 320, 770 340, 800 340" class="topology-bus-line purple" fill="none" stroke-width="2" />
+
+              <!-- Node 1: Mobile Client -->
+              <g class="topo-node active" data-node="client" transform="translate(30, 170)">
+                <rect width="110" height="100" rx="10" fill="url(#nodeGrad)" stroke="#38BDF8" stroke-width="1.5" />
+                <text x="55" y="32" fill="#38BDF8" font-family="'Fira Code', monospace" font-size="20" text-anchor="middle">📱</text>
+                <text x="55" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">Mobile Edge</text>
+                <text x="55" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">React Native</text>
+                <circle cx="55" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <!-- Node 2: AWS CloudFront CDN -->
+              <g class="topo-node" data-node="cdn" transform="translate(250, 170)">
+                <rect width="120" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="32" fill="#00F5A0" font-family="'Fira Code', monospace" font-size="20" text-anchor="middle">🌐</text>
+                <text x="60" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">CloudFront Edge</text>
+                <text x="60" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">450+ PoPs // SSL</text>
+                <circle cx="60" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <!-- Node 3: AWS ALB -->
+              <g class="topo-node" data-node="alb" transform="translate(470, 170)">
+                <rect width="120" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="32" fill="#38BDF8" font-family="'Fira Code', monospace" font-size="20" text-anchor="middle">⚖️</text>
+                <text x="60" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">AWS ALB</text>
+                <text x="60" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">L7 Ingress InSync</text>
+                <circle cx="60" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <!-- Node 4: EKS Kubernetes Cluster -->
+              <g class="topo-node" data-node="eks" transform="translate(680, 170)">
+                <rect width="120" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="32" fill="#38BDF8" font-family="'Fira Code', monospace" font-size="20" text-anchor="middle">☸️</text>
+                <text x="60" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">EKS Cluster</text>
+                <text x="60" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">Pods (v1.30.2)</text>
+                <circle cx="60" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <!-- Node 5: Redis Cache (Top Branch) -->
+              <g class="topo-node" data-node="redis" transform="translate(770, 50)">
+                <rect width="100" height="90" rx="8" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="50" y="30" fill="#FF8A00" font-family="'Fira Code', monospace" font-size="18" text-anchor="middle">⚡</text>
+                <text x="50" y="52" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="10.5" text-anchor="middle">Redis Cluster</text>
+                <text x="50" y="68" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="8.5" text-anchor="middle">0.3ms Hot Cart</text>
+                <circle cx="50" cy="80" r="3.5" fill="#00F5A0" />
+              </g>
+
+              <!-- Node 6: Aurora PostgreSQL (Bottom Branch) -->
+              <g class="topo-node" data-node="db" transform="translate(770, 290)">
+                <rect width="100" height="90" rx="8" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="50" y="30" fill="#A855F7" font-family="'Fira Code', monospace" font-size="18" text-anchor="middle">🗄️</text>
+                <text x="50" y="52" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="10.5" text-anchor="middle">Aurora Postgres</text>
+                <text x="50" y="68" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="8.5" text-anchor="middle">Multi-AZ Storage</text>
+                <circle cx="50" cy="80" r="3.5" fill="#00F5A0" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- DIAGRAM 2: Kashmir Kesar Kingdom Topology -->
+          <div class="topology-diagram-container" data-system="kkk" id="diag-kkk">
+            <svg class="topology-svg" viewBox="0 0 880 440" xmlns="http://www.w3.org/2000/svg">
+              <!-- Paths -->
+              <path d="M 140 220 L 260 220" class="topology-bus-line cyan" fill="none" stroke-width="2.5" />
+              <path d="M 380 220 L 490 220" class="topology-bus-line emerald" fill="none" stroke-width="2.5" />
+              <path d="M 610 180 C 620 120, 660 100, 700 100" class="topology-bus-line amber" fill="none" stroke-width="2" />
+              <path d="M 610 260 C 620 320, 660 340, 700 340" class="topology-bus-line purple" fill="none" stroke-width="2" />
+
+              <!-- Nodes -->
+              <g class="topo-node active" data-node="client" transform="translate(30, 170)">
+                <rect width="110" height="100" rx="10" fill="url(#nodeGrad)" stroke="#38BDF8" stroke-width="1.5" />
+                <text x="55" y="32" fill="#38BDF8" font-size="20" text-anchor="middle">🛒</text>
+                <text x="55" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">Global Shoppers</text>
+                <text x="55" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">ES6+ Modular</text>
+                <circle cx="55" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="dns" transform="translate(260, 170)">
+                <rect width="120" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="32" fill="#00F5A0" font-size="20" text-anchor="middle">🌍</text>
+                <text x="60" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">Route 53 DNS</text>
+                <text x="60" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">Anycast GeoIP</text>
+                <circle cx="60" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="nginx" transform="translate(490, 170)">
+                <rect width="120" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="32" fill="#00F5A0" font-size="20" text-anchor="middle">⚡</text>
+                <text x="60" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">NGINX Gateway</text>
+                <text x="60" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">Brotli 95% Comp</text>
+                <circle cx="60" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="storage" transform="translate(700, 50)">
+                <rect width="120" height="90" rx="8" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="30" fill="#FF8A00" font-size="18" text-anchor="middle">📦</text>
+                <text x="60" y="52" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="10.5" text-anchor="middle">AWS S3 Media</text>
+                <text x="60" y="68" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="8.5" text-anchor="middle">Immutable Bucket</text>
+                <circle cx="60" cy="80" r="3.5" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="currency" transform="translate(700, 290)">
+                <rect width="120" height="90" rx="8" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="30" fill="#A855F7" font-size="18" text-anchor="middle">💱</text>
+                <text x="60" y="52" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="10.5" text-anchor="middle">Currency Engine</text>
+                <text x="60" y="68" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="8.5" text-anchor="middle">Dynamic Multi-Forex</text>
+                <circle cx="60" cy="80" r="3.5" fill="#00F5A0" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- DIAGRAM 3: sys-inspect Telemetry Pipeline -->
+          <div class="topology-diagram-container" data-system="sysinspect" id="diag-sysinspect">
+            <svg class="topology-svg" viewBox="0 0 880 440" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 180 220 L 300 220" class="topology-bus-line cyan" fill="none" stroke-width="2.5" />
+              <path d="M 440 220 L 560 220" class="topology-bus-line emerald" fill="none" stroke-width="2.5" />
+              <path d="M 680 220 L 760 220" class="topology-bus-line amber" fill="none" stroke-width="2.5" />
+
+              <g class="topo-node active" data-node="kernel" transform="translate(40, 170)">
+                <rect width="140" height="100" rx="10" fill="url(#nodeGrad)" stroke="#38BDF8" stroke-width="1.5" />
+                <text x="70" y="32" fill="#38BDF8" font-size="20" text-anchor="middle">🐧</text>
+                <text x="70" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">Linux Kernel OS</text>
+                <text x="70" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">/proc &amp; /sys VFS</text>
+                <circle cx="70" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="daemon" transform="translate(300, 170)">
+                <rect width="140" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="70" y="32" fill="#00F5A0" font-size="20" text-anchor="middle">🔍</text>
+                <text x="70" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">sys-inspect CLI</text>
+                <text x="70" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">Socket &amp; Zombie Audit</text>
+                <circle cx="70" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="exporter" transform="translate(560, 170)">
+                <rect width="120" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="60" y="32" fill="#FF8A00" font-size="20" text-anchor="middle">📊</text>
+                <text x="60" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">Prometheus Exporter</text>
+                <text x="60" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">:9100/metrics</text>
+                <circle cx="60" cy="88" r="4" fill="#00F5A0" />
+              </g>
+
+              <g class="topo-node" data-node="grafana" transform="translate(760, 170)">
+                <rect width="110" height="100" rx="10" fill="url(#nodeGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" />
+                <text x="55" y="32" fill="#A855F7" font-size="20" text-anchor="middle">📈</text>
+                <text x="55" y="58" fill="#FFFFFF" font-family="'Inter', sans-serif" font-weight="700" font-size="11" text-anchor="middle">Grafana HUD</text>
+                <text x="55" y="74" fill="#94A3B8" font-family="'Fira Code', monospace" font-size="9" text-anchor="middle">Alertmanager InSync</text>
+                <circle cx="55" cy="88" r="4" fill="#00F5A0" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Right Column: Node Telemetry Inspector -->
+        <aside class="arch-inspector-panel">
+          <div class="arch-inspector-header">
+            <h3><span>⚡</span> COMPONENT INSPECTOR</h3>
+            <span class="status-indicator-badge" style="font-size:0.65rem; padding: 0.15rem 0.5rem;">TELEMETRY LIVE</span>
+          </div>
+
+          <div class="arch-inspect-name" id="inspectNodeName">Mobile Edge Client (Expo / React Native)</div>
+
+          <ul class="arch-inspect-meta-list">
+            <li class="arch-inspect-meta-item">
+              <span class="arch-inspect-meta-label">SYSTEM ROLE &amp; SCOPE</span>
+              <span class="arch-inspect-meta-val" id="inspectNodeRole">Client Presentation Layer</span>
+            </li>
+            <li class="arch-inspect-meta-item">
+              <span class="arch-inspect-meta-label">NETWORK PROTOCOL &amp; CIPHER</span>
+              <span class="arch-inspect-meta-val" id="inspectNodeProtocol">HTTPS / TLS 1.3 • WebSockets</span>
+            </li>
+            <li class="arch-inspect-meta-item">
+              <span class="arch-inspect-meta-label">REDUNDANCY &amp; AVAILABILITY</span>
+              <span class="arch-inspect-meta-val" id="inspectNodeRedundancy">Global Distributed Clients (iOS / Android)</span>
+            </li>
+            <li class="arch-inspect-meta-item">
+              <span class="arch-inspect-meta-label">HEALTH PROBE &amp; SELF-HEALING</span>
+              <span class="arch-inspect-meta-val" id="inspectNodeHealth">PWA Service Worker + SQLite Offline Cart Cache</span>
+            </li>
+            <li class="arch-inspect-meta-item">
+              <span class="arch-inspect-meta-label">OBSERVED P99 TELEMETRY</span>
+              <span class="arch-inspect-meta-val" id="inspectNodeMetrics">Avg Render Time: 16ms | Local Cache Hit: 94%</span>
+            </li>
+          </ul>
+        </aside>
+
+      </div>
+
+      <!-- ==================== 5. 3D EXPLODED DOCKER MULTI-STAGE LAYER INSPECTOR ==================== -->
+      <section class="docker-exploder-section">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.75rem;">
+          <div class="section-tag-badge">HARDENED CONTAINER ENGINEERING</div>
+          <h2>Multi-Stage Docker Layer Compilation</h2>
+          <p class="section-subtitle">
+            Exploded view of production container layers: segregating heavy compilers in ephemeral build stages to minimize production attack surfaces down to an ultra-minimal distroless artifact.
+          </p>
+        </header>
+
+        <div class="docker-exploder-card">
+          <div class="docker-layers-stack">
+            <div class="docker-layer-slab" data-layer="base">
+              <div class="docker-slab-left">
+                <span class="docker-slab-title">Layer 0: Alpine Linux v3.20 Minimal Base</span>
+                <span class="docker-slab-desc">Base root filesystem • Read-only packages</span>
+              </div>
+              <span class="docker-slab-badge">5.42 MB</span>
+            </div>
+
+            <div class="docker-layer-slab" data-layer="builder">
+              <div class="docker-slab-left">
+                <span class="docker-slab-title">Layer 1: Ephemeral Multi-Stage Toolchain</span>
+                <span class="docker-slab-desc">Go/C/Node compilers • Build dependencies</span>
+              </div>
+              <span class="docker-slab-badge" style="background:rgba(255,138,0,0.12); color:#FF8A00; border-color:rgba(255,138,0,0.3);">STRIPPED ON COMMIT</span>
+            </div>
+
+            <div class="docker-layer-slab active" data-layer="distroless">
+              <div class="docker-slab-left">
+                <span class="docker-slab-title">Layer 2: Google Distroless Non-Root Base</span>
+                <span class="docker-slab-desc">Zero package manager • Zero shell binaries</span>
+              </div>
+              <span class="docker-slab-badge">2.38 MB (CACHED)</span>
+            </div>
+
+            <div class="docker-layer-slab" data-layer="binary">
+              <div class="docker-slab-left">
+                <span class="docker-slab-title">Layer 3: Statically Linked Binary (UID 10001)</span>
+                <span class="docker-slab-desc">Non-root user execution • Capability drops</span>
+              </div>
+              <span class="docker-slab-badge">11.75 MB</span>
+            </div>
+          </div>
+
+          <div class="docker-inspect-box">
+            <h4 id="dockerLayerName">Stage 2: Google Distroless Non-Root Runtime Base</h4>
+            <div class="docker-inspect-size" id="dockerLayerSize">Size: 2.38 MB</div>
+            <p class="docker-inspect-p" id="dockerLayerPurpose">
+              Contains only application runtime dependencies and root CA certificates. With no bash, curl, or package managers present, remote code execution vulnerability exploits are strictly mitigated.
+            </p>
+            <div class="docker-security-stamp" id="dockerLayerSecurity">
+              <span>🛡️</span> Trivy Audit: 0 Critical | 0 High | 0 Medium Vulnerabilities
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 6. DECLARATIVE INFRASTRUCTURE-AS-CODE (IaC) ==================== -->
+      <section class="iac-manifests-section">
+        <header class="section-header" style="text-align: left; margin-bottom: 1.75rem;">
+          <div class="section-tag-badge">DECLARATIVE INFRASTRUCTURE AS CODE</div>
+          <h2>Production Terraform &amp; Kubernetes Blueprints</h2>
+          <p class="section-subtitle">
+            Auditable, version-controlled cloud infrastructure definitions implementing zero-trust networking, multi-AZ high availability, and least-privilege security policies.
+          </p>
+        </header>
+
+        <div class="iac-viewer-card">
+          <div class="iac-viewer-header">
+            <div class="iac-file-tabs">
+              <button type="button" class="iac-file-tab active" data-file="vpc">terraform/vpc-subnets.tf</button>
+              <button type="button" class="iac-file-tab" data-file="k8s">k8s/deployment.yaml</button>
+              <button type="button" class="iac-file-tab" data-file="hpa">k8s/hpa-autoscaler.yaml</button>
+              <button type="button" class="iac-file-tab" data-file="netpol">security/network-policy.yaml</button>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="copyIaCBtn" style="font-size:0.74rem;">Copy Manifest 📋</button>
+          </div>
+
+          <!-- Manifest 1: Terraform VPC -->
+          <div class="iac-code-pane active" id="iac-vpc">
+            <pre><code><span style="color:#A855F7;"># Production Multi-AZ VPC Architecture (ap-south-1)</span>
+<span style="color:#38BDF8;">module</span> <span style="color:#F8FAFC;">"vpc"</span> {
+  <span style="color:#00F5A0;">source</span>  = <span style="color:#F8FAFC;">"terraform-aws-modules/vpc/aws"</span>
+  <span style="color:#00F5A0;">version</span> = <span style="color:#F8FAFC;">"5.8.1"</span>
+
+  <span style="color:#00F5A0;">name</span> = <span style="color:#F8FAFC;">"uzair-prod-vpc"</span>
+  <span style="color:#00F5A0;">cidr</span> = <span style="color:#F8FAFC;">"10.0.0.0/16"</span>
+
+  <span style="color:#00F5A0;">azs</span>             = [<span style="color:#F8FAFC;">"ap-south-1a"</span>, <span style="color:#F8FAFC;">"ap-south-1b"</span>, <span style="color:#F8FAFC;">"ap-south-1c"</span>]
+  <span style="color:#00F5A0;">private_subnets</span> = [<span style="color:#F8FAFC;">"10.0.1.0/24"</span>, <span style="color:#F8FAFC;">"10.0.2.0/24"</span>, <span style="color:#F8FAFC;">"10.0.3.0/24"</span>]
+  <span style="color:#00F5A0;">public_subnets</span>  = [<span style="color:#F8FAFC;">"10.0.101.0/24"</span>, <span style="color:#F8FAFC;">"10.0.102.0/24"</span>, <span style="color:#F8FAFC;">"10.0.103.0/24"</span>]
+
+  <span style="color:#00F5A0;">enable_nat_gateway</span>     = <span style="color:#FF8A00;">true</span>
+  <span style="color:#00F5A0;">single_nat_gateway</span>     = <span style="color:#FF8A00;">false</span> <span style="color:#64748B;"># Multi-AZ HA Redundancy</span>
+  <span style="color:#00F5A0;">enable_dns_hostnames</span>   = <span style="color:#FF8A00;">true</span>
+  <span style="color:#00F5A0;">enable_dns_support</span>     = <span style="color:#FF8A00;">true</span>
+
+  <span style="color:#00F5A0;">public_subnet_tags</span> = {
+    <span style="color:#F8FAFC;">"kubernetes.io/role/elb"</span>                    = <span style="color:#F8FAFC;">"1"</span>
+    <span style="color:#F8FAFC;">"kubernetes.io/cluster/uzair-eks-cluster"</span> = <span style="color:#F8FAFC;">"shared"</span>
+  }
+
+  <span style="color:#00F5A0;">private_subnet_tags</span> = {
+    <span style="color:#F8FAFC;">"kubernetes.io/role/internal-elb"</span>           = <span style="color:#F8FAFC;">"1"</span>
+    <span style="color:#F8FAFC;">"kubernetes.io/cluster/uzair-eks-cluster"</span> = <span style="color:#F8FAFC;">"shared"</span>
+  }
+}</code></pre>
+          </div>
+
+          <!-- Manifest 2: K8s Deployment -->
+          <div class="iac-code-pane" id="iac-k8s">
+            <pre><code><span style="color:#A855F7;">apiVersion:</span> <span style="color:#F8FAFC;">apps/v1</span>
+<span style="color:#A855F7;">kind:</span> <span style="color:#F8FAFC;">Deployment</span>
+<span style="color:#A855F7;">metadata:</span>
+  <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">nexora-api-gateway</span>
+  <span style="color:#00F5A0;">namespace:</span> <span style="color:#F8FAFC;">production</span>
+<span style="color:#A855F7;">spec:</span>
+  <span style="color:#00F5A0;">replicas:</span> <span style="color:#38BDF8;">3</span>
+  <span style="color:#00F5A0;">strategy:</span>
+    <span style="color:#00F5A0;">type:</span> <span style="color:#F8FAFC;">RollingUpdate</span>
+    <span style="color:#00F5A0;">rollingUpdate:</span>
+      <span style="color:#00F5A0;">maxSurge:</span> <span style="color:#F8FAFC;">25%</span>
+      <span style="color:#00F5A0;">maxUnavailable:</span> <span style="color:#F8FAFC;">0</span> <span style="color:#64748B;"># Guarantee zero downtime</span>
+  <span style="color:#A855F7;">template:</span>
+    <span style="color:#A855F7;">spec:</span>
+      <span style="color:#00F5A0;">securityContext:</span>
+        <span style="color:#00F5A0;">runAsNonRoot:</span> <span style="color:#FF8A00;">true</span>
+        <span style="color:#00F5A0;">runAsUser:</span> <span style="color:#38BDF8;">10001</span>
+      <span style="color:#A855F7;">containers:</span>
+      - <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">gateway</span>
+        <span style="color:#00F5A0;">image:</span> <span style="color:#F8FAFC;">ghcr.io/uzair0123/nexora-gateway:v1.2.0@sha256:8f4c219...</span>
+        <span style="color:#00F5A0;">securityContext:</span>
+          <span style="color:#00F5A0;">readOnlyRootFilesystem:</span> <span style="color:#FF8A00;">true</span>
+          <span style="color:#00F5A0;">capabilities:</span>
+            <span style="color:#00F5A0;">drop:</span> [<span style="color:#F8FAFC;">"ALL"</span>]
+        <span style="color:#00F5A0;">resources:</span>
+          <span style="color:#00F5A0;">requests:</span> { <span style="color:#00F5A0;">cpu:</span> <span style="color:#F8FAFC;">"100m"</span>, <span style="color:#00F5A0;">memory:</span> <span style="color:#F8FAFC;">"128Mi"</span> }
+          <span style="color:#00F5A0;">limits:</span>   { <span style="color:#00F5A0;">cpu:</span> <span style="color:#F8FAFC;">"500m"</span>, <span style="color:#00F5A0;">memory:</span> <span style="color:#F8FAFC;">"512Mi"</span> }
+        <span style="color:#00F5A0;">livenessProbe:</span>
+          <span style="color:#00F5A0;">httpGet:</span> { <span style="color:#00F5A0;">path:</span> <span style="color:#F8FAFC;">/healthz</span>, <span style="color:#00F5A0;">port:</span> <span style="color:#38BDF8;">8080</span> }
+          <span style="color:#00F5A0;">initialDelaySeconds:</span> <span style="color:#38BDF8;">10</span>
+          <span style="color:#00F5A0;">periodSeconds:</span> <span style="color:#38BDF8;">5</span></code></pre>
+          </div>
+
+          <!-- Manifest 3: K8s HPA -->
+          <div class="iac-code-pane" id="iac-hpa">
+            <pre><code><span style="color:#A855F7;">apiVersion:</span> <span style="color:#F8FAFC;">autoscaling/v2</span>
+<span style="color:#A855F7;">kind:</span> <span style="color:#F8FAFC;">HorizontalPodAutoscaler</span>
+<span style="color:#A855F7;">metadata:</span>
+  <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">nexora-hpa</span>
+  <span style="color:#00F5A0;">namespace:</span> <span style="color:#F8FAFC;">production</span>
+<span style="color:#A855F7;">spec:</span>
+  <span style="color:#00F5A0;">scaleTargetRef:</span>
+    <span style="color:#00F5A0;">apiVersion:</span> <span style="color:#F8FAFC;">apps/v1</span>
+    <span style="color:#00F5A0;">kind:</span> <span style="color:#F8FAFC;">Deployment</span>
+    <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">nexora-api-gateway</span>
+  <span style="color:#00F5A0;">minReplicas:</span> <span style="color:#38BDF8;">3</span>
+  <span style="color:#00F5A0;">maxReplicas:</span> <span style="color:#38BDF8;">12</span>
+  <span style="color:#A855F7;">metrics:</span>
+  - <span style="color:#00F5A0;">type:</span> <span style="color:#F8FAFC;">Resource</span>
+    <span style="color:#00F5A0;">resource:</span>
+      <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">cpu</span>
+      <span style="color:#00F5A0;">target:</span>
+        <span style="color:#00F5A0;">type:</span> <span style="color:#F8FAFC;">Utilization</span>
+        <span style="color:#00F5A0;">averageUtilization:</span> <span style="color:#38BDF8;">70</span>
+  - <span style="color:#00F5A0;">type:</span> <span style="color:#F8FAFC;">Resource</span>
+    <span style="color:#00F5A0;">resource:</span>
+      <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">memory</span>
+      <span style="color:#00F5A0;">target:</span>
+        <span style="color:#00F5A0;">type:</span> <span style="color:#F8FAFC;">Utilization</span>
+        <span style="color:#00F5A0;">averageUtilization:</span> <span style="color:#38BDF8;">80</span></code></pre>
+          </div>
+
+          <!-- Manifest 4: K8s Network Policy -->
+          <div class="iac-code-pane" id="iac-netpol">
+            <pre><code><span style="color:#A855F7;">apiVersion:</span> <span style="color:#F8FAFC;">networking.k8s.io/v1</span>
+<span style="color:#A855F7;">kind:</span> <span style="color:#F8FAFC;">NetworkPolicy</span>
+<span style="color:#A855F7;">metadata:</span>
+  <span style="color:#00F5A0;">name:</span> <span style="color:#F8FAFC;">default-deny-and-least-privilege</span>
+  <span style="color:#00F5A0;">namespace:</span> <span style="color:#F8FAFC;">production</span>
+<span style="color:#A855F7;">spec:</span>
+  <span style="color:#00F5A0;">podSelector:</span>
+    <span style="color:#00F5A0;">matchLabels:</span>
+      <span style="color:#00F5A0;">app.kubernetes.io/tier:</span> <span style="color:#F8FAFC;">backend</span>
+  <span style="color:#00F5A0;">policyTypes:</span>
+  - <span style="color:#F8FAFC;">Ingress</span>
+  - <span style="color:#F8FAFC;">Egress</span>
+  <span style="color:#A855F7;">ingress:</span>
+  - <span style="color:#00F5A0;">from:</span>
+    - <span style="color:#00F5A0;">podSelector:</span>
+        <span style="color:#00F5A0;">matchLabels:</span>
+          <span style="color:#00F5A0;">app.kubernetes.io/tier:</span> <span style="color:#F8FAFC;">ingress-gateway</span>
+    <span style="color:#00F5A0;">ports:</span>
+    - <span style="color:#00F5A0;">protocol:</span> <span style="color:#F8FAFC;">TCP</span>
+      <span style="color:#00F5A0;">port:</span> <span style="color:#38BDF8;">8080</span>
+  <span style="color:#A855F7;">egress:</span>
+  - <span style="color:#00F5A0;">to:</span>
+    - <span style="color:#00F5A0;">podSelector:</span>
+        <span style="color:#00F5A0;">matchLabels:</span>
+          <span style="color:#00F5A0;">app.kubernetes.io/tier:</span> <span style="color:#F8FAFC;">cache</span>
+    <span style="color:#00F5A0;">ports:</span>
+    - <span style="color:#00F5A0;">protocol:</span> <span style="color:#F8FAFC;">TCP</span>
+      <span style="color:#00F5A0;">port:</span> <span style="color:#38BDF8;">6379</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="terminal-footer">
+    <div class="container footer-content">
+      <p class="copyright">Uzair Sultan // Cloud &amp; DevOps Infrastructure Architect</p>
+      <p class="footer-telemetry">HOST: cloud-node-01 | REGION: ap-south-1 | TOPOLOGY_LAB: ACTIVE</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="../assets/js/main.js?v=2.7.0"></script>
+  <script src="../assets/js/architecture.js?v=2.7.0"></script>
+</body>
+</html>
