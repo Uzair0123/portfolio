@@ -168,11 +168,49 @@ Docker, Kubernetes (v1.30), AWS Cloud (VPC, EKS, ALB, S3, IAM, CloudFront), Terr
   }
 
   // ═══════════════════════════════════════════════════════════════
+  // 3. CRYPTOGRAPHIC ATTESTATION & COSIGN LEDGER
+  // ═══════════════════════════════════════════════════════════════
+  function initAttestationLedger() {
+    const btnView = document.getElementById("btnViewAttestationJson");
+    const jsonBox = document.getElementById("attestationJsonBox");
+    const btnCopy = document.getElementById("btnCopyAttestationJson");
+    const jsonCode = document.getElementById("attestationJsonCode");
+
+    if (!btnView || !jsonBox) return;
+
+    btnView.addEventListener("click", () => {
+      const isVisible = jsonBox.style.display !== "none";
+      if (isVisible) {
+        jsonBox.style.display = "none";
+        btnView.innerHTML = `<span>📜</span> Inspect in-toto Attestation JSON`;
+      } else {
+        jsonBox.style.display = "block";
+        btnView.innerHTML = `<span>✕</span> Hide Attestation JSON`;
+      }
+    });
+
+    if (btnCopy && jsonCode) {
+      btnCopy.addEventListener("click", () => {
+        const text = jsonCode.innerText || jsonCode.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            btnCopy.textContent = "Copied! ✓";
+            setTimeout(() => {
+              btnCopy.textContent = "Copy JSON 📋";
+            }, 2000);
+          });
+        }
+      });
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
   // INITIALIZATION ON DOM READY
   // ═══════════════════════════════════════════════════════════════
   function initCredentials() {
     initCertModal();
     initRecruiterCopy();
+    initAttestationLedger();
   }
 
   if (document.readyState === "loading") {

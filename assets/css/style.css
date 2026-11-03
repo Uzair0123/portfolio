@@ -5352,3 +5352,301 @@ html.lenis, html.lenis body {
   background: var(--accent-bash);
   color: #000000;
 }
+
+/* ==========================================================================
+   SPRINT 3: LIVE PRODUCTION TELEMETRY COCKPIT & ATTESTATION LEDGER
+   ========================================================================== */
+
+/* ── 1. UNIFIED LIVE TELEMETRY COCKPIT FOOTER ───────────────────────────── */
+.telemetry-cockpit-footer {
+  background: #020407;
+  border-top: 1px solid var(--border-subtle);
+  padding: 3rem 0 2rem;
+  font-family: var(--font-ui);
+  margin-top: 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .footer-telemetry-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.telemetry-tile {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: var(--transition-smooth);
+}
+
+.telemetry-tile:hover {
+  border-color: var(--border-highlight);
+  background: rgba(20, 30, 55, 0.75);
+}
+
+.telemetry-tile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.telemetry-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.telemetry-value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telemetry-val {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #00F5A0;
+}
+
+.telemetry-link {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+.telemetry-link:hover {
+  text-decoration: underline;
+}
+
+.telemetry-hash {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+.telemetry-hash:hover {
+  border-color: var(--accent-k8s);
+  color: var(--accent-k8s);
+}
+
+.telemetry-msg {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.telemetry-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.telemetry-vitals-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.vital-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  color: var(--text-primary);
+}
+
+.btn-refresh-pulse {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.2s;
+  padding: 0;
+  color: var(--text-muted);
+}
+
+.btn-refresh-pulse:hover {
+  opacity: 1;
+  color: var(--accent-bash);
+  transform: rotate(180deg);
+}
+
+.footer-bottom-baseline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.footer-links-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.footer-links-row a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links-row a:hover {
+  color: var(--accent-bash);
+}
+
+/* ── 2. SIGSTORE / COSIGN ATTESTATION CARD ──────────────────────────────── */
+.attestation-card {
+  background: var(--card-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-top: 1.5rem;
+}
+
+.attestation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.25rem;
+}
+
+.attestation-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.attestation-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .attestation-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.attest-cell {
+  background: rgba(3, 5, 8, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.attest-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.attest-val {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+  word-break: break-all;
+}
+
+.attest-val-code code {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-bash);
+  word-break: break-all;
+}
+
+.attestation-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.attestation-json-box {
+  margin-top: 1.25rem;
+  background: #000000;
+  border: 1px solid var(--border-highlight);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.json-box-header {
+  background: #111827;
+  padding: 0.6rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.attestation-json-box pre {
+  margin: 0;
+  padding: 1rem;
+  max-height: 280px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: #38BDF8;
+  line-height: 1.5;
+}

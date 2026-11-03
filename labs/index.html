@@ -24,7 +24,7 @@
   <script>(function(){const t=localStorage.getItem('uz_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="../assets/css/style.css?v=2.9.2">
+  <link rel="stylesheet" href="../assets/css/style.css?v=2.9.3">
 </head>
 <body class="labs-body">
 
@@ -603,11 +603,68 @@
     </div>
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="terminal-footer">
-    <div class="container footer-content">
-      <p class="copyright">Uzair Sultan // Cloud &amp; DevOps Infrastructure Architect</p>
-      <p class="footer-telemetry">HOST: cloud-node-01 | REGION: ap-south-1 | DEVOPS_LAB: ACTIVE</p>
+  <!-- ==================== LIVE TELEMETRY & PRODUCTION STATUS COCKPIT ==================== -->
+  <footer class="telemetry-cockpit-footer">
+    <div class="container">
+      
+      <!-- Top Row: Live GitHub CI/CD & Production Release Pulse -->
+      <div class="footer-telemetry-grid">
+        <!-- Tile 1: CI/CD Pipeline Health -->
+        <div class="telemetry-tile">
+          <div class="telemetry-tile-header">
+            <span class="telemetry-label">GITHUB ACTIONS CI/CD</span>
+            <span class="status-indicator-badge" style="font-size:0.62rem; padding:0.12rem 0.45rem;">LIVE PROBE</span>
+          </div>
+          <div class="telemetry-value-row">
+            <span class="telemetry-val" id="ghRunStatus">● Passing (Run #54)</span>
+            <a href="https://github.com/Uzair0123/portfolio/actions" target="_blank" rel="noopener noreferrer" class="telemetry-link">Logs ↗</a>
+          </div>
+          <span class="telemetry-sub" id="ghRunWorkflow">Deploy Portfolio to GitHub Pages</span>
+        </div>
+
+        <!-- Tile 2: Live Commit & Release Digest -->
+        <div class="telemetry-tile">
+          <div class="telemetry-tile-header">
+            <span class="telemetry-label">LATEST COMMIT DISPATCH</span>
+            <span style="font-family: var(--font-mono); font-size:0.65rem; color: var(--accent-cyan);" id="ghCommitTime">Pushed today</span>
+          </div>
+          <div class="telemetry-value-row">
+            <a href="https://github.com/Uzair0123/portfolio/commits/main" target="_blank" rel="noopener noreferrer" class="telemetry-hash" id="ghCommitSha">
+              sha: 960316e
+            </a>
+            <span class="telemetry-sub">Branch: <strong>main</strong></span>
+          </div>
+          <span class="telemetry-msg" id="ghCommitMsg">feat(v2.9.2): sprint 2 opentelemetry trace waterfall...</span>
+        </div>
+
+        <!-- Tile 3: Client Core Web Vitals & Hardware HUD -->
+        <div class="telemetry-tile">
+          <div class="telemetry-tile-header">
+            <span class="telemetry-label">REAL-TIME WEB VITALS &amp; HARDWARE</span>
+            <button type="button" class="btn-refresh-pulse" id="btnRefreshPulse" title="Refresh Live Telemetry Pulse">🔄</button>
+          </div>
+          <div class="telemetry-vitals-row">
+            <span class="vital-badge" id="vitalFps">⚡ 60 FPS</span>
+            <span class="vital-badge" id="vitalDom">📦 412 Nodes</span>
+            <span class="vital-badge" id="vitalLoad">⏱️ ~120ms</span>
+            <span class="vital-badge" id="vitalMem">🧠 14 MB</span>
+          </div>
+          <span class="telemetry-sub" id="vitalNet">Network: Online (TLS 1.3 / HTTP/2)</span>
+        </div>
+      </div>
+
+      <!-- Bottom Baseline Bar -->
+      <div class="footer-bottom-baseline">
+        <p>&copy; 2026 Uzair Sultan // Cloud &amp; DevOps Infrastructure Architect</p>
+        <div class="footer-links-row">
+          <a href="https://github.com/Uzair0123/portfolio" target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a>
+          <span>•</span>
+          <a href="https://linkedin.com/in/uzair-sultan-dev" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <span>•</span>
+          <span style="color: var(--accent-bash);">UZ-OS v2.9.3-PROD</span>
+        </div>
+      </div>
+
     </div>
   </footer>
 
@@ -615,7 +672,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-  <script src="../assets/js/main.js?v=2.9.2"></script>
-  <script src="../assets/js/labs.js?v=2.9.2"></script>
+  <script src="../assets/js/main.js?v=2.9.3"></script>
+  <script src="../assets/js/labs.js?v=2.9.3"></script>
 </body>
 </html>
