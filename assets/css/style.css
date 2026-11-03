@@ -2135,27 +2135,6 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* GPU Hardware Acceleration for Cinematic Motion */
-.status-nav,
-.hero-avatar-wrap,
-.hero-avatar,
-.hero-name-badge,
-.hero-name-glamour,
-.hero-tagline-creed,
-.hero-role-sub,
-.hero-bio,
-.hero-actions,
-.terminal-container,
-.terminal-1click-pills,
-.bento-card,
-.project-card,
-.pipeline-card,
-.pipeline-stage,
-.channel-tile,
-.experience-card {
-  will-change: transform, opacity;
-}
-
 /* 3D Perspective Preservation for Avatar Tilt */
 .hero-avatar-wrap {
   perspective: 1000px;
@@ -2522,24 +2501,87 @@ html.lenis, html.lenis body {
   );
 }
 
-/* GPU Hardware Acceleration Updates */
-.status-nav,
-.hero-avatar-wrap,
-.hero-avatar,
-.hero-name-badge,
-.hero-name-glamour,
-.hero-tagline-creed,
-.hero-role-sub,
-.hero-bio,
-.hero-actions,
-.terminal-container,
-.terminal-1click-pills,
-.bento-card,
-.project-card,
-.server-blade-card,
-.commit-node-card,
-.pipeline-card,
-.pipeline-stage,
-.channel-tile {
-  will-change: transform, opacity;
+/* --------------------------------------------------------------------------
+   Mobile-First Stability & Anti-Collapse Layout Rules (< 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Disable heavy multi-layer blur textures on mobile GPUs to prevent compositor blackouts */
+  .liquid-mesh-blob {
+    display: none !important;
+  }
+
+  .liquid-bg-container {
+    background:
+      radial-gradient(circle at 12% 15%, rgba(0, 245, 160, 0.42) 0%, transparent 55%),
+      radial-gradient(circle at 88% 35%, rgba(56, 189, 248, 0.45) 0%, transparent 60%),
+      radial-gradient(circle at 18% 70%, rgba(168, 85, 247, 0.42) 0%, transparent 55%),
+      radial-gradient(circle at 82% 88%, rgba(255, 138, 0, 0.38) 0%, transparent 50%),
+      #030508;
+    background-size: 100% 100%;
+    animation: mobileFluidDrift 14s ease-in-out infinite alternate;
+  }
+
+  /* Bento K8s Pod Matrix 1-Column Reflow */
+  .pod-replica-matrix {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  /* Git Commit Ledger Timeline Mobile Sizing */
+  .commit-ledger-timeline {
+    padding-left: 1.25rem;
+    max-width: 100%;
+  }
+
+  .timeline-branch-spine {
+    left: 5px;
+  }
+
+  .commit-node-marker {
+    left: -1.25rem;
+  }
+
+  .commit-node-card {
+    padding: 1.15rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .commit-card-header {
+    gap: 0.4rem;
+  }
+
+  .commit-hash-pill {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .credential-hash-strip {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  /* Server Blade Card Mobile Sizing */
+  .server-blade-card {
+    padding: 1.25rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .blade-chassis-strip {
+    padding-bottom: 0.45rem;
+    margin-bottom: 0.45rem;
+  }
+}
+
+@keyframes mobileFluidDrift {
+  0% {
+    filter: brightness(1) saturate(1.15);
+  }
+  50% {
+    filter: brightness(1.22) saturate(1.35);
+  }
+  100% {
+    filter: brightness(1.08) saturate(1.2);
+  }
 }

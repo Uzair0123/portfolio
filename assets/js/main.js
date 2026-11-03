@@ -28,8 +28,8 @@
     let width = 0;
     let height = 0;
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 28 : 64;
-    const maxDistance = isMobile ? 105 : 140;
+    const particleCount = isMobile ? 18 : 64;
+    const maxDistance = isMobile ? 90 : 140;
 
     let mouse = { x: -9999, y: -9999, vx: 0, vy: 0, lastX: 0, lastY: 0 };
 
@@ -78,7 +78,7 @@
     }
 
     // ── 2. Quantum Telemetry Stardust Field ───────────────────────
-    const stardustCount = isMobile ? 20 : 44;
+    const stardustCount = isMobile ? 12 : 44;
     const stardust = [];
     for (let s = 0; s < stardustCount; s++) {
       stardust.push({
@@ -98,7 +98,7 @@
       "SYN", "ACK", "0x7F", "200 OK", "10.0.1.1", "λ", "TCP/IP",
       "OCI", "v1.30.2", "443/TLS", "UDP", "ETag", "99.99%", "git commit", "HEALTHY"
     ];
-    const glyphCount = isMobile ? 6 : 13;
+    const glyphCount = isMobile ? 4 : 13;
     const glyphs = [];
     for (let g = 0; g < glyphCount; g++) {
       glyphs.push({
@@ -136,7 +136,7 @@
       [5, 1], [5, 2], [5, 3], [5, 4]
     ];
 
-    const polyhedraCount = isMobile ? 3 : 7;
+    const polyhedraCount = isMobile ? 1 : 7;
     const polyhedra = [];
     for (let p = 0; p < polyhedraCount; p++) {
       const isCube = p % 2 === 0;
@@ -230,27 +230,29 @@
       const mouseParallaxX = hasMouse ? (mouse.x - width / 2) * 0.025 : 0;
       const mouseParallaxY = hasMouse ? (mouse.y - height / 2) * 0.025 : 0;
 
-      // ── Liquid Floating Wave Ribbons ───────────────────────────
-      const waveTime = frameCount * 0.015;
-      ctx.beginPath();
-      ctx.moveTo(0, height * 0.35);
-      for (let x = 0; x <= width; x += 25) {
-        const y = height * 0.35 + Math.sin(x * 0.003 + waveTime) * 45 + Math.cos(x * 0.006 + waveTime * 0.8) * 25;
-        ctx.lineTo(x, y);
-      }
-      ctx.strokeStyle = "rgba(56, 189, 248, 0.15)";
-      ctx.lineWidth = 3;
-      ctx.stroke();
+      // ── Liquid Floating Wave Ribbons (Desktop High-Power) ────
+      if (!isMobile) {
+        const waveTime = frameCount * 0.015;
+        ctx.beginPath();
+        ctx.moveTo(0, height * 0.35);
+        for (let x = 0; x <= width; x += 25) {
+          const y = height * 0.35 + Math.sin(x * 0.003 + waveTime) * 45 + Math.cos(x * 0.006 + waveTime * 0.8) * 25;
+          ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.15)";
+        ctx.lineWidth = 3;
+        ctx.stroke();
 
-      ctx.beginPath();
-      ctx.moveTo(0, height * 0.68);
-      for (let x = 0; x <= width; x += 25) {
-        const y = height * 0.68 + Math.sin(x * 0.0025 - waveTime * 0.9) * 55 + Math.cos(x * 0.005 + waveTime * 0.5) * 30;
-        ctx.lineTo(x, y);
+        ctx.beginPath();
+        ctx.moveTo(0, height * 0.68);
+        for (let x = 0; x <= width; x += 25) {
+          const y = height * 0.68 + Math.sin(x * 0.0025 - waveTime * 0.9) * 55 + Math.cos(x * 0.005 + waveTime * 0.5) * 30;
+          ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = "rgba(0, 245, 160, 0.12)";
+        ctx.lineWidth = 3.5;
+        ctx.stroke();
       }
-      ctx.strokeStyle = "rgba(0, 245, 160, 0.12)";
-      ctx.lineWidth = 3.5;
-      ctx.stroke();
 
       // ── A. Render 3D Floating Polyhedra (Depth Layer 2) ────────
       for (let p = 0; p < polyhedra.length; p++) {
@@ -741,11 +743,16 @@
   function initLenisSmoothScroll() {
     if (typeof window.Lenis === "undefined") return null;
 
+    // Keep 100% native momentum scrolling on mobile touch screens for maximum 120Hz/60Hz smoothness
+    if (window.innerWidth < 768) {
+      return null;
+    }
+
     const lenis = new window.Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      smoothTouch: false // Native fluid touch on mobile devices
+      smoothTouch: false
     });
 
     // Sync Lenis with GSAP ScrollTrigger if present
