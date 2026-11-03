@@ -2062,6 +2062,15 @@ html.lenis, html.lenis body {
   animation: orbFloat3 22s ease-in-out infinite alternate;
 }
 
+.orb-amber {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255, 138, 0, 0.12) 0%, transparent 70%);
+  top: 62%;
+  left: -8%;
+  animation: orbFloat1 26s ease-in-out infinite alternate;
+}
+
 @keyframes orbFloat1 {
   0% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(90px, 60px) scale(1.12); }

@@ -16,7 +16,7 @@
   'use strict';
 
   // ═══════════════════════════════════════════════════════════════
-  // 1. CLOUD NETWORK TOPOLOGY BACKGROUND CANVAS
+  // 1. CLOUD NETWORK TOPOLOGY BACKGROUND CANVAS (GOD-TIER ENGINE)
   // ═══════════════════════════════════════════════════════════════
   function initNetworkTopologyCanvas() {
     const canvas = document.getElementById("network-bg");
@@ -27,12 +27,11 @@
 
     let width = 0;
     let height = 0;
-    let particles = [];
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 32 : 68;
-    const maxDistance = isMobile ? 110 : 145;
+    const particleCount = isMobile ? 28 : 64;
+    const maxDistance = isMobile ? 105 : 140;
 
-    let mouse = { x: -9999, y: -9999 };
+    let mouse = { x: -9999, y: -9999, vx: 0, vy: 0, lastX: 0, lastY: 0 };
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -41,10 +40,12 @@
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // Track mouse on desktop for interactive node linking & 3D parallax
+    // Track mouse on desktop for magnetic deflection & 3D parallax
     window.addEventListener("pointermove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      mouse.vx = e.clientX - (mouse.lastX || e.clientX);
+      mouse.vy = e.clientY - (mouse.lastY || e.clientY);
+      mouse.lastX = mouse.x = e.clientX;
+      mouse.lastY = mouse.y = e.clientY;
     }, { passive: true });
 
     window.addEventListener("pointerleave", () => {
@@ -52,107 +53,146 @@
       mouse.y = -9999;
     });
 
-    // Color palette: Cyber Emerald (#00F5A0), Electric Cyan (#38BDF8) & Tech Violet (#818CF8)
+    // Color palette: Cyber Emerald (#00F5A0), Electric Cyan (#38BDF8), Tech Violet (#818CF8), Cloud Amber (#FF8A00)
     const palette = [
-      { r: 0, g: 245, b: 160 },   // Cyber Emerald (--accent-bash)
-      { r: 56, g: 189, b: 248 },  // Electric Cyan (--accent-k8s)
-      { r: 129, g: 140, b: 248 }  // Tech Violet (--accent-violet)
+      { r: 0, g: 245, b: 160 },   // Cyber Emerald
+      { r: 56, g: 189, b: 248 },  // Electric Cyan
+      { r: 129, g: 140, b: 248 }, // Tech Violet
+      { r: 255, g: 138, b: 0 }    // Cloud Amber
     ];
 
+    // ── 1. Cloud Network Node Particles ──────────────────────────
+    const particles = [];
     for (let i = 0; i < particleCount; i++) {
-      const col = palette[i % 2]; // Alternating Emerald & Cyan for node particles
+      const col = palette[i % 2];
       particles.push({
         x: Math.random() * (width || window.innerWidth),
         y: Math.random() * (height || window.innerHeight),
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
+        baseVx: (Math.random() - 0.5) * 0.45,
+        baseVy: (Math.random() - 0.5) * 0.45,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
         radius: Math.random() * 1.8 + 1,
         color: col
       });
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // 3D Floating Isometric Server Wireframe Cubes
-    // ─────────────────────────────────────────────────────────────
-    const cubeCount = isMobile ? 3 : 6;
-    const cubes = [];
-
-    // Unit cube 8 vertices (centered at origin)
-    const cubeVertices = [
-      [-1, -1, -1],
-      [ 1, -1, -1],
-      [ 1,  1, -1],
-      [-1,  1, -1],
-      [-1, -1,  1],
-      [ 1, -1,  1],
-      [ 1,  1,  1],
-      [-1,  1,  1]
-    ];
-
-    // 12 wireframe edge indices
-    const cubeEdges = [
-      [0, 1], [1, 2], [2, 3], [3, 0], // back face
-      [4, 5], [5, 6], [6, 7], [7, 4], // front face
-      [0, 4], [1, 5], [2, 6], [3, 7]  // connecting edges
-    ];
-
-    for (let c = 0; c < cubeCount; c++) {
-      cubes.push({
+    // ── 2. Quantum Telemetry Stardust Field ───────────────────────
+    const stardustCount = isMobile ? 20 : 44;
+    const stardust = [];
+    for (let s = 0; s < stardustCount; s++) {
+      stardust.push({
         x: Math.random() * (width || window.innerWidth),
         y: Math.random() * (height || window.innerHeight),
-        z: Math.random() * 220 + 160,
-        size: Math.random() * 16 + (isMobile ? 18 : 28),
+        r: Math.random() * 0.8 + 0.6,
+        baseVy: -(Math.random() * 0.25 + 0.1),
+        vy: -(Math.random() * 0.25 + 0.1),
+        vx: 0,
+        seed: Math.random() * Math.PI * 2,
+        color: palette[s % palette.length]
+      });
+    }
+
+    // ── 3. Ascending Telemetry Matrix Glyphs ───────────────────────
+    const glyphWords = [
+      "SYN", "ACK", "0x7F", "200 OK", "10.0.1.1", "λ", "TCP/IP",
+      "OCI", "v1.30.2", "443/TLS", "UDP", "ETag", "99.99%", "git commit", "HEALTHY"
+    ];
+    const glyphCount = isMobile ? 6 : 13;
+    const glyphs = [];
+    for (let g = 0; g < glyphCount; g++) {
+      glyphs.push({
+        x: Math.random() * (width || window.innerWidth),
+        y: Math.random() * (height || window.innerHeight),
+        vy: -(Math.random() * 0.35 + 0.22),
+        text: glyphWords[g % glyphWords.length],
+        color: palette[g % palette.length],
+        pulse: Math.random() * Math.PI * 2
+      });
+    }
+
+    // ── 4. 3D Floating Isometric Polyhedra (Dual: Cubes & Octahedrons) ──
+    const cubeVertices = [
+      [-1, -1, -1], [ 1, -1, -1], [ 1,  1, -1], [-1,  1, -1],
+      [-1, -1,  1], [ 1, -1,  1], [ 1,  1,  1], [-1,  1,  1]
+    ];
+    const cubeEdges = [
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [0, 4], [1, 5], [2, 6], [3, 7]
+    ];
+
+    const octaVertices = [
+      [ 0, -1.25,  0],
+      [ 1,  0,     0],
+      [ 0,  0,     1],
+      [-1,  0,     0],
+      [ 0,  0,    -1],
+      [ 0,  1.25,  0]
+    ];
+    const octaEdges = [
+      [0, 1], [0, 2], [0, 3], [0, 4],
+      [1, 2], [2, 3], [3, 4], [4, 1],
+      [5, 1], [5, 2], [5, 3], [5, 4]
+    ];
+
+    const polyhedraCount = isMobile ? 3 : 7;
+    const polyhedra = [];
+    for (let p = 0; p < polyhedraCount; p++) {
+      const isCube = p % 2 === 0;
+      polyhedra.push({
+        type: isCube ? "cube" : "octa",
+        vertices: isCube ? cubeVertices : octaVertices,
+        edges: isCube ? cubeEdges : octaEdges,
+        x: Math.random() * (width || window.innerWidth),
+        y: Math.random() * (height || window.innerHeight),
+        z: Math.random() * 240 + 150,
+        size: isCube ? (Math.random() * 16 + (isMobile ? 18 : 28)) : (Math.random() * 14 + (isMobile ? 16 : 24)),
         rx: Math.random() * Math.PI * 2,
         ry: Math.random() * Math.PI * 2,
         rz: Math.random() * Math.PI * 2,
         vrx: (Math.random() - 0.5) * 0.007 + 0.003,
         vry: (Math.random() - 0.5) * 0.007 + 0.004,
         vrz: (Math.random() - 0.5) * 0.005,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: -(Math.random() * 0.28 + 0.15), // gently drifts upward like server heat/nodes
-        color: palette[c % palette.length],
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: -(Math.random() * 0.25 + 0.14),
+        color: palette[p % palette.length],
         pulse: Math.random() * Math.PI * 2
       });
     }
 
-    function project3D(v, cube, parallaxX, parallaxY) {
+    function project3D(v, poly, parallaxX, parallaxY) {
       const [vx, vy, vz] = v;
-      const s = cube.size;
+      const s = poly.size;
       const x0 = vx * s;
       const y0 = vy * s;
       const z0 = vz * s;
 
-      // Rotate around X
-      const cx = Math.cos(cube.rx), sx = Math.sin(cube.rx);
+      const cx = Math.cos(poly.rx), sx = Math.sin(poly.rx);
       const y1 = y0 * cx - z0 * sx;
       const z1 = y0 * sx + z0 * cx;
 
-      // Rotate around Y
-      const cy = Math.cos(cube.ry), sy = Math.sin(cube.ry);
+      const cy = Math.cos(poly.ry), sy = Math.sin(poly.ry);
       const x2 = x0 * cy + z1 * sy;
       const z2 = -x0 * sy + z1 * cy;
 
-      // Rotate around Z
-      const cz = Math.cos(cube.rz), sz = Math.sin(cube.rz);
+      const cz = Math.cos(poly.rz), sz = Math.sin(poly.rz);
       const x3 = x2 * cz - y1 * sz;
       const y3 = x2 * sz + y1 * cz;
 
-      // Perspective projection
       const fov = 350;
-      const totalZ = z2 + cube.z;
+      const totalZ = z2 + poly.z;
       const scale = fov / (fov + totalZ);
 
       return {
-        x: (cube.x + parallaxX) + x3 * scale,
-        y: (cube.y + parallaxY) + y3 * scale,
+        x: (poly.x + parallaxX) + x3 * scale,
+        y: (poly.y + parallaxY) + y3 * scale,
         z: totalZ,
         scale: scale
       };
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // Photon Data Packets & Radar Ripples
-    // ─────────────────────────────────────────────────────────────
+    // ── 5. Photon Data Packets & Hexagonal Radar Waves ───────────
     const packets = [];
     const maxPackets = isMobile ? 6 : 14;
 
@@ -186,43 +226,39 @@
       ctx.clearRect(0, 0, width, height);
       frameCount++;
 
-      // ── A. Render Floating 3D Wireframe Server Cubes ────────────
-      const mouseParallaxX = mouse.x > 0 ? (mouse.x - width / 2) * 0.025 : 0;
-      const mouseParallaxY = mouse.y > 0 ? (mouse.y - height / 2) * 0.025 : 0;
+      const hasMouse = mouse.x > 0 && mouse.y > 0;
+      const mouseParallaxX = hasMouse ? (mouse.x - width / 2) * 0.025 : 0;
+      const mouseParallaxY = hasMouse ? (mouse.y - height / 2) * 0.025 : 0;
 
-      for (let c = 0; c < cubes.length; c++) {
-        const cube = cubes[c];
-        cube.rx += cube.vrx;
-        cube.ry += cube.vry;
-        cube.rz += cube.vrz;
-        cube.pulse += 0.02;
+      // ── A. Render 3D Floating Polyhedra (Depth Layer 2) ────────
+      for (let p = 0; p < polyhedra.length; p++) {
+        const poly = polyhedra[p];
+        poly.rx += poly.vrx;
+        poly.ry += poly.vry;
+        poly.rz += poly.vrz;
+        poly.pulse += 0.02;
 
-        cube.x += cube.vx;
-        cube.y += cube.vy;
+        poly.x += poly.vx;
+        poly.y += poly.vy;
 
-        // Wrap around vertically
-        if (cube.y < -120) {
-          cube.y = height + 100;
-          cube.x = Math.random() * width;
-        } else if (cube.y > height + 120) {
-          cube.y = -100;
-          cube.x = Math.random() * width;
+        if (poly.y < -120) {
+          poly.y = height + 100;
+          poly.x = Math.random() * width;
+        } else if (poly.y > height + 120) {
+          poly.y = -100;
+          poly.x = Math.random() * width;
         }
+        if (poly.x < -120) poly.x = width + 100;
+        else if (poly.x > width + 120) poly.x = -100;
 
-        if (cube.x < -120) cube.x = width + 100;
-        else if (cube.x > width + 120) cube.x = -100;
-
-        // Project all 8 vertices
-        const projected = cubeVertices.map((v) => project3D(v, cube, mouseParallaxX, mouseParallaxY));
-
-        // Base opacity with subtle breathing pulse
-        const baseAlpha = 0.28 + Math.sin(cube.pulse) * 0.08;
-        const colStr = `${cube.color.r}, ${cube.color.g}, ${cube.color.b}`;
+        const projected = poly.vertices.map((v) => project3D(v, poly, mouseParallaxX, mouseParallaxY));
+        const baseAlpha = 0.28 + Math.sin(poly.pulse) * 0.08;
+        const colStr = `${poly.color.r}, ${poly.color.g}, ${poly.color.b}`;
 
         // Draw wireframe edges
         ctx.beginPath();
-        for (let e = 0; e < cubeEdges.length; e++) {
-          const [i1, i2] = cubeEdges[e];
+        for (let e = 0; e < poly.edges.length; e++) {
+          const [i1, i2] = poly.edges[e];
           const p1 = projected[i1];
           const p2 = projected[i2];
           ctx.moveTo(p1.x, p1.y);
@@ -232,34 +268,112 @@
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Draw an internal diagonal server blade rack rail across front and back faces
-        ctx.beginPath();
-        ctx.moveTo(projected[0].x, projected[0].y);
-        ctx.lineTo(projected[2].x, projected[2].y);
-        ctx.moveTo(projected[4].x, projected[4].y);
-        ctx.lineTo(projected[6].x, projected[6].y);
-        ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.35})`;
-        ctx.lineWidth = 0.6;
-        ctx.stroke();
+        if (poly.type === "cube") {
+          // Internal server rack chassis diagonal
+          ctx.beginPath();
+          ctx.moveTo(projected[0].x, projected[0].y);
+          ctx.lineTo(projected[2].x, projected[2].y);
+          ctx.moveTo(projected[4].x, projected[4].y);
+          ctx.lineTo(projected[6].x, projected[6].y);
+          ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.35})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        } else {
+          // Octahedron internal core axis
+          ctx.beginPath();
+          ctx.moveTo(projected[0].x, projected[0].y);
+          ctx.lineTo(projected[5].x, projected[5].y);
+          ctx.strokeStyle = `rgba(${colStr}, ${baseAlpha * 0.4})`;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+        }
 
-        // Draw glowing vertex pins
+        // Glowing vertex pins
         for (let v = 0; v < projected.length; v++) {
           const pv = projected[v];
           ctx.beginPath();
           ctx.arc(pv.x, pv.y, 1.6, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${colStr}, ${baseAlpha + 0.2})`;
+          ctx.fillStyle = `rgba(${colStr}, ${baseAlpha + 0.25})`;
           ctx.fill();
         }
       }
 
-      // ── B. Update & Render Node Particles & Grid Lines ──────────
+      // ── B. Render Quantum Telemetry Stardust ────────────────────
+      for (let s = 0; s < stardust.length; s++) {
+        const d = stardust[s];
+        d.seed += 0.02;
+        d.y += d.vy;
+        d.x += Math.sin(d.seed) * 0.25 + d.vx;
+
+        // Mouse magnetic deflection on stardust
+        if (hasMouse) {
+          const mdx = d.x - mouse.x;
+          const mdy = d.y - mouse.y;
+          const dist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (dist < 130 && dist > 1) {
+            const force = (1 - dist / 130) * 1.8;
+            d.vx += (mdx / dist) * force;
+          }
+        }
+        d.vx *= 0.92;
+
+        if (d.y < -10) {
+          d.y = height + 10;
+          d.x = Math.random() * width;
+        }
+
+        const alpha = 0.25 + Math.sin(d.seed) * 0.2;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${d.color.r}, ${d.color.g}, ${d.color.b}, ${alpha})`;
+        ctx.fill();
+      }
+
+      // ── C. Render Ascending Telemetry Matrix Glyphs ─────────────
+      ctx.font = "9px 'JetBrains Mono', 'Fira Code', monospace";
+      for (let g = 0; g < glyphs.length; g++) {
+        const gl = glyphs[g];
+        gl.y += gl.vy;
+        gl.pulse += 0.025;
+
+        if (gl.y < -20) {
+          gl.y = height + 20;
+          gl.x = Math.random() * width;
+          gl.text = glyphWords[Math.floor(Math.random() * glyphWords.length)];
+        }
+
+        // Natural fade in at bottom, fade out at top
+        const vertFactor = Math.sin((gl.y / height) * Math.PI);
+        const gAlpha = Math.max(0.05, Math.min(0.32, vertFactor * 0.35 + Math.sin(gl.pulse) * 0.05));
+
+        ctx.fillStyle = `rgba(${gl.color.r}, ${gl.color.g}, ${gl.color.b}, ${gAlpha})`;
+        ctx.fillText(gl.text, gl.x, gl.y);
+      }
+
+      // ── D. Render Cloud Network Node Mesh + Magnetic Deflection ──
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
+
+        // Magnetic Deflection from cursor
+        if (hasMouse) {
+          const mdx = p.x - mouse.x;
+          const mdy = p.y - mouse.y;
+          const dist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+          if (dist < 130 && dist > 1) {
+            const repulse = (1 - dist / 130) * 2.2;
+            p.vx += (mdx / dist) * repulse;
+            p.vy += (mdy / dist) * repulse;
+          }
+        }
+
+        // Dampen velocity back to base trajectory
+        p.vx = p.vx * 0.94 + p.baseVx * 0.06;
+        p.vy = p.vy * 0.94 + p.baseVy * 0.06;
 
         p.x += p.vx;
         p.y += p.vy;
 
-        // Wrap around boundaries smoothly
         if (p.x < -10) p.x = width + 10;
         else if (p.x > width + 10) p.x = -10;
         if (p.y < -10) p.y = height + 10;
@@ -268,10 +382,10 @@
         // Draw particle node
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.75)`;
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.78)`;
         ctx.fill();
 
-        // Connect nearby particles with thin cloud network lines
+        // Connect nearby particles with thin network lines
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
@@ -294,8 +408,8 @@
           }
         }
 
-        // Interactive mouse connection on desktop
-        if (mouse.x > 0 && mouse.y > 0) {
+        // Laser line to mouse
+        if (hasMouse) {
           const mdx = p.x - mouse.x;
           const mdy = p.y - mouse.y;
           const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -312,7 +426,7 @@
         }
       }
 
-      // ── C. Periodic Hexagonal Radar Ripples ─────────────────────
+      // ── E. Periodic Hexagonal Radar Waves ────────────────────────
       if (frameCount % 90 === 0 && particles.length > 0) {
         const randP = particles[Math.floor(Math.random() * particles.length)];
         spawnRipple(randP.x, randP.y, randP.color);
@@ -328,7 +442,6 @@
           continue;
         }
 
-        // Draw 6-sided radar hexagon
         ctx.beginPath();
         for (let k = 0; k < 6; k++) {
           const angle = (k * Math.PI) / 3;
@@ -343,7 +456,7 @@
         ctx.stroke();
       }
 
-      // ── D. Render Photon Data Packets ───────────────────────────
+      // ── F. Render Photon Data Packets ────────────────────────────
       for (let pIdx = packets.length - 1; pIdx >= 0; pIdx--) {
         const pkt = packets[pIdx];
         const pA = particles[pkt.from];
@@ -363,13 +476,11 @@
         const curX = pA.x + (pB.x - pA.x) * pkt.progress;
         const curY = pA.y + (pB.y - pA.y) * pkt.progress;
 
-        // Draw glowing photon packet head
         ctx.beginPath();
         ctx.arc(curX, curY, 2.2, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${pkt.color.r}, ${pkt.color.g}, ${pkt.color.b}, 0.95)`;
         ctx.fill();
 
-        // Draw short glowing tail
         const tailProgress = Math.max(0, pkt.progress - 0.12);
         const tailX = pA.x + (pB.x - pA.x) * tailProgress;
         const tailY = pA.y + (pB.y - pA.y) * tailProgress;
@@ -828,6 +939,39 @@
           ease: "power3.out",
           clearProps: "transform,opacity"
         });
+      }
+
+      // 8. Section-Reactive Chromatic Auroras (Atmospheric Dynamic Glow)
+      const auroraProfiles = [
+        { id: "#about", em: 1.0, cy: 0.8, vi: 0.6, am: 0.4 },
+        { id: "#skills", em: 0.5, cy: 1.2, vi: 0.9, am: 0.4 },
+        { id: "#pipeline", em: 0.6, cy: 0.7, vi: 1.2, am: 0.4 },
+        { id: "#projects", em: 0.5, cy: 0.7, vi: 0.5, am: 1.3 },
+        { id: "#experience", em: 1.1, cy: 0.9, vi: 0.8, am: 0.4 },
+        { id: "#contact", em: 0.7, cy: 1.1, vi: 0.6, am: 1.0 }
+      ];
+
+      auroraProfiles.forEach((prof) => {
+        const targetEl = document.querySelector(prof.id);
+        if (!targetEl) return;
+        window.ScrollTrigger.create({
+          trigger: targetEl,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => applyAuroraProfile(prof),
+          onEnterBack: () => applyAuroraProfile(prof)
+        });
+      });
+
+      function applyAuroraProfile(p) {
+        const orbEm = document.querySelector(".orb-emerald");
+        const orbCy = document.querySelector(".orb-cyan");
+        const orbVi = document.querySelector(".orb-violet");
+        const orbAm = document.querySelector(".orb-amber");
+        if (orbEm) window.gsap.to(orbEm, { opacity: p.em, duration: 1.2, overwrite: "auto" });
+        if (orbCy) window.gsap.to(orbCy, { opacity: p.cy, duration: 1.2, overwrite: "auto" });
+        if (orbVi) window.gsap.to(orbVi, { opacity: p.vi, duration: 1.2, overwrite: "auto" });
+        if (orbAm) window.gsap.to(orbAm, { opacity: p.am, duration: 1.2, overwrite: "auto" });
       }
     });
 
